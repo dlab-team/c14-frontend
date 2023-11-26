@@ -39,4 +39,4 @@ TL: [José Campos](https://github.com/josecamposhz)
 
 ### Team Frontend
 
-- 
+- [Henry Morales](https://github.com/AFD9417)
