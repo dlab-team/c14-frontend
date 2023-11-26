@@ -39,4 +39,8 @@ TL: [José Campos](https://github.com/josecamposhz)
 
 ### Team Frontend
 
-- [Henry Morales](https://github.com/AFD9417)
+- [Felipe Burboa](https://github.com/FelipeBurboa)    
+- [Arturo Muñoz](https://github.com/arturo0427) 
+- [Marcelo Bovet](https://github.com/marcelobovet)  
+- [Henry Morales](https://github.com/AFD9417) 
+
