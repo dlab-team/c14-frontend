@@ -39,4 +39,6 @@ TL: [José Campos](https://github.com/josecamposhz)
 
 ### Team Frontend
 
-- [Marcelo Bovet](https://github.com/marcelobovet)
+- [Felipe Burboa](https://github.com/FelipeBurboa)    
+- [Arturo Muñoz](https://github.com/arturo0427) 
+- [Marcelo Bovet](https://github.com/marcelobovet)  
