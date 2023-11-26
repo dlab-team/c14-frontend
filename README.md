@@ -39,4 +39,4 @@ TL: [José Campos](https://github.com/josecamposhz)
 
 ### Team Frontend
 
-- 
+- [Arturo Muñoz](https://github.com/arturo0427)
