@@ -44,5 +44,7 @@ TL: [José Campos](https://github.com/josecamposhz)
 - [Marcelo Bovet](https://github.com/marcelobovet)  
 - [Henry Morales](https://github.com/AFD9417) 
 - [Diego Rojas](https://github.com/diegorojas89z) 
+- [Matias Torres](https://github.com/matias1812)
 - [Michelle Faure](https://github.com/MichelleFaure) 
+
 
