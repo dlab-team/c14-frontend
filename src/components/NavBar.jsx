@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { RiArrowLeftLine } from 'react-icons/ri';
+import { TiArrowBack } from 'react-icons/ti';
 
 const NavBar = () => {
   return (
     <nav className="bg-white flex items-center justify-between py-[30px] px-16 border-b-2">
       <Link to="/">
-        <RiArrowLeftLine size={35} />
+        <TiArrowBack size={35} />
       </Link>
       <p className="font-semibold text-2xl">Lorem ipsum dolor sit</p>
       <Link to="/">
