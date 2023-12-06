@@ -6,12 +6,14 @@ import { RootLayout } from '@/layouts';
 // pages
 import Home from '@/pages/Home';
 import Questionary from '@/pages/Questionary/Index';
+import Opinion from '@/pages/Opinion';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/cuestionario" element={<Questionary />} />
+      <Route path="/opinion" element={<Opinion />} />
     </Route>
   )
 );
