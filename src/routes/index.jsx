@@ -9,6 +9,7 @@ import Questionary from '@/pages/Questionary/Index';
 import Opinion from '@/pages/Opinion';
 import Login from '@/pages/Login/Login';
 import Recovery from '@/pages/RecoveryPass/Recovery';
+import Changed from '@/pages/PassChanged/Changed';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ export const router = createBrowserRouter(
       <Route path="/auth" element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
         <Route path="recovery" element={<Recovery />} />
+        <Route path="changed" element={<Changed />} />
       </Route>
     </>
   )
