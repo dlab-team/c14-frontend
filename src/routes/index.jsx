@@ -8,6 +8,7 @@ import Home from '@/pages/Home';
 import Questionary from '@/pages/Questionary/Index';
 import Opinion from '@/pages/Opinion';
 import Login from '@/pages/Login/Login';
+import Recovery from '@/pages/RecoveryPass/Recovery';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ export const router = createBrowserRouter(
       <Route path="/cuestionario" element={<Questionary />} />
       <Route path="/opinion" element={<Opinion />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/recovery" element={<Recovery />} />
     </Route>
   )
 );
