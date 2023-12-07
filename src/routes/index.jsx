@@ -15,12 +15,12 @@ export const router = createBrowserRouter(
     <>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
-        <Route path="/cuestionario" element={<Questionary />} />
-        <Route path="/opinion" element={<Opinion />} />
+        <Route path="cuestionario" element={<Questionary />} />
+        <Route path="opinion" element={<Opinion />} />
       </Route>
       <Route path="/auth" element={<AuthLayout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/recovery" element={<Recovery />} />
+        <Route path="login" element={<Login />} />
+        <Route path="recovery" element={<Recovery />} />
       </Route>
     </>
   )
