@@ -4,12 +4,13 @@ import Button from '../../../layouts/Button';
 import { recoverySchema } from '@/schemas/recoverySchema';
 import { FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import  ChangedCard  from './ChangedCard';
 
 const RecoveryForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const title = 'Restaurar Contraseña';
-  const navigate = useNavigate(); 
+ 
   const {
     register,
     handleSubmit,
@@ -23,8 +24,12 @@ const RecoveryForm = () => {
     console.log(data);
     alert('Contraseña restaurada!');
     reset();
-    navigate('/auth/changed');
+    setSubmitted(true);
   });
+
+  if (submitted) {
+    return <ChangedCard />;
+  }
 
   return (
     <div className="flex flex-col justify-center items-center">
