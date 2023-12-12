@@ -2,17 +2,19 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { forgotSchema } from '../../../schemas/forgotSchema';
 import Button from '../../../layouts/Button';
-import { Link } from 'react-router-dom';
+import useForgotPasswordLink from '@/hooks/useForgotPasswordLink';
+import { Toaster } from 'sonner';
+
 
 function ForgotForm() {
     const title = "Enviar"
+    const { mutate } = useForgotPasswordLink();
     const { register, handleSubmit, formState: { errors }, reset} = useForm({
       resolver: yupResolver(forgotSchema),
     });
 
   const onSubmit = (data) => {
-    console.log(data);
-        alert('Se te envio un email con los pasos para elegir una nueva!');
+    mutate({ email: data.email });
     reset();
   };
 
@@ -34,6 +36,7 @@ function ForgotForm() {
             <Button type="submit" title={title} />
           </div>
         </form>
+        <Toaster position="top-center" />
       </div>
   );
   
