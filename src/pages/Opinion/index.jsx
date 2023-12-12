@@ -47,13 +47,13 @@ const Opinion = () => {
           problemas, pero es la única manera que tenemos de medir opiniones en una encuesta.
         </p>
       </header>
-      <section className="flex flex-col items-center mb-28">
+      <section className="flex flex-col items-center mt-14 mb-28">
         <p className="text-2xl font-bold">
           ¿Qué tan de acuerdo estás con cada una de estas frases?
         </p>
-        <form onSubmit={onSubmit} className="w-10/12 lg:w-3/4 grid grid-cols-2 mt-14">
+        <form onSubmit={onSubmit} className="w-10/12 lg:w-3/4 grid grid-cols-2 mt-16">
           <div className="col-start-2">
-            <div className="grid grid-cols-4 divide-x-2 border-x-2 border-t-2 rounded-t-lg text-sm font-bold h-16">
+            <div className="grid grid-cols-4 divide-x-2 border-x-2 border-t-2 rounded-t-lg text-xs lg:text-sm font-bold h-16 text-center">
               <div className="flex justify-center items-center">
                 <span className="">Muy de acuerdo</span>
               </div>
@@ -112,7 +112,7 @@ const Opinion = () => {
             </Fragment>
           ))}
           <div className="col-span-2 flex justify-end">
-            <div className="w-1/6 mr-5 mt-8">
+            <div className="w-1/3 md:w-1/6 mr-1 mt-10 ">
               <Button title={'Continuar'} />
             </div>
           </div>
