@@ -10,6 +10,7 @@ import Opinion from '@/pages/Opinion';
 import Login from '@/pages/Login/Login';
 import Recovery from '@/pages/RecoveryPass/Recovery';
 import Forgot from '@/pages/ForgotPass/Forgot'
+import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ export const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="cuestionario" element={<Questionary />} />
         <Route path="opinion" element={<Opinion />} />
+        <Route path="opposite" element={<OppositeQuestions />} />
       </Route>
       <Route path="/auth" element={<AuthLayout />}>
         <Route path="login" element={<Login />} />

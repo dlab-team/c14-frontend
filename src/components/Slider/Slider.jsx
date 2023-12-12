@@ -1,5 +1,6 @@
 import Slider from '@mui/material/Slider';
 import './Slider.css';
+import { useState } from 'react';
 
 
 function valuetext(value) {
@@ -7,15 +8,24 @@ function valuetext(value) {
   }
 
 export default function CustomSlider({color}){
-    return (
+      
+    function handleChange(e) {
+        setValue(e.target.value);
+      }
+
+    const [value, setValue] = useState(50);
+      
+   
+      return (
         <Slider
-            defaultValue={50}
+            value={value}
             valueLabelFormat={valuetext}
             step={1}
             valueLabelDisplay="auto"
             sx={{
                 color: color,
                 }}
+            onChange={handleChange}
             />
     );
 }

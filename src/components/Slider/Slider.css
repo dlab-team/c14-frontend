@@ -12,18 +12,20 @@
 }  
 
 .MuiSlider-rail {
-    height: 8px!important;
+    height: 19px!important;
     color:grey;
     opacity: 0.2!important;
 }
 
 .MuiSlider-track {
-    height: 8px!important;
+    height: 19px!important;
 }
 
 .MuiSlider-thumb {
     color: black;
     box-shadow:none !important;
+    width: 50px !important;
+    height: 50px !important;
 }
 
 .Mui-focusVisible, .muislider-thumb:hover {
@@ -39,9 +41,9 @@
     content: "<>"!important;
     width: 0 !important;
     height: 0 !important;
-    translate: -7.3px -8.3px;
+    translate: -13px -14px;
     color: white;
-    font-size: 10px;
+    font-size: 20px;
     font-weight: 100;
     font-family: monospace;
     letter-spacing: 3.5px;
