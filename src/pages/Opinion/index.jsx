@@ -19,7 +19,7 @@ const Opinion = () => {
 
   const onSubmit = handleSubmit(data => {
     console.log(data);
-    alert('Form submitted successfully!');
+    alert('Form submitted successfully');
     reset();
   });
 
