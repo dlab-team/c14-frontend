@@ -3,17 +3,22 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../../schemas/loginSchema';
 import Button from '../../../layouts/Button';
 import { Link } from 'react-router-dom';
+import useLogin from '../../../hooks/useLogin'
 
 function LoginForm() {
-    const title = "Acceder"
-    const { register, handleSubmit, formState: { errors }, reset} = useForm({
-      resolver: yupResolver(loginSchema),
-    });
+  const title = "Acceder";
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
 
-  const onSubmit = (data) => {
-    console.log(data);
-        alert('Form submitted successfully!');
-    reset();
+  const loginMutation = useLogin();
+
+  const onSubmit = async (data) => {
+    try {
+      await loginMutation.mutateAsync(data);
+      reset();
+    } catch (error) {
+    }
   };
 
   return (
