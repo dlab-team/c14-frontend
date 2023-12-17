@@ -4,6 +4,7 @@ import { loginSchema } from '../../../schemas/loginSchema';
 import Button from '../../../layouts/Button';
 import { Link } from 'react-router-dom';
 import useLogin from '../../../hooks/useLogin'
+import { Toaster } from 'sonner';
 
 function LoginForm() {
   const title = "Acceder";
@@ -61,6 +62,7 @@ function LoginForm() {
             <Button type="submit" title={title} />
           </div>
         </form>
+        <Toaster position="top-center"/>
       </div>
   );
   
