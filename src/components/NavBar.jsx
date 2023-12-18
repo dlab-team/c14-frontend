@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { TiArrowBack } from 'react-icons/ti';
+import { FaArrowLeft } from 'react-icons/fa6';
 
 const NavBar = () => {
   return (
     <nav className="bg-white flex items-center justify-between h-[10vh] px-16 border-b-2">
       <Link to="/">
-        <TiArrowBack size={35} />
+        <FaArrowLeft size={30} />
       </Link>
       {/* <p className="font-semibold text-2xl">Lorem ipsum dolor sit</p> */}
       <Link to="/">
