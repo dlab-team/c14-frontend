@@ -23,12 +23,12 @@ const Opinion = () => {
     reset();
   });
 
-  const [randomNumbers, setRandomNumbers] = useState([1, 2, 3, 4, 5]);
+  const [randomNumbers, setRandomNumbers] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 
   useEffect(() => {
     let array = [];
-    while (array.length < 5) {
-      let randomNum = Math.floor(Math.random() * 8) + 1;
+    while (array.length < 9) {
+      let randomNum = Math.floor(Math.random() * 9);
       if (!array.includes(randomNum)) {
         array.push(randomNum);
       }
@@ -41,7 +41,7 @@ const Opinion = () => {
       <header className="flex flex-col items-center lg:h-[90vh]">
         <h1 className="text-4xl font-bold mt-16">3XI CRITERIA</h1>
         <div className="bg-gradient-to-r from-orange-500 via-purple-500 to-lime-500 h-2 w-64 rounded-full mt-6"></div>
-        <h2 className="text-5xl font-bold mt-6">Estudio Polarizaciones</h2>
+        <h2 className="text-5xl font-bold mt-6 text-center">Estudio Polarizaciones</h2>
         <p className="w-3/4 text-2xl text-center mt-24 text-slate-600">
           Esta encuesta es muy especial porque te vamos a desafiar. A continuación, te presentaremos
           una serie de frases que quizás no representen exactamente tu pensamiento e incluso te
@@ -50,20 +50,20 @@ const Opinion = () => {
           problemas, pero es la única manera que tenemos de medir opiniones en una encuesta.
         </p>
       </header>
-      <section className="flex flex-col items-center mt-14 mb-28">
-        <p className="text-2xl font-bold">
+      <section className="flex flex-col items-center mt-14 mb-28 sm:mx-14 md:mx-0">
+        <p className="text-2xl font-bold text-center mx-6">
           ¿Qué tan de acuerdo estás con cada una de estas frases?
         </p>
-        <form onSubmit={onSubmit} className="w-10/12 lg:w-3/4 grid grid-cols-2 mt-16">
-          <div className="col-start-2">
+        <form onSubmit={onSubmit} className="w-10/12 lg:w-3/4 md:grid md:grid-cols-2 mt-8 md:mt-16">
+          <div className="hidden md:block col-start-2">
             <div className="grid grid-cols-4 divide-x-2 border-x-2 border-t-2 rounded-t-lg text-xs lg:text-sm font-bold h-16 text-center">
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center px-1">
                 <span className="">Muy de acuerdo</span>
               </div>
               <div className="flex justify-center items-center">
                 <span className="">De acuerdo</span>
               </div>
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center px-1">
                 <span className="text-center">Medianamente de acuerdo</span>
               </div>
               <div className="flex justify-center items-center">
@@ -71,6 +71,7 @@ const Opinion = () => {
               </div>
             </div>
           </div>
+
           <RadioInput
             bgColor={'bg-purple-500'}
             sentence={sentences[randomNumbers[0]].text}
@@ -112,6 +113,42 @@ const Opinion = () => {
             sentence={sentences[randomNumbers[4]].text}
             accentColor={'accent-pink-500'}
             register={register('frase5')}
+          />
+          <div className="col-span-2 flex justify-end me-1 text-red-500 bg-">
+            {errors.frase5 && <p>{errors.frase5.message}</p>}
+          </div>
+          <RadioInput
+            bgColor={'bg-red-500'}
+            sentence={sentences[randomNumbers[5]].text}
+            accentColor={'accent-red-500'}
+            register={register('frase6')}
+          />
+          <div className="col-span-2 flex justify-end me-1 text-red-500">
+            {errors.frase5 && <p>{errors.frase5.message}</p>}
+          </div>
+          <RadioInput
+            bgColor={'bg-indigo-500'}
+            sentence={sentences[randomNumbers[6]].text}
+            accentColor={'accent-indigo-500'}
+            register={register('frase7')}
+          />
+          <div className="col-span-2 flex justify-end me-1 text-red-500">
+            {errors.frase5 && <p>{errors.frase5.message}</p>}
+          </div>
+          <RadioInput
+            bgColor={'bg-sky-500'}
+            sentence={sentences[randomNumbers[7]].text}
+            accentColor={'accent-sky-600'}
+            register={register('frase8')}
+          />
+          <div className="col-span-2 flex justify-end me-1 text-red-500">
+            {errors.frase5 && <p>{errors.frase5.message}</p>}
+          </div>
+          <RadioInput
+            bgColor={'bg-purple-500'}
+            sentence={sentences[randomNumbers[8]].text}
+            accentColor={'accent-purple-500'}
+            register={register('frase9')}
           />
           <div className="col-span-2 flex justify-end me-1 text-red-500">
             {errors.frase5 && <p>{errors.frase5.message}</p>}
