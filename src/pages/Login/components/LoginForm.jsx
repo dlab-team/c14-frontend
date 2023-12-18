@@ -56,7 +56,7 @@ function LoginForm() {
               />
               <label htmlFor="remember" className="text-slate-950 ml-1 font-medium text-xs">Recuérdame</label>
             </div>
-            <Link to="/login" className="text-slate-950 font-medium text-xs">¿Olvidaste la contraseña?</Link>
+            <Link to="/auth/forgot" className="text-slate-950 font-medium text-xs">¿Olvidaste la contraseña?</Link>
           </div>
           <div className="flex gap-x-3 text-sm mt-10">
             <Button type="submit" title={title} />
