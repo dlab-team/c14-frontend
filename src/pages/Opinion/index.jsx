@@ -1,13 +1,28 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { opinionSchema } from '@/schemas/opinionSchema';
 import { sentences } from './db';
 import RadioInput from './components/RadioInput';
 import Button from '@/layouts/Button';
+import useFormStore from '../../store/useFormStore';
+import { useNavigate } from 'react-router'
 
 const Opinion = () => {
+  const navigate = useNavigate()
+  const endForm = useFormStore(state => state.endForm);
+  const currentSurveySection = useFormStore(state => state.currentSurveySection);
+  console.log(currentSurveySection);
+
+  //Para redireccionar al cuestionario en caso de que quieran entrar a la vista sin antes hacer la caracterizacion
+  useEffect(() => {
+    if (currentSurveySection === 'questionary') {
+      navigate('/cuestionario')
+    }
+  } , [currentSurveySection, navigate])
+
+ 
+
   const {
     register,
     handleSubmit,
@@ -19,8 +34,11 @@ const Opinion = () => {
 
   const onSubmit = handleSubmit(data => {
     console.log(data);
+    //Tomando este como ejemplo del ultimo paso, uso el endForm para limpiar todo y setear el currentSurveySection: 'done'
+    //Quizas de esa forma se lleva a la vista con los resultados, pero por test solo hace que se rendeere el div
+    //con el boton de volver al inicio
+    endForm();
     alert('Form submitted successfully');
-    reset();
   });
 
   const [randomNumbers, setRandomNumbers] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
@@ -36,22 +54,44 @@ const Opinion = () => {
     setRandomNumbers(array);
   }, []);
 
+  //Boton para simular que ya vi los resultados y quiero volver al inicio. Se setea el currentSurveySection: 'questionary'
+  //En caso de que la persona quiera volver a realizar la encuesta, tiene que comenzar desde la caracterizacion
+  const handleGoHome = async () => {
+    const isConfirmed = window.confirm('¿Estás seguro de que deseas salir?');
+    if (isConfirmed) {
+      useFormStore.setState({ currentSurveySection: 'questionary' });
+      navigate('/');
+    }
+  };
+
   return (
-    <div>
-      <header className="flex flex-col items-center lg:h-[90vh]">
-        <h1 className="text-4xl font-bold mt-16">3XI CRITERIA</h1>
-        <div className="bg-gradient-to-r from-orange-500 via-purple-500 to-lime-500 h-2 w-64 rounded-full mt-6"></div>
-        <h2 className="text-5xl font-bold mt-6 text-center">Estudio Polarizaciones</h2>
-        <p className="w-3/4 text-2xl text-center mt-24 text-slate-600">
-          Esta encuesta es muy especial porque te vamos a desafiar. A continuación, te presentaremos
-          una serie de frases que quizás no representen exactamente tu pensamiento e incluso te
-          pueden parecer un poco exageradas. Y lo que te pedimos es que hagas el esfuerzo por
-          responder igualmente. Sintetizar temas sociales en frases es complejo y siempre se generan
-          problemas, pero es la única manera que tenemos de medir opiniones en una encuesta.
-        </p>
-      </header>
-      <section className="flex flex-col items-center mt-14 mb-28 sm:mx-14 md:mx-0">
-        <p className="text-2xl font-bold text-center mx-6">
+<div>
+{currentSurveySection === 'opinion' ? (
+  <header className="flex flex-col items-center lg:h-[90vh]">
+  <h1 className="text-4xl font-bold mt-16">3XI CRITERIA</h1>
+  <div className="bg-gradient-to-r from-orange-500 via-purple-500 to-lime-500 h-2 w-64 rounded-full mt-6"></div>
+  <h2 className="text-5xl font-bold mt-6 text-center">Estudio Polarizaciones</h2>
+  <p className="w-3/4 text-2xl text-center mt-24 text-slate-600">
+    Esta encuesta es muy especial porque te vamos a desafiar. A continuación, te presentaremos
+    una serie de frases que quizás no representen exactamente tu pensamiento e incluso te
+    pueden parecer un poco exageradas. Y lo que te pedimos es que hagas el esfuerzo por
+    responder igualmente. Sintetizar temas sociales en frases es complejo y siempre se generan
+    problemas, pero es la única manera que tenemos de medir opiniones en una encuesta.
+  </p>
+</header>
+) : (
+  <div>
+    <p>Gracias por realizar nuestro cuestionario!</p>
+    <p>bla bla bla resultados</p>
+    <div onClick={handleGoHome}>
+      <Button title='Volver Inicio'></Button>
+    </div>
+  </div>
+)}
+
+{currentSurveySection === 'opinion' && (
+  <section className="flex flex-col items-center mt-14 mb-28 sm:mx-14 md:mx-0">
+     <p className="text-2xl font-bold text-center mx-6">
           ¿Qué tan de acuerdo estás con cada una de estas frases?
         </p>
         <form onSubmit={onSubmit} className="w-10/12 lg:w-3/4 md:grid md:grid-cols-2 mt-8 md:mt-16">
@@ -159,8 +199,10 @@ const Opinion = () => {
             </div>
           </div>
         </form>
-      </section>
-    </div>
+  </section>
+)}
+</div>
+
   );
 };
 

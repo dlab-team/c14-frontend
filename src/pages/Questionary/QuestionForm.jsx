@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import Button from '../../layouts/Button';
 import useFormStore from '../../store/useFormStore';
+import { useNavigate } from 'react-router'
 
 const QuestionForm = ({ questions, onSubmit }) => {
+  const navigate = useNavigate()
   const [selectedOptions, setSelectedOptions] = useState({});
   const currentQuestionIndex = useFormStore(state => state.currentQuestionIndex);
   const setAnswer = useFormStore(state => state.setAnswer);
@@ -28,8 +30,13 @@ const QuestionForm = ({ questions, onSubmit }) => {
     const confirmed = window.confirm('Estas seguro de que quieres enviar estas respuestas?');
     if (confirmed) {
       const answers = clearForm();
+      console.log('Respuestas guardadas:', answers);
       alert('Respuestas guardadas:\n' + JSON.stringify(answers, null, 2));
+      //Seteo la siguiente seccion y lo redirecciono
+      useFormStore.setState({ currentSurveySection: 'opinion' });
+      navigate('/opinion')
     }
+  
   };
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -53,6 +60,7 @@ const QuestionForm = ({ questions, onSubmit }) => {
           {currentQuestion.options.map(option => (
             <div key={option.id}>
               <input
+                required
                 type="radio"
                 name={`options${currentQuestion.item}`}
                 id={`item${currentQuestion.item}option${option.id}`}

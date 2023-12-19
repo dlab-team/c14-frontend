@@ -6,6 +6,7 @@ const useFormStore = create(
     (set, get) => ({
       answers: {},
       currentQuestionIndex: 0,
+      currentSurveySection: 'questionary',
       setAnswer: (questionItem, optionId) => {
         set(state => {
           const newAnswers = {
@@ -21,9 +22,12 @@ const useFormStore = create(
       clearForm: () => {
         const state = get(); 
         const answers = { ...state.answers }; 
-        set({ answers: {}, currentQuestionIndex: 0 });
+        set({ answers: {}, currentQuestionIndex: 0, currentSurveySection: '' });
         return answers; 
       },
+      endForm: () => {
+        set({ answers: {}, currentQuestionIndex: 0, currentSurveySection: 'done' });
+      }
     }),
     {
       name: 'form-storage',

@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import QuestionForm from './QuestionForm';
-import { questions } from './info';
+import { caracterizacion } from './caracterization';
+import useFormStore from '../../store/useFormStore';
 
 const Questionary = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  //Seteo la seccion actual
+  useFormStore.setState({ currentSurveySection: 'questionary' });
+  const currentSurveySection = useFormStore(state => state.currentSurveySection);;
+  console.log(currentSurveySection)
 
   const handleSubmit = selectedOptions => {
     console.log('Selected Options:', selectedOptions);
+    
   };
 
   const handleNext = () => {
@@ -19,7 +25,7 @@ const Questionary = () => {
         <h1 className="font-medium text-5xl">Comenzamos con el cuestionario</h1>
       </div>
       <QuestionForm
-        questions={questions}
+        questions={caracterizacion}
         currentQuestionIndex={currentQuestionIndex}
         onSubmit={handleSubmit}
         onNext={handleNext}

@@ -1,4 +1,4 @@
-export const questions = [
+export const caracterizacion = [
   {
     item: 1,
     title: '¿Con quién te identificas?',
@@ -36,44 +36,36 @@ export const questions = [
     ]
   },{
     item: 3,
-    title: '¿Cual es tu asdaads?',
+    title: '¿Cual es tu género?',
     options: [
       {
         id: 1,
-        title: 'asdas',
+        title: 'Hombre',
       },
       {
         id: 2,
-        title: 'dfgdfg',
-      },
-      {
-        id: 3,
-        title: 'dfgdfg',
+        title: 'Mujer',
       }
     ]
   },{
     item: 4,
-    title: '¿Cual es tu asdaads?',
+    title: '¿Cual es tu edad?',
     options: [
       {
         id: 1,
-        title: 'asdas',
+        title: 'Menos de 18',
       },
       {
         id: 2,
-        title: 'dfgdfg',
+        title: 'Entre 19 y 25',
       },
       {
         id: 3,
-        title: 'dfgdfg',
+        title: 'Entre 26 y 40',
       },
       {
         id: 4,
-        title: 'dfgdfg',
-      },
-      {
-        id: 5,
-        title: 'dfgdfg',
+        title: 'Más de 41',
       }
     ]
   }
