@@ -29,7 +29,7 @@ export const router = createBrowserRouter(
         <Route path="forgot" element={<Forgot />} />        
       </Route>
       <Route path="/auth" element={<AdminLayout />}>
-        <Route path="admin" element={<Admin />} />     
+        <Route index element={<Admin />} />     
       </Route>
     </>
   )

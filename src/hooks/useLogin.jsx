@@ -11,7 +11,7 @@ const useLogin = () => {
   return useMutation(LoginService.login, {
     onSuccess: ( data ) => {
       const { token, ...user } = data
-      navigate('/auth/admin')  
+      navigate('/auth')  
       toast.success('Sesion iniciada correctamente')
       setAuth({ user })      
     },
