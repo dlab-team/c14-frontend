@@ -28,7 +28,7 @@ export const router = createBrowserRouter(
         <Route path="recovery" element={<Recovery />} />
         <Route path="forgot" element={<Forgot />} />        
       </Route>
-      <Route path="/auth" element={<AdminLayout />}>
+      <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Admin />} />     
       </Route>
     </>
