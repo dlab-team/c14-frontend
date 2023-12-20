@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { toast } from 'sonner';
+import useLogout from '@/hooks/useLogout';
 
 import {
   PiChartBar,
@@ -14,11 +16,20 @@ import {
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { logout } = useLogout();
+
+  const handleLogoutClick = async () => {
+    const isConfirmed = window.confirm('¿Estás seguro de que deseas salir?');
+    if (isConfirmed) {
+      await logout();
+      toast.success('Sesión cerrada exitosamente');
+    }
+  };
 
   return (
     <>
       <div
-        className={`h-full xl:h-[100vh] fixed xl:static w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-auto top-0 p-4 flex flex-col justify-between z-50 shadow-xl text-sm xl:col-span-2 text-gray-700 ${
+        className={`h-full xl:h-[100vh] fixed xl:static w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-auto top-0 p-4 flex bg-white flex-col justify-between z-50 shadow-xl text-sm xl:col-span-2 text-gray-700 ${
           showMenu ? 'left-0' : '-left-full'
         } transition-all`}
       >
@@ -85,8 +96,8 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
-        <nav className="text-slate-900 font-bold">
-          <div className="flex items-center m-4">
+        <nav className="text-slate-900 font-bold mr-6">
+          <div className="flex items-center m-3">
             <img
               src="/userPic/userPic.png"
               alt="Imagen Usuario"
@@ -97,12 +108,12 @@ const Sidebar = () => {
               <span className="block text-xs font-normal"> Superadmin</span>
             </div>
           </div>
-          <Link
-            to="/"
-            className="flex items-center my-6 gap-4 py-2 px-4 border mx-4 border-slate-900 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
+          <button
+            onClick={handleLogoutClick}
+            className="flex items-center my-6 gap-4 py-2 px-4 w-full border mx-3 border-slate-900 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
           >
             <PiSignOut className="text-xl" /> Cerrar sesión
-          </Link>
+          </button>
         </nav>
       </div>
 
