@@ -14,9 +14,9 @@ export const AdminLayout = () => {
   }, [user, navigate]);
 
   return (
-    <div className="min-h-screen grid grid-cols-1 xl:grid-cols-10">
+    <div className="min-h-screen w-full grid grid-cols-1 xl:grid-cols-10">
       <Sidebar />
-      <div className="xl:col-span-8 h-screen p-8">
+      <div className="xl:col-span-8 h-screen p-8 relative -z-10">
         <Outlet />
       </div>
     </div>

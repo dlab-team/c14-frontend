@@ -16,10 +16,8 @@ const Admin = () => {
   };
 
   return (
-    <div>
-      <div onClick={handleLogoutClick}>
-        <Button title={title}></Button>
-      </div>
+    <div onClick={handleLogoutClick}>
+      <Button title={title}></Button>
     </div>
   );
 };
