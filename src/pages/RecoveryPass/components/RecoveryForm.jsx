@@ -1,16 +1,18 @@
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../../layouts/Button';
-import { recoverySchema } from '@/schemas/recoverySchema';
+import ChangedCard from './ChangedCard';
 import { FaEyeSlash } from 'react-icons/fa';
+import { recoverySchema } from '@/schemas/recoverySchema';
+import { useForm } from 'react-hook-form';
+import useResetPassword from '@/hooks/useRecoverPass';
 import { useState } from 'react';
-import  ChangedCard  from './ChangedCard';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const RecoveryForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const title = 'Restaurar Contraseña';
- 
+  const { mutate } = useResetPassword();
+
   const {
     register,
     handleSubmit,
@@ -20,9 +22,14 @@ const RecoveryForm = () => {
     resolver: yupResolver(recoverySchema),
   });
 
+  const authToken = 'Token';
+
   const onSubmit = handleSubmit(data => {
-    console.log(data);
-    alert('Contraseña restaurada!');
+    const headers = {
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    mutate({ password: data.password }, { headers });
     reset();
     setSubmitted(true);
   });
