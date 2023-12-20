@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import useLogout from '@/hooks/useLogout';
@@ -21,7 +21,7 @@ const Sidebar = () => {
   const handleLogoutClick = async () => {
     const isConfirmed = window.confirm('¿Estás seguro de que deseas salir?');
     if (isConfirmed) {
-      await logout();
+      logout();
       toast.success('Sesión cerrada exitosamente');
     }
   };
@@ -38,20 +38,24 @@ const Sidebar = () => {
             <img src="/logo/logo-3xi-negro.png" alt="Logo 3xi" className="w-10" />
             <img src="/logo/criteria/criteriaLogo.png" alt="Logo Criteria" className="w-32 pt-7" />
           </div>
-          <ul className="md:px-3 lg:px-0">
+          <ul className="md:px-3 lg:px-0 space-y-1">
             <li>
-              <Link
-                to="/"
-                className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
+              <NavLink
+                to="/admin"
+                className={({ isActive }) =>
+                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
+                    isActive && 'bg-slate-900 text-white'
+                  }`
+                }
               >
                 <div>
                   <PiHouse className="text-xl" />
                 </div>
                 Inicio
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/"
                 className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
               >
@@ -59,10 +63,10 @@ const Sidebar = () => {
                   <PiChartBar className="text-xl" />
                 </div>
                 Analisis
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/"
                 className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
               >
@@ -70,21 +74,21 @@ const Sidebar = () => {
                   <PiClipboardText className="text-xl" />
                 </div>
                 Frases y Respuestas
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
-                to="/"
+              <NavLink
+                to="/admin/polynomials"
                 className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
               >
                 <div>
                   <PiListBullets className="text-xl" />
                 </div>
                 Polinomios y Opciones
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/"
                 className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
               >
@@ -92,7 +96,7 @@ const Sidebar = () => {
                   <PiUsersFour className="text-xl" />
                 </div>
                 Control de Usuarios
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

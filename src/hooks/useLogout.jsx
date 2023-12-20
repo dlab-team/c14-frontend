@@ -8,8 +8,8 @@ const useLogout = () => {
   const logout = () => {
     clearLocalStorage();
     setTimeout(() => {
-        navigate('/');
-      }, 1500);
+      navigate('/');
+    }, 1500);
   };
 
   return { logout };
