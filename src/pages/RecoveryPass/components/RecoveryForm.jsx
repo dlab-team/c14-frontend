@@ -3,6 +3,7 @@ import ChangedCard from './ChangedCard';
 import { FaEyeSlash } from 'react-icons/fa';
 import { recoverySchema } from '@/schemas/recoverySchema';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import useResetPassword from '@/hooks/useRecoverPass';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,14 +23,10 @@ const RecoveryForm = () => {
     resolver: yupResolver(recoverySchema),
   });
 
-  const authToken = 'Token';
+  const { token } = useParams();
 
   const onSubmit = handleSubmit(data => {
-    const headers = {
-      Authorization: `Bearer ${authToken}`,
-    };
-
-    mutate({ password: data.password }, { headers });
+    mutate({ password: data.password, token });
     reset();
     setSubmitted(true);
   });

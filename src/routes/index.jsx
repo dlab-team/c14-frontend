@@ -1,18 +1,17 @@
+// layouts
+import { AdminLayout, AuthLayout, RootLayout } from '@/layouts';
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-// layouts
-import { AuthLayout, RootLayout, AdminLayout } from '@/layouts';
-
+// admin pages
+import Admin from '@/pages/Admin/Admin';
+import Forgot from '@/pages/ForgotPass/Forgot';
 // pages
 import Home from '@/pages/Home';
-import Questionary from '@/pages/Questionary/Index';
-import Opinion from '@/pages/Opinion';
 import Login from '@/pages/Login/Login';
-import Recovery from '@/pages/RecoveryPass/Recovery';
-import Forgot from '@/pages/ForgotPass/Forgot'
+import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
-// admin pages
-import Admin from '@/pages/Admin/Admin'
+import Questionary from '@/pages/Questionary/Index';
+import Recovery from '@/pages/RecoveryPass/Recovery';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,15 +20,15 @@ export const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="cuestionario" element={<Questionary />} />
         <Route path="opinion" element={<Opinion />} />
-        <Route path="opposite" element={<OppositeQuestions />} />        
+        <Route path="opposite" element={<OppositeQuestions />} />
       </Route>
       <Route path="/auth" element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
-        <Route path="recovery" element={<Recovery />} />
-        <Route path="forgot" element={<Forgot />} />        
+        <Route path="recovery/:token" element={<Recovery />} />
+        <Route path="forgot" element={<Forgot />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<Admin />} />     
+        <Route index element={<Admin />} />
       </Route>
     </>
   )
