@@ -4,7 +4,7 @@ import Button from '../../layouts/Button';
 import { toast } from 'sonner';
 
 const Admin = () => {
-  const title = "Logout";
+  const title = 'Logout';
   const { logout } = useLogout();
 
   const handleLogoutClick = async () => {
