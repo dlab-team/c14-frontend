@@ -1,8 +1,3 @@
-import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import { toast } from 'sonner';
-import useLogout from '@/hooks/useLogout';
-
 import {
   PiChartBar,
   PiClipboardText,
@@ -14,9 +9,16 @@ import {
   PiXBold,
 } from 'react-icons/pi';
 
+import { NavLink } from 'react-router-dom';
+import { toast } from 'sonner';
+import useAuthStore from '@/store/useAuthStore';
+import useLogout from '@/hooks/useLogout';
+import { useState } from 'react';
+
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const { logout } = useLogout();
+  const { user } = useAuthStore();
 
   const handleLogoutClick = async () => {
     const isConfirmed = window.confirm('¿Estás seguro de que deseas salir?');
@@ -89,7 +91,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/"
+                to="/admin/users"
                 className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
               >
                 <div>
@@ -108,8 +110,10 @@ const Sidebar = () => {
               className="w-10 border-2 border-black rounded-full mr-4"
             />
             <div>
-              <span className="block text-xs font-bold mb-2">Nombre Usuario</span>
-              <span className="block text-xs font-normal"> Superadmin</span>
+              <span className="block text-xs font-bold mb-2">{user.firstName}</span>
+              <span className="block text-xs font-normal">
+                {user.superAdmin ? 'SuperAdmin' : ''}
+              </span>
             </div>
           </div>
           <button

@@ -12,6 +12,7 @@ import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 import Questionary from '@/pages/Questionary/Index';
 import Recovery from '@/pages/RecoveryPass/Recovery';
+import UserControl from '@/pages/Admin/UserControl';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,7 @@ export const router = createBrowserRouter(
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Admin />} />
+        <Route path="users" element={<UserControl />} />
       </Route>
     </>
   )
