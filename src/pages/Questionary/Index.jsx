@@ -1,8 +1,10 @@
+import { useState } from 'react';
+import useFormStore from '@/store/useFormStore';
 import Button from '../../layouts/Button';
 import { task } from './info';
-import { useState } from 'react';
+
 const Questionary = () => {
-  const title = 'Continuar';
+  const setCurrentSurveySection = useFormStore(state => state.setCurrentSurveySection);
   const [agreeTerms, setAgreeTerms] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -15,6 +17,7 @@ const Questionary = () => {
       alert('Debes estar de acuerdo con los términos y condiciones.');
       return;
     }
+    setCurrentSurveySection(1);
   };
   return (
     <div className="flex flex-col justify-center items-center">
@@ -45,7 +48,7 @@ const Questionary = () => {
           />
           <label htmlFor="conditions">Estoy de acuerdo con los términos y condiciones</label>
         </div>
-        <Button title={title} />
+        <Button title="Continuar" />
       </form>
     </div>
   );

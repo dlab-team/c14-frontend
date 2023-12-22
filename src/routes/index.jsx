@@ -10,7 +10,7 @@ import Home from '@/pages/Home';
 import Login from '@/pages/Login/Login';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
-import Questionary from '@/pages/Questionary/Index';
+import Questionary from '@/pages/Questionary/Wrapper';
 import Recovery from '@/pages/RecoveryPass/Recovery';
 
 export const router = createBrowserRouter(
