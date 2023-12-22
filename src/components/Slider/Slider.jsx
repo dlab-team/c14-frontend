@@ -21,7 +21,7 @@ export default function CustomSlider({color}){
             value={value}
             valueLabelFormat={valuetext}
             step={1}
-            valueLabelDisplay="auto"
+            valueLabelDisplay="on"
             sx={{
                 color: color,
                 }}
