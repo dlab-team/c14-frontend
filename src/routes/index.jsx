@@ -2,7 +2,6 @@
 import { AdminLayout, AuthLayout, RootLayout } from '@/layouts';
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-// admin pages
 import Admin from '@/pages/Admin/Admin';
 import Forgot from '@/pages/ForgotPass/Forgot';
 // pages
@@ -12,6 +11,7 @@ import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 import Questionary from '@/pages/Questionary/Index';
 import Recovery from '@/pages/RecoveryPass/Recovery';
+// admin pages
 import UserControl from '@/pages/Admin/UserControl';
 
 export const router = createBrowserRouter(

@@ -59,7 +59,11 @@ const Sidebar = () => {
             <li>
               <NavLink
                 to="/"
-                className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
+                className={({ isActive }) =>
+                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
+                    isActive && 'bg-slate-900 text-white'
+                  }`
+                }
               >
                 <div>
                   <PiChartBar className="text-xl" />
@@ -70,7 +74,11 @@ const Sidebar = () => {
             <li>
               <NavLink
                 to="/"
-                className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
+                className={({ isActive }) =>
+                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
+                    isActive && 'bg-slate-900 text-white'
+                  }`
+                }
               >
                 <div>
                   <PiClipboardText className="text-xl" />
@@ -81,7 +89,11 @@ const Sidebar = () => {
             <li>
               <NavLink
                 to="/admin/polynomials"
-                className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
+                className={({ isActive }) =>
+                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
+                    isActive && 'bg-slate-900 text-white'
+                  }`
+                }
               >
                 <div>
                   <PiListBullets className="text-xl" />
@@ -92,7 +104,11 @@ const Sidebar = () => {
             <li>
               <NavLink
                 to="/admin/users"
-                className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
+                className={({ isActive }) =>
+                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
+                    isActive && 'bg-slate-900 text-white'
+                  }`
+                }
               >
                 <div>
                   <PiUsersFour className="text-xl" />
