@@ -9,10 +9,12 @@ import Home from '@/pages/Home';
 import Login from '@/pages/Login/Login';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
-import Questionary from '@/pages/Questionary/Wrapper';
+import Questionary from '@/pages/Questionary/Index';
 import Recovery from '@/pages/RecoveryPass/Recovery';
+
 // admin pages
 import UserControl from '@/pages/Admin/UserControl';
+import Phrases from '@/pages/Admin/Phrases/Phrases';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +32,7 @@ export const router = createBrowserRouter(
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Admin />} />
+        <Route path="phrases" element={<Phrases />} />
         <Route path="users" element={<UserControl />} />
       </Route>
     </>
