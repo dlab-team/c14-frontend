@@ -16,7 +16,7 @@ export const AdminLayout = () => {
   return (
     <div className="min-h-screen w-full grid grid-cols-1 xl:grid-cols-10">
       <Sidebar />
-      <div className="xl:col-span-8 h-screen relative -z-10">
+      <div className="xl:col-span-8 h-screen relative">
         <Outlet />
       </div>
     </div>

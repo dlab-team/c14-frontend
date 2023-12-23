@@ -67,7 +67,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/"
+                to="/admin/phrases"
                 className="flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
               >
                 <div>
