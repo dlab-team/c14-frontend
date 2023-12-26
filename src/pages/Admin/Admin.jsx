@@ -6,7 +6,7 @@ const Admin = () => {
   return (
     <>
       <AdminHeader
-        title={`Bienvenido, ${user.firstName}`}
+        title={`Bienvenido, ${user?.firstName}`}
         description="Información general sobre los resultados de los encuestados."
       />
       <main className="p-8"></main>
