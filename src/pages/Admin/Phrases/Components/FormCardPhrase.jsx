@@ -30,7 +30,7 @@ const FormCardPhrase = () => {
 
       <div className="flex justify-center md:justify-around flex-wrap text-xl mb-10 gap-8">
         <select
-          className="border rounded border-slate-200 px-3 font-semibold h-12 w-72 "
+          className="border rounded-lg border-slate-200 px-3 font-semibold h-12 w-72 "
           {...register('binomio')}
         >
           <option value="" defaultValue>
@@ -53,7 +53,7 @@ const FormCardPhrase = () => {
             placeholder="acuerdo"
             className="peer px-3 w-32 rounded-l-lg outline-none "
           />
-          <div className="bg-[#34ABC9] text-white flex items-center rounded-r-lg px-2">
+          <div className="bg-[#34ABC9] text-white flex items-center rounded-r-lg px-3">
             <MdPercent />
           </div>
         </div>
