@@ -1,6 +1,6 @@
 // layouts
 import { AdminLayout, AuthLayout, RootLayout } from '@/layouts';
-import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 import Admin from '@/pages/Admin/Admin';
 import Forgot from '@/pages/ForgotPass/Forgot';
@@ -26,9 +26,11 @@ export const router = createBrowserRouter(
         <Route path="opposite" element={<OppositeQuestions />} />
       </Route>
       <Route path="/auth" element={<AuthLayout />}>
+        <Route index element={<Navigate to="/auth/login" replace={true} />} />
         <Route path="login" element={<Login />} />
         <Route path="recovery/:token" element={<Recovery />} />
         <Route path="forgot" element={<Forgot />} />
+        <Route path="*" element={<Navigate to="/auth/login" replace={true} />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Admin />} />
