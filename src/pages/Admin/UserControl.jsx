@@ -35,7 +35,7 @@ const UserControl = () => {
   }
 
   return (
-    <div className="bg-gray-100 h-full">
+    <div className="h-full">
       <AdminHeader
         title="Control de Usuarios"
         description="Aquí puedes crear, modificar y eliminar cuentas de usuarios."
@@ -139,7 +139,6 @@ const UserControl = () => {
           </tbody>
         </table>
       </div>
-      ;
     </div>
   );
 };
