@@ -126,9 +126,9 @@ const Sidebar = () => {
               className="w-10 border-2 border-black rounded-full mr-4"
             />
             <div>
-              <span className="block text-xs font-bold mb-2">{user.firstName}</span>
+              <span className="block text-xs font-bold mb-2">{user?.firstName}</span>
               <span className="block text-xs font-normal">
-                {user.superAdmin ? 'SuperAdmin' : ''}
+                {user?.superAdmin ? 'SuperAdmin' : ''}
               </span>
             </div>
           </div>
