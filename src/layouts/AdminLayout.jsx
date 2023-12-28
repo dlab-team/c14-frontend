@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '@/components/admin/Sidebar';
 import useAuthStore from '../store/useAuthStore';
 
 export const AdminLayout = () => {

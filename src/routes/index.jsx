@@ -33,7 +33,7 @@ export const router = createBrowserRouter(
         <Route path="*" element={<Navigate to="/auth/login" replace={true} />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<Admin />} />
+        <Route path="home" element={<Admin />} />
         <Route path="phrases" element={<Phrases />} />
         <Route path="users" element={<UserControl />} />
       </Route>
