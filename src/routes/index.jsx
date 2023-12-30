@@ -11,6 +11,7 @@ import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 import Questionary from '@/pages/Questionary/Index';
 import Recovery from '@/pages/RecoveryPass/Recovery';
+import Error404 from '@/pages/Error404/Error404'
 
 // admin pages
 import UserControl from '@/pages/Admin/UserControl';
@@ -24,6 +25,7 @@ export const router = createBrowserRouter(
         <Route path="cuestionario" element={<Questionary />} />
         <Route path="opinion" element={<Opinion />} />
         <Route path="opposite" element={<OppositeQuestions />} />
+        <Route path="*" element={<Error404 />} />
       </Route>
       <Route path="/auth" element={<AuthLayout />}>
         <Route index element={<Navigate to="/auth/login" replace={true} />} />
