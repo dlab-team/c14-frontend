@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../layouts/Button';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -45,7 +46,9 @@ export default function Home() {
             una encuesta.
           </p>
           <div className="lg:w-96">
+            <Link to={'/cuestionario'}>
             <Button title={'¡Quiero participar! '} />
+            </Link>
           </div>
         </div>
         <div className="lg:hidden flex flex-col items-center h-[500px] pb-16 mx-6">

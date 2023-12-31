@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { opinionSchema } from '@/schemas/opinionSchema';
 import { sentences } from './db';
 import RadioInput from './components/RadioInput';
 import Button from '@/layouts/Button';
+import useFormStore from '@/store/useFormStore';
 
 const Opinion = () => {
+  
   const {
     register,
     handleSubmit,
@@ -26,6 +27,7 @@ const Opinion = () => {
   const [randomNumbers, setRandomNumbers] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 
   useEffect(() => {
+    console.log(useFormStore.getState().politicalCharacterization);//Para probar que se esta guardando
     let array = [];
     while (array.length < 9) {
       let randomNum = Math.floor(Math.random() * 9);

@@ -9,16 +9,7 @@ import HowCompare from '@/components/HowCompare/HowCompare';
 //   name: '[Political] Characterization Section',
 //   component: <Questionary />,
 // },
-const sections = {
-  0: <StepOne />,
-  1: <Opinion />, // <p>[Political] Own group perceptions</p>,
-  // 2: <p>[Political] Own group perceptions results</p>,
-  2: <HowCompare />, // <p>[Political] Opposite group perceptions</p>,
-  3: <OppositeQuestions />, // <p>[Political] Opposite group perceptions</p>,
-  // 4: <p>[Political] Opposite group perceptions results</p>,
-  // 5: <p>[Political] Next step invitation</p>,
-  // 9: <p>[End] Final Step</p>,
-};
+
 
 const Wrapper = () => {
   const currentSurveySection = useFormStore(state => state.currentSurveySection);
@@ -28,6 +19,16 @@ const Wrapper = () => {
     nextStep();
   };
 
+  const sections = {
+  0: <StepOne handleStep={handleStep}/>,
+  1: <Opinion />, // <p>[Political] Own group perceptions</p>,
+  // 2: <p>[Political] Own group perceptions results</p>,
+  2: <HowCompare />, // <p>[Political] Opposite group perceptions</p>,
+  3: <OppositeQuestions />, // <p>[Political] Opposite group perceptions</p>,
+  // 4: <p>[Political] Opposite group perceptions results</p>,
+  // 5: <p>[Political] Next step invitation</p>,
+  // 9: <p>[End] Final Step</p>,
+};
   const CurrentStep = sections[currentSurveySection];
 
   // if (currentSurveySection === 5) {
