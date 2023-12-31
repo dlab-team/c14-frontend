@@ -9,20 +9,20 @@ import Home from '@/pages/Home';
 import Login from '@/pages/Login/Login';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
-import Questionary from '@/pages/Questionary/Index';
 import Recovery from '@/pages/RecoveryPass/Recovery';
 import Error404 from '@/pages/Error404/Error404'
 
 // admin pages
 import UserControl from '@/pages/Admin/UserControl';
 import Phrases from '@/pages/Admin/Phrases/Phrases';
+import Wrapper from '@/pages/Questionary/Wrapper';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
-        <Route path="cuestionario" element={<Questionary />} />
+        <Route path="cuestionario" element={<Wrapper />} />
         <Route path="opinion" element={<Opinion />} />
         <Route path="opposite" element={<OppositeQuestions />} />
         <Route path="*" element={<Error404 />} />
