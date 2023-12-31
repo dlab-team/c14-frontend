@@ -6,18 +6,16 @@ import './Error404.css';
 
 const Error404 = () => {
   return (
-    <div className="error-container">
-      <div className="bg-image">
+    <div className="relative min-h-[90vh] flex justify-center items-center text-center overflow-hidden">
+      <div className="bg-image hidden sm:block">
         <img src={bg404} alt="bg404" />
       </div>
-      <div className="error-content">
-        <img className="error-image" src={error404} alt="error404" />
-        <p className="error-message">Página no encontrada</p>
-        <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <Link to="/">
-            <Button title={'Volver al inicio'} />
-          </Link>
-        </div>
+      <div className="px-4 max-w-sm flex flex-col gap-4">
+        <img className="error-image max-w-xs" src={error404} alt="error404" />
+        <p className="error-message mb-4">Página no encontrada</p>
+        <Link to="/">
+          <Button title={'Volver al inicio'} className="rounded-lg" />
+        </Link>
       </div>
     </div>
   );
