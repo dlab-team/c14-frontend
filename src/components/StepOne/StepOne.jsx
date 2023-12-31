@@ -50,7 +50,7 @@ const StepOne = ({handleStep}) => {
               <Controller
                 control={control}
                 name="ladoPolitico"
-                rules={{ required: 'Porfavor selecciona una opción' }}
+                rules={{required: true}}
                 render={({ field }) => (
                   <>
                     <input type="radio" {...field} value={option.value} />
@@ -60,7 +60,6 @@ const StepOne = ({handleStep}) => {
               />
             </label>
           ))}
-          {errors.lado && <p className="text-red-500">{errors.lado.message}</p>}
         </div>
         <div className="col-span-2 flex justify-end">
         <div className="w-1/3 md:w-1/6 mr-1 mt-10 ">
