@@ -1,16 +1,11 @@
 export default function AdminModal() {
   return (
-    <div className="relative  z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-      {/* <!--
-    Background backdrop, show/hide based on modal state.
-
-    Entering: "ease-out duration-300"
-      From: "opacity-0"
-      To: "opacity-100"
-    Leaving: "ease-in duration-200"
-      From: "opacity-100"
-      To: "opacity-0"
-  --> */}
+    <div
+      className="relative z-50 hidden"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
