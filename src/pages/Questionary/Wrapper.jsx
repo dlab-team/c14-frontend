@@ -17,11 +17,12 @@ const Wrapper = () => {
 
   const handleStep = () => {
     nextStep();
+    console.log(useFormStore.getState().currentSurveySection);
   };
 
   const sections = {
   0: <StepOne handleStep={handleStep}/>,
-  1: <Opinion />, // <p>[Political] Own group perceptions</p>,
+  1: <Opinion handleStep={handleStep}/>, // <p>[Political] Own group perceptions</p>,
   // 2: <p>[Political] Own group perceptions results</p>,
   2: <HowCompare />, // <p>[Political] Opposite group perceptions</p>,
   3: <OppositeQuestions />, // <p>[Political] Opposite group perceptions</p>,
