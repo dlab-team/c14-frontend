@@ -19,6 +19,7 @@ const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const { logout } = useLogout();
   const { user } = useAuthStore();
+  console.log(user);
 
   const handleLogoutClick = async () => {
     const isConfirmed = window.confirm('¿Estás seguro de que deseas salir?');
@@ -33,7 +34,7 @@ const Sidebar = () => {
       <div
         className={`h-full xl:h-[100vh] fixed xl:static w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-auto top-0 p-4 flex bg-white flex-col justify-between z-50 shadow-xl text-sm xl:col-span-2 text-gray-700 ${
           showMenu ? 'left-0' : '-left-full'
-        } transition-all`}
+        } transition-all overflow-y-scroll`}
       >
         <div>
           <div className="flex flex-col items-center py-10">
@@ -43,7 +44,7 @@ const Sidebar = () => {
           <ul className="md:px-3 lg:px-0 space-y-1">
             <li>
               <NavLink
-                to="/admin"
+                to="/admin/home"
                 className={({ isActive }) =>
                   `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
                     isActive && 'bg-slate-900 text-white'
@@ -118,7 +119,7 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
-        <nav className="text-slate-900 font-bold mr-6">
+        <nav className="text-slate-900 font-bold mt-2 mr-6">
           <div className="flex items-center m-3">
             <img
               src="/userPic/userPic.png"
@@ -126,9 +127,9 @@ const Sidebar = () => {
               className="w-10 border-2 border-black rounded-full mr-4"
             />
             <div>
-              <span className="block text-xs font-bold mb-2">{user?.firstName}</span>
+              <span className="block text-xs font-bold mb-1">{user?.firstName}</span>
               <span className="block text-xs font-normal">
-                {user?.superAdmin ? 'SuperAdmin' : ''}
+                {user?.superAdmin ? 'Super Adminstrador' : 'Administrador'}
               </span>
             </div>
           </div>

@@ -33,7 +33,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center lg:justify-center lg:me-36 pt-20 lg:mt-0">
+        <div className="flex flex-col items-center lg:justify-center lg:me-36 pt-20 lg:pt-0">
           <h1 className="text-4xl lg:text-5xl font-bold text-center mx-4">
             Estudio Polarizaciones
           </h1>
