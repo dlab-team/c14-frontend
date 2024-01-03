@@ -1,11 +1,20 @@
+import { useState } from 'react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import { CiEdit } from 'react-icons/ci';
 import { MdDeleteOutline } from 'react-icons/md';
 import { format } from 'date-fns';
 import useGetUsers from '@/hooks/useGetUsers';
+import AdminModal from '@/components/admin/AdminModal';
+import Button from '@/layouts/Button';
 
 const UserControl = () => {
   const { data: users, isLoading, isError, refetch } = useGetUsers();
+  const [showModal, setShowModal] = useState(false);
+
+  const onSubmit = async data => {
+    console.log(data);
+    alert('desea agregar el usuario?');
+  };
 
   const formatCreatedAt = createdAt => {
     return format(new Date(createdAt), 'dd-MM-yyyy');
@@ -22,7 +31,7 @@ const UserControl = () => {
   };
 
   const addUser = async () => {
-    alert('desea agregar un usuario?');
+    setShowModal(true);
     refetch();
   };
 
@@ -139,6 +148,42 @@ const UserControl = () => {
           </tbody>
         </table>
       </div>
+      {showModal && (
+        <AdminModal setShowModal={setShowModal} title={'Agregar administrador'}>
+          <form onSubmit={onSubmit} className="grid gap-y-3">
+            <div>
+              <label className="block leading-6 text-gray-900 font-medium">Nombre</label>
+              <div className="mt-1">
+                <input
+                  className="block w-80 rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
+                  placeholder="Ingresa el nombre"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block leading-6 text-gray-900 font-medium">Apellido</label>
+              <div className="mt-1">
+                <input
+                  className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6 py-3 px-4"
+                  placeholder="Ingresa el apellido"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block leading-6 text-gray-900 font-medium">
+                Correo electronico
+              </label>
+              <div className="mt-1">
+                <input
+                  className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
+                  placeholder="Ingresa el correo"
+                />
+              </div>
+            </div>
+            <Button title={'Agregar'} className={'mt-3 font-normal py-1'} />
+          </form>
+        </AdminModal>
+      )}
     </>
   );
 };

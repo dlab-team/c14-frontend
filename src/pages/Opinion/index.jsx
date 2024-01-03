@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { opinionSchema } from '@/schemas/opinionSchema';
 import { sentences } from './db';
 import RadioInput from './components/RadioInput';
 import Button from '@/layouts/Button';
+import useFormStore from '@/store/useFormStore';
 
-const Opinion = () => {
+const Opinion = ({ handleStep }) => {
+  
   const {
     register,
     handleSubmit,
@@ -18,9 +19,7 @@ const Opinion = () => {
   });
 
   const onSubmit = handleSubmit(data => {
-    console.log(data);
-    alert('Form submitted successfully');
-    reset();
+    handleStep();
   });
 
   const [randomNumbers, setRandomNumbers] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);

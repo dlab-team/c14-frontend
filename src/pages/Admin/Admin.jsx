@@ -3,6 +3,7 @@ import useAuthStore from '@/store/useAuthStore';
 
 const Admin = () => {
   const { user } = useAuthStore();
+
   return (
     <>
       <AdminHeader
