@@ -2,10 +2,25 @@ import backgroundHeaderMobile from '../../assets/img/admin/backgroundHeaderMobil
 import backgroundHeader from '../../assets/img/admin/backgroundHeader.png';
 import banderas from '../../assets/img/banderas.png';
 import Button from '../../layouts/Button';
+import { useForm, Controller } from 'react-hook-form';
 import './HowCompare.css';
 
-const HowCompare = () => {
+const HowCompare = ({handleStep}) => {
+  const {control, handleSubmit, formState: { errors }} = useForm();
+
+  const radioOptions = [
+    { label: 'Izquierda', value: 'Izquierda' },
+    { label: 'Derecha', value: 'Derecha' },
+  ]
+
+  const onSubmit = (data) => {
+  //Hacer algo con el data
+   const ladoComparar = data.ladoComparar
+   handleStep();
+  }
+
   return (
+    <form onSubmit={handleSubmit(onSubmit)}>
     <div
       className="flex flex-col justify-center relative col-start-2 col-span-5 p-4 md:p-8 text-white h-[300px]"
       style={{ background: 'linear-gradient(to right, #DF1A84, #E23F43)' }}
@@ -26,21 +41,33 @@ const HowCompare = () => {
         <img width="70px" src={banderas} alt="" /><p>¿Con quién te quieres comparar?</p>
         </div>
         <div className="parte-inferior">
-          <label>
-            <input type="radio" name="lado" /> Izquierda
-          </label>
-          <label>
-            <input type="radio" name="lado" /> Derecha
-          </label>
+          {radioOptions.map((option, index) => (
+            <label key={index}>
+              <Controller
+                control={control}
+                name="ladoComparar"
+                rules={{required: true}}
+                render={({ field }) => (
+                  <>
+                    <input type="radio" {...field} value={option.value} />
+                    {option.label}
+                  </>
+                )}
+              />
+            </label>
+          ))}
         </div>
         <div className="col-span-2 flex justify-end">
-        <div className="w-1/3 md:w-1/6 mr-1 mt-10 ">
+                <div className="w-1/3 md:w-1/6 mr-1 mt-10 ">
+
           <Button title={'Continuar'} />
         </div>
       </div>
       </div>      
     </div>
+    </form>
   );
 };
 
 export default HowCompare;
+
