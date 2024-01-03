@@ -1,8 +1,16 @@
 import React from 'react';
 import Button from '../../layouts/Button';
 import { Link } from 'react-router-dom';
+import useFormStore from '@/store/useFormStore';
 
 export default function Home() {
+
+  const clearForm = useFormStore(state => state.clearForm);
+
+  const handleClick = () => {
+    clearForm();
+  }
+
   return (
     <React.Fragment>
       <div className="grid lg:grid-cols-2 h-[90vh] ">
@@ -47,7 +55,7 @@ export default function Home() {
           </p>
           <div className="lg:w-96">
             <Link to={'/cuestionario'}>
-            <Button title={'¡Quiero participar! '} />
+            <Button title={'¡Quiero participar! '} onClick={handleClick}/>
             </Link>
           </div>
         </div>
