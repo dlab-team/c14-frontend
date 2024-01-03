@@ -10,12 +10,15 @@ import Login from '@/pages/Login/Login';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 import Recovery from '@/pages/RecoveryPass/Recovery';
-import Error404 from '@/pages/Error404/Error404'
+import Error404 from '@/pages/Error404/Error404';
 
 // admin pages
 import UserControl from '@/pages/Admin/UserControl';
 import Phrases from '@/pages/Admin/Phrases/Phrases';
 import Wrapper from '@/pages/Questionary/Wrapper';
+import Analysis from '@/pages/Admin/Analysis';
+import Polynomials from '@/pages/Admin/Polynomials';
+import Profile from '@/pages/Admin/Profile';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,6 +41,9 @@ export const router = createBrowserRouter(
         <Route path="home" element={<Admin />} />
         <Route path="phrases" element={<Phrases />} />
         <Route path="users" element={<UserControl />} />
+        <Route path="analysis" element={<Analysis />} />
+        <Route path="polynomials" element={<Polynomials />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
     </>
   )
