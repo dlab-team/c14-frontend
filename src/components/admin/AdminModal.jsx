@@ -22,13 +22,13 @@ export default function AdminModal({ setShowModal, title, children }) {
                 <div className="my-3 text-left">
                   <button
                     onClick={() => setShowModal(false)}
-                    className="absolute top-5 right-8  hover:text-zinc-100 hover:bg-slate-900 p-1 rounded-full"
+                    className="absolute top-6 right-6  hover:text-zinc-100 hover:bg-slate-900 p-1 rounded-full"
                   >
                     <PiXBold />
                   </button>
 
                   <h3
-                    className="text-xl font-semibold leading-6 text-gray-900 mb-4"
+                    className="text-xl font-semibold leading-6 text-gray-900 mb-4 mr-8"
                     id="modal-title"
                   >
                     {title}

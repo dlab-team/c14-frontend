@@ -14,19 +14,18 @@ import { toast } from 'sonner';
 import useAuthStore from '@/store/useAuthStore';
 import useLogout from '@/hooks/useLogout';
 import { useState } from 'react';
+import AdminModal from './AdminModal';
+import Button from '@/layouts/Button';
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const { logout } = useLogout();
   const { user } = useAuthStore();
-  console.log(user);
+  const [logoutModal, setLogoutModal] = useState(false);
 
   const handleLogoutClick = async () => {
-    const isConfirmed = window.confirm('¿Estás seguro de que deseas salir?');
-    if (isConfirmed) {
-      logout();
-      toast.success('Sesión cerrada exitosamente');
-    }
+    logout();
+    toast.success('Sesión cerrada exitosamente');
   };
 
   return (
@@ -59,7 +58,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/"
+                to="/admin/analysis"
                 className={({ isActive }) =>
                   `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
                     isActive && 'bg-slate-900 text-white'
@@ -134,7 +133,7 @@ const Sidebar = () => {
             </div>
           </div>
           <button
-            onClick={handleLogoutClick}
+            onClick={() => setLogoutModal(true)}
             className="flex items-center my-6 gap-4 py-2 px-4 w-full border mx-3 border-slate-900 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
           >
             <PiSignOut className="text-xl" /> Cerrar sesión
@@ -148,6 +147,21 @@ const Sidebar = () => {
       >
         {showMenu ? <PiXBold /> : <PiListBold />}
       </button>
+      {logoutModal && (
+        <AdminModal setShowModal={setLogoutModal} title={'¿Estás seguro de que deseas salir?'}>
+          <div className="flex justify-center w-full gap-2">
+            <div onClick={() => setLogoutModal(false)}>
+              <Button
+                title="Cancelar"
+                className={'mt-3 font-medium text-base bg-white text-black border border-slate-600'}
+              />
+            </div>
+            <div onClick={handleLogoutClick}>
+              <Button title="Cerrar sesion" className={'mt-3 font-medium text-base'} />
+            </div>
+          </div>
+        </AdminModal>
+      )}
     </>
   );
 };
