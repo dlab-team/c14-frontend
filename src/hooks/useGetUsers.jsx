@@ -1,4 +1,4 @@
-import { AdministrationService } from '../services/administration.services';
+import { AdministrationService } from '../services/administration.service';
 import { toast } from 'sonner';
 import { useQuery } from 'react-query';
 

@@ -9,12 +9,13 @@ import Home from '@/pages/Home';
 import Login from '@/pages/Login/Login';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
+import OptPolynomials from '@/pages/Admin/Polynomials/OptPolynomials';
+import Phrases from '@/pages/Admin/Phrases/Phrases';
+// import Polynomials from '@/pages/Admin/Polynomials/Polynomials';
 import Questionary from '@/pages/Questionary/Index';
 import Recovery from '@/pages/RecoveryPass/Recovery';
-
 // admin pages
 import UserControl from '@/pages/Admin/UserControl';
-import Phrases from '@/pages/Admin/Phrases/Phrases';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +37,8 @@ export const router = createBrowserRouter(
         <Route index element={<Admin />} />
         <Route path="phrases" element={<Phrases />} />
         <Route path="users" element={<UserControl />} />
+        {/* <Route path="polynomials" element={<Polynomials />} /> */}
+        <Route path="polynomials/:polynomialsId" element={<OptPolynomials />} />
       </Route>
     </>
   )
