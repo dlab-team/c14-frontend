@@ -37,7 +37,9 @@ const Sidebar = () => {
       >
         <div>
           <div className="flex flex-col items-center py-10">
-            <img src="/logo/logo-3xi-negro.png" alt="Logo 3xi" className="w-10" />
+            <NavLink to="/">
+              <img src="/logo/logo-3xi-negro.png" alt="Logo 3xi" className="w-10" />
+            </NavLink>
             <img src="/logo/criteria/criteriaLogo.png" alt="Logo Criteria" className="w-32 pt-7" />
           </div>
           <ul className="md:px-3 lg:px-0 space-y-1">
@@ -118,19 +120,28 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
-        <nav className="text-slate-900 font-bold mt-2 mr-6">
-          <div className="flex items-center m-3">
-            <img
-              src="/userPic/userPic.png"
-              alt="Imagen Usuario"
-              className="w-10 border-2 border-black rounded-full mr-4"
-            />
-            <div>
-              <span className="block text-xs font-bold mb-1">{user?.firstName}</span>
-              <span className="block text-xs font-normal">
-                {user?.superAdmin ? 'Super Adminstrador' : 'Administrador'}
-              </span>
-            </div>
+        <nav className="text-slate-900 font-bold mt-2 ">
+          <div className="mr-4">
+            <NavLink
+              to="/admin/profile"
+              className={({ isActive }) =>
+                `flex items-center w-full p-1 m-2 my-3 rounded-lg hover:bg-gray-100 ${
+                  isActive && 'bg-gray-200'
+                }`
+              }
+            >
+              <img
+                src="/userPic/userPic.png"
+                alt="Imagen Usuario"
+                className="w-10 border-2 border-black rounded-full mr-4"
+              />
+              <div className="flex flex-col items-start">
+                <span className="text-xs font-bold mb-1">{user?.firstName}</span>
+                <span className="text-xs font-normal">
+                  {user?.superAdmin ? 'Super Adminstrador' : 'Administrador'}
+                </span>
+              </div>
+            </NavLink>
           </div>
           <button
             onClick={() => setLogoutModal(true)}

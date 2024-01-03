@@ -24,7 +24,7 @@ const Wrapper = () => {
   0: <StepOne handleStep={handleStep}/>,
   1: <Opinion handleStep={handleStep}/>, // <p>[Political] Own group perceptions</p>,
   // 2: <p>[Political] Own group perceptions results</p>,
-  2: <HowCompare />, // <p>[Political] Opposite group perceptions</p>,
+  2: <HowCompare handleStep={handleStep}/>, // <p>[Political] Opposite group perceptions</p>,
   3: <OppositeQuestions />, // <p>[Political] Opposite group perceptions</p>,
   // 4: <p>[Political] Opposite group perceptions results</p>,
   // 5: <p>[Political] Next step invitation</p>,
