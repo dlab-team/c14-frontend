@@ -7,7 +7,7 @@ import RadioInput from './components/RadioInput';
 import Button from '@/layouts/Button';
 import useFormStore from '@/store/useFormStore';
 
-const Opinion = () => {
+const Opinion = ({ handleStep }) => {
   
   const {
     register,
@@ -19,15 +19,12 @@ const Opinion = () => {
   });
 
   const onSubmit = handleSubmit(data => {
-    console.log(data);
-    alert('Form submitted successfully');
-    reset();
+    handleStep();
   });
 
   const [randomNumbers, setRandomNumbers] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 
   useEffect(() => {
-    console.log(useFormStore.getState().politicalCharacterization);//Para probar que se esta guardando
     let array = [];
     while (array.length < 9) {
       let randomNum = Math.floor(Math.random() * 9);
