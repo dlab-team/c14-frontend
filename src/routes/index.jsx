@@ -9,22 +9,24 @@ import Home from '@/pages/Home';
 import Login from '@/pages/Login/Login';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
-import OptPolynomials from '@/pages/Admin/Polynomials/OptPolynomials';
-import Phrases from '@/pages/Admin/Phrases/Phrases';
-// import Polynomials from '@/pages/Admin/Polynomials/Polynomials';
-import Questionary from '@/pages/Questionary/Index';
 import Recovery from '@/pages/RecoveryPass/Recovery';
+import Error404 from '@/pages/Error404/Error404'
+
 // admin pages
 import UserControl from '@/pages/Admin/UserControl';
+import Phrases from '@/pages/Admin/Phrases/Phrases';
+import Wrapper from '@/pages/Questionary/Wrapper';
+import OptPolynomials from '@/pages/Admin/Polynomials/OptPolynomials';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
-        <Route path="cuestionario" element={<Questionary />} />
+        <Route path="cuestionario" element={<Wrapper />} />
         <Route path="opinion" element={<Opinion />} />
         <Route path="opposite" element={<OppositeQuestions />} />
+        <Route path="*" element={<Error404 />} />
       </Route>
       <Route path="/auth" element={<AuthLayout />}>
         <Route index element={<Navigate to="/auth/login" replace={true} />} />
@@ -37,7 +39,6 @@ export const router = createBrowserRouter(
         <Route index element={<Admin />} />
         <Route path="phrases" element={<Phrases />} />
         <Route path="users" element={<UserControl />} />
-        {/* <Route path="polynomials" element={<Polynomials />} /> */}
         <Route path="polynomials/:polynomialsId" element={<OptPolynomials />} />
       </Route>
     </>
