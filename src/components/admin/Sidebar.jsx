@@ -90,7 +90,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/admin/polynomials/145c1fcf-cab7-48ef-af50-69be51a36105"
+                to="/admin/polynomials"
                 className={({ isActive }) =>
                   `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
                     isActive && 'bg-slate-900 text-white'
