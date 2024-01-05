@@ -120,7 +120,7 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
-        <nav className="text-slate-900 font-bold mt-2 ">
+        <nav className="text-slate-900 font-bold mt-2">
           <div className="mr-4">
             <NavLink
               to="/admin/profile"
@@ -143,12 +143,14 @@ const Sidebar = () => {
               </div>
             </NavLink>
           </div>
-          <button
-            onClick={() => setLogoutModal(true)}
-            className="flex items-center my-6 gap-4 py-2 px-4 w-full border mx-3 border-slate-900 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
-          >
-            <PiSignOut className="text-xl" /> Cerrar sesión
-          </button>
+          <div className="mr-6">
+            <button
+              onClick={() => setLogoutModal(true)}
+              className="flex items-center my-6 gap-4 py-2 px-4 w-full border mx-3 border-slate-900 rounded-lg hover:bg-slate-900 hover:text-white transition-colors"
+            >
+              <PiSignOut className="text-xl" /> Cerrar sesión
+            </button>
+          </div>
         </nav>
       </div>
 
