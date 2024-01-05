@@ -1,14 +1,20 @@
+import { useMutation, useQueryClient } from 'react-query';
+
 import { OptPolynomialsService } from '@/services/optionPolynomial.service';
 import { toast } from 'sonner';
-import { useMutation } from 'react-query';
 
 const useEditOption = () => {
+  const queryClient = useQueryClient();
+
   return useMutation(({ id, payload }) => OptPolynomialsService.editOptPolynomial(id, payload), {
     onSuccess: () => {
       toast.success('Opcion editada con exito');
     },
     onError: error => {
       toast.error(error?.message || 'Ha ocurrido un error, intente nuevamente');
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries('options');
     },
   });
 };
