@@ -6,6 +6,19 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #bdbbb7;
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
 }
