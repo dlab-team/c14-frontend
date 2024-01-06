@@ -9,19 +9,21 @@ import {
   PiXBold,
 } from 'react-icons/pi';
 
+import AdminModal from './AdminModal';
+import Button from '@/layouts/Button';
 import { NavLink } from 'react-router-dom';
 import { toast } from 'sonner';
 import useAuthStore from '@/store/useAuthStore';
 import useLogout from '@/hooks/useLogout';
 import { useState } from 'react';
-import AdminModal from './AdminModal';
-import Button from '@/layouts/Button';
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const { logout } = useLogout();
   const { user } = useAuthStore();
   const [logoutModal, setLogoutModal] = useState(false);
+
+  console.log(user);
 
   const handleLogoutClick = async () => {
     logout();
@@ -104,19 +106,23 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/admin/users"
-                className={({ isActive }) =>
-                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
-                    isActive && 'bg-slate-900 text-white'
-                  }`
-                }
-              >
-                <div>
-                  <PiUsersFour className="text-xl" />
-                </div>
-                Control de Usuarios
-              </NavLink>
+              {user.superAdmin ? (
+                <NavLink
+                  to="/admin/users"
+                  className={({ isActive }) =>
+                    `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
+                      isActive && 'bg-slate-900 text-white'
+                    }`
+                  }
+                >
+                  <div>
+                    <PiUsersFour className="text-xl" />
+                  </div>
+                  Control de Usuarios
+                </NavLink>
+              ) : (
+                ''
+              )}
             </li>
           </ul>
         </div>
