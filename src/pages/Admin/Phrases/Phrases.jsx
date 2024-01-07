@@ -15,7 +15,7 @@ const Phrases = () => {
         description="Aquí podrás editar frases y respuestas del cuestionario."
       />
       <main className="max-w-4xl mx-4 md:mx-auto">
-        <div className="flex justify-end">
+        <div className="flex xl:justify-end justify-center">
           <button
             className="bg-black px-4 py-2 my-10 rounded-2xl text-white text-xl font-bold flex justify-center items-center"
             onClick={handleButton}

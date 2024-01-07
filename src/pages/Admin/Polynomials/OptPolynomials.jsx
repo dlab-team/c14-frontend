@@ -18,7 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 const OptPolynomials = () => {
   const { polynomialsId } = useParams();
-  const { data: options, isLoading, isError, refetch } = useGetOptions();
+  const { data: options, isLoading, isError } = useGetOptions();
   const { data: polyId, isLoading: loadingPoly, isError: errorPoly } = useGetPolyId(polynomialsId);
   const { mutate: mutateCreate } = useCreateOption();
   const { mutate: mutateEdit } = useEditOption();
@@ -77,7 +77,6 @@ const OptPolynomials = () => {
         },
         error: err => <b>{err.response?.data?.message || 'Ha ocurrido un error'}</b>,
       });
-      refetch();
     }
   };
 
@@ -97,7 +96,6 @@ const OptPolynomials = () => {
         });
         toast.success('Opción creada con éxito');
       }
-      refetch();
       toggleModal(null);
       closeModal();
     } catch (error) {
@@ -150,7 +148,7 @@ const OptPolynomials = () => {
             {poly &&
               poly?.map(pol => (
                 <tr key={pol?.id}>
-                  <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+                  <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap w-72">
                     {pol.name}
                   </th>
                   <td className="hidden sm:table-cell px-6 py-4 font-medium whitespace-nowrap">
@@ -187,13 +185,15 @@ const OptPolynomials = () => {
                   poly.length > 0 &&
                   poly[0].id === opt.polynomialId && (
                     <tr key={opt?.id}>
-                      <td className="px-6 py-4 font-medium sm:whitespace-nowrap">{opt.name}</td>
+                      <td className="px-6 py-4 font-medium sm:whitespace-nowrap w-72">
+                        {opt.name}
+                      </td>
                       <td className="hidden sm:table-cell px-6 py-4 font-medium sm:whitespace-nowrap">
                         {opt.group}
                       </td>
 
-                      <td className="px-6 py-4 font-medium sm:whitespace-nowrap">
-                        <div className="flex gap-3 justify-center">
+                      <td className="px-6 py-4 font-medium sm:whitespace-nowrap flex justify-center items-center">
+                        <div className="flex gap-3">
                           <button
                             className="border border-black rounded-md"
                             onClick={() => toggleModal(opt)}
@@ -253,14 +253,19 @@ const OptPolynomials = () => {
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900">Grupo</label>
-                  <input
-                    type="text"
-                    name="group"
+                  <select
+                    name="option"
                     defaultValue={isEditing ? editOption.group : ''}
-                    placeholder="Extremo1, Neutro, Extremo2"
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  bg-white dark:border-gray-500 dark:placeholder-gray-400"
                     {...register('group')}
-                  />
+                  >
+                    <option value="" disabled hidden>
+                      Selecciona una opción
+                    </option>
+                    <option value="Extremo1">Extremo1</option>
+                    <option value="Neutro">Neutro</option>
+                    <option value="Extremo2">Extremo2</option>
+                  </select>
                   {errors.group && <div className="text-red-600">{errors.group.message}</div>}
                 </div>
                 <button
