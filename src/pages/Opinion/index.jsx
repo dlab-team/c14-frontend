@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { opinionSchema } from '@/schemas/opinionSchema';
-import { sentences } from './db';
 import RadioInput from './components/RadioInput';
 import Button from '@/layouts/Button';
 import useFormStore from '@/store/useFormStore';
+import useGetExtrmPoliticalPhrases from '@/hooks/usegetExtrmPoliticalPhrases';
 
 const Opinion = ({ handleStep }) => {
-  
   const {
     register,
     handleSubmit,
@@ -18,22 +17,51 @@ const Opinion = ({ handleStep }) => {
     resolver: yupResolver(opinionSchema),
   });
 
+  const bgColors = [
+    'bg-purple-500',
+    'bg-teal-500',
+    'bg-lime-500',
+    'bg-orange-500',
+    'bg-pink-500',
+    'bg-red-500',
+    'bg-indigo-500',
+    'bg-sky-500',
+    'bg-emerald-500',
+  ];
+
+  const accentColors = [
+    'accent-purple-500',
+    'accent-teal-600',
+    'accent-lime-600',
+    'accent-orange-600',
+    'accent-pink-500',
+    'accent-red-500',
+    'accent-indigo-500',
+    'accent-sky-600',
+    'accent-emerald-600',
+  ];
+
+  const phrases = useGetExtrmPoliticalPhrases(useFormStore.getState().politicalCharacterization);
+  let text = [];
+  let id = [];
+  if (phrases.data) {
+    phrases.data.forEach(phrase => {
+      id.push(phrase.id);
+      text.push(phrase.text);
+    });
+  }
+
+  if (phrases.isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (phrases.isError) {
+    return <p>Error</p>;
+  }
+
   const onSubmit = handleSubmit(data => {
     handleStep();
   });
-
-  const [randomNumbers, setRandomNumbers] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
-
-  useEffect(() => {
-    let array = [];
-    while (array.length < 9) {
-      let randomNum = Math.floor(Math.random() * 9);
-      if (!array.includes(randomNum)) {
-        array.push(randomNum);
-      }
-    }
-    setRandomNumbers(array);
-  }, []);
 
   return (
     <div>
@@ -53,6 +81,7 @@ const Opinion = ({ handleStep }) => {
         <p className="text-2xl font-bold text-center mx-6">
           ¿Qué tan de acuerdo estás con cada una de estas frases?
         </p>
+
         <form onSubmit={onSubmit} className="w-10/12 lg:w-3/4 md:grid md:grid-cols-2 mt-8 md:mt-16">
           <div className="hidden md:block col-start-2">
             <div className="grid grid-cols-4 divide-x-2 border-x-2 border-t-2 rounded-t-lg text-xs lg:text-sm font-bold h-16 text-center">
@@ -73,16 +102,17 @@ const Opinion = ({ handleStep }) => {
 
           <RadioInput
             bgColor={'bg-purple-500'}
-            sentence={sentences[randomNumbers[0]].text}
+            sentence={text[0]}
             accentColor={'accent-purple-500'}
             register={register('frase1')}
+            required
           />
           <div className="col-span-2 flex justify-end me-1 text-red-500">
             {errors.frase1 && <p>{errors.frase1.message}</p>}
           </div>
           <RadioInput
             bgColor={'bg-teal-500'}
-            sentence={sentences[randomNumbers[1]].text}
+            sentence={text[1]}
             accentColor={'accent-teal-600'}
             register={register('frase2')}
           />
@@ -91,7 +121,7 @@ const Opinion = ({ handleStep }) => {
           </div>
           <RadioInput
             bgColor={'bg-lime-500'}
-            sentence={sentences[randomNumbers[2]].text}
+            sentence={text[2]}
             accentColor={'accent-lime-600'}
             register={register('frase3')}
           />
@@ -100,7 +130,7 @@ const Opinion = ({ handleStep }) => {
           </div>
           <RadioInput
             bgColor={'bg-orange-500'}
-            sentence={sentences[randomNumbers[3]].text}
+            sentence={text[3]}
             accentColor={'accent-orange-600'}
             register={register('frase4')}
           />
@@ -109,7 +139,7 @@ const Opinion = ({ handleStep }) => {
           </div>
           <RadioInput
             bgColor={'bg-pink-500'}
-            sentence={sentences[randomNumbers[4]].text}
+            sentence={text[4]}
             accentColor={'accent-pink-500'}
             register={register('frase5')}
           />
@@ -118,39 +148,39 @@ const Opinion = ({ handleStep }) => {
           </div>
           <RadioInput
             bgColor={'bg-red-500'}
-            sentence={sentences[randomNumbers[5]].text}
+            sentence={text[5]}
             accentColor={'accent-red-500'}
             register={register('frase6')}
           />
           <div className="col-span-2 flex justify-end me-1 text-red-500">
-            {errors.frase5 && <p>{errors.frase5.message}</p>}
+            {errors.frase6 && <p>{errors.frase6.message}</p>}
           </div>
           <RadioInput
             bgColor={'bg-indigo-500'}
-            sentence={sentences[randomNumbers[6]].text}
+            sentence={text[6]}
             accentColor={'accent-indigo-500'}
             register={register('frase7')}
           />
           <div className="col-span-2 flex justify-end me-1 text-red-500">
-            {errors.frase5 && <p>{errors.frase5.message}</p>}
+            {errors.frase7 && <p>{errors.frase7.message}</p>}
           </div>
           <RadioInput
             bgColor={'bg-sky-500'}
-            sentence={sentences[randomNumbers[7]].text}
+            sentence={text[7]}
             accentColor={'accent-sky-600'}
             register={register('frase8')}
           />
           <div className="col-span-2 flex justify-end me-1 text-red-500">
-            {errors.frase5 && <p>{errors.frase5.message}</p>}
+            {errors.frase7 && <p>{errors.frase7.message}</p>}
           </div>
           <RadioInput
             bgColor={'bg-purple-500'}
-            sentence={sentences[randomNumbers[8]].text}
+            sentence={text[8]}
             accentColor={'accent-purple-500'}
             register={register('frase9')}
           />
           <div className="col-span-2 flex justify-end me-1 text-red-500">
-            {errors.frase5 && <p>{errors.frase5.message}</p>}
+            {errors.frase8 && <p>{errors.frase8.message}</p>}
           </div>
           <div className="col-span-2 flex justify-end">
             <div className="w-1/3 md:w-1/6 mr-1 mt-10 ">
