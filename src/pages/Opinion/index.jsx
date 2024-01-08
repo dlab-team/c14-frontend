@@ -17,30 +17,6 @@ const Opinion = ({ handleStep }) => {
     resolver: yupResolver(opinionSchema),
   });
 
-  const bgColors = [
-    'bg-purple-500',
-    'bg-teal-500',
-    'bg-lime-500',
-    'bg-orange-500',
-    'bg-pink-500',
-    'bg-red-500',
-    'bg-indigo-500',
-    'bg-sky-500',
-    'bg-emerald-500',
-  ];
-
-  const accentColors = [
-    'accent-purple-500',
-    'accent-teal-600',
-    'accent-lime-600',
-    'accent-orange-600',
-    'accent-pink-500',
-    'accent-red-500',
-    'accent-indigo-500',
-    'accent-sky-600',
-    'accent-emerald-600',
-  ];
-
   const phrases = useGetExtrmPoliticalPhrases(useFormStore.getState().politicalCharacterization);
   let text = [];
   let id = [];
