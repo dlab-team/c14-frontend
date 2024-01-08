@@ -5,7 +5,7 @@ import { opinionSchema } from '@/schemas/opinionSchema';
 import RadioInput from './components/RadioInput';
 import Button from '@/layouts/Button';
 import useFormStore from '@/store/useFormStore';
-import useGetExtrmPoliticalPhrases from '@/hooks/usegetExtrmPoliticalPhrases';
+import useGetExtrmPoliticalPhrases from '@/hooks/useGetExtrmPoliticalPhrases';
 
 const Opinion = ({ handleStep }) => {
   const {
