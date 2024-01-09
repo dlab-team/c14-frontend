@@ -8,7 +8,7 @@ const useEditOption = () => {
 
   return useMutation(({ id, payload }) => OptPolynomialsService.editOptPolynomial(id, payload), {
     onSuccess: () => {
-      toast.success('Opcion editada con exito');
+      toast.success('Opcion editada con éxito');
     },
     onError: error => {
       toast.error(error?.message || 'Ha ocurrido un error, intente nuevamente');
