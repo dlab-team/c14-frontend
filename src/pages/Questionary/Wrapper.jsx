@@ -15,7 +15,7 @@ const Wrapper = () => {
 
   const handleStep = () => {
     nextStep();
-    console.log(useFormStore.getState().currentSurveySection);
+    //console.log(useFormStore.getState().currentSurveySection);
   };
 
   const sections = {

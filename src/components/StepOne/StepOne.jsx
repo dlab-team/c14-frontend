@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
-
 import backgroundHeaderMobile from '../../assets/img/admin/backgroundHeaderMobile.png';
 import backgroundHeader from '../../assets/img/admin/backgroundHeader.png';
 import banderas from '../../assets/img/banderas.png';
@@ -22,10 +21,10 @@ const StepOne = ({ handleStep }) => {
   };
 
   const radioOptions = [
-    { label: 'Izquierda', value: 'Izquierda' },
-    { label: 'Derecha', value: 'Derecha' },
-    { label: 'Centro', value: 'Centro' },
-    { label: 'Independiente', value: 'Independiente' },
+    { label: 'Izquierda', value: 'Extremo 2' },
+    { label: 'Derecha', value: 'Extremo 1' },
+    { label: 'Centro', value: 'Neutro' },
+    { label: 'Independiente', value: 'Neutro' },
   ];
 
   return (
