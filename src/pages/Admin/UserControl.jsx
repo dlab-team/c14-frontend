@@ -7,15 +7,28 @@ import { MdDeleteOutline } from 'react-icons/md';
 import { format } from 'date-fns';
 import useGetUsers from '@/hooks/useGetUsers';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Toaster, toast } from 'sonner';
+import { AdministrationService } from '@/services/administration.service';
 
 const UserControl = () => {
   const { data: users, isLoading, isError, refetch } = useGetUsers();
   const [showModal, setShowModal] = useState(false);
+  
 
-  const onSubmit = async data => {
-    console.log(data);
-    alert('desea agregar el usuario?');
-  };
+//crear usuario
+const { register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = handleSubmit(async ({...payload }) => {
+    try {
+      await AdministrationService.create({...payload});
+      toast('Se enviará a su correo un enlace para generar su contraseña');
+      setShowModal(!showModal);
+      refetch();
+    } catch (error) {
+      console.error({ error }); 
+      toast(error.message);
+    }
+  });
 
   const formatCreatedAt = createdAt => {
     return format(new Date(createdAt), 'dd-MM-yyyy');
@@ -46,6 +59,7 @@ const UserControl = () => {
 
   return (
     <>
+      <Toaster position="top-center" />
       <AdminHeader
         title="Control de Usuarios"
         description="Aquí puedes crear, modificar y eliminar cuentas de usuarios."
@@ -188,6 +202,7 @@ const UserControl = () => {
                 <input
                   className="block w-80 rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                   placeholder="Ingresa el nombre"
+                  {...register('firstName')}
                 />
               </div>
             </div>
@@ -197,6 +212,7 @@ const UserControl = () => {
                 <input
                   className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6 py-3 px-4"
                   placeholder="Ingresa el apellido"
+                  {...register('lastName')}
                 />
               </div>
             </div>
@@ -208,6 +224,8 @@ const UserControl = () => {
                 <input
                   className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                   placeholder="Ingresa el correo"
+                  type='email'
+                  {...register('email')}
                 />
               </div>
             </div>
