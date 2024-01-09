@@ -23,8 +23,6 @@ const Sidebar = () => {
   const { user } = useAuthStore();
   const [logoutModal, setLogoutModal] = useState(false);
 
-  console.log(user);
-
   const handleLogoutClick = async () => {
     logout();
     toast.success('Sesión cerrada exitosamente');

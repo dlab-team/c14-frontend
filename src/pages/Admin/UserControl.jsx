@@ -4,12 +4,16 @@ import AdminHeader from '@/components/admin/AdminHeader';
 import AdminModal from '@/components/admin/AdminModal';
 import Button from '@/layouts/Button';
 import { MdDeleteOutline } from 'react-icons/md';
+import { Toaster } from 'sonner';
 import { format } from 'date-fns';
+import useDeleteUser from '@/hooks/useDeleteUser';
 import useGetUsers from '@/hooks/useGetUsers';
 import { useState } from 'react';
 
 const UserControl = () => {
   const { data: users, isLoading, isError, refetch } = useGetUsers();
+  const { mutate: mutateDelete } = useDeleteUser();
+
   const [showModal, setShowModal] = useState(false);
 
   const onSubmit = async data => {
@@ -21,9 +25,16 @@ const UserControl = () => {
     return format(new Date(createdAt), 'dd-MM-yyyy');
   };
 
-  const deleteUser = async () => {
-    alert('desea elimar el usuario?');
-    refetch();
+  const deleteUser = async (name, lastName, email) => {
+    const status = window.confirm(
+      `¿Estás seguro de eliminar el administrador "${name} ${lastName}"? Una vez eliminado, no se podrá recuperar`
+    );
+    if (status) {
+      const payload = {
+        email: email,
+      };
+      mutateDelete(payload);
+    }
   };
 
   const editUser = async () => {
@@ -103,7 +114,7 @@ const UserControl = () => {
                         </button>
                         <button
                           className="border border-black rounded-md"
-                          onClick={() => deleteUser(user)}
+                          /* onClick={() => deleteUser(user)} */
                         >
                           <MdDeleteOutline size={28} />
                         </button>
@@ -144,40 +155,46 @@ const UserControl = () => {
             </tr>
           </thead>
           <tbody className="text-#5C5E64 divide-y divide-slate-#5C5E64 px-6 border-t">
-            {users.map(user => (
-              <tr key={user.id}>
-                <th
-                  scope="row"
-                  className="hidden sm:table-cell px-6 py-4 font-medium  whitespace-nowrap w-5"
-                >
-                  avatar
-                </th>
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap w-72">
-                  {user.firstName} {user.lastName}
-                </th>
-                <td className="hidden sm:table-cell px-6 py-4 font-medium whitespace-nowrap w-32">
-                  {formatCreatedAt(user.createdAt)}
-                </td>
-                <td className="hidden md:table-cell px-6 py-4 font-medium whitespace-nowrap w-72">
-                  {user.email}
-                </td>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium whitespace-nowrap flex justify-center items-center"
-                >
-                  <div className="flex flex-column gap-3">
-                    <button className="border border-black rounded-md" onClick={editUser}>
-                      <CiEdit size={28} />
-                    </button>
-                    <button className="border border-black rounded-md" onClick={deleteUser}>
-                      <MdDeleteOutline size={28} />
-                    </button>
-                  </div>
-                </th>
-              </tr>
-            ))}
+            {users
+              .filter(user => !user.superAdmin)
+              .map(user => (
+                <tr key={user.id}>
+                  <th
+                    scope="row"
+                    className="hidden sm:table-cell px-6 py-4 font-medium  whitespace-nowrap w-5"
+                  >
+                    avatar
+                  </th>
+                  <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap w-72">
+                    {user.firstName} {user.lastName}
+                  </th>
+                  <td className="hidden sm:table-cell px-6 py-4 font-medium whitespace-nowrap w-32">
+                    {formatCreatedAt(user.createdAt)}
+                  </td>
+                  <td className="hidden md:table-cell px-6 py-4 font-medium whitespace-nowrap w-72">
+                    {user.email}
+                  </td>
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium whitespace-nowrap flex justify-center items-center"
+                  >
+                    <div className="flex flex-column gap-3">
+                      <button className="border border-black rounded-md" onClick={editUser}>
+                        <CiEdit size={28} />
+                      </button>
+                      <button
+                        className="border border-black rounded-md"
+                        onClick={() => deleteUser(user.firstName, user.lastName, user.email)}
+                      >
+                        <MdDeleteOutline size={28} />
+                      </button>
+                    </div>
+                  </th>
+                </tr>
+              ))}
           </tbody>
         </table>
+        <Toaster position="top-center" />
       </div>
       {showModal && (
         <AdminModal setShowModal={setShowModal} title={'Agregar administrador'}>

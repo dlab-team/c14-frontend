@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import { IoClose } from 'react-icons/io5';
 import { MdDeleteOutline } from 'react-icons/md';
+import { Toaster } from 'sonner';
 import { createOptionSchema } from '@/schemas/createOptionSchema';
 import { editOptionSchema } from '@/schemas/editOptionSchema';
-import { toast } from 'sonner';
 import useCreateOption from '@/hooks/OptionsHook/useCreateOption';
 import useDeleteOption from '@/hooks/OptionsHook/useDeleteOption';
 import useEditOption from '@/hooks/OptionsHook/useEditOption';
@@ -68,15 +68,9 @@ const OptPolynomials = () => {
   };
 
   const deleteOpt = async id => {
-    const status = window.confirm(`¿Estás seguro de eliminar el Polinomio?`);
+    const status = window.confirm(`¿Estás seguro de eliminar la opción?`);
     if (status) {
-      toast.promise(mutateDelete(id), {
-        loading: 'Eliminando...',
-        success: option => {
-          return `${option.name} eliminado con éxito`;
-        },
-        error: err => <b>{err.response?.data?.message || 'Ha ocurrido un error'}</b>,
-      });
+      mutateDelete(id);
     }
   };
 
@@ -87,14 +81,12 @@ const OptPolynomials = () => {
           id: editOption.id,
           payload: { ...payload, polynomialId: polynomialsId, active: true },
         });
-        toast.success('Opción actualizada con éxito');
       } else {
         mutateCreate({
           ...payload,
           polynomialId: polynomialsId,
           active: true,
         });
-        toast.success('Opción creada con éxito');
       }
       toggleModal(null);
       closeModal();
@@ -213,6 +205,7 @@ const OptPolynomials = () => {
               )}
           </tbody>
         </table>
+        <Toaster position="top-center" />
       </div>
 
       {isModalOpen && (
@@ -262,9 +255,9 @@ const OptPolynomials = () => {
                     <option value="" disabled hidden>
                       Selecciona una opción
                     </option>
-                    <option value="Extremo1">Extremo1</option>
+                    <option value="Extremo 1">Extremo 1</option>
                     <option value="Neutro">Neutro</option>
-                    <option value="Extremo2">Extremo2</option>
+                    <option value="Extremo 2">Extremo 2</option>
                   </select>
                   {errors.group && <div className="text-red-600">{errors.group.message}</div>}
                 </div>
