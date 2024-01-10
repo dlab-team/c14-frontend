@@ -4,32 +4,28 @@ import AdminHeader from '@/components/admin/AdminHeader';
 import AdminModal from '@/components/admin/AdminModal';
 import Button from '@/layouts/Button';
 import { MdDeleteOutline } from 'react-icons/md';
-import { Toaster } from 'sonner';
+import { Toaster, toast } from 'sonner';
 import { format } from 'date-fns';
 import useDeleteUser from '@/hooks/useDeleteUser';
 import useGetUsers from '@/hooks/useGetUsers';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Toaster, toast } from 'sonner';
 import { AdministrationService } from '@/services/administration.service';
 
 const UserControl = () => {
   const { data: users, isLoading, isError, refetch } = useGetUsers();
   const { mutate: mutateDelete } = useDeleteUser();
-
   const [showModal, setShowModal] = useState(false);
-  
+  const { register, handleSubmit } = useForm();
 
-//crear usuario
-const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = handleSubmit(async ({...payload }) => {
+  const onSubmit = handleSubmit(async ({ ...payload }) => {
     try {
-      await AdministrationService.create({...payload});
+      await AdministrationService.create({ ...payload });
       toast('Se enviará a su correo un enlace para generar su contraseña');
       setShowModal(!showModal);
       refetch();
     } catch (error) {
-      console.error({ error }); 
+      console.error({ error });
       toast(error.message);
     }
   });
@@ -241,7 +237,7 @@ const { register, handleSubmit, formState: { errors } } = useForm();
                 <input
                   className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                   placeholder="Ingresa el correo"
-                  type='email'
+                  type="email"
                   {...register('email')}
                 />
               </div>
