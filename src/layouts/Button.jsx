@@ -5,7 +5,7 @@ const Button = ({ title, className, ...props }) => {
   return (
     <button
       className={twMerge(
-        'bg-slate-900 px-4 py-2 rounded-2xl text-white text-xl font-bold flex justify-center items-center w-full transition-all hover:scale-105',
+        'bg-slate-900 px-4 py-2 rounded-xl text-white text-xl font-bold flex justify-center items-center w-full transition-all hover:scale-105',
         className
       )}
       {...props}
