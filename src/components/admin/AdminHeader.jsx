@@ -14,7 +14,7 @@ const AdminHeader = ({ title = '', description = '' }) => {
         alt="Background Header"
         className="absolute inset-0 w-full h-full object-cover hidden md:block"
       />
-      <div className="absolute p-4 md:p-8 inset-0 flex flex-col justify-center items-start text-white">
+      <div className="absolute p-8 inset-0 flex flex-col justify-center items-start text-white">
         <p className="text-5xl font-medium mb-4">{title}</p>
         <p className="text-2xl font-normal">{description}</p>
       </div>
