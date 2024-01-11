@@ -1,9 +1,9 @@
 import backgroundHeaderMobile from '../../assets/img/admin/backgroundHeaderMobile.png';
 import backgroundHeader from '../../assets/img/admin/backgroundHeader.png';
 
-const AdminHeader = ({ title = '', description = '' }) => {
+const AdminHeader = ({ title = '', description = '', fromColor = 'indigo-600', toColor = 'teal-400', positionTitle='items-start' }) => {
   return (
-    <header className="flex flex-col justify-center relative col-start-2 col-span-5  bg-gradient-to-r from-indigo-600 to-teal-400 p-4 md:p-8 text-white h-[298px]">
+    <header className={`flex flex-col justify-center relative col-start-2 col-span-5  bg-gradient-to-r from-${fromColor} to-${toColor} p-4 md:p-8 text-white h-[298px]`}>
       <img
         src={backgroundHeaderMobile}
         alt="Background Header"
@@ -14,7 +14,7 @@ const AdminHeader = ({ title = '', description = '' }) => {
         alt="Background Header"
         className="absolute inset-0 w-full h-full object-cover hidden md:block"
       />
-      <div className="absolute p-4 md:p-8 inset-0 flex flex-col justify-center items-start text-white">
+      <div className={`absolute p-4 md:p-8 inset-0 flex flex-col justify-center ${positionTitle} text-white`}>
         <p className="text-5xl font-medium mb-4">{title}</p>
         <p className="text-2xl font-normal">{description}</p>
       </div>
