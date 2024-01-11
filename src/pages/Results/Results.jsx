@@ -1,9 +1,16 @@
-import React from 'react'
+import AdminHeader from '@/components/admin/AdminHeader';
 
 const Results = () => {
-    return (
-        <div>Results</div>
-    )
-}
+  return (
+    <div>
+      <AdminHeader
+        title="Resultados de mi brecha de percepción"
+        fromColor="from-yellow-600"
+        toColor="to-fuchsia-400"
+        positionTitle="items-center"
+      />
+    </div>
+  );
+};
 
-export default Results
+export default Results;
