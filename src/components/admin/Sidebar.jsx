@@ -31,9 +31,9 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`h-full xl:h-[100vh] fixed xl:static w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-auto top-0 p-4 flex bg-white flex-col justify-between z-50 shadow-xl text-sm xl:col-span-2 text-gray-700 ${
+        className={`h-full fixed xl:static w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-auto top-0 p-4 flex bg-white flex-col justify-between z-50 shadow-xl text-sm xl:col-span-2 text-gray-700 ${
           showMenu ? 'left-0' : '-left-full'
-        } transition-all overflow-y-scroll`}
+        } transition-all overflow-y-auto`}
       >
         <div>
           <div className="flex flex-col items-center py-10">
