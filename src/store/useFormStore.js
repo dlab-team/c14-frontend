@@ -7,7 +7,7 @@ const useFormStore = create(
     politicalCharacterization: null,
     currentSurveySection: 0,
     howCompare: null,
-    opossitePoliticalResult:[],
+    opossitePoliticalResult: [],
     setPoliticalCharacterization: politicalCharacterization => {
       set(state => {
         return { ...state, politicalCharacterization };
@@ -21,6 +21,17 @@ const useFormStore = create(
     setOpossitePoliticalResult: opossitePoliticalResult => {
       set(state => {
         return { ...state, opossitePoliticalResult };
+      });
+    },
+    updateOpossitePoliticalResult: (phraseId, newValue) => {
+      set(state => {
+        return {
+          ...state,
+          opossitePoliticalResult: [...state.opossitePoliticalResult].map(phrase => ({
+            ...phrase,
+            value: phrase.id === phraseId ? newValue : phrase.value,
+          })),
+        };
       });
     },
     setCurrentSurveySection: sectionIndex => {
