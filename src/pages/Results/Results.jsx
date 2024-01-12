@@ -1,12 +1,18 @@
-import React from 'react'
+import AdminHeader from '@/components/admin/AdminHeader';
 import { ResultsFooter } from './components/ResultsFooter'
 
 const Results = () => {
-    return (
-        <div>
+  return (
+    <div>
+      <AdminHeader
+        title="Resultados de mi brecha de percepción"
+        fromColor="from-yellow-600"
+        toColor="to-fuchsia-400"
+        positionTitle="items-center"
+      />
             <ResultsFooter />
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default Results
+export default Results;

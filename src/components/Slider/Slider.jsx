@@ -1,32 +1,28 @@
+import PropTypes from 'prop-types';
 import Slider from '@mui/material/Slider';
 import './Slider.css';
-import { useState } from 'react';
 
-
-function valuetext(value) {
-    return `${value}%`;
-  }
-
-export default function CustomSlider({color}){
-      
-    function handleChange(e) {
-        setValue(e.target.value);
-      }
-
-    const [value, setValue] = useState(50);
-      
-   
-      return (
-        <Slider
-            value={value}
-            valueLabelFormat={valuetext}
-            step={1}
-            valueLabelDisplay="on"
-            sx={{
-                color: color,
-                }}
-            onChange={handleChange}
-            />
-    );
+function valueText(value) {
+  return `${value}%`;
 }
 
+export default function CustomSlider({ color = '#66B947', value = 50, handleChange }) {
+  return (
+    <Slider
+      value={value}
+      valueLabelFormat={valueText}
+      step={1}
+      valueLabelDisplay="on"
+      sx={{
+        color: color,
+      }}
+      onChange={handleChange}
+    />
+  );
+}
+
+CustomSlider.propTypes = {
+  color: PropTypes.string,
+  value: PropTypes.number,
+  handleChange: PropTypes.func,
+};
