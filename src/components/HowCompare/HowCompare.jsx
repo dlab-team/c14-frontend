@@ -6,6 +6,7 @@ import backgroundHeader from '../../assets/img/admin/backgroundHeader.png';
 import banderas from '../../assets/img/banderas.png';
 import Button from '../../layouts/Button';
 import './HowCompare.css';
+import useFormStore from '@/store/useFormStore';
 
 const HowCompare = ({ handleStep }) => {
   const {
@@ -15,13 +16,14 @@ const HowCompare = ({ handleStep }) => {
   } = useForm();
 
   const radioOptions = [
-    { label: 'Izquierda', value: 'Izquierda' },
-    { label: 'Derecha', value: 'Derecha' },
+    { label: 'Izquierda', value: 'Extremo 2' },
+    { label: 'Derecha', value: 'Extremo 1' },
   ];
 
+  const setHowCompare = useFormStore(state => state.setHowCompare);
+
   const onSubmit = data => {
-    //Hacer algo con el data
-    const ladoComparar = data.ladoComparar;
+    setHowCompare(data.ladoComparar);
     handleStep();
   };
 

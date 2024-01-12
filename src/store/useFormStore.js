@@ -6,9 +6,32 @@ const useFormStore = create(
   set => ({
     politicalCharacterization: null,
     currentSurveySection: 0,
+    howCompare: null,
+    opossitePoliticalResult: [],
     setPoliticalCharacterization: politicalCharacterization => {
       set(state => {
         return { ...state, politicalCharacterization };
+      });
+    },
+    setHowCompare: howCompare => {
+      set(state => {
+        return { ...state, howCompare };
+      });
+    },
+    setOpossitePoliticalResult: opossitePoliticalResult => {
+      set(state => {
+        return { ...state, opossitePoliticalResult };
+      });
+    },
+    updateOpossitePoliticalResult: (phraseId, newValue) => {
+      set(state => {
+        return {
+          ...state,
+          opossitePoliticalResult: [...state.opossitePoliticalResult].map(phrase => ({
+            ...phrase,
+            value: phrase.id === phraseId ? newValue : phrase.value,
+          })),
+        };
       });
     },
     setCurrentSurveySection: sectionIndex => {
