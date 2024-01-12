@@ -6,19 +6,31 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 
 ::-webkit-scrollbar-track {
   background: #bdbbb7;
   border-radius: 10px;
 }
 
-
 ::-webkit-scrollbar-thumb {
   background: black;
   border-radius: 10px;
+}
+
+.gradientFooter {
+  background: linear-gradient(
+    89.48deg,
+    #e4ab4d 0.9%,
+    #e0702d 13.29%,
+    #e23f43 25.67%,
+    #df1987 38.06%,
+    #985daa 50.45%,
+    #776ade 62.84%,
+    #4897cf 75.22%,
+    #34abc9 87.61%,
+    #99d140 100%
+  );
 }
