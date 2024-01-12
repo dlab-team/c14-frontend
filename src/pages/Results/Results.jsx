@@ -1,5 +1,5 @@
 import AdminHeader from '@/components/admin/AdminHeader';
-import { ResultsFooter } from './components/ResultsFooter'
+import { ResultsFooter } from './components/ResultsFooter';
 
 const Results = () => {
   return (
@@ -10,7 +10,7 @@ const Results = () => {
         toColor="to-fuchsia-400"
         positionTitle="items-center"
       />
-            <ResultsFooter />
+      <ResultsFooter />
     </div>
   );
 };
