@@ -1,8 +1,11 @@
 import React from 'react'
+import { ResultsFooter } from './components/ResultsFooter'
 
 const Results = () => {
     return (
-        <div>Results</div>
+        <div>
+            <ResultsFooter />
+        </div>
     )
 }
 
