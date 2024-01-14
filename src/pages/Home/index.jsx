@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Button from '../../layouts/Button';
-import { useNavigate } from 'react-router-dom';
-import useFormStore from '@/store/useFormStore';
-import Terms from '@/components/Terms/Terms';
 import { Toaster, toast } from 'sonner';
+
+import Button from '../../layouts/Button';
+import Terms from '@/components/Terms/Terms';
+import useFormStore from '@/store/useFormStore';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const clearForm = useFormStore(state => state.clearForm);
@@ -121,7 +122,6 @@ export default function Home() {
                 className="h-5 w-5 mr-2"
                 checked={isChecked}
                 onChange={handleCheckboxChange}
-                disabled
               />
               <span className="font-medium text-sm">Estoy de acuerdo con los </span>
               <span className="underline cursor-pointer font-bold text-sm ml-1" onClick={openModal}>
