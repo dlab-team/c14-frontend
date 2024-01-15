@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { opinionSchema } from '@/schemas/opinionSchema';
@@ -147,7 +146,7 @@ const Opinion = ({ handleStep }) => {
             register={register('frase8')}
           />
           <div className="col-span-2 flex justify-end me-1 text-red-500">
-            {errors.frase7 && <p>{errors.frase7.message}</p>}
+            {errors.frase8 && <p>{errors.frase8.message}</p>}
           </div>
           <RadioInput
             bgColor={'bg-purple-500'}
@@ -156,7 +155,7 @@ const Opinion = ({ handleStep }) => {
             register={register('frase9')}
           />
           <div className="col-span-2 flex justify-end me-1 text-red-500">
-            {errors.frase8 && <p>{errors.frase8.message}</p>}
+            {errors.frase9 && <p>{errors.frase9.message}</p>}
           </div>
           <div className="col-span-2 flex justify-end">
             <div className="w-1/3 md:w-1/6 mr-1 mt-10 ">
