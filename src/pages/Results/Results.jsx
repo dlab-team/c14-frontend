@@ -1,5 +1,6 @@
 import AdminHeader from '@/components/admin/AdminHeader';
 import { ResultsFooter } from './components/ResultsFooter';
+import Comparison from './components/Comparison.jsx';
 
 const Results = () => {
   return (
@@ -10,6 +11,7 @@ const Results = () => {
         toColor="to-fuchsia-400"
         positionTitle="items-center"
       />
+      <Comparison />
       <ResultsFooter />
     </div>
   );
