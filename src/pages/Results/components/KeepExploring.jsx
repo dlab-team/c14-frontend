@@ -9,6 +9,7 @@ function KeepExploring() {
   };
 
   const onReject = () => {
+    //Alomejor añadir un clearForm acá
     navigate('/reconocimiento');
   };
   const paragraphs = [
