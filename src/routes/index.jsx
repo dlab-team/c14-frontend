@@ -13,6 +13,7 @@ import Wrapper from '@/pages/Questionary/Wrapper';
 import Recovery from '@/pages/RecoveryPass/Recovery';
 import Results from '@/pages/Results/Results';
 import Error404 from '@/pages/Error404/Error404';
+import Acknowledgments from '@/components/Acknowledgments/Acknowledgments';
 
 // admin pages
 import UserControl from '@/pages/Admin/UserControl';
@@ -31,6 +32,7 @@ export const router = createBrowserRouter(
         <Route path="opinion" element={<Opinion />} />
         <Route path="opposite" element={<OppositeQuestions />} />
         <Route path="results" element={<Results />} />
+        <Route path="reconocimiento" element={<Acknowledgments />} />
         <Route path="*" element={<Error404 />} />
       </Route>
       <Route path="/auth" element={<AuthLayout />}>
