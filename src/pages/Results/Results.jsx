@@ -1,6 +1,7 @@
 import AdminHeader from '@/components/admin/AdminHeader';
 import { ResultsFooter } from './components/ResultsFooter';
 import Comparison from './components/Comparison.jsx';
+import KeepExploring from './components/KeepExploring';
 
 const Results = () => {
   return (
@@ -12,6 +13,7 @@ const Results = () => {
         positionTitle="items-center"
       />
       <Comparison />
+      <KeepExploring />
       <ResultsFooter />
     </div>
   );
