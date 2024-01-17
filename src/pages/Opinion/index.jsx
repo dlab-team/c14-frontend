@@ -17,26 +17,24 @@ const Opinion = ({ handleStep }) => {
     resolver: yupResolver(opinionSchema),
   });
 
-  const valor = { id: useFormStore(state => state.politicalCharacterization) };
+  const optionId = useFormStore(state => state.politicalCharacterization);
 
-  const { data: politicalPhrases, isLoading, isError } = useGetPoliticalPhrases(valor);
-  console.log(politicalPhrases);
+  const { data: politicalPhrases, isLoading, isError } = useGetPoliticalPhrases(optionId);
 
-  const phrases = useGetExtrmPoliticalPhrases(useFormStore.getState().politicalCharacterization);
   let text = [];
   let id = [];
-  if (phrases.data) {
-    phrases.data.forEach(phrase => {
+  if (politicalPhrases) {
+    politicalPhrases?.forEach(phrase => {
       id.push(phrase.id);
       text.push(phrase.text);
     });
   }
 
-  if (phrases.isLoading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (phrases.isError) {
+  if (isError) {
     return <p>Error</p>;
   }
 
