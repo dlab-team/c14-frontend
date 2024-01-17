@@ -10,9 +10,11 @@ export class PhrasesService {
     }
   }
 
-  static async getPoliticalPhrases(valor) {
+  static async getPoliticalPhrases(optionId) {
     try {
-      const { data, status } = await api.get('/phrases/bygroup/political', { data: valor });
+      const { data, status } = await api.post(`/phrases/bygroup/political`, {
+        id: optionId,
+      });
       if (status === 200) {
         return data;
       }
