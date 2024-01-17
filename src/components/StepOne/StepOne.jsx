@@ -6,6 +6,7 @@ import banderas from '../../assets/img/banderas.png';
 import Button from '../../layouts/Button';
 import './StepOne.css';
 import useFormStore from '@/store/useFormStore';
+import useGetPoliticalOptions from '@/hooks/OptionsHook/useGetPoliticalOptions';
 
 const StepOne = ({ handleStep }) => {
   const {
@@ -13,6 +14,9 @@ const StepOne = ({ handleStep }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { data: politicalOptions, isLoading, isError } = useGetPoliticalOptions();
+
   const setPoliticalCharacterization = useFormStore(state => state.setPoliticalCharacterization);
 
   const onSubmit = data => {
@@ -20,12 +24,8 @@ const StepOne = ({ handleStep }) => {
     handleStep();
   };
 
-  const radioOptions = [
-    { label: 'Izquierda', value: 'Extremo 2' },
-    { label: 'Derecha', value: 'Extremo 1' },
-    { label: 'Centro', value: 'Neutro' },
-    { label: 'Independiente', value: 'Neutro' },
-  ];
+  const radioOptions =
+    politicalOptions && politicalOptions.map(item => ({ label: item.name, value: item.id }));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,21 +50,22 @@ const StepOne = ({ handleStep }) => {
             <p>¿Con quién te identificas?</p>
           </div>
           <div className="parte-inferior">
-            {radioOptions.map((option, index) => (
-              <label key={index}>
-                <Controller
-                  control={control}
-                  name="ladoPolitico"
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <>
-                      <input type="radio" {...field} value={option.value} />
-                      {option.label}
-                    </>
-                  )}
-                />
-              </label>
-            ))}
+            {radioOptions &&
+              radioOptions.map((option, index) => (
+                <label key={index}>
+                  <Controller
+                    control={control}
+                    name="ladoPolitico"
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <>
+                        <input type="radio" {...field} value={option.value} />
+                        {option.label}
+                      </>
+                    )}
+                  />
+                </label>
+              ))}
           </div>
           <div className="col-span-2 flex justify-end">
             <div className="w-1/3 md:w-1/6 mr-1 mt-10 ">

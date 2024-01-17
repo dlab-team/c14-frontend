@@ -5,6 +5,7 @@ import RadioInput from './components/RadioInput';
 import Button from '@/layouts/Button';
 import useFormStore from '@/store/useFormStore';
 import useGetExtrmPoliticalPhrases from '@/hooks/useGetExtrmPoliticalPhrases';
+import useGetPoliticalPhrases from '@/hooks/PhrasesHook/useGetPoliticalPhrases';
 
 const Opinion = ({ handleStep }) => {
   const {
@@ -15,6 +16,11 @@ const Opinion = ({ handleStep }) => {
   } = useForm({
     resolver: yupResolver(opinionSchema),
   });
+
+  const valor = { id: useFormStore(state => state.politicalCharacterization) };
+
+  const { data: politicalPhrases, isLoading, isError } = useGetPoliticalPhrases(valor);
+  console.log(politicalPhrases);
 
   const phrases = useGetExtrmPoliticalPhrases(useFormStore.getState().politicalCharacterization);
   let text = [];
