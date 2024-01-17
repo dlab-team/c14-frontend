@@ -15,17 +15,14 @@ const StepOne = ({ handleStep }) => {
     formState: { errors },
   } = useForm();
 
-  const { data: politicalOptions, isLoading, isError } = useGetPoliticalOptions();
+  const { data: politicalOptions } = useGetPoliticalOptions();
 
   const setPoliticalCharacterization = useFormStore(state => state.setPoliticalCharacterization);
 
   const onSubmit = data => {
-    setPoliticalCharacterization(data.ladoPolitico);
+    setPoliticalCharacterization(data.politicalCharacterization);
     handleStep();
   };
-
-  const radioOptions =
-    politicalOptions && politicalOptions.map(item => ({ label: item.name, value: item.id }));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,22 +47,21 @@ const StepOne = ({ handleStep }) => {
             <p>¿Con quién te identificas?</p>
           </div>
           <div className="parte-inferior">
-            {radioOptions &&
-              radioOptions.map((option, index) => (
-                <label key={index}>
-                  <Controller
-                    control={control}
-                    name="ladoPolitico"
-                    rules={{ required: true }}
-                    render={({ field }) => (
-                      <>
-                        <input type="radio" {...field} value={option.value} />
-                        {option.label}
-                      </>
-                    )}
-                  />
-                </label>
-              ))}
+            {politicalOptions?.map((option, index) => (
+              <label key={index}>
+                <Controller
+                  control={control}
+                  name="politicalCharacterization"
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <>
+                      <input type="radio" {...field} value={option.id} />
+                      {option.name}
+                    </>
+                  )}
+                />
+              </label>
+            ))}
           </div>
           <div className="col-span-2 flex justify-end">
             <div className="w-1/3 md:w-1/6 mr-1 mt-10 ">
