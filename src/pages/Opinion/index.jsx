@@ -18,7 +18,6 @@ const Opinion = ({ handleStep }) => {
   });
 
   const optionId = useFormStore(state => state.politicalCharacterization);
-
   const { data: politicalPhrases, isLoading, isError } = useGetPoliticalPhrases(optionId);
 
   const bgColors = [
