@@ -41,7 +41,7 @@ const Opinion = ({ handleStep }) => {
 
   return (
     <div>
-      <header className="flex flex-col items-center lg:h-[90vh]">
+      <header className="flex flex-col items-center">
         <h1 className="text-4xl font-bold mt-16">3XI CRITERIA</h1>
         <div className="bg-gradient-to-r from-orange-500 via-purple-500 to-lime-500 h-2 w-64 rounded-full mt-6"></div>
         <h2 className="text-5xl font-bold mt-6 text-center">Estudio Polarizaciones</h2>
