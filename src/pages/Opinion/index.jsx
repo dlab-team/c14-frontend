@@ -12,8 +12,10 @@ const Opinion = ({ handleStep }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
+    defaultValues: {
+      phrases: [],
+    },
     resolver: yupResolver(opinionSchema),
   });
 
@@ -51,6 +53,7 @@ const Opinion = ({ handleStep }) => {
   }
 
   const onSubmit = handleSubmit(data => {
+    // TODO: guardar las opciones seleccionadas
     handleStep();
   });
 
@@ -91,18 +94,17 @@ const Opinion = ({ handleStep }) => {
             </div>
           </div>
           {politicalPhrases?.map((p, index) => {
-            let nameRegister = `phrase.${index}`;
             return (
               <Fragment key={p.id}>
                 <RadioInput
-                  bgColor={bgColors[index > 7 ? index % 8 : index]}
                   sentence={p.text}
-                  accentColor={accentColors[index > 7 ? index % 8 : index]}
-                  register={register(nameRegister)}
+                  bgColor={bgColors[index % 8]}
+                  accentColor={accentColors[index % 8]}
+                  register={register(`phrases.${index}`)}
                   required
                 />
                 <div className="col-span-2 flex justify-end me-1 text-red-500">
-                  {errors.nameRegister && <p>{errors.nameRegister.message}</p>}
+                  {errors.phrases?.[index] && <p>{errors.phrases?.[index].message}</p>}
                 </div>
               </Fragment>
             );
