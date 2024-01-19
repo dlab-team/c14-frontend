@@ -1,11 +1,12 @@
+import useFormStore from '@/store/useFormStore';
 import { useNavigate } from 'react-router-dom';
 
 function KeepExploring() {
   const navigate = useNavigate();
+  const nextStep = useFormStore(state => state.nextStep);
 
   const onAccept = () => {
-    //Que lleve al cuestionario pero parte social
-    alert('vamos al cuestionario social');
+    nextStep();
   };
 
   const onReject = () => {
