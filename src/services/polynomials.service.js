@@ -10,4 +10,13 @@ export class PolynomialsService {
       throw new Error('No se pudo obtener la informacion')
     }
   }
+
+  static async getSocialsPolynomial() {
+    try {
+      const { data } = await api.get('/polynomials/notpolitical')
+      return data
+    } catch (error) {
+      throw new Error('No se pudo obtener la informacion')
+    }
+  }
 }

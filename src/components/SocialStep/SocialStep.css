@@ -1,0 +1,32 @@
+.bgsup {
+    background-color: #E4AB4D;
+}
+
+.parte-inferior2 {
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.parte-inferior2 label {
+    border: 1px solid #c9c9c9;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    font-size: 22px;
+}
+
+.parte-inferior2 input[type="radio"] {
+    box-sizing: border-box;
+    margin: 8px;
+    appearance: none;
+    min-width: 1em;
+    min-height: 1em;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+
+}
+
+.parte-inferior2 input[type="radio"]:checked {
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    outline: 1px solid #000000;
+}
