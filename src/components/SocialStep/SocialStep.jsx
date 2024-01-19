@@ -21,7 +21,7 @@ const SocialStep = ({ handleStep }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <div
         className="flex flex-col justify-center relative col-start-2 col-span-5 p-4 md:p-8 text-white h-[400px]"
         style={{ background: 'linear-gradient(to right, #E23F43, #DF1A84)' }}
