@@ -58,13 +58,20 @@ function Comparison() {
           </Tooltip>
         </div>
 
-        <div className="flex items-center mt-3 justify-between w-[75%] mx-auto translate-x-[-16%] xl:w-[82%] xl:mx-auto xl:pl-9 xl:translate-x-0 lg:mx-auto lg:w-[78%] lg:pr-3 lg:translate-x-0 md:mx-auto md:w-[77%] md:pr-4 md:translate-x-0 sm:mx-auto sm:w-[81%] sm:pr-10 sm:translate-x-0">
+        <div className="flex items-center mt-10 justify-between w-[75%] mx-auto translate-x-[-16%] xl:w-[82%] xl:mx-auto xl:pl-9 xl:translate-x-0 lg:mx-auto lg:w-[78%] lg:pr-3 lg:translate-x-0 md:mx-auto md:w-[77%] md:pr-4 md:translate-x-0 sm:mx-auto sm:w-[81%] sm:pr-10 sm:translate-x-0">
           <div className="text-sm">0%</div>
           <div className="text-sm">25%</div>
           <div className="text-sm">50%</div>
           <div className="text-sm">75%</div>
           <div className="text-sm">100%</div>
         </div>
+      </div>
+      <div className="mt-11 md:hidden">
+        {testComparison.map((item, index) => (
+          <div className="flex items-center justify-begin mt-2 w-[90%]" key={index}>
+            <div className="text-xs font-semibold">{item.item + '. ' + item.phrase}</div>
+          </div>
+        ))}
       </div>
       <div className="border-2 rounded-lg border-opacity-60 border-gray-400 w-[80%] mx-auto mt-[15vh]">
         <div className="w-[90%] mx-auto pt-10 pb-10 text-center">

@@ -16,7 +16,7 @@
   .scatter-chart .item .data .percentage {
     position: absolute;
     top: 0;
-    height: 140%;
+    height: 200%;
     border-left: 1px dotted #aaa;
     z-index: 200;
   }
