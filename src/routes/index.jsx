@@ -2,26 +2,24 @@
 import { AdminLayout, AuthLayout, RootLayout } from '@/layouts';
 import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
+import Acknowledgments from '@/components/Acknowledgments/Acknowledgments';
 import Admin from '@/pages/Admin/Admin';
+import Analysis from '@/pages/Admin/Analysis';
+import Error404 from '@/pages/Error404/Error404';
 import Forgot from '@/pages/ForgotPass/Forgot';
 // pages
 import Home from '@/pages/Home';
 import Login from '@/pages/Login/Login';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
-import Wrapper from '@/pages/Questionary/Wrapper';
+import Phrases from '@/pages/Admin/Phrases/Phrases';
+import PolynomialsOpt from '@/pages/Admin/Polynomials/PolynomialsOpt';
+// admin pages
+import Profile from '@/pages/Admin/Profile';
 import Recovery from '@/pages/RecoveryPass/Recovery';
 import Results from '@/pages/Results/Results';
-import Error404 from '@/pages/Error404/Error404';
-import Acknowledgments from '@/components/Acknowledgments/Acknowledgments';
-
-// admin pages
 import UserControl from '@/pages/Admin/UserControl';
-import Phrases from '@/pages/Admin/Phrases/Phrases';
-import Analysis from '@/pages/Admin/Analysis';
-import Polynomials from '@/pages/Admin/Polynomials';
-import OptPolynomials from '@/pages/Admin/Polynomials/OptPolynomials';
-import Profile from '@/pages/Admin/Profile';
+import Wrapper from '@/pages/Questionary/Wrapper';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,8 +44,7 @@ export const router = createBrowserRouter(
         <Route path="home" element={<Admin />} />
         <Route path="phrases" element={<Phrases />} />
         <Route path="users" element={<UserControl />} />
-        <Route path="polynomials" element={<Polynomials />} />
-        <Route path="polynomials/:polynomialsId" element={<OptPolynomials />} />
+        <Route path="polynomials" element={<PolynomialsOpt />} />
         <Route path="analysis" element={<Analysis />} />
         <Route path="profile" element={<Profile />} />
       </Route>

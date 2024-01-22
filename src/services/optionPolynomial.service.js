@@ -37,7 +37,7 @@ export class OptPolynomialsService {
       const { data } = await api.post('/polynomialsoptions', payload);
       return data;
     } catch (error) {
-      throw new Error('No se pudo crear el polinomio');
+      throw new Error('No se pudo crear la opción');
     }
   }
 
@@ -46,7 +46,7 @@ export class OptPolynomialsService {
       const { data } = await api.put(`/polynomialsoptions/${id}`, payload);
       return data;
     } catch (error) {
-      throw new Error('No se pudo editar el polinomio');
+      throw new Error('No se pudo editar la opción');
     }
   }
 
@@ -57,7 +57,7 @@ export class OptPolynomialsService {
         return data;
       }
     } catch (error) {
-      throw new Error('error al eliminar el polinomio');
+      throw new Error('error al eliminar la opción');
     }
   }
 }
