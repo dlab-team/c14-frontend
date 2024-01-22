@@ -2,7 +2,7 @@ import { PolynomialsService } from '@/services/polynomials.service';
 import { toast } from 'sonner';
 import { useQuery } from 'react-query';
 
-const useGetPolyId = id => {
+const useGetPolynomialById = id => {
   const { data, isLoading, isError } = useQuery(
     ['polyId', id],
     () => PolynomialsService.getPolynomialById(id),
@@ -16,4 +16,4 @@ const useGetPolyId = id => {
   return { data, isLoading, isError };
 };
 
-export default useGetPolyId;
+export default useGetPolynomialById;
