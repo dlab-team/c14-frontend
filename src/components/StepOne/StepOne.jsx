@@ -6,6 +6,7 @@ import banderas from '../../assets/img/banderas.png';
 import Button from '../../layouts/Button';
 import './StepOne.css';
 import useFormStore from '@/store/useFormStore';
+import useGetPoliticalOptions from '@/hooks/OptionsHook/useGetPoliticalOptions';
 
 const StepOne = ({ handleStep }) => {
   const {
@@ -13,19 +14,15 @@ const StepOne = ({ handleStep }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { data: politicalOptions } = useGetPoliticalOptions();
+
   const setPoliticalCharacterization = useFormStore(state => state.setPoliticalCharacterization);
 
   const onSubmit = data => {
-    setPoliticalCharacterization(data.ladoPolitico);
+    setPoliticalCharacterization(data.politicalCharacterization);
     handleStep();
   };
-
-  const radioOptions = [
-    { label: 'Izquierda', value: 'Extremo 2' },
-    { label: 'Derecha', value: 'Extremo 1' },
-    { label: 'Centro', value: 'Neutro' },
-    { label: 'Independiente', value: 'Neutro' },
-  ];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,21 +42,21 @@ const StepOne = ({ handleStep }) => {
         />
 
         <div className="contenedor">
-          <div className="parte-superior">
+          <div className="parte-superior bg-purple-500">
             <img width="70px" src={banderas} alt="" />
             <p>¿Con quién te identificas?</p>
           </div>
           <div className="parte-inferior">
-            {radioOptions.map((option, index) => (
+            {politicalOptions?.map((option, index) => (
               <label key={index}>
                 <Controller
                   control={control}
-                  name="ladoPolitico"
+                  name="politicalCharacterization"
                   rules={{ required: true }}
                   render={({ field }) => (
                     <>
-                      <input type="radio" {...field} value={option.value} />
-                      {option.label}
+                      <input type="radio" {...field} value={option.id} />
+                      {option.name}
                     </>
                   )}
                 />
