@@ -76,7 +76,7 @@ const PolynomialsOpt = () => {
       />
       <div className="flex relative overflow-x-auto  p-3 my-8  max-w-4xl mx-auto xl:justify-end justify-center">
         <button
-          className="bg-black px-4 py-2 rounded-2xl text-white text-xl font-bold flex justify-center items-center"
+          className="bg-black px-4 py-2 rounded-2xl text-white text-xl font-bold flex justify-center items-center gap-2"
           onClick={() => togglePolynomialModal()}
         >
           Crear un Polinomio <CiCirclePlus />
@@ -94,7 +94,7 @@ const PolynomialsOpt = () => {
                 key={poly?.id}
                 className="relative overflow-x-auto mx-auto my-8 max-w-4xl border rounded border-slate-200 bg-white shadow-xl p-4 md:p-10 mb-10 "
               >
-                <div className="flex justify-between items-center text-2xl m-2">
+                <div className="flex justify-between items-center text-xl m-2">
                   <p className="font-semibold w-52 sm:mb-5">{poly.name}</p>
                   <p className="font-semibold hidden sm:block">
                     {poly.active ? 'activo' : 'inactivo'}
@@ -133,21 +133,21 @@ const PolynomialsOpt = () => {
                           Agregar una opción
                         </button>
                       </div>
-                      <div className="flex flex-wrap">
+                      <div className="flex flex-wrap gap-2">
                         {options &&
                           options
                             .filter(opt => opt.polynomialId === poly.id)
                             .map(opt => (
                               <div
                                 key={opt.id}
-                                className="border rounded-md border-gray-300 m-1 flex max-w-sm items-center p-2"
+                                className="border rounded-xl border-gray-300 flex max-w-sm items-center gap-2 px-2.5 py-1"
                               >
                                 <p>{opt.name}</p>
                                 <button
-                                  className="text-red-500 m-2 border border-red-600 rounded-lg"
+                                  className="text-red-500 border border-red-600 rounded-full"
                                   onClick={() => deleteOption(opt.id)}
                                 >
-                                  <TbLetterX size={20} />
+                                  <TbLetterX size={18} />
                                 </button>
                               </div>
                             ))}
@@ -171,7 +171,7 @@ const PolynomialsOpt = () => {
                 key={poly?.id}
                 className="relative overflow-x-auto mx-auto my-8 max-w-4xl border rounded border-slate-200 bg-white shadow-xl p-4 md:p-10 mb-10"
               >
-                <div className="flex sm:flex-row justify-between items-center text-2xl m-2">
+                <div className="flex sm:flex-row justify-between items-center text-xl m-2">
                   <p className="font-semibold w-52">{poly.name}</p>
                   <p className="font-semibold hidden sm:block">
                     {poly.active ? 'activo' : 'inactivo'}
@@ -210,21 +210,21 @@ const PolynomialsOpt = () => {
                           Agregar una opción
                         </button>
                       </div>
-                      <div className="flex flex-wrap">
+                      <div className="flex flex-wrap gap-2">
                         {options &&
                           options
                             .filter(opt => opt.polynomialId === poly.id)
                             .map(opt => (
                               <div
                                 key={opt.id}
-                                className="border rounded-md border-gray-300 m-1 flex max-w-sm items-center p-2"
+                                className="border rounded-xl border-gray-300 flex max-w-sm items-center gap-2 px-2.5 py-1"
                               >
                                 <p>{opt.name}</p>
                                 <button
-                                  className="text-red-500 m-2 border border-red-600 rounded-lg"
+                                  className="text-red-500 border border-red-600 rounded-full"
                                   onClick={() => deleteOption(opt.id)}
                                 >
-                                  <TbLetterX size={20} />
+                                  <TbLetterX size={18} />
                                 </button>
                               </div>
                             ))}
