@@ -20,7 +20,10 @@ const useFormStore = create(
     },
     setOpossitePoliticalResult: opossitePoliticalResult => {
       set(state => {
-        return { ...state, opossitePoliticalResult };
+        return {
+          ...state,
+          opossitePoliticalResult: opossitePoliticalResult?.map(p => ({ ...p, value: 50 })),
+        };
       });
     },
     updateOpossitePoliticalResult: (phraseId, newValue) => {
