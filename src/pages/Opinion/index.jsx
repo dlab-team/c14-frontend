@@ -59,16 +59,14 @@ const Opinion = ({ handleStep }) => {
 
   return (
     <div>
-      <header className="flex flex-col items-center">
-        <h1 className="text-4xl font-bold mt-16">3XI CRITERIA</h1>
-        <div className="bg-gradient-to-r from-orange-500 via-purple-500 to-lime-500 h-2 w-64 rounded-full mt-6"></div>
+      <header className="flex flex-col items-center">        
         <h2 className="text-5xl font-bold mt-6 text-center">Estudio Polarizaciones</h2>
         <p className="w-3/4 text-2xl text-center mt-24 text-slate-600">
-          Esta encuesta es muy especial porque te vamos a desafiar. A continuación, te presentaremos
-          una serie de frases que quizás no representen exactamente tu pensamiento e incluso te
-          pueden parecer un poco exageradas. Y lo que te pedimos es que hagas el esfuerzo por
-          responder igualmente. Sintetizar temas sociales en frases es complejo y siempre se generan
-          problemas, pero es la única manera que tenemos de medir opiniones en una encuesta.
+        Esta encuesta es muy especial porque te vamos a desafiar. <br></br>
+        A continuación, te presentaremos una serie de frases que quizás no representen exactamente tu pensamiento e incluso te pueden parecer un poco exageradas. <br></br>
+        Lo que te pedimos es que hagas el esfuerzo por responder igualmente. <br></br>
+        Sintetizar temas sociales en frases es complejo y siempre se generan problemas, pero es la única manera que tenemos de medir opiniones en una encuesta.
+
         </p>
       </header>
       <section className="flex flex-col items-center mt-24 mb-28 sm:mx-14 md:mx-0">
@@ -80,16 +78,16 @@ const Opinion = ({ handleStep }) => {
           <div className="hidden md:block col-start-2">
             <div className="grid grid-cols-4 divide-x-2 border-x-2 border-t-2 rounded-t-lg text-xs lg:text-sm font-bold h-16 text-center">
               <div className="flex justify-center items-center px-1">
-                <span className="">Muy de acuerdo</span>
+                <span className="">Muy en desacuerdo</span>
               </div>
               <div className="flex justify-center items-center">
-                <span className="">De acuerdo</span>
+                <span className="">En desacuerdo</span>
               </div>
               <div className="flex justify-center items-center px-1">
-                <span className="text-center">Medianamente de acuerdo</span>
+                <span className="text-center">De acuerdo</span>
               </div>
               <div className="flex justify-center items-center">
-                <span className="">Desacuerdo</span>
+                <span className="">Muy de acuerdo</span>
               </div>
             </div>
           </div>
