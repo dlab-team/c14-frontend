@@ -7,10 +7,18 @@ const NavBar = () => {
       <Link to="/">
         <FaArrowLeft size={30} />
       </Link>
-      {/* <p className="font-semibold text-2xl">Lorem ipsum dolor sit</p> */}
-      <Link to="/">
-        <img src="/logo/logo-3xi-negro.png" alt="Logo 3xi" className="w-14 lg:pr-3" />
-      </Link>
+      <div className="flex items-center">
+        <Link className="flex-shrink-0 mr-4">
+          <img
+            src="/logo/criteria/criteriaLogo.png"
+            alt="Logo criteria"
+            style={{ width: '120px' }}
+          />
+        </Link>
+        <Link to="/">
+          <img src="/logo/logo-3xi-negro.png" alt="Logo 3xi" className="w-14 lg:pr-3" />
+        </Link>
+      </div>
     </nav>
   );
 };
