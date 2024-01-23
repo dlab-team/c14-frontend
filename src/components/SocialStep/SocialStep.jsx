@@ -42,7 +42,7 @@ const SocialStep = ({ handleStep }) => {
           pregunta="¿Con qué Género te identificas?"
           opciones={socialPolynomials?.[0]?.polynomial_options}
           control={control}
-          nombreDelControl="ladoNoPolitico"
+          nombreDelControl="genero"
         />
 
         <SocialQuestions
@@ -57,49 +57,49 @@ const SocialStep = ({ handleStep }) => {
           pregunta="¿En qué rango de ingresos te clasificas?"
           opciones={socialPolynomials?.[2]?.polynomial_options}
           control={control}
-          nombreDelControl="ladoNoPolitico"
+          nombreDelControl="rangoIngresos"
         />
 
         <SocialQuestions
           pregunta="¿Perteneces a un pueblo indígena?"
           opciones={socialPolynomials?.[3]?.polynomial_options}
           control={control}
-          nombreDelControl="ladoNoPolitico"
+          nombreDelControl="publoIndigena"
         />
 
         <SocialQuestions
           pregunta="¿Con qué credo te identificas?"
           opciones={socialPolynomials?.[4]?.polynomial_options}
           control={control}
-          nombreDelControl="ladoNoPolitico"
+          nombreDelControl="credo"
         />
 
         <SocialQuestions
           pregunta="¿Cual es tu estado actual?"
           opciones={socialPolynomials?.[5]?.polynomial_options}
           control={control}
-          nombreDelControl="region"
+          nombreDelControl="nacionalidad"
         />
 
         <SocialQuestions
           pregunta="¿En qué grupo laboral te clasificas?"
           opciones={socialPolynomials?.[6]?.polynomial_options}
           control={control}
-          nombreDelControl="ladoNoPolitico"
+          nombreDelControl="grupoLaboral"
         />
 
         <SocialQuestions
           pregunta="¿A que grupo etario perteneces?"
           opciones={socialPolynomials?.[7]?.polynomial_options}
           control={control}
-          nombreDelControl="ladoNoPolitico"
+          nombreDelControl="grupoEtario"
         />
 
         <SocialQuestions
           pregunta="¿Cual es tu orientación sexual?"
           opciones={socialPolynomials?.[8]?.polynomial_options}
           control={control}
-          nombreDelControl="ladoNoPolitico"
+          nombreDelControl="orientacionSexual"
         />
         <div className="col-span-2 flex justify-end">
           <div className="w-1/3 md:w-1/6 mr-1 mt-10">
