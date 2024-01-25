@@ -1,6 +1,13 @@
 import { Fragment } from 'react';
+import useFormStore from '@/store/useFormStore';
 
-const RadioInput = ({ bgColor, sentence, accentColor, register }) => {
+const RadioInput = ({ bgColor, sentence, accentColor, register, phrase }) => {
+  const updatePoliticalResult = useFormStore(state => state.updatePoliticalResult);
+
+  const handleChange = (e, newValue) => {
+    updatePoliticalResult(phrase.id, newValue);
+  };
+
   return (
     <Fragment>
       <div
@@ -16,7 +23,8 @@ const RadioInput = ({ bgColor, sentence, accentColor, register }) => {
           <input
             className={`before:content[''] peer relative h-5 w-5 cursor-pointer rounded-full border border-blue-gray-200 ${accentColor} transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10`}
             type="radio"
-            value="option1"
+            value="Muy en desacuerdo"
+            onChange={() => handleChange("Muy en desacuerdo")}
             {...register}
           />
         </div>
@@ -27,7 +35,8 @@ const RadioInput = ({ bgColor, sentence, accentColor, register }) => {
           <input
             className={`before:content[''] peer relative h-5 w-5 cursor-pointer rounded-full border border-blue-gray-200 ${accentColor} transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10`}
             type="radio"
-            value="option2"
+            value="En desacuerdo"
+            onChange={() => handleChange('En desacuerdo')}
             {...register}
           />
         </div>
@@ -38,7 +47,8 @@ const RadioInput = ({ bgColor, sentence, accentColor, register }) => {
           <input
             className={`before:content[''] peer relative h-5 w-5 cursor-pointer rounded-full border border-blue-gray-200 ${accentColor} transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10`}
             type="radio"
-            value="option3"
+            value="De acuerdo"
+            onChange={() => handleChange('De acuerdo')}
             {...register}
           />
         </div>
@@ -49,7 +59,8 @@ const RadioInput = ({ bgColor, sentence, accentColor, register }) => {
           <input
             className={`before:content[''] peer relative h-5 w-5 cursor-pointer rounded-full border border-blue-gray-200 ${accentColor} transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10`}
             type="radio"
-            value="option4"
+            value="Muy de acuerdo"
+            onChange={() => handleChange('Muy de acuerdo')}
             {...register}
           />
         </div>

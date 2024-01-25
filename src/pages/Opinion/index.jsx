@@ -5,7 +5,7 @@ import RadioInput from './components/RadioInput';
 import Button from '@/layouts/Button';
 import useFormStore from '@/store/useFormStore';
 import useGetPoliticalPhrases from '@/hooks/PhrasesHook/useGetPoliticalPhrases';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 const Opinion = ({ handleStep }) => {
   const {
@@ -20,7 +20,16 @@ const Opinion = ({ handleStep }) => {
   });
 
   const optionId = useFormStore(state => state.politicalCharacterization);
+  const politicalResult = useFormStore(s => s.politicalResult);
+  const setPoliticalResult = useFormStore(s => s.setPoliticalResult);
   const { data: politicalPhrases, isLoading, isError } = useGetPoliticalPhrases(optionId);
+
+  useEffect(() => {
+    console.log(politicalResult);
+    if (!politicalResult?.length) {
+      setPoliticalResult(politicalPhrases);
+    }
+  }, [politicalPhrases, politicalResult, setPoliticalResult]);
 
   const bgColors = [
     'bg-purple-500',
@@ -59,14 +68,15 @@ const Opinion = ({ handleStep }) => {
 
   return (
     <div>
-      <header className="flex flex-col items-center">        
+      <header className="flex flex-col items-center">
         <h2 className="text-5xl font-bold mt-6 text-center">Estudio Polarizaciones</h2>
         <p className="w-3/4 text-2xl text-center mt-24 text-slate-600">
-        Esta encuesta es muy especial porque te vamos a desafiar. <br></br>
-        A continuación, te presentaremos una serie de frases que quizás no representen exactamente tu pensamiento e incluso te pueden parecer un poco exageradas. <br></br>
-        Lo que te pedimos es que hagas el esfuerzo por responder igualmente. <br></br>
-        Sintetizar temas sociales en frases es complejo y siempre se generan problemas, pero es la única manera que tenemos de medir opiniones en una encuesta.
-
+          Esta encuesta es muy especial porque te vamos a desafiar. <br></br>A continuación, te
+          presentaremos una serie de frases que quizás no representen exactamente tu pensamiento e
+          incluso te pueden parecer un poco exageradas. <br></br>
+          Lo que te pedimos es que hagas el esfuerzo por responder igualmente. <br></br>
+          Sintetizar temas sociales en frases es complejo y siempre se generan problemas, pero es la
+          única manera que tenemos de medir opiniones en una encuesta.
         </p>
       </header>
       <section className="flex flex-col items-center mt-24 mb-28 sm:mx-14 md:mx-0">
@@ -98,7 +108,8 @@ const Opinion = ({ handleStep }) => {
                   sentence={p.text}
                   bgColor={bgColors[index % 8]}
                   accentColor={accentColors[index % 8]}
-                  register={register(`phrases.${index}`)}
+                  register={register(`phrases.${index}.value`)}
+                  phrase={p}
                   required
                 />
                 <div className="col-span-2 flex justify-end me-1 text-red-500">
