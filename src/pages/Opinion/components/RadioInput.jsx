@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import useFormStore from '@/store/useFormStore';
 
-const RadioInput = ({ bgColor, sentence, accentColor, register, phrase }) => {
+const RadioInput = ({ bgColor, sentence, accentColor, register, phraseId }) => {
   const updatePoliticalResult = useFormStore(state => state.updatePoliticalResult);
 
-  const handleChange = (e, newValue) => {
-    updatePoliticalResult(phrase.id, newValue);
+  const handleChange = newValue => {
+    updatePoliticalResult(phraseId, newValue);
   };
 
   return (
@@ -24,8 +24,8 @@ const RadioInput = ({ bgColor, sentence, accentColor, register, phrase }) => {
             className={`before:content[''] peer relative h-5 w-5 cursor-pointer rounded-full border border-blue-gray-200 ${accentColor} transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10`}
             type="radio"
             value="Muy en desacuerdo"
-            onChange={() => handleChange("Muy en desacuerdo")}
             {...register}
+            onChange={() => handleChange('Muy en desacuerdo')}
           />
         </div>
         <div className="flex justify-center items-center md:hidden h-14">
@@ -36,8 +36,8 @@ const RadioInput = ({ bgColor, sentence, accentColor, register, phrase }) => {
             className={`before:content[''] peer relative h-5 w-5 cursor-pointer rounded-full border border-blue-gray-200 ${accentColor} transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10`}
             type="radio"
             value="En desacuerdo"
-            onChange={() => handleChange('En desacuerdo')}
             {...register}
+            onChange={() => handleChange('En desacuerdo')}
           />
         </div>
         <div className="flex justify-center items-center md:hidden h-14 bg-gray-100">
@@ -48,8 +48,8 @@ const RadioInput = ({ bgColor, sentence, accentColor, register, phrase }) => {
             className={`before:content[''] peer relative h-5 w-5 cursor-pointer rounded-full border border-blue-gray-200 ${accentColor} transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10`}
             type="radio"
             value="De acuerdo"
-            onChange={() => handleChange('De acuerdo')}
             {...register}
+            onChange={() => handleChange('De acuerdo')}
           />
         </div>
         <div className="flex justify-center items-center md:hidden h-14 text-center">
@@ -60,8 +60,8 @@ const RadioInput = ({ bgColor, sentence, accentColor, register, phrase }) => {
             className={`before:content[''] peer relative h-5 w-5 cursor-pointer rounded-full border border-blue-gray-200 ${accentColor} transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10`}
             type="radio"
             value="Muy de acuerdo"
-            onChange={() => handleChange('Muy de acuerdo')}
             {...register}
+            onChange={() => handleChange('Muy de acuerdo')}
           />
         </div>
       </div>

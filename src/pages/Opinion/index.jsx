@@ -7,6 +7,28 @@ import useFormStore from '@/store/useFormStore';
 import useGetPoliticalPhrases from '@/hooks/PhrasesHook/useGetPoliticalPhrases';
 import { Fragment, useEffect } from 'react';
 
+const bgColors = [
+  'bg-purple-500',
+  'bg-teal-500',
+  'bg-lime-500',
+  'bg-orange-500',
+  'bg-pink-500',
+  'bg-red-500',
+  'bg-indigo-500',
+  'bg-sky-500',
+];
+
+const accentColors = [
+  'accent-purple-500',
+  'accent-teal-600',
+  'accent-lime-600',
+  'accent-orange-600',
+  'accent-pink-500',
+  'accent-red-500',
+  'accent-indigo-500',
+  'accent-sky-600',
+];
+
 const Opinion = ({ handleStep }) => {
   const {
     register,
@@ -25,33 +47,10 @@ const Opinion = ({ handleStep }) => {
   const { data: politicalPhrases, isLoading, isError } = useGetPoliticalPhrases(optionId);
 
   useEffect(() => {
-    console.log(politicalResult);
     if (!politicalResult?.length) {
       setPoliticalResult(politicalPhrases);
     }
   }, [politicalPhrases, politicalResult, setPoliticalResult]);
-
-  const bgColors = [
-    'bg-purple-500',
-    'bg-teal-500',
-    'bg-lime-500',
-    'bg-orange-500',
-    'bg-pink-500',
-    'bg-red-500',
-    'bg-indigo-500',
-    'bg-sky-500',
-  ];
-
-  const accentColors = [
-    'accent-purple-500',
-    'accent-teal-600',
-    'accent-lime-600',
-    'accent-orange-600',
-    'accent-pink-500',
-    'accent-red-500',
-    'accent-indigo-500',
-    'accent-sky-600',
-  ];
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -62,7 +61,6 @@ const Opinion = ({ handleStep }) => {
   }
 
   const onSubmit = handleSubmit(data => {
-    // TODO: guardar las opciones seleccionadas
     handleStep();
   });
 
@@ -101,15 +99,15 @@ const Opinion = ({ handleStep }) => {
               </div>
             </div>
           </div>
-          {politicalPhrases?.map((p, index) => {
+          {politicalResult?.map((p, index) => {
             return (
               <Fragment key={p.id}>
                 <RadioInput
                   sentence={p.text}
                   bgColor={bgColors[index % 8]}
                   accentColor={accentColors[index % 8]}
-                  register={register(`phrases.${index}.value`)}
-                  phrase={p}
+                  register={register(`phrases.${index}`)}
+                  phraseId={p.id}
                   required
                 />
                 <div className="col-span-2 flex justify-end me-1 text-red-500">

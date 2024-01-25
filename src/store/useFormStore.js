@@ -42,7 +42,7 @@ const useFormStore = create(
       set(state => {
         return {
           ...state,
-          politicalResult: politicalResult?.map(p => ({ ...p, value: "Valor vacio por defecto" })),
+          politicalResult,
         };
       });
     },
@@ -50,7 +50,7 @@ const useFormStore = create(
       set(state => {
         return {
           ...state,
-          politicalResult: [...state.politicalResult].map(phrase => ({
+          politicalResult: state.politicalResult?.map(phrase => ({
             ...phrase,
             value: phrase.id === phraseId ? newValue : phrase.value,
           })),
