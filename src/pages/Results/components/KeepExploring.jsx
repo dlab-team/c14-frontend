@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 function KeepExploring() {
   const navigate = useNavigate();
   const nextStep = useFormStore(state => state.nextStep);
+  const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
 
   const onAccept = () => {
     nextStep();
   };
 
   const onReject = () => {
-    //Alomejor añadir un clearForm acá
+    setAcceptedTerms(false);
     navigate('/reconocimiento');
   };
   const paragraphs = [

@@ -5,6 +5,8 @@ import StepOne from '@/components/StepOne/StepOne';
 import HowCompare from '@/components/HowCompare/HowCompare';
 import SocialStep from '@/components/SocialStep/SocialStep';
 import Results from '../Results/Results';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // 0: {
 //   name: '[Political] Characterization Section',
@@ -14,6 +16,14 @@ import Results from '../Results/Results';
 const Wrapper = () => {
   const currentSurveySection = useFormStore(state => state.currentSurveySection);
   const nextStep = useFormStore(state => state.nextStep);
+  const acceptedTerms = useFormStore(state => state.acceptedTerms);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!acceptedTerms) {
+      navigate('/');
+    }
+  });
 
   const handleStep = () => {
     nextStep();

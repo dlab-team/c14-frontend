@@ -11,10 +11,12 @@ export default function Home() {
   const [isChecked, setIsChecked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
 
   const handleClick = () => {
     if (isChecked) {
       clearForm();
+      setAcceptedTerms(true);
       navigate('/cuestionario');
     } else {
       toast.error('Por favor, acepte los términos y condiciones');
@@ -43,13 +45,17 @@ export default function Home() {
       <Toaster position="top-center" />
       <Terms isOpen={isModalOpen} onClose={closeModal} onAccept={handleAccept} />
       <div className="grid lg:grid-cols-2 h-[90vh] ">
-        <img src="logo/logo-estudio.png" alt="Logo estudio" width={'60%'} className="mx-auto my-10 lg:my-10 lg:ml-20"/>
+        <img
+          src="logo/logo-estudio.png"
+          alt="Logo estudio"
+          width={'60%'}
+          className="mx-auto my-10 lg:my-10 lg:ml-20"
+        />
         <div className="flex flex-col items-center lg:justify-center lg:me-36 lg:pt-0">
           <h1 className="text-4xl lg:text-5xl font-bold text-center mx-4">
             Test de polarizaciones
           </h1>
-          <h2 className="text-2xl text-center mx-4"> Descúbrete y despolarízate!
-</h2>
+          <h2 className="text-2xl text-center mx-4"> Descúbrete y despolarízate!</h2>
           <p className="xl:text-xl text-center px-10 sm:px-28 lg:px-0 py-10 text-slate-600 w-[90%]">
             Esta encuesta es muy especial porque te vamos a desafiar. A continuación, te
             presentaremos una serie de frases que quizás no representen exactamente tu pensamiento e

@@ -4,6 +4,7 @@ import { create } from 'zustand';
 const useFormStore = create(
   // persist(
   set => ({
+    acceptedTerms: null,
     politicalCharacterization: null,
     currentSurveySection: 0,
     howCompare: null,
@@ -11,6 +12,11 @@ const useFormStore = create(
     setPoliticalCharacterization: politicalCharacterization => {
       set(state => {
         return { ...state, politicalCharacterization };
+      });
+    },
+    setAcceptedTerms: acceptedTerms => {
+      set(state => {
+        return { ...state, acceptedTerms };
       });
     },
     setHowCompare: howCompare => {
