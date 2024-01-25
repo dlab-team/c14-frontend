@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-// import { persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
 const useFormStore = create(
-  // persist(
+  persist(
   set => ({
     acceptedTerms: null,
     politicalCharacterization: null,
@@ -56,7 +56,7 @@ const useFormStore = create(
   {
     name: 'form-storage',
   }
-  // )
+  )
 );
 
 export default useFormStore;
