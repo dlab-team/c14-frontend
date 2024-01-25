@@ -1,16 +1,36 @@
 import AdminHeader from '@/components/admin/AdminHeader';
 import { CiCirclePlus } from 'react-icons/ci';
 import PhraseCard from './Components/PhraseCard';
-import { data } from './data';
 import useGetAllPoly from './../../../hooks/PolynomialsHook/useGetAllPoly';
 import Select from 'react-select';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import useGetPhrasesByIdPolinomial from '@/hooks/PhrasesHook/useGetPhrasesByIdPolinomial';
 
 const Phrases = () => {
-  const {data: polynomials} = useGetAllPoly()
-  const [selectedOption, setSelectedOption] = useState(null);
-  
-  const filteredPhrases = data.filter(phrase => phrase.polynomialId === selectedOption?.value);
+  const [selectedOption, setSelectedOption] = useState({
+    value: 'aa1acca6-908e-4261-a882-f9e473da0bea',
+    label: 'Político',
+  });
+  const [polynomials, setPolynomials] = useState([]);
+  const { data: polynomialsData } = useGetAllPoly();
+  const {
+    data: PhrasesByIdPolinomial,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetPhrasesByIdPolinomial(selectedOption?.value );
+
+  useEffect(() => {
+    if (polynomialsData) {
+      setPolynomials(polynomialsData);
+    }
+  }, [polynomialsData]);
+
+  useEffect(() => {
+    if (selectedOption?.value) {
+      refetch();
+    }
+  }, [selectedOption, refetch]);
 
   const handleButton = () => {
     console.log('crear frase');
@@ -19,8 +39,7 @@ const Phrases = () => {
   const handleChange = selectedOption => {
     setSelectedOption(selectedOption);
   };
- 
-
+console.log(selectedOption);
   return (
     <>
       <AdminHeader
@@ -45,9 +64,15 @@ const Phrases = () => {
           </button>
         </div>
         {selectedOption && (
-          filteredPhrases.map(phrase =>{
-            return <PhraseCard key={phrase.id} phrase={phrase}></PhraseCard>;
-          })
+          isLoading ? (
+            <p>Loading...</p>
+          ) : isError ? (
+            <p>Error loading data</p>
+          ) : (
+            PhrasesByIdPolinomial.map(phrase => (
+              <PhraseCard key={phrase.id} phrase={phrase}></PhraseCard>
+            ))
+          )
         )}
       </main>
     </>
