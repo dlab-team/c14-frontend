@@ -71,8 +71,8 @@ const PolynomialsOpt = () => {
     <>
       <Toaster position="top-center" />
       <AdminHeader
-        title="Opciones de polinomios"
-        description="Puedes agregar, modificar o eliminar opciones"
+        title="Control de Polinomios"
+        description="Aquí puedes crear, modificar y eliminar polinomios."
       />
       <div className="flex relative overflow-x-auto  p-3 my-8  max-w-4xl mx-auto xl:justify-end justify-center">
         <button
