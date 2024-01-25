@@ -17,8 +17,7 @@ const SocialStep = ({ handleStep }) => {
 
   const onSubmit = data => {
     setSocialCharacterization(data);
-    console.log(useFormStore.getState().socialCharacterization);
-    //handleStep();
+    handleStep();
   };
 
   return (
