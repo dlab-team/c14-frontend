@@ -9,6 +9,12 @@ const useFormStore = create(
     currentSurveySection: 0,
     howCompare: null,
     opossitePoliticalResult: [],
+    socialCharacterization:[],
+    setSocialCharacterization: socialCharacterization => {
+      set(state => {
+        return { ...state, socialCharacterization };
+      });
+    },
     setPoliticalCharacterization: politicalCharacterization => {
       set(state => {
         return { ...state, politicalCharacterization };

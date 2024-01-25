@@ -11,12 +11,12 @@ import useGetSocialsPolynomials from '@/hooks/useGetSocialsPolynomials';
 
 const SocialStep = ({ handleStep }) => {
   const { control, handleSubmit } = useForm();
-  const setPoliticalCharacterization = useFormStore(state => state.setPoliticalCharacterization);
+  const setSocialCharacterization = useFormStore(state => state.setSocialCharacterization);
 
   const { data: socialPolynomials } = useGetSocialsPolynomials();
 
   const onSubmit = data => {
-    setPoliticalCharacterization(data.ladoPolitico);
+    setSocialCharacterization(data);
     handleStep();
   };
 
