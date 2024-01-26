@@ -37,13 +37,22 @@ export class PolynomialsService {
       throw new Error('No se pudo editar el polinomio');
     }
   }
-
+  
   static async getPolynomialById(id) {
     try {
-      const { data } = await api.get(`/polynomials/${id}`)
-      return data
+      const { data } = await api.get(`/polynomials/${id}`);
+      return data;
     } catch (error) {
-      throw new Error('No se pudo obtener la informacion')
+      throw new Error('No se pudo obtener la informacion');
+    }
+  }
+
+  static async getAllPolynomial() {
+    try {
+      const { data } = await api.get(`/polynomials`);
+      return data;
+    } catch (error) {
+      throw new Error('No se pudo obtener la informacion');
     }
   }
 

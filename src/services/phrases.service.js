@@ -22,4 +22,14 @@ export class PhrasesService {
       throw new Error('Error al obtener informacion');
     }
   }
+
+  static async getPhrasesByIdPolinomial(idPolinomial) {
+    try {
+      const {data} = await api.get(`/phrases/polynomial/${idPolinomial}`);
+      return data;
+    
+    } catch (error) {
+      throw new Error('Error al obtener informacion');
+    }
+  }
 }
