@@ -1,15 +1,17 @@
+import useFormStore from '@/store/useFormStore';
 import { useNavigate } from 'react-router-dom';
 
 function KeepExploring() {
   const navigate = useNavigate();
+  const nextStep = useFormStore(state => state.nextStep);
+  const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
 
   const onAccept = () => {
-    //Que lleve al cuestionario pero parte social
-    alert('vamos al cuestionario social');
+    nextStep();
   };
 
   const onReject = () => {
-    //Alomejor añadir un clearForm acá
+    setAcceptedTerms(false);
     navigate('/reconocimiento');
   };
   const paragraphs = [

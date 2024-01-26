@@ -1,6 +1,7 @@
 import AdminHeader from '@/components/admin/AdminHeader';
 import { ResultsFooter } from './components/ResultsFooter';
 import Comparison from './components/Comparison.jsx';
+import { Perception } from './components/Perception';
 import KeepExploring from './components/KeepExploring';
 
 const Results = () => {
@@ -13,6 +14,7 @@ const Results = () => {
         positionTitle="items-center"
       />
       <Comparison />
+      <Perception />
       <KeepExploring />
       <ResultsFooter />
     </div>

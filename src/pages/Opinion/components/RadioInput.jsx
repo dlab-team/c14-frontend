@@ -10,7 +10,7 @@ const RadioInput = ({ bgColor, sentence, accentColor, register }) => {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 divide-x-2 divide-y-2 md:divide-y-0 border-2 md:mb-3 h-fit md:h-20 md:shadow-xl">
         <div className="flex justify-center items-center md:hidden h-14 bg-gray-100">
-          <span className="">Desacuerdo</span>
+          <span className="">Muy en desacuerdo</span>
         </div>
         <div className="grid place-content-center bg-gray-100">
           <input
@@ -21,7 +21,7 @@ const RadioInput = ({ bgColor, sentence, accentColor, register }) => {
           />
         </div>
         <div className="flex justify-center items-center md:hidden h-14">
-          <span className="text-center">Medianamente de acuerdo</span>
+          <span className="text-center">En desacuerdo</span>
         </div>
         <div className="grid place-content-center">
           <input

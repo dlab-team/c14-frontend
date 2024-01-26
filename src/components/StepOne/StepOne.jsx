@@ -42,7 +42,7 @@ const StepOne = ({ handleStep }) => {
         />
 
         <div className="contenedor">
-          <div className="parte-superior">
+          <div className="parte-superior bg-purple-500">
             <img width="70px" src={banderas} alt="" />
             <p>¿Con quién te identificas?</p>
           </div>

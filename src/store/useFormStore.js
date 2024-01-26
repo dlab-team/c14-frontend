@@ -1,16 +1,28 @@
 import { create } from 'zustand';
-// import { persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
 const useFormStore = create(
-  // persist(
+  persist(
   set => ({
+    acceptedTerms: null,
     politicalCharacterization: null,
     currentSurveySection: 0,
     howCompare: null,
     opossitePoliticalResult: [],
+    socialCharacterization:[],
+    setSocialCharacterization: socialCharacterization => {
+      set(state => {
+        return { ...state, socialCharacterization };
+      });
+    },
     setPoliticalCharacterization: politicalCharacterization => {
       set(state => {
         return { ...state, politicalCharacterization };
+      });
+    },
+    setAcceptedTerms: acceptedTerms => {
+      set(state => {
+        return { ...state, acceptedTerms };
       });
     },
     setHowCompare: howCompare => {
@@ -20,7 +32,10 @@ const useFormStore = create(
     },
     setOpossitePoliticalResult: opossitePoliticalResult => {
       set(state => {
-        return { ...state, opossitePoliticalResult };
+        return {
+          ...state,
+          opossitePoliticalResult: opossitePoliticalResult?.map(p => ({ ...p, value: 50 })),
+        };
       });
     },
     updateOpossitePoliticalResult: (phraseId, newValue) => {
@@ -47,7 +62,7 @@ const useFormStore = create(
   {
     name: 'form-storage',
   }
-  // )
+  )
 );
 
 export default useFormStore;

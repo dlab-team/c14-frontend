@@ -104,7 +104,7 @@ const Sidebar = () => {
                 <div>
                   <PiListBullets className="text-xl" />
                 </div>
-                Polinomios y Opciones
+                Control de Polinomios
               </NavLink>
             </li>
             <li>
