@@ -3,7 +3,7 @@ import { CiCirclePlus } from 'react-icons/ci';
 import PhraseCard from './Components/PhraseCard';
 import useGetAllPoly from './../../../hooks/PolynomialsHook/useGetAllPoly';
 import Select from 'react-select';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import useGetPhrasesByIdPolinomial from '@/hooks/PhrasesHook/useGetPhrasesByIdPolinomial';
 
 const Phrases = () => {
@@ -18,11 +18,15 @@ const Phrases = () => {
     isLoading,
     isError,
     refetch,
-  } = useGetPhrasesByIdPolinomial(selectedOption?.value );
+  } = useGetPhrasesByIdPolinomial(selectedOption?.value);
 
   useEffect(() => {
     if (polynomialsData) {
       setPolynomials(polynomialsData);
+      setSelectedOption({
+        value: polynomialsData[0].id,
+        label: polynomialsData[0].name,
+      });
     }
   }, [polynomialsData]);
 
@@ -39,7 +43,7 @@ const Phrases = () => {
   const handleChange = selectedOption => {
     setSelectedOption(selectedOption);
   };
-console.log(selectedOption);
+
   return (
     <>
       <AdminHeader
@@ -63,8 +67,8 @@ console.log(selectedOption);
             Crear Frase <CiCirclePlus />
           </button>
         </div>
-        {selectedOption && (
-          isLoading ? (
+        {selectedOption &&
+          (isLoading ? (
             <p>Loading...</p>
           ) : isError ? (
             <p>Error loading data</p>
@@ -72,8 +76,7 @@ console.log(selectedOption);
             PhrasesByIdPolinomial.map(phrase => (
               <PhraseCard key={phrase.id} phrase={phrase}></PhraseCard>
             ))
-          )
-        )}
+          ))}
       </main>
     </>
   );
