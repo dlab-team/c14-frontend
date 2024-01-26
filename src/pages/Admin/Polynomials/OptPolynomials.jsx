@@ -12,7 +12,7 @@ import useDeleteOption from '@/hooks/OptionsHook/useDeleteOption';
 import useEditOption from '@/hooks/OptionsHook/useEditOption';
 import { useForm } from 'react-hook-form';
 import useGetOptions from '@/hooks/OptionsHook/useGetOptions';
-import useGetPolyId from '@/hooks/PolynomialsHook/useGetPolyId';
+import useGetPolyId from '@/hooks/useGetPolyId';
 import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
