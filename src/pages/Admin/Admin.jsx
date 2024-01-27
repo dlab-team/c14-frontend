@@ -1,4 +1,5 @@
 import AdminHeader from '@/components/admin/AdminHeader';
+import AdminResults from '@/components/admin/AdminResults';
 import useAuthStore from '@/store/useAuthStore';
 
 const Admin = () => {
@@ -10,7 +11,9 @@ const Admin = () => {
         title={`Bienvenido, ${user?.firstName}`}
         description="Información general sobre los resultados de los encuestados."
       />
+      <AdminResults />
       <main className="p-8"></main>
+      
     </>
   );
 };
