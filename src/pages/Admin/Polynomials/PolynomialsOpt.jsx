@@ -3,9 +3,9 @@ import { CiCirclePlus } from 'react-icons/ci';
 import CreateOptionModal from './Components/CreateOptModal';
 import CreatePolynomialModal from './Components/CreatePolynomialModal';
 import EditPolynomialModal from './Components/EditPolynomialModal';
-import { FaRegTrashCan } from 'react-icons/fa6';
-import { FiEdit3 } from 'react-icons/fi';
-import { TbLetterX } from 'react-icons/tb';
+import OptButton from './Components/OptButton';
+import OptionCard from './Components/OptionsCard';
+import PolynomialCard from './Components/PolynomialCard';
 import { Toaster } from 'sonner';
 import useDeleteOption from '@/hooks/OptionsHook/useDeleteOption';
 import useDeletePolynomial from '@/hooks/PolynomialsHook/useDeletePolynomial';
@@ -24,11 +24,17 @@ const PolynomialsOpt = () => {
   const [isCreatingPoly, setIsCreatingPoly] = useState(false);
   const [isEditingPoly, setIsEditingPoly] = useState(false);
 
+  const [polynomialsState, setPolynomialsState] = useState({});
+
   const DetailsOpt = polynomial => {
-    setSelectedPolynomial(
-      selectedPolynomial && selectedPolynomial.id === polynomial.id ? null : polynomial
+    setSelectedPolynomial(prevSelected =>
+      prevSelected && prevSelected.id === polynomial.id ? null : polynomial
     );
-    setIsOptionsOpen(selectedPolynomial && selectedPolynomial.id === polynomial.id ? false : true);
+
+    setPolynomialsState(prevState => ({
+      ...prevState,
+      [polynomial.id]: !prevState[polynomial.id],
+    }));
   };
 
   const toggleOptionModal = () => {
@@ -90,72 +96,26 @@ const PolynomialsOpt = () => {
           polynomials
             ?.filter(poly => poly.political === true)
             .map(poly => (
-              <div
+              <PolynomialCard
                 key={poly?.id}
-                className="relative overflow-x-auto mx-auto my-8 max-w-4xl border rounded border-slate-200 bg-white shadow-xl p-4 md:p-10 mb-10 "
+                polynomial={poly}
+                deletePolynomial={deletePolynomial}
+                toggleEditPolynomialModal={toggleEditPolynomialModal}
+                DetailsOpt={() => DetailsOpt(poly)}
+                isOptionsOpen={polynomialsState[poly.id] || false}
               >
-                <div className="flex justify-between items-center text-xl m-2">
-                  <p className="font-semibold w-52 sm:mb-5">{poly.name}</p>
-                  <p className="font-semibold hidden sm:block">
-                    {poly.active ? 'activo' : 'inactivo'}
-                  </p>
-                  <div className="flex gap-4">
-                    <button
-                      className="border rounded border-black p-1"
-                      onClick={() => deletePolynomial(poly.id)}
-                    >
-                      <FaRegTrashCan />
-                    </button>
-                    <button
-                      className="border rounded border-black p-1"
-                      onClick={() => toggleEditPolynomialModal(poly)}
-                    >
-                      <FiEdit3 />
-                    </button>
-                    <button
-                      className={`border rounded border-black p-1 ${
-                        isOptionsOpen ? 'bg-black text-white' : 'bg-white text-black'
-                      }`}
-                      onClick={() => DetailsOpt(poly)}
-                    >
-                      Opciones
-                    </button>
+                <div className="flex flex-col items-center mt-5">
+                  <OptButton toggleOptionModal={toggleOptionModal} />
+                  <div className="flex flex-wrap gap-2">
+                    {options &&
+                      options
+                        .filter(opt => opt.polynomialId === poly.id)
+                        .map(opt => (
+                          <OptionCard key={opt.id} option={opt} deleteOption={deleteOption} />
+                        ))}
                   </div>
                 </div>
-                <div>
-                  {selectedPolynomial && selectedPolynomial.id === poly.id && (
-                    <div className="flex flex-col items-center mt-5">
-                      <div className="mb-3">
-                        <button
-                          className="underline text-black px-4 py-2 rounded cursor-pointer"
-                          onClick={() => toggleOptionModal()}
-                        >
-                          Agregar una opción
-                        </button>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {options &&
-                          options
-                            .filter(opt => opt.polynomialId === poly.id)
-                            .map(opt => (
-                              <div
-                                key={opt.id}
-                                className="border rounded-xl border-gray-300 flex max-w-sm items-center gap-2 px-2.5 py-1"
-                              >
-                                <p>{opt.name}</p>
-                                <button
-                                  className="text-red-500 border border-red-600 rounded-full"
-                                  onClick={() => deleteOption(opt.id)}
-                                >
-                                  <TbLetterX size={18} />
-                                </button>
-                              </div>
-                            ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+              </PolynomialCard>
             ))}
       </div>
 
@@ -167,72 +127,26 @@ const PolynomialsOpt = () => {
           polynomials
             ?.filter(poly => poly.political === false)
             .map(poly => (
-              <div
+              <PolynomialCard
                 key={poly?.id}
-                className="relative overflow-x-auto mx-auto my-8 max-w-4xl border rounded border-slate-200 bg-white shadow-xl p-4 md:p-10 mb-10"
+                polynomial={poly}
+                deletePolynomial={deletePolynomial}
+                toggleEditPolynomialModal={toggleEditPolynomialModal}
+                DetailsOpt={() => DetailsOpt(poly)}
+                isOptionsOpen={polynomialsState[poly.id] || false}
               >
-                <div className="flex sm:flex-row justify-between items-center text-xl m-2">
-                  <p className="font-semibold w-52">{poly.name}</p>
-                  <p className="font-semibold hidden sm:block">
-                    {poly.active ? 'activo' : 'inactivo'}
-                  </p>
-                  <div className="flex gap-4 ">
-                    <button
-                      className="border rounded border-black p-1"
-                      onClick={() => deletePolynomial(poly.id)}
-                    >
-                      <FaRegTrashCan />
-                    </button>
-                    <button
-                      className="border rounded border-black p-1"
-                      onClick={() => toggleEditPolynomialModal(poly)}
-                    >
-                      <FiEdit3 />
-                    </button>
-                    <button
-                      className={`border rounded border-black p-1 ${
-                        isOptionsOpen ? 'bg-black text-white' : 'bg-white text-black'
-                      }`}
-                      onClick={() => DetailsOpt(poly)}
-                    >
-                      Opciones
-                    </button>
+                <div className="flex flex-col items-center mt-5">
+                  <OptButton toggleOptionModal={toggleOptionModal} />
+                  <div className="flex flex-wrap gap-2">
+                    {options &&
+                      options
+                        .filter(opt => opt.polynomialId === poly.id)
+                        .map(opt => (
+                          <OptionCard key={opt.id} option={opt} deleteOption={deleteOption} />
+                        ))}
                   </div>
                 </div>
-                <div>
-                  {selectedPolynomial && selectedPolynomial.id === poly.id && (
-                    <div className="flex flex-col items-center mt-5">
-                      <div className="mb-3">
-                        <button
-                          className="underline text-black px-4 py-2 rounded cursor-pointer"
-                          onClick={() => toggleOptionModal()}
-                        >
-                          Agregar una opción
-                        </button>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {options &&
-                          options
-                            .filter(opt => opt.polynomialId === poly.id)
-                            .map(opt => (
-                              <div
-                                key={opt.id}
-                                className="border rounded-xl border-gray-300 flex max-w-sm items-center gap-2 px-2.5 py-1"
-                              >
-                                <p>{opt.name}</p>
-                                <button
-                                  className="text-red-500 border border-red-600 rounded-full"
-                                  onClick={() => deleteOption(opt.id)}
-                                >
-                                  <TbLetterX size={18} />
-                                </button>
-                              </div>
-                            ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+              </PolynomialCard>
             ))}
       </div>
       {isCreatingOpt && (
