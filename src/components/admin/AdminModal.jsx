@@ -4,7 +4,7 @@ export default function AdminModal({ setShowModal, title, children }) {
   return (
     <div
       onClick={() => setShowModal(false)}
-      className="relative z-50"
+      className="absolute z-50"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
