@@ -41,16 +41,7 @@ const Opinion = ({ handleStep, opinionResult, updateOpinionResult }) => {
   });
 
   const onSubmit = handleSubmit(data => {
-    const results = useFormStore.getState().socialResult;
-    console.log('Esto es results');
-    console.log(results);
-    // console.log('Esto es data');
-    // console.log(data);
-    // console.log('*****************');
-    // console.log('Esto es results');
-    // console.log(results);
-    // console.log('*****************');
-    //handleStep();
+    handleStep();
   });
 
   return (

@@ -9,8 +9,6 @@ const SocialOpinion = ({ handleStep }) => {
   const setSocialResult = useFormStore(s => s.setSocialResult);
   const { data: socialPhrases, isLoading, isError } = useGetSocialPhrases(optionIds);
   const updateSocialResult = useFormStore(state => state.updateSocialResult);
-  console.log('Esto es socialPhrass en SocialOpinion.jsx');
-  console.log(socialPhrases);
 
   useEffect(() => {
     if (!socialResult?.length) {

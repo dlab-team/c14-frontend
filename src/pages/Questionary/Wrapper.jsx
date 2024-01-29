@@ -34,14 +34,14 @@ const Wrapper = () => {
   };
 
   const sections = {
-    //0: <StepOne handleStep={handleStep} />,
-    //1: <PoliticalOpinion handleStep={handleStep} />, // <p>[Political] Own group perceptions</p>,
+    0: <StepOne handleStep={handleStep} />,
+    1: <PoliticalOpinion handleStep={handleStep} />, // <p>[Political] Own group perceptions</p>,
     //1: <Opinion handleStep={handleStep} />,
     // 2: <HowCompare handleStep={handleStep} />, // <p>[Political] Opposite group perceptions</p>,
     2: <OppositeQuestions handleStep={handleStep} />, // <p>[Political] Opposite group perceptions</p>,
     3: <Results />,
-    0: <SocialStep handleStep={handleStep} />,
-    1: <SocialOpinion handleStep={handleStep} />,
+    4: <SocialStep handleStep={handleStep} />,
+    5: <SocialOpinion handleStep={handleStep} />,
     // 4: <p>[Political] Opposite group perceptions results</p>,
     // 5: <p>[Political] Next step invitation</p>,
     // 9: <p>[End] Final Step</p>,

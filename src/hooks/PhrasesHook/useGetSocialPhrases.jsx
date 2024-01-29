@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 const useGetSocialPhrases = optionIds => {
   const { data, isLoading, isError, refetch } = useQuery({
-    queryHash: 'socialPhrases',
+    queryHash: ['socialPhrases', optionIds],
     queryFn: () => PhrasesService.getSocialPhrases(optionIds),
     onError: error => {
       toast.error(error?.message || 'Error al obtener las opciones');

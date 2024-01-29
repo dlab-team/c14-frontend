@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 const useGetPoliticalPhrases = optionId => {
   const { data, isLoading, isError, refetch } = useQuery({
-    queryHash: 'politicalPhrases',
+    queryHash: ['politicalPhrases', optionId],
     queryFn: () => PhrasesService.getPoliticalPhrases(optionId),
     onError: error => {
       toast.error(error?.message || 'Error al obtener las opciones');

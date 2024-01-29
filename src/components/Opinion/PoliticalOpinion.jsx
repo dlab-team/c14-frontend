@@ -9,8 +9,6 @@ const PoliticalOpinion = ({ handleStep }) => {
   const setPoliticalResult = useFormStore(s => s.setPoliticalResult);
   const { data: politicalPhrases, isLoading, isError } = useGetPoliticalPhrases(optionId);
   const updatePoliticalResult = useFormStore(state => state.updatePoliticalResult);
-  console.log('Esto es politicalPhrass en PoliticalOpinion.jsx');
-  console.log(politicalPhrases);
 
   useEffect(() => {
     if (!politicalResult?.length) {
