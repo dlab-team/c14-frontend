@@ -1,12 +1,16 @@
 import api from './api.services';
 
 export class PhrasesService {
-  static async getExtrmPoliticalPhrases(group) {
+  static async getExtrmPoliticalPhrases(optionId) {
     try {
-      const { data } = await api.get(`/phrases/political/${group}`);
-      return data;
-    } catch (error) {
-      throw new Error('No se pudo obtener la informacion');
+      const { data, status } = await api.post(`/phrases/inverse/political`, {
+        id: optionId,
+      });
+      if (status === 200) {
+        return data;
+      }
+    } catch (erro) {
+      throw new Error('Error al obtener informacion');
     }
   }
 

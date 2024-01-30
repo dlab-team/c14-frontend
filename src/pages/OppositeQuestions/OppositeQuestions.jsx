@@ -7,19 +7,19 @@ import CardOpposite from './Components/CardOpposite';
 import HeaderOpposite from './Components/HeaderOpposite';
 
 const OppositeQuestions = ({ handleStep }) => {
-  const howCompare = useFormStore.getState().howCompare;
+  const optionId = useFormStore(state => state.politicalCharacterization);
   const opossitePoliticalResult = useFormStore(s => s.opossitePoliticalResult);
   const setOpossitePoliticalResult = useFormStore(s => s.setOpossitePoliticalResult);
-  const { data: phrases } = useGetOppositePoliticalPhrases(howCompare || 'Extremo 1');
+  const { data: oppositePoliticalPhrases } = useGetOppositePoliticalPhrases(optionId);
   const handleOnClick = () => {
     handleStep();
   };
 
   useEffect(() => {
     if (!opossitePoliticalResult?.length) {
-      setOpossitePoliticalResult(phrases);
+      setOpossitePoliticalResult(oppositePoliticalPhrases);
     }
-  }, [phrases, opossitePoliticalResult, setOpossitePoliticalResult]);
+  }, [oppositePoliticalPhrases, opossitePoliticalResult, setOpossitePoliticalResult]);
 
   return (
     <>
