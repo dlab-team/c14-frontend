@@ -13,6 +13,8 @@ const Phrases = () => {
   });
   const [polynomials, setPolynomials] = useState([]);
   const { data: polynomialsData } = useGetAllPoly();
+  const [selectedExtrm, setselectedExtrm] = useState([]);
+  const [filteredOptions, setsfilteredOptions] = useState([]);
   const {
     data: PhrasesByIdPolinomial,
     isLoading,
@@ -34,14 +36,18 @@ const Phrases = () => {
     if (selectedOption?.value) {
       refetch();
     }
+   setselectedExtrm([])
+   setsfilteredOptions([]);
   }, [selectedOption, refetch]);
 
   const handleButton = () => {
     console.log('crear frase');
   };
 
-  const handleChange = selectedOption => {
-    setSelectedOption(selectedOption);
+  const handleChange = selectedExtrm => {
+    setselectedExtrm(selectedExtrm);
+    const filteredOptions = PhrasesByIdPolinomial.filter(item => item.group === selectedExtrm.value);
+    setsfilteredOptions(filteredOptions);
   };
 
   return (
@@ -57,8 +63,19 @@ const Phrases = () => {
             id="selectOption"
             placeholder="Selecciona"
             options={polynomials?.map(poly => ({ value: poly.id, label: poly.name }))}
-            onChange={handleChange}
+            onChange={selectedOption => setSelectedOption(selectedOption)}
             value={selectedOption}
+          />
+          <Select
+            className="md:w-52 mt-2"
+            id="selectOption"
+            placeholder="Selecciona Extremo"
+            options={[
+              { value: 'Extremo 1', label: 'Extremo 1' },
+              { value: 'Extremo 2', label: 'Extremo 2' },
+            ]}
+            onChange={handleChange}
+            value={selectedExtrm}
           />
           <button
             className="bg-black px-4 py-2 my-10 rounded-2xl text-white text-xl font-bold flex justify-center items-center"
@@ -73,9 +90,7 @@ const Phrases = () => {
           ) : isError ? (
             <p>Error loading data</p>
           ) : (
-            PhrasesByIdPolinomial.map(phrase => (
-              <PhraseCard key={phrase.id} phrase={phrase}></PhraseCard>
-            ))
+            filteredOptions.map((phrase,index) => <PhraseCard key={phrase.id} phrase={phrase} index={index}></PhraseCard>)
           ))}
       </main>
     </>
