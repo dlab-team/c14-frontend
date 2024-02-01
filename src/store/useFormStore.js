@@ -96,7 +96,14 @@ const useFormStore = create(
       set(state => ({ ...state, currentSurveySection: state.currentSurveySection + 1 }));
     },
     clearForm: () => {
-      set({ politicalCharacterization: null, currentSurveySection: 0, politicalResult: null, socialResult: null, socialCharacterization: null });
+      set(state => ({
+        politicalCharacterization: null,
+        socialCharacterization: null,
+        currentSurveySection: 0,
+        politicalResult: null,
+        socialResult: null,
+        opossitePoliticalResult: [],
+      }));
     },
   }),
   {

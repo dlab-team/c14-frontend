@@ -2,21 +2,16 @@ import { PhrasesService } from '@/services/phrases.service';
 import { toast } from 'sonner';
 import { useQuery } from 'react-query';
 
-const useGetOppositePoliticalPhrases = group => {
+const useGetOppositePoliticalPhrases = optionId => {
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryHash: ['oppositePoliticalPhrases', optionId],
+    queryFn: () => PhrasesService.getExtrmPoliticalPhrases(optionId),
+    onError: error => {
+      toast.error(error?.message || 'Error al obtener las opciones');
+    },
+  });
 
-  const newGroup = group;
-  const { data, isLoading, isError } = useQuery(
-    ['group', newGroup],
-    () => PhrasesService.getExtrmPoliticalPhrases(newGroup),
-    {
-      onError: error => {
-        toast.error(error?.message || 'Error al obtener las frases');
-      },
-    }
-  );
-
-
-  return { data, isLoading, isError };
+  return { data, isLoading, isError, refetch };
 };
 
 export default useGetOppositePoliticalPhrases;

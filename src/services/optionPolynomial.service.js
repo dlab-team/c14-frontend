@@ -7,7 +7,7 @@ export class OptPolynomialsService {
       if (status === 200) {
         return data;
       }
-    } catch (erro) {
+    } catch (error) {
       throw new Error('Error al obtener informacion');
     }
   }
@@ -18,7 +18,7 @@ export class OptPolynomialsService {
       if (status === 200) {
         return data;
       }
-    } catch (erro) {
+    } catch (error) {
       throw new Error('Error al obtener informacion');
     }
   }
