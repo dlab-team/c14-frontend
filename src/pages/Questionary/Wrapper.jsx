@@ -7,6 +7,8 @@ import SocialStep from '@/components/SocialStep/SocialStep';
 import Results from '../Results/Results';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PoliticalOpinion from '@/components/Opinion/PoliticalOpinion';
+import SocialOpinion from '@/components/Opinion/SocialOpinion';
 
 // 0: {
 //   name: '[Political] Characterization Section',
@@ -23,6 +25,7 @@ const Wrapper = () => {
     if (!acceptedTerms) {
       navigate('/');
     }
+    window.scrollTo(0, 0);
   });
 
   const handleStep = () => {
@@ -32,11 +35,13 @@ const Wrapper = () => {
 
   const sections = {
     0: <StepOne handleStep={handleStep} />,
-    1: <Opinion handleStep={handleStep} />, // <p>[Political] Own group perceptions</p>,
+    1: <PoliticalOpinion handleStep={handleStep} />, // <p>[Political] Own group perceptions</p>,
+    //1: <Opinion handleStep={handleStep} />,
     // 2: <HowCompare handleStep={handleStep} />, // <p>[Political] Opposite group perceptions</p>,
     2: <OppositeQuestions handleStep={handleStep} />, // <p>[Political] Opposite group perceptions</p>,
     3: <Results />,
     4: <SocialStep handleStep={handleStep} />,
+    5: <SocialOpinion handleStep={handleStep} />,
     // 4: <p>[Political] Opposite group perceptions results</p>,
     // 5: <p>[Political] Next step invitation</p>,
     // 9: <p>[End] Final Step</p>,

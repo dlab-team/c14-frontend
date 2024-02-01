@@ -2,10 +2,10 @@ import { PhrasesService } from '@/services/phrases.service';
 import { toast } from 'sonner';
 import { useQuery } from 'react-query';
 
-const useGetPoliticalPhrases = optionId => {
+const useGetSocialPhrases = optionIds => {
   const { data, isLoading, isError, refetch } = useQuery({
-    queryHash: ['politicalPhrases', optionId],
-    queryFn: () => PhrasesService.getPoliticalPhrases(optionId),
+    queryHash: ['socialPhrases', optionIds],
+    queryFn: () => PhrasesService.getSocialPhrases(optionIds),
     onError: error => {
       toast.error(error?.message || 'Error al obtener las opciones');
     },
@@ -14,4 +14,4 @@ const useGetPoliticalPhrases = optionId => {
   return { data, isLoading, isError, refetch };
 };
 
-export default useGetPoliticalPhrases;
+export default useGetSocialPhrases;
