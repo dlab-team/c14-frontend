@@ -36,4 +36,20 @@ export class PhrasesService {
       throw new Error('Error al obtener informacion');
     }
   }
+
+  static async getSocialPhrases(optionIds) {
+    const ids = Object.values(optionIds);
+    try {
+      const { data, status } = await api.post(`/phrases/bygroup/social`, {
+        ids: ids,
+      });
+      if (status === 200) {       
+        return data.phrases;
+      }
+    } catch (erro) {
+      throw new Error('Error al obtener informacion');
+    }
+  }
+
 }
+
