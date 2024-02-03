@@ -17,7 +17,7 @@ export class AdministrationService {
     try {
       const { data } = await api.post('/users', payload);
       return data;
-      
+
     } catch (error) {
       throw new Error('No se pudo crear el administrador');
     }
@@ -25,7 +25,7 @@ export class AdministrationService {
 
   static async deleteUser(payload) {
     try {
-      const { data, status } = await api.delete('/users/delete', { data: payload })
+      const { data, status } = await api.put('/users/delete', payload)
       if (status === 200) {
         return data
       }
@@ -33,4 +33,27 @@ export class AdministrationService {
       throw new Error('Error al eliminar un usuario')
     }
   }
+
+  static async updateProfile(payload) {
+    try {
+      const { data, status } = await api.put('/users/profile', payload)
+      if (status === 200) {
+        return data
+      }
+    } catch (error) {
+      throw new Error('Error al actualizar tus datos')
+    }
+  }
+
+  static async updatePassword(payload) {
+    try {
+      const { data, status } = await api.delete('/users/update-password', { data: payload })
+      if (status === 200) {
+        return data
+      }
+    } catch (error) {
+      throw new Error('Error al modificar tu password')
+    }
+  }
+
 }

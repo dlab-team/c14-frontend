@@ -13,7 +13,6 @@ const EditPolynomialModal = ({ isOpen, onClose, polynomialData }) => {
     handleSubmit,
     register,
     reset,
-    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: polynomialData || {},
