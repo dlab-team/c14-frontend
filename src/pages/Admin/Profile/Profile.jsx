@@ -6,12 +6,15 @@ import UpdatePass from './Components/UpdatePass';
 import { updateProfileSchema } from '@/schemas/updateProfileSchema';
 import useAuthStore from '@/store/useAuthStore';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import useUpdateProfile from '@/hooks/ProfileHook/useUpdateProfile';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 export default function Profile() {
   const { mutate: upProfile } = useUpdateProfile();
   const { user, setUser } = useAuthStore();
+  const [edit, setEdit] = useState(true);
+
   const {
     handleSubmit,
     register,
@@ -25,8 +28,11 @@ export default function Profile() {
     resolver: yupResolver(updateProfileSchema),
   });
 
+  const onEdit = () => {
+    setEdit(!edit);
+  };
+
   const onSubmit = handleSubmit(async payload => {
-    console.log('entro al submit');
     try {
       upProfile(
         { ...payload },
@@ -42,13 +48,14 @@ export default function Profile() {
           },
         }
       );
+      setEdit(false);
     } catch (error) {
       console.error({ error });
     }
   });
 
   return (
-    <div className="pb-20">
+    <div className="pb-20 mb-20">
       <AdminHeader
         title={`Mi perfil `}
         description="Aquí podrás personalizar la información de tu perfil."
@@ -76,9 +83,12 @@ export default function Profile() {
                   <input
                     type="text"
                     name="firstName"
-                    className="mt-2 mb-4 lg:mb-8 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className={`mt-2 mb-4 lg:mb-8 border ${
+                      edit ? 'border-gray-300 bg-gray-200' : 'border-gray-500 bg-white'
+                    } text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:border-gray-500 dark:placeholder-gray-400`}
                     {...register('firstName')}
                     defaultValue={user?.firstName}
+                    disabled={edit}
                   />
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
@@ -88,9 +98,12 @@ export default function Profile() {
                   <input
                     type="text"
                     name="lastName"
-                    className="mt-2 mb-4 lg:mb-8 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className={`mt-2 mb-4 lg:mb-8 border ${
+                      edit ? 'border-gray-300 bg-gray-200' : 'border-gray-500 bg-white'
+                    } text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:border-gray-500 dark:placeholder-gray-400`}
                     {...register('lastName')}
                     defaultValue={user?.lastName}
+                    disabled={edit}
                   />
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
@@ -101,7 +114,7 @@ export default function Profile() {
                   <input
                     type="text"
                     name="email"
-                    className="mt-2 mb-4 lg:mb-8 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-gray-100 dark:border-gray-500 dark:placeholder-gray-400"
+                    className="mt-2 mb-4 lg:mb-8 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-gray-200 dark:border-gray-500"
                     {...register('email')}
                     defaultValue={user?.email}
                     disabled
@@ -109,12 +122,14 @@ export default function Profile() {
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
                 <div className="flex gap-4 mt-16 mb-10">
-                  <Button
-                    title={'Cancelar'}
-                    className={' bg-white text-black border border-slate-600'}
-                    type={'submit'}
-                  />
-                  <Button title={'Guardar'} />
+                  {edit ? (
+                    <Button title={'Editar'} onClick={() => onEdit()} type="button" />
+                  ) : (
+                    <>
+                      <Button title={'Cancelar'} onClick={() => onEdit()} type="button" />
+                      <Button title={'Guardar'} type={'submit'} />
+                    </>
+                  )}
                 </div>
               </div>
             </form>

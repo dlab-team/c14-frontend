@@ -47,7 +47,7 @@ export class AdministrationService {
 
   static async updatePassword(payload) {
     try {
-      const { data, status } = await api.delete('/users/update-password', { data: payload })
+      const { data, status } = await api.put('/users/update-password', payload)
       if (status === 200) {
         return data
       }
