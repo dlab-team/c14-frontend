@@ -5,21 +5,21 @@ import OppositeQuestions from './components/OppositeQuestions';
 
 const PoliticalOppositeQuestions = ({ handleStep }) => {
   const optionId = useFormStore(state => state.politicalCharacterization);
-  const opossitePoliticalResult = useFormStore(s => s.opossitePoliticalResult);
-  const setOpossitePoliticalResult = useFormStore(s => s.setOpossitePoliticalResult);
+  const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
+  const setOppositePoliticalResult = useFormStore(s => s.setOppositePoliticalResult);
   const { data: oppositePoliticalPhrases } = useGetOppositePoliticalPhrases(optionId);
-  const updateOppositePoliticalResult = useFormStore(state => state.updateOpossitePoliticalResult);
+  const updateOppositePoliticalResult = useFormStore(state => state.updateOppositePoliticalResult);
 
   useEffect(() => {
-    if (!opossitePoliticalResult?.length) {
-      setOpossitePoliticalResult(oppositePoliticalPhrases);
+    if (!oppositePoliticalResult?.length) {
+      setOppositePoliticalResult(oppositePoliticalPhrases);
     }
-  }, [oppositePoliticalPhrases, opossitePoliticalResult, setOpossitePoliticalResult]);
+  }, [oppositePoliticalPhrases, oppositePoliticalResult, setOppositePoliticalResult]);
 
   return (
     <OppositeQuestions
       handleStep={handleStep}
-      oppositeResults={opossitePoliticalResult}
+      oppositeResults={oppositePoliticalResult}
       updateOppositeResult={updateOppositePoliticalResult}
     />
   );
