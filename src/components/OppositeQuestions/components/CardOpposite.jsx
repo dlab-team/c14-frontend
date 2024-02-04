@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
-import useFormStore from '@/store/useFormStore';
-
 import Slider from '../../../components/Slider/Slider';
 
-const CardOpposite = ({ phrase, updateOpossitePoliticalResult }) => {
+const CardOpposite = ({ phrase, updateOppositeResult }) => {
   const handleChange = (e, newValue) => {
-    updateOpossitePoliticalResult(phrase.id, newValue);
+    updateOppositeResult(phrase.id, newValue);
   };
 
   return (

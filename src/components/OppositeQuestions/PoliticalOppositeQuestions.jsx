@@ -8,7 +8,7 @@ const PoliticalOppositeQuestions = ({ handleStep }) => {
   const opossitePoliticalResult = useFormStore(s => s.opossitePoliticalResult);
   const setOpossitePoliticalResult = useFormStore(s => s.setOpossitePoliticalResult);
   const { data: oppositePoliticalPhrases } = useGetOppositePoliticalPhrases(optionId);
-  const updateOpossitePoliticalResult = useFormStore(state => state.updateOpossitePoliticalResult);
+  const updateOppositePoliticalResult = useFormStore(state => state.updateOpossitePoliticalResult);
 
   useEffect(() => {
     if (!opossitePoliticalResult?.length) {
@@ -20,7 +20,7 @@ const PoliticalOppositeQuestions = ({ handleStep }) => {
     <OppositeQuestions
       handleStep={handleStep}
       oppositeResults={opossitePoliticalResult}
-      updateOpossitePoliticalResult={updateOpossitePoliticalResult}
+      updateOppositeResult={updateOppositePoliticalResult}
     />
   );
 };
