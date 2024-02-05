@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import PoliticalOpinion from '@/components/Opinion/PoliticalOpinion';
 import SocialOpinion from '@/components/Opinion/SocialOpinion';
 import PoliticalOppositeQuestions from '@/components/OppositeQuestions/PoliticalOppositeQuestions';
+import SocialOppositeQuestions from '@/components/OppositeQuestions/SocialOppositeQuestions';
 
 const Wrapper = () => {
   const currentSurveySection = useFormStore(state => state.currentSurveySection);
@@ -33,6 +34,8 @@ const Wrapper = () => {
     3: <Results />,
     4: <SocialStep handleStep={handleStep} />,
     5: <SocialOpinion handleStep={handleStep} />,
+    6: <SocialOppositeQuestions handleStep={handleStep} />,
+    7: <Results />,
     // 4: <p>[Political] Opposite group perceptions results</p>,
     // 5: <p>[Political] Next step invitation</p>,
     // 9: <p>[End] Final Step</p>,

@@ -11,6 +11,7 @@ const useFormStore = create(
     politicalResult: [],
     socialResults: [],
     oppositePoliticalResult: [],
+    oppositeSocialResult: [],
     socialCharacterization:[],
     setSocialCharacterization: socialCharacterization => {
       set(state => {
@@ -45,6 +46,22 @@ const useFormStore = create(
         return {
           ...state,
           oppositePoliticalResult: [...state.oppositePoliticalResult].map(phrase => ({
+            ...phrase,
+            value: phrase.id === phraseId ? newValue : phrase.value,
+          })),
+        };
+      });
+    },
+    setOppositeSocialResult: oppositeSocialResult => {
+      set(state => {
+        return { ...state, oppositeSocialResult };
+      });
+    },
+    updateOppositeSocialResult: (phraseId, newValue) => {
+      set(state => {
+        return {
+          ...state,
+          oppositeSocialResult: [...state.oppositeSocialResult].map(phrase => ({
             ...phrase,
             value: phrase.id === phraseId ? newValue : phrase.value,
           })),
@@ -103,6 +120,7 @@ const useFormStore = create(
         politicalResult: null,
         socialResult: null,
         oppositePoliticalResult: [],
+        oppositeSocialResult: [],
       }));
     },
   }),

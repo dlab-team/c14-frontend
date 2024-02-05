@@ -1,6 +1,7 @@
 import Button from '@/layouts/Button';
 import CardOpposite from './CardOpposite';
 import HeaderOpposite from './HeaderOpposite';
+import useFormStore from '@/store/useFormStore';
 
 const OppositeQuestions = ({ handleStep, oppositeResults, updateOppositeResult }) => {
   const handleOnClick = () => {
