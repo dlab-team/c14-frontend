@@ -15,7 +15,7 @@ import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 import Phrases from '@/pages/Admin/Phrases/Phrases';
 import PolynomialsOpt from '@/pages/Admin/Polynomials/PolynomialsOpt';
 // admin pages
-import Profile from '@/pages/Admin/Profile';
+import Profile from '@/pages/Admin/Profile/Profile';
 import Recovery from '@/pages/RecoveryPass/Recovery';
 import Results from '@/pages/Results/Results';
 import UserControl from '@/pages/Admin/UserControl';
