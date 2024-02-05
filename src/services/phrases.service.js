@@ -46,10 +46,25 @@ export class PhrasesService {
       if (status === 200) {       
         return data.phrases;
       }
-    } catch (erro) {
+    } catch (error) {
       throw new Error('Error al obtener informacion');
     }
   }
+
+ 
+    static async getInverseSocialPhrases(optionIds) {
+      const ids = Object.values(optionIds);
+      try {
+        const { data, status } = await api.post(`/phrases/inverse/social`, {
+          ids: ids,
+        });
+        if (status === 200) {
+          return data.phrases;
+        }
+      } catch (error) {
+        throw new Error('Error al obtener informacion');
+      }
+    }
 
 }
 
