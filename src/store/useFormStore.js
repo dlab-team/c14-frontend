@@ -10,7 +10,7 @@ const useFormStore = create(
     howCompare: null,
     politicalResult: [],
     socialResults: [],
-    opossitePoliticalResult: [],
+    oppositePoliticalResult: [],
     socialCharacterization:[],
     setSocialCharacterization: socialCharacterization => {
       set(state => {
@@ -32,19 +32,19 @@ const useFormStore = create(
         return { ...state, howCompare };
       });
     },
-    setOpossitePoliticalResult: opossitePoliticalResult => {
+    setOppositePoliticalResult: oppositePoliticalResult => {
       set(state => {
         return {
           ...state,
-          opossitePoliticalResult: opossitePoliticalResult?.map(p => ({ ...p, value: 50 })),
+          oppositePoliticalResult: oppositePoliticalResult?.map(p => ({ ...p, value: 50 })),
         };
       });
     },
-    updateOpossitePoliticalResult: (phraseId, newValue) => {
+    updateOppositePoliticalResult: (phraseId, newValue) => {
       set(state => {
         return {
           ...state,
-          opossitePoliticalResult: [...state.opossitePoliticalResult].map(phrase => ({
+          oppositePoliticalResult: [...state.oppositePoliticalResult].map(phrase => ({
             ...phrase,
             value: phrase.id === phraseId ? newValue : phrase.value,
           })),
@@ -102,7 +102,7 @@ const useFormStore = create(
         currentSurveySection: 0,
         politicalResult: null,
         socialResult: null,
-        opossitePoliticalResult: [],
+        oppositePoliticalResult: [],
       }));
     },
   }),
