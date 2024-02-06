@@ -4,10 +4,10 @@ import useFormStore from '@/store/useFormStore';
 import Slider from '../../../components/Slider/Slider';
 
 const CardOpposite = ({ phrase }) => {
-  const updateOpossitePoliticalResult = useFormStore(state => state.updateOpossitePoliticalResult);
+  const updateOppositePoliticalResult = useFormStore(state => state.updateOppositePoliticalResult);
 
   const handleChange = (e, newValue) => {
-    updateOpossitePoliticalResult(phrase.id, newValue);
+    updateOppositePoliticalResult(phrase.id, newValue);
   };
 
   return (
