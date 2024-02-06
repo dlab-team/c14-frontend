@@ -3,8 +3,8 @@ import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
 
 export const Perception = () => {
-  const opossitePoliticalResult = useFormStore(s =>
-    s.opossitePoliticalResult.map(e => ({
+  const oppositePoliticalResult = useFormStore(s =>
+    s.oppositePoliticalResult.map(e => ({
       ...e,
       investigation: Math.floor(Math.random() * 60) + 30,
     }))
@@ -47,7 +47,7 @@ export const Perception = () => {
       </div>
       <div className="flex items-center justify-end font-bold my-7">Mi percepción</div>
       <div className="scatter-chart mt-3">
-        {opossitePoliticalResult.map((item, index) => (
+        {oppositePoliticalResult.map((item, index) => (
           <div key={index} className="flex justify-around items-center h-[94px] gap-4">
             <div className="text-right text-xs overflow-clip w-32 h-20">{item.text}</div>
             <div className="flex items-center relative w-[100%] h-[100%] border-t-[2px] border-b-[1px] border-solid border-slate-400">

@@ -8,23 +8,23 @@ import HeaderOpposite from './Components/HeaderOpposite';
 
 const OppositeQuestions = ({ handleStep }) => {
   const optionId = useFormStore(state => state.politicalCharacterization);
-  const opossitePoliticalResult = useFormStore(s => s.opossitePoliticalResult);
-  const setOpossitePoliticalResult = useFormStore(s => s.setOpossitePoliticalResult);
+  const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
+  const setoppositePoliticalResult = useFormStore(s => s.setoppositePoliticalResult);
   const { data: oppositePoliticalPhrases } = useGetOppositePoliticalPhrases(optionId);
   const handleOnClick = () => {
     handleStep();
   };
 
   useEffect(() => {
-    if (!opossitePoliticalResult?.length) {
-      setOpossitePoliticalResult(oppositePoliticalPhrases);
+    if (!oppositePoliticalResult?.length) {
+      setoppositePoliticalResult(oppositePoliticalPhrases);
     }
-  }, [oppositePoliticalPhrases, opossitePoliticalResult, setOpossitePoliticalResult]);
+  }, [oppositePoliticalPhrases, oppositePoliticalResult, setoppositePoliticalResult]);
 
   return (
     <>
       <HeaderOpposite />
-      {opossitePoliticalResult?.map(phrase => {
+      {oppositePoliticalResult?.map(phrase => {
         return <CardOpposite phrase={phrase} key={phrase.id} />;
       })}
 
