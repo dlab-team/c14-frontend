@@ -9,7 +9,7 @@ import HeaderOpposite from './Components/HeaderOpposite';
 const OppositeQuestions = ({ handleStep }) => {
   const optionId = useFormStore(state => state.politicalCharacterization);
   const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
-  const setoppositePoliticalResult = useFormStore(s => s.setoppositePoliticalResult);
+  const setOppositePoliticalResult = useFormStore(s => s.setOppositePoliticalResult);
   const { data: oppositePoliticalPhrases } = useGetOppositePoliticalPhrases(optionId);
   const handleOnClick = () => {
     handleStep();
@@ -17,9 +17,9 @@ const OppositeQuestions = ({ handleStep }) => {
 
   useEffect(() => {
     if (!oppositePoliticalResult?.length) {
-      setoppositePoliticalResult(oppositePoliticalPhrases);
+      setOppositePoliticalResult(oppositePoliticalPhrases);
     }
-  }, [oppositePoliticalPhrases, oppositePoliticalResult, setoppositePoliticalResult]);
+  }, [oppositePoliticalPhrases, oppositePoliticalResult, setOppositePoliticalResult]);
 
   return (
     <>
