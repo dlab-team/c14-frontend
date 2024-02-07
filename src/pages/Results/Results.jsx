@@ -3,8 +3,12 @@ import { ResultsFooter } from './components/ResultsFooter';
 import Comparison from './components/Comparison.jsx';
 import { Perception } from './components/Perception';
 import KeepExploring from './components/KeepExploring';
+import useFormStore from '@/store/useFormStore';
+import Finish from './components/Finish';
 
 const Results = () => {
+  const step = useFormStore.getState().currentSurveySection;
+
   return (
     <div>
       <AdminHeader
@@ -15,7 +19,7 @@ const Results = () => {
       />
       <Comparison />
       <Perception />
-      <KeepExploring />
+      {step === 3 ? <KeepExploring /> : <Finish />}
       <ResultsFooter />
     </div>
   );
