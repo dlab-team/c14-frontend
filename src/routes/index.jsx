@@ -6,17 +6,15 @@ import Acknowledgments from '@/components/Acknowledgments/Acknowledgments';
 import Admin from '@/pages/Admin/Admin';
 import Analysis from '@/pages/Admin/Analysis';
 import Error404 from '@/pages/Error404/Error404';
-import Forgot from '@/pages/ForgotPass/Forgot';
 // pages
 import Home from '@/pages/Home';
-import Login from '@/pages/Login/Login';
+import { Login, ForgotPassword, RecoveryPassword } from '@/pages/Auth';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 import Phrases from '@/pages/Admin/Phrases/Phrases';
 import PolynomialsOpt from '@/pages/Admin/Polynomials/PolynomialsOpt';
 // admin pages
 import Profile from '@/pages/Admin/Profile/Profile';
-import Recovery from '@/pages/RecoveryPass/Recovery';
 import Results from '@/pages/Results/Results';
 import UserControl from '@/pages/Admin/UserControl';
 import Wrapper from '@/pages/Questionary/Wrapper';
@@ -36,8 +34,8 @@ export const router = createBrowserRouter(
       <Route path="/auth" element={<AuthLayout />}>
         <Route index element={<Navigate to="/auth/login" replace={true} />} />
         <Route path="login" element={<Login />} />
-        <Route path="recovery/:token" element={<Recovery />} />
-        <Route path="forgot" element={<Forgot />} />
+        <Route path="recovery/:token" element={<RecoveryPassword />} />
+        <Route path="forgot" element={<ForgotPassword />} />
         <Route path="*" element={<Navigate to="/auth/login" replace={true} />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>

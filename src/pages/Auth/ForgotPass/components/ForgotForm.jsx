@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { forgotSchema } from '../../../schemas/forgotSchema';
-import Button from '../../../layouts/Button';
+import { forgotSchema } from '@/schemas/forgotSchema';
+import Button from '@/layouts/Button';
 import useForgotPasswordLink from '@/hooks/useForgotPasswordLink';
 import { Toaster } from 'sonner';
 

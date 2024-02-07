@@ -1,4 +1,4 @@
-import Button from '../../../layouts/Button';
+import Button from '@/layouts/Button';
 import ChangedCard from './ChangedCard';
 import { FaEyeSlash } from 'react-icons/fa';
 import { recoverySchema } from '@/schemas/recoverySchema';
