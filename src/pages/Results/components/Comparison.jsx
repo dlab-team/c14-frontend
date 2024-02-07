@@ -37,10 +37,7 @@ function Comparison() {
               <div className="percentage fifty"></div>
               <div className="percentage seventy-five"></div>
               <div className="percentage one-hundred"></div>
-              <div
-                className={`marker dot ${index % 2 === 0 ? 'green' : 'blue'}`}
-                style={{ left: `${item.value}%` }}
-              ></div>
+              <div className={`marker dot blue`} style={{ left: `${item.value}%` }}></div>
             </div>
             <div className="response ml-3 font-bold w-40 text-center translate-y-[-10px] text-sm">
               <span id={`phrase-${index}`}>{item.answer}</span>
