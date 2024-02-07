@@ -8,8 +8,7 @@ export const updatePasswordSchema = yup.object().shape({
     .min(8, 'lenght_min_fail')
     .matches(/[a-z]/, 'minus_missing')
     .matches(/[A-Z]+/, 'mayus_missing')
-    .matches(/\d/, 'numbers_missing')
-    .matches(/[@$!%*?&]/, 'signs_missing'),
+    .matches(/\d/, 'numbers_missing'),
   repeatPassword: yup.string()
     .oneOf([yup.ref('newPassword'), null], 'Contraseñas no coinciden')
     .required('Repetir contraseña es obligatorio')

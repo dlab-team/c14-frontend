@@ -22,7 +22,6 @@ export default function UpdatePass() {
     minLength: failureClass,
     minMayus: failureClass,
     numbers: failureClass,
-    signs: failureClass,
     comparison: failureClass,
   });
 
@@ -35,7 +34,6 @@ export default function UpdatePass() {
           ? failureClass
           : successClass,
       numbers: errors.includes('numbers_missing') ? failureClass : successClass,
-      signs: errors.includes('signs_missing') ? failureClass : successClass,
       comparison: isSamePass ? successClass : failureClass,
     });
   }, [validationErrors, isSamePass]);
@@ -138,16 +136,12 @@ export default function UpdatePass() {
                 <div className="flex gap-2 mt-2">
                   <div className={`h-[13px] w-[13px] rounded-full ${passErrors['minMayus']}`}></div>
                   <span className="text-black text-sm font-medium">
-                    Letras mayusculas y minúsculas
+                    Letras mayúsculas y minúsculas
                   </span>
                 </div>
                 <div className="flex gap-2 mt-2">
                   <div className={`h-[13px] w-[13px] rounded-full ${passErrors['numbers']}`}></div>
                   <span className="text-black text-sm font-medium">Número</span>
-                </div>
-                <div className="flex gap-2 mt-2">
-                  <div className={`h-[13px] w-[13px] rounded-full ${passErrors['signs']}`}></div>
-                  <span className="text-black text-sm font-medium">Signos (%$#¿.+_*) </span>
                 </div>
                 <div className="flex gap-2 mt-2">
                   <div
@@ -159,7 +153,7 @@ export default function UpdatePass() {
                 </div>
                 <div className="flex gap-2 mt-20 mb-10 pr-0 xl:pr-[100px] md:pr-[150px] xl:mr-0">
                   {edit ? (
-                    <Button title={'Editar'} onClick={() => onEdit()} type="button" />
+                    <Button title={'Cambiar Contraseña'} onClick={() => onEdit()} type="button" />
                   ) : (
                     <>
                       <Button title={'Cancelar'} onClick={() => onEdit()} type="button" />
