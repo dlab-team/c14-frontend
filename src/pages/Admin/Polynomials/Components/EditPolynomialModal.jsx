@@ -77,6 +77,17 @@ const EditPolynomialModal = ({ isOpen, onClose, polynomialData }) => {
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
                 <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-900">Pregunta</label>
+                  <input
+                    type="text"
+                    name="question"
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    {...register('question')}
+                    defaultValue={polynomialData?.question || ''}
+                  />
+                  {errors.question && <div className="text-red-600">{errors.question.message}</div>}
+                </div>
+                <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900">
                     Tipo Político/Social
                   </label>
@@ -92,6 +103,9 @@ const EditPolynomialModal = ({ isOpen, onClose, polynomialData }) => {
                     <option value="true">Político</option>
                     <option value="false">Social</option>
                   </select>
+                  {errors.political && (
+                    <div className="text-red-600">{errors.political.message}</div>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900">Estado</label>
@@ -107,6 +121,7 @@ const EditPolynomialModal = ({ isOpen, onClose, polynomialData }) => {
                     <option value="true">Activo</option>
                     <option value="false">Inactivo</option>
                   </select>
+                  {errors.active && <div className="text-red-600">{errors.active.message}</div>}
                 </div>
 
                 <button
