@@ -2,29 +2,24 @@ import { IoClose } from 'react-icons/io5';
 import { Toaster } from 'sonner';
 import { createPolynomialSchema } from '@/schemas/createPolynomialSchema';
 import useCreatePolynomial from '@/hooks/PolynomialsHook/useCreatePolynomial';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const CreatePolynomialModal = ({ isOpen, onClose }) => {
   const { mutate: createPoly } = useCreatePolynomial();
 
-  const defaultValuesForCreatePoly = {
-    name: '',
-    question: '',
-    political: null,
-    active: null,
-  };
-
   const {
     handleSubmit,
     register,
     reset,
+    setValue, 
     formState: { errors },
   } = useForm({
-    defaultValues: defaultValuesForCreatePoly,
     resolver: yupResolver(createPolynomialSchema),
   });
+
+  const [isPolitical, setIsPolitical] = useState(false);
 
   const onSubmit = handleSubmit(async payload => {
     try {
@@ -35,11 +30,16 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
     }
   });
 
-  useEffect(() => {
-    if (isOpen) {
-      reset(defaultValuesForCreatePoly);
+  const handlePoliticalChange = (e) => {
+    const value = e.target.value;
+    setIsPolitical(value === "true");
+    if (value === "true") {
+      setValue('political', value);
+      setValue('active', 'true');
+    } else {
+      reset({ political: value });
     }
-  }, [isOpen, reset]);
+  };
 
   return (
     <>
@@ -71,10 +71,8 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
                   <label className="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
                   <input
                     type="text"
-                    name="name"
-                    defaultValue=""
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
                     {...register('name')}
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
                   />
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
@@ -82,10 +80,8 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
                   <label className="block mb-2 text-sm font-medium text-gray-900">Pregunta</label>
                   <input
                     type="text"
-                    name="question"
-                    defaultValue=""
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
                     {...register('question')}
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
                   />
                   {errors.question && <div className="text-red-600">{errors.question.message}</div>}
                 </div>
@@ -94,10 +90,10 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
                     Tipo Político/Social
                   </label>
                   <select
-                    name="politico"
                     defaultValue=""
                     {...register('political')}
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    onChange={handlePoliticalChange}
                   >
                     <option value="" disabled hidden>
                       Selecciona una opción
@@ -112,10 +108,10 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900">Estado</label>
                   <select
-                    name="active"
                     defaultValue=""
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
                     {...register('active')}
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    disabled={isPolitical} 
                   >
                     <option value="" disabled hidden>
                       Selecciona una opción
