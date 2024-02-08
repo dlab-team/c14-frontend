@@ -26,8 +26,9 @@ function LoginForm() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="bg-black h-20 w-20 flex items-center justify-center mb-4">
-        <img src="/logo/logo-3xi-blanco.png" alt="Logo 3xi" className="h-10" />
+      <div className="h-20 w-30 flex items-center mb-4">
+        <img src="/logo/criteria/criteriaLogo.png" alt="Logo criteria" style={{ width: '120px' }} />
+        <img src="/logo/logo-3xi-negro.png" alt="Logo 3xi" className="w-14 lg:pr-0 pl-3" />
       </div>
       <div className="flex gap-x-4 pt-4 pb-7">
         <h1 className="font-semibold text-3xl">¡Bienvenido!</h1>
