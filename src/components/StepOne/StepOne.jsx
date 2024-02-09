@@ -7,54 +7,13 @@ import Button from '../../layouts/Button';
 import './StepOne.css';
 import useFormStore from '@/store/useFormStore';
 import useGetPoliticalOptions from '@/hooks/OptionsHook/useGetPoliticalOptions';
-import { useState, useEffect } from 'react';
-import { osName } from 'react-device-detect';
-import { ResponseService } from '@/services/response.service';
 
 const StepOne = ({ handleStep }) => {
-  const [ip, setIp] = useState();
-  const [responseCreated, setResponseCreated] = useState(false);
-  const idResponse = useFormStore(state => state.responseId);
-  const setIdResponse = useFormStore(state => state.setResponseId);
-
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  useEffect(() => {
-    const getIp = async () => {
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        setIp(data);
-      } catch (error) {
-        console.error('Error fetching IP:', error);
-      }
-    };
-    getIp();
-  }, []);
-
-  useEffect(() => {
-    if (ip && !responseCreated && !idResponse) {
-      ResponseService.createResponse({
-        os: osName,
-        country: ip.country_name,
-        region: ip.region,
-        city: ip.city,
-        finishedSocialForm: false,
-        duration: 0,
-      })
-        .then(responseData => {
-          setResponseCreated(true);
-          setIdResponse(responseData);
-        })
-        .catch(error => {
-          console.error('Error creating response:', error);
-        });
-    }
-  }, [ip, osName, responseCreated, idResponse]);
 
   const { data: politicalOptions } = useGetPoliticalOptions();
   const setPoliticalCharacterization = useFormStore(state => state.setPoliticalCharacterization);
