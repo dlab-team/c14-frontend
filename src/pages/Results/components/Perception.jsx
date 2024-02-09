@@ -108,7 +108,7 @@ export const Perception = () => {
                 }}
               ></div>
             </div>
-            <div>{item.value}%</div>
+            <div>{Math.abs(item.value-item.investigation)}%</div>
           </div>
         ))}
         <div className="flex justify-between mt-2 ml-[104px] md:ml-[120px] mr-8">
