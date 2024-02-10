@@ -4,12 +4,27 @@ import useFormStore from '@/store/useFormStore';
 import './Comparison.css';
 
 function Comparison() {
+  const socialResult = useFormStore.getState().socialResult;
   const politicalResult = useFormStore(s =>
     s.politicalResult.map(e => ({
       ...e,
       percentage: Math.floor(e.survey_results[0].percentage * 100),
     }))
   );
+
+  let mappedResult;
+
+  if (socialResult && socialResult.length > 0) {
+    mappedResult = useFormStore(s =>
+      s.socialResult.map(e => ({
+        ...e,
+        percentage: Math.floor(e.survey_results[0].percentage * 100),
+      }))
+    );
+  } else {
+    mappedResult = politicalResult;
+  }
+
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
@@ -26,7 +41,7 @@ function Comparison() {
         </Tooltip>
       </div>
       <div className="scatter-chart mt-10">
-        {politicalResult.map((item, index) => (
+        {mappedResult.map((item, index) => (
           <div className="item body" key={item.id}>
             <div className="legend mr-3 text-xs bottom-4 ml-[-50px]">
               <label className="text-xs mb-4 hidden lg:block" htmlFor={`phrase-${index}`}>
@@ -70,7 +85,7 @@ function Comparison() {
         <div className="text-sm">100%</div>
       </div>
       <div className="mt-11 lg:hidden">
-        {politicalResult.map((item, index) => (
+        {mappedResult.map((item, index) => (
           <div className="flex items-center justify-begin mt-2 w-[90%]" key={index}>
             <div className="text-xs font-semibold">{index + 1 + '. ' + item.text}</div>
           </div>
