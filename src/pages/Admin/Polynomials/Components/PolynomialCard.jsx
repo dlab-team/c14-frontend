@@ -19,19 +19,19 @@ const PolynomialCard = ({
         <p className="font-semibold hidden sm:block">{polynomial.active ? 'Activo' : 'Inactivo'}</p>
         <div className="flex gap-4">
           <button
-            className="border rounded border-black p-1"
+            className="border hover:border-black border-white rounded-md transition-all hover:scale-105"
             onClick={() => deletePolynomial(polynomial.id)}
           >
-            <FaRegTrashCan />
+            <FaRegTrashCan size={28} color="Crimson" />
           </button>
           <button
-            className="border rounded border-black p-1"
+            className="border hover:border-black border-white rounded-md transition-all hover:scale-105"
             onClick={() => toggleEditPolynomialModal(polynomial)}
           >
-            <FiEdit3 />
+            <FiEdit3 color="DarkCyan" size={28} />
           </button>
           <button
-            className={`border rounded border-black p-1 ${
+            className={`border rounded border-black p-1 transition-all hover:scale-105 ${
               isOptionsOpen ? 'bg-black text-white' : 'bg-white text-black'
             }`}
             onClick={() => DetailsOpt(polynomial)}

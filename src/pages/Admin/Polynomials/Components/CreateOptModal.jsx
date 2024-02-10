@@ -1,4 +1,4 @@
-import { IoClose } from 'react-icons/io5';
+import { PiXBold } from 'react-icons/pi';
 import { Toaster } from 'sonner';
 import { createOptionSchema } from '@/schemas/createOptionSchema';
 import useCreateOption from '@/hooks/OptionsHook/useCreateOption';
@@ -48,7 +48,7 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
       <Toaster position="top-center" />
       {isOpen && (
         <div
-          className="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-50"
+          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
           onClick={onClose}
         />
       )}
@@ -60,32 +60,37 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
         } fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center`}
       >
         <div className="relative p-4 w-full max-w-md max-h-full">
-          <div className="relative bg-white rounded-lg shadow white border border-gray-200 ">
-            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900">Crear una nueva Opción</h3>
-              <button onClick={() => onClose()}>
-                <IoClose size={28} />
+          <div className="relative bg-white rounded-lg shadow white border border-gray-200 p-4">
+            <div className="flex items-center justify-between p-5 md:pb-2 rounded-t dark:border-gray-600">
+              <h3 className="flex items-center mt-2 text-xl font-semibold leading-6 text-gray-900 mr-8">
+                Crear una nueva Opción
+              </h3>
+              <button
+                onClick={() => onClose()}
+                className="absolute top-6 right-6  hover:text-zinc-100 hover:bg-slate-900 p-1 rounded-full"
+              >
+                <PiXBold />
               </button>
             </div>
             <div className="p-4 md:p-5">
               <form className="space-y-4" onSubmit={onSubmit}>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
+                  <label className="block leading-6 text-gray-900 font-medium">Nombre</label>
                   <input
                     type="text"
                     name="name"
                     defaultValue=""
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6 mt-2"
                     {...register('name')}
                   />
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">Grupo</label>
+                  <label className="block leading-6 text-gray-900 font-medium">Grupo</label>
                   <select
                     name="option"
                     defaultValue=""
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6 mt-2"
                     {...register('group')}
                   >
                     <option value="" disabled hidden>
@@ -99,7 +104,7 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full text-white bg-black hover:bg-gray-600 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-black dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                  className="bg-slate-900 px-4 py-2 rounded-xl text-white text-xl font-bold flex justify-center items-center w-full transition-all hover:scale-105"
                 >
                   Crear nueva opción
                 </button>
