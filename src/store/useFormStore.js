@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware';
 const useFormStore = create(
   persist(
   set => ({
+    responseId: null,
     acceptedTerms: null,
     politicalCharacterization: null,
     currentSurveySection: 0,
@@ -13,6 +14,11 @@ const useFormStore = create(
     oppositePoliticalResult: [],
     oppositeSocialResult: [],
     socialCharacterization:[],
+    setResponseId: responseId => {
+      set(state => {
+        return { ...state, responseId };
+      });
+    },
     setSocialCharacterization: socialCharacterization => {
       set(state => {
         return { ...state, socialCharacterization };
@@ -121,6 +127,7 @@ const useFormStore = create(
         socialResult: null,
         oppositePoliticalResult: [],
         oppositeSocialResult: [],
+        responseId: null,
       }));
     },
   }),

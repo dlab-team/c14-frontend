@@ -16,9 +16,7 @@ const StepOne = ({ handleStep }) => {
   } = useForm();
 
   const { data: politicalOptions } = useGetPoliticalOptions();
-
   const setPoliticalCharacterization = useFormStore(state => state.setPoliticalCharacterization);
-
   const onSubmit = data => {
     setPoliticalCharacterization(data.politicalCharacterization);
     handleStep();
