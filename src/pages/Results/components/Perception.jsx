@@ -9,10 +9,17 @@ export const Perception = () => {
       investigation: Math.floor(Math.random() * 60) + 30,
     }))
   );
+  let quantityPerseptions = 0
+  let totalPerseptions = 0
+  for (const result of oppositePoliticalResult){
+    quantityPerseptions = quantityPerseptions+1
+    totalPerseptions = totalPerseptions+Math.abs(result.value-result.investigation)
+  }
+  const totalPerseptionGap = (totalPerseptions/quantityPerseptions).toFixed(2)
   return (
     <div className="flex flex-col h-full lg:w-[70%] w-[90%] mx-auto my-10">
       <div className="flex flex-col items-center justify-center mt-10 mb-10 gap-4">
-        <p className="text-3xl font-bold text-amber-500">Mi percepción es: 16%</p>
+        <p className="text-3xl font-bold text-amber-500">Mi brecha de percepción es: {totalPerseptionGap}%</p>
         <p className="text-center text-base text-black font-normal">
           ipsum dolor sit amet consectetur adipiscing elit etiam habitant, scelerisque maecenas nisl
           platea himenaeos neque volutpat bibendum eros, donec rutrum odio in pellentesque venenatis
@@ -45,7 +52,7 @@ export const Perception = () => {
           </Tooltip>
         </div>
       </div>
-      <div className="flex items-center justify-end font-bold my-7">Mi percepción</div>
+      <div className="flex items-center justify-end font-bold my-7">Brecha de percepción</div>
       <div className="flex flex-col scatter-chart mt-3">
         {oppositePoliticalResult.map((item, index) => (
           <div key={index} className="flex justify-around items-center h-[94px] gap-4">
@@ -107,9 +114,7 @@ export const Perception = () => {
                 }}
               ></div>
             </div>
-            <div
-              className='w-[20px]'
-            >{item.value}%</div>
+            <div className='w-[20px]'>{Math.abs(item.value-item.investigation)}%</div>
           </div>
         ))}
         <div className="flex justify-between mt-2 ml-[30px] md:ml-[34px] mr-8">

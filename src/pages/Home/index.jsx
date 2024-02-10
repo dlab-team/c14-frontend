@@ -1,23 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'sonner';
-
 import Button from '../../layouts/Button';
 import Terms from '@/components/Terms/Terms';
 import useFormStore from '@/store/useFormStore';
-import { useNavigate } from 'react-router-dom';
+import useCreateResponse from '@/hooks/useCreateResponse';
+import { osName } from 'react-device-detect';
 
 export default function Home() {
   const clearForm = useFormStore(state => state.clearForm);
   const [isChecked, setIsChecked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
   const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
+  const { mutate: createResponse } = useCreateResponse();
+  const [ip, setIp] = useState();
+  const [isIpLoaded, setIsIpLoaded] = useState(false);
+
+  useEffect(() => {
+    const getIp = async () => {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        setIp(data);
+        setIsIpLoaded(true);
+      } catch (error) {
+        console.error('Error fetching IP:', error);
+      }
+    };
+    getIp();
+  }, []);
 
   const handleClick = () => {
     if (isChecked) {
       clearForm();
       setAcceptedTerms(true);
-      navigate('/cuestionario');
+      createResponse({
+        os: osName,
+        country: ip.country_name,
+        region: ip.region,
+        city: ip.city,
+        finishedSocialForm: false,
+        duration: 0,
+      });
     } else {
       toast.error('Por favor, acepte los términos y condiciones');
     }
@@ -79,7 +102,7 @@ export default function Home() {
               </span>
             </p>
             <div className="lg:pb-0 pb-10">
-              <Button title={'¡Quiero participar! '} onClick={handleClick} />
+              <Button title={'¡Quiero participar! '} onClick={handleClick} disabled={!isIpLoaded} />
             </div>
           </div>
         </div>

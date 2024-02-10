@@ -57,7 +57,8 @@ const Phrases = () => {
         description="Aquí podrás editar frases y respuestas del cuestionario."
       />
       <main className="max-w-4xl mx-4 md:mx-auto">
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-10">
+        <p className="mt-5">Para ver las frases asociadas a cada grupo debe seleccionar un Polinomio y un grupo</p>
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <Select
             className="md:w-52"
             id="selectOption"
