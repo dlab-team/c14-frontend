@@ -1,29 +1,33 @@
+import { useEffect, useState } from 'react';
+
 import AdminHeader from '@/components/admin/AdminHeader';
 import { CiCirclePlus } from 'react-icons/ci';
+import CreatePhraseModal from './Components/CreatePhraseModal';
 import PhraseCard from './Components/PhraseCard';
-import useGetAllPoly from './../../../hooks/PolynomialsHook/useGetAllPoly';
 import Select from 'react-select';
-import { useState, useEffect } from 'react';
+import { Toaster } from 'sonner';
+import useGetAllPoly from './../../../hooks/PolynomialsHook/useGetAllPoly';
 import useGetPhrasesByIdPolinomial from '@/hooks/PhrasesHook/useGetPhrasesByIdPolinomial';
 
 const Phrases = () => {
   const [selectedOption, setSelectedOption] = useState({
-    value: 'aa1acca6-908e-4261-a882-f9e473da0bea',
-    label: 'Político',
+    value: 'a1d1458c-14e1-404f-af2a-1b20601068bf',
+    label: 'Politico',
   });
   const [polynomials, setPolynomials] = useState([]);
-  const { data: polynomialsData } = useGetAllPoly();
-  const [selectedExtrm, setselectedExtrm] = useState([]);
-  const [filteredOptions, setsfilteredOptions] = useState([]);
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [extremo, setExtremo] = useState('Extremo 1');
+  const { data: polynomialsData, isLoading, isError } = useGetAllPoly();
   const {
-    data: PhrasesByIdPolinomial,
-    isLoading,
-    isError,
+    data: phrasesData,
     refetch,
+    isLoading: loadPhrase,
+    isError: errorPhrase,
   } = useGetPhrasesByIdPolinomial(selectedOption?.value);
 
   useEffect(() => {
-    if (polynomialsData) {
+    if (polynomialsData && polynomialsData.length > 0) {
       setPolynomials(polynomialsData);
       setSelectedOption({
         value: polynomialsData[0].id,
@@ -33,21 +37,25 @@ const Phrases = () => {
   }, [polynomialsData]);
 
   useEffect(() => {
-    if (selectedOption?.value) {
+    if (selectedOption) {
       refetch();
     }
-   setselectedExtrm([])
-   setsfilteredOptions([]);
   }, [selectedOption, refetch]);
 
-  const handleButton = () => {
-    console.log('crear frase');
+  useEffect(() => {
+    if (phrasesData) {
+      setFilteredOptions(phrasesData.filter(item => item.group === extremo));
+    }
+  }, [phrasesData, extremo]);
+
+  const handleExtreme = extreme => {
+    if (extreme !== extremo) {
+      setExtremo(extreme);
+    }
   };
 
-  const handleChange = selectedExtrm => {
-    setselectedExtrm(selectedExtrm);
-    const filteredOptions = PhrasesByIdPolinomial.filter(item => item.group === selectedExtrm.value);
-    setsfilteredOptions(filteredOptions);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -57,42 +65,60 @@ const Phrases = () => {
         description="Aquí podrás editar frases y respuestas del cuestionario."
       />
       <main className="max-w-4xl mx-4 md:mx-auto">
-        <p className="mt-5">Para ver las frases asociadas a cada grupo debe seleccionar un Polinomio y un grupo</p>
+        <Toaster position="top-center" />
+        <p className="mt-5 font-bold">
+          Para ver las frases asociadas a cada grupo debe seleccionar un Polinomio y un grupo.
+        </p>
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <Select
             className="md:w-52"
             id="selectOption"
             placeholder="Selecciona"
-            options={polynomials?.map(poly => ({ value: poly.id, label: poly.name }))}
-            onChange={selectedOption => setSelectedOption(selectedOption)}
+            options={polynomials.map(poly => ({ value: poly.id, label: poly.name }))}
+            onChange={setSelectedOption}
             value={selectedOption}
           />
-          <Select
-            className="md:w-52 mt-2"
-            id="selectOption"
-            placeholder="Selecciona Extremo"
-            options={[
-              { value: 'Extremo 1', label: 'Extremo 1' },
-              { value: 'Extremo 2', label: 'Extremo 2' },
-            ]}
-            onChange={handleChange}
-            value={selectedExtrm}
-          />
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center  rounded-2xl bg-gray-400">
+            <button
+              className={`px-4 py-2  rounded-l-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 ${
+                extremo === 'Extremo 1'
+                  ? 'bg-purple-700 text-md border border-black text-gray-400'
+                  : 'bg-purple-500 text-xl'
+              }`}
+              onClick={() => handleExtreme('Extremo 1')}
+            >
+              Extremo 1
+            </button>
+
+            <button
+              className={`px-4 py-2  rounded-r-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 ${
+                extremo === 'Extremo 2'
+                  ? 'bg-teal-700 text-md border border-black text-gray-400'
+                  : 'bg-teal-500 text-xl'
+              }`}
+              onClick={() => handleExtreme('Extremo 2')}
+            >
+              Extremo 2
+            </button>
+          </div>
+
           <button
-            className="bg-black px-4 py-2 my-10 rounded-2xl text-white text-xl font-bold flex justify-center items-center"
-            onClick={handleButton}
+            className="bg-black px-4 py-2 md:my-10 my-3 rounded-2xl text-white text-xl font-bold flex justify-center items-center transition-all hover:scale-105"
+            onClick={() => toggleModal()}
           >
             Crear Frase <CiCirclePlus />
           </button>
         </div>
-        {selectedOption &&
-          (isLoading ? (
-            <p>Loading...</p>
-          ) : isError ? (
-            <p>Error loading data</p>
-          ) : (
-            filteredOptions.map((phrase,index) => <PhraseCard key={phrase.id} phrase={phrase} index={index}></PhraseCard>)
-          ))}
+        {isLoading && loadPhrase && <p>Loading...</p>}
+        {isError && errorPhrase && <p>Error loading data</p>}
+        {!isLoading && !isError && (
+          <div>
+            {filteredOptions.map((phrase, index) => (
+              <PhraseCard key={phrase.id} phrase={phrase} index={index} />
+            ))}
+          </div>
+        )}
+        {isOpen && <CreatePhraseModal isOpen={isOpen} onClose={() => setIsOpen(false)} />}
       </main>
     </>
   );
