@@ -1,16 +1,17 @@
 import { CiCirclePlus, CiEdit } from 'react-icons/ci';
+import { Toaster, toast } from 'sonner';
 
 import AdminHeader from '@/components/admin/AdminHeader';
 import AdminModal from '@/components/admin/AdminModal';
+import { AdministrationService } from '@/services/administration.service';
 import Button from '@/layouts/Button';
+import { FaRegTrashCan } from 'react-icons/fa6';
 import { MdDeleteOutline } from 'react-icons/md';
-import { Toaster, toast } from 'sonner';
 import { format } from 'date-fns';
 import useDeleteUser from '@/hooks/useDeleteUser';
+import { useForm } from 'react-hook-form';
 import useGetUsers from '@/hooks/useGetUsers';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { AdministrationService } from '@/services/administration.service';
 
 const UserControl = () => {
   const { data: users, isLoading, isError, refetch } = useGetUsers();
@@ -115,20 +116,7 @@ const UserControl = () => {
                       scope="row"
                       className="px-6 py-4 font-medium whitespace-nowrap flex justify-center items-center"
                     >
-                      <div className="flex flex-column gap-3">
-                        <button
-                          className="border border-black rounded-md"
-                          onClick={() => editUser(user)}
-                        >
-                          <CiEdit size={28} />
-                        </button>
-                        <button
-                          className="border border-black rounded-md"
-                          /* onClick={() => deleteUser(user)} */
-                        >
-                          <MdDeleteOutline size={28} />
-                        </button>
-                      </div>
+                      <div className="flex flex-column gap-3"></div>
                     </th>
                   </tr>
                 )
@@ -138,7 +126,7 @@ const UserControl = () => {
       </div>
       <div className="flex relative overflow-x-auto  p-3 my-8  w-5/6 mx-auto xl:justify-end justify-center">
         <button
-          className="bg-black px-4 py-2 rounded-2xl text-white text-xl font-bold flex justify-center items-center"
+          className="bg-black px-4 py-2 rounded-2xl text-white text-xl font-bold flex justify-center items-center transition-all hover:scale-105"
           onClick={addUser}
         >
           Agregar un nuevo usuario <CiCirclePlus />
@@ -189,14 +177,11 @@ const UserControl = () => {
                     className="px-6 py-4 font-medium whitespace-nowrap flex justify-center items-center"
                   >
                     <div className="flex flex-column gap-3">
-                      <button className="border border-black rounded-md" onClick={editUser}>
-                        <CiEdit size={28} />
-                      </button>
                       <button
-                        className="border border-black rounded-md"
+                        className="border hover:border-black border-white rounded-md transition-all hover:scale-105"
                         onClick={() => deleteUser(user.firstName, user.lastName, user.email)}
                       >
-                        <MdDeleteOutline size={28} />
+                        <FaRegTrashCan size={28} color="Crimson" />
                       </button>
                     </div>
                   </th>
