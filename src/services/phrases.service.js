@@ -29,9 +29,9 @@ export class PhrasesService {
 
   static async getPhrasesByIdPolinomial(idPolinomial) {
     try {
-      const {data} = await api.get(`/phrases/polynomial/${idPolinomial}`);
+      const { data } = await api.get(`/phrases/polynomial/${idPolinomial}`);
       return data;
-    
+
     } catch (error) {
       throw new Error('Error al obtener informacion');
     }
@@ -43,7 +43,7 @@ export class PhrasesService {
       const { data, status } = await api.post(`/phrases/bygroup/social`, {
         ids: ids,
       });
-      if (status === 200) {       
+      if (status === 200) {
         return data.phrases;
       }
     } catch (error) {
@@ -51,20 +51,28 @@ export class PhrasesService {
     }
   }
 
- 
-    static async getInverseSocialPhrases(optionIds) {
-      const ids = Object.values(optionIds);
-      try {
-        const { data, status } = await api.post(`/phrases/inverse/social`, {
-          ids: ids,
-        });
-        if (status === 200) {
-          return data.phrases;
-        }
-      } catch (error) {
-        throw new Error('Error al obtener informacion');
+  static async getInverseSocialPhrases(optionIds) {
+    const ids = Object.values(optionIds);
+    try {
+      const { data, status } = await api.post(`/phrases/inverse/social`, {
+        ids: ids,
+      });
+      if (status === 200) {
+        return data.phrases;
       }
+    } catch (error) {
+      throw new Error('Error al obtener informacion');
     }
+  }
+
+  static async deletePhrase(id) {
+    try {
+      const { data } = await api.delete(`/phrases/${id}`)
+      return data
+    } catch (error) {
+      throw new Error('No se pudo obtener la informacion')
+    }
+  }
 
 }
 

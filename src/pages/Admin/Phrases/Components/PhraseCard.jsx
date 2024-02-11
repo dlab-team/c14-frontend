@@ -1,18 +1,20 @@
-import { FaRegTrashCan, FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
+import { FaRegEye, FaRegEyeSlash, FaRegTrashCan } from 'react-icons/fa6';
+import { useEffect, useState } from 'react';
+
 import { FiEdit3 } from 'react-icons/fi';
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { phrasesSchema } from '../../../../schemas/phrasesSchema';
 import { MdPercent } from 'react-icons/md';
+import { phrasesSchema } from '../../../../schemas/phrasesSchema';
+import useDeletePhrase from '@/hooks/PhrasesHook/useDeletePhrase';
+import { useForm } from 'react-hook-form';
 import useGetOptions from '@/hooks/OptionsHook/useGetOptions';
-import Select from 'react-select';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const PhraseCard = ({ phrase, index }) => {
   const [showEdit, setShowEdit] = useState(true);
   const [activePhrase, setActivePhrase] = useState(true);
   const { data: options, isLoading, isError } = useGetOptions();
   const [filteredOptions, setsfilteredOptions] = useState([]);
+  const { mutate: deletePhrase } = useDeletePhrase();
 
   useEffect(() => {
     if (options) {
@@ -37,11 +39,18 @@ const PhraseCard = ({ phrase, index }) => {
     console.log(phrase);
   };
 
+  const deleteOnePhrase = async id => {
+    const status = window.confirm(`¿Estás seguro de eliminar la frase?`);
+    if (status) {
+      deletePhrase(id);
+    }
+  };
+
   return (
     <div className="border rounded border-slate-200 bg-white shadow-xl p-4 md:p-10 mb-10">
       <div className="flex justify-between items-center text-2xl">
         <div className="flex flex-wrap">
-          <p className="font-semibold me-2">Frase N°{index+1}</p>
+          <p className="font-semibold me-2">Frase N°{index + 1}</p>
           <span className="text-xs text-[#34ABC9] font-medium bg-[#E8FAFF] py-2 px-3 rounded-full">
             {phrase.group}
           </span>
@@ -49,23 +58,32 @@ const PhraseCard = ({ phrase, index }) => {
 
         <div className="flex gap-4 ">
           {/* DELETE - ACTIVE - EDIT BUTTONS -------- */}
-          <button className="border rounded border-black p-1 ">
-            <FaRegTrashCan />
+          <button
+            className="border hover:border-black border-white rounded-md transition-all hover:scale-105 mx-1"
+            onClick={() => deleteOnePhrase(phrase.id)}
+          >
+            <FaRegTrashCan size={28} color="Crimson" />
           </button>
           <button
             onClick={() => setActivePhrase(!activePhrase)}
-            className="border rounded border-black p-1 "
+            className="border hover:border-black border-white rounded-md transition-all hover:scale-105 mx-1"
           >
-            {activePhrase ? <FaRegEye /> : <FaRegEyeSlash />}
+            {activePhrase ? (
+              <FaRegEye size={28} color="black" />
+            ) : (
+              <FaRegEyeSlash size={28} color="black" />
+            )}
           </button>
           <button
             onClick={() => {
               setShowEdit(!showEdit);
               setValue('phrase', phrase.text);
             }}
-            className={`border rounded border-black p-1 ${showEdit ? '' : 'bg-black text-white'}`}
+            className={`p-1 border hover:border-black border-white rounded-md transition-all hover:scale-105 mx-1${
+              showEdit ? '' : 'bg-white text-white rounded border border-black'
+            }`}
           >
-            <FiEdit3 />
+            <FiEdit3 size={28} color="DarkCyan" />
           </button>
         </div>
       </div>
@@ -114,7 +132,7 @@ const PhraseCard = ({ phrase, index }) => {
           </div>
 
           {/* SAVE PHRASE BUTTON----------- */}
-          <button className="font-medium border rounded-lg border-black flex justify-center items-center gap-2 w-full text-lg md:h-12">
+          <button className="font-medium border rounded-lg border-black flex justify-center items-center gap-2 w-full text-lg md:h-12 transition-all hover:scale-105">
             <span>Guardar Cambios</span>
           </button>
         </form>
