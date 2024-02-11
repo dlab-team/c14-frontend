@@ -3,13 +3,15 @@ import { toast } from 'sonner';
 import { useQuery } from 'react-query';
 
 const useGetPhrasesByIdPolinomial = idPolinomial => {
-  const { data, isLoading, isError, refetch } = useQuery({
-    queryHash: 'PhrasesByidPolinomial',
-    queryFn: () => PhrasesService.getPhrasesByIdPolinomial(idPolinomial),
-    onError: error => {
-      toast.error(error?.message || 'Error al obtener las opciones');
-    },
-  });
+  const { data, isLoading, isError, refetch } = useQuery(
+    ['PhrasesByidPolinomial', idPolinomial],
+    () => PhrasesService.getPhrasesByIdPolinomial(idPolinomial),
+    {
+      onError: error => {
+        toast.error(error?.message || 'Error al obtener las frases');
+      },
+    }
+  );
 
   return { data, isLoading, isError, refetch };
 };

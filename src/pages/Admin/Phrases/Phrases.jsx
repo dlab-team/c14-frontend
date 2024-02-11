@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import AdminHeader from '@/components/admin/AdminHeader';
 import { CiCirclePlus } from 'react-icons/ci';
+import CreatePhraseModal from './Components/CreatePhraseModal';
 import PhraseCard from './Components/PhraseCard';
 import Select from 'react-select';
 import { Toaster } from 'sonner';
@@ -15,6 +16,7 @@ const Phrases = () => {
   });
   const [polynomials, setPolynomials] = useState([]);
   const [filteredOptions, setFilteredOptions] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const [extremo, setExtremo] = useState('Extremo 1');
   const { data: polynomialsData, isLoading, isError } = useGetAllPoly();
   const {
@@ -52,8 +54,8 @@ const Phrases = () => {
     }
   };
 
-  const handleButton = () => {
-    console.log('crear frase');
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -65,7 +67,7 @@ const Phrases = () => {
       <main className="max-w-4xl mx-4 md:mx-auto">
         <Toaster position="top-center" />
         <p className="mt-5 font-bold">
-          Para ver las frases asociadas a cada grupo debe seleccionar un Polinomio y un grupo
+          Para ver las frases asociadas a cada grupo debe seleccionar un Polinomio y un grupo.
         </p>
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <Select
@@ -76,30 +78,33 @@ const Phrases = () => {
             onChange={setSelectedOption}
             value={selectedOption}
           />
-          <button
-            className={`px-4 py-2 md:my-10 my-3 rounded-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 ${
-              extremo === 'Extremo 1'
-                ? 'bg-blue-700 text-md border border-black'
-                : 'bg-blue-500 text-xl'
-            }`}
-            onClick={() => handleExtreme('Extremo 1')}
-          >
-            Extremo 1
-          </button>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center  rounded-2xl bg-gray-400">
+            <button
+              className={`px-4 py-2  rounded-l-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 ${
+                extremo === 'Extremo 1'
+                  ? 'bg-purple-700 text-md border border-black text-gray-400'
+                  : 'bg-purple-500 text-xl'
+              }`}
+              onClick={() => handleExtreme('Extremo 1')}
+            >
+              Extremo 1
+            </button>
+
+            <button
+              className={`px-4 py-2  rounded-r-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 ${
+                extremo === 'Extremo 2'
+                  ? 'bg-teal-700 text-md border border-black text-gray-400'
+                  : 'bg-teal-500 text-xl'
+              }`}
+              onClick={() => handleExtreme('Extremo 2')}
+            >
+              Extremo 2
+            </button>
+          </div>
 
           <button
-            className={`px-4 py-2 md:my-10 my-3 rounded-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 ${
-              extremo === 'Extremo 2'
-                ? 'bg-green-700 text-md border border-black'
-                : 'bg-green-500 text-xl'
-            }`}
-            onClick={() => handleExtreme('Extremo 2')}
-          >
-            Extremo 2
-          </button>
-          <button
             className="bg-black px-4 py-2 md:my-10 my-3 rounded-2xl text-white text-xl font-bold flex justify-center items-center transition-all hover:scale-105"
-            onClick={handleButton}
+            onClick={() => toggleModal()}
           >
             Crear Frase <CiCirclePlus />
           </button>
@@ -113,6 +118,7 @@ const Phrases = () => {
             ))}
           </div>
         )}
+        {isOpen && <CreatePhraseModal isOpen={isOpen} onClose={() => setIsOpen(false)} />}
       </main>
     </>
   );

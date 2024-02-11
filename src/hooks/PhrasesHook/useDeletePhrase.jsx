@@ -8,13 +8,13 @@ const useDeletePhrase = () => {
 
   return useMutation(id => PhrasesService.deletePhrase(id), {
     onSuccess: () => {
-      toast.success('Opción eliminada con éxito');
+      toast.success('Frase eliminada con éxito');
     },
     onError: error => {
       toast.error(error?.message || 'Ha ocurrido un error al eliminar, intente nuevamente');
     },
     onSettled: () => {
-      queryClient.invalidateQueries('options');
+      queryClient.invalidateQueries('PhrasesByidPolinomial');
     },
   });
 };

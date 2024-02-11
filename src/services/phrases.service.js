@@ -74,5 +74,13 @@ export class PhrasesService {
     }
   }
 
+  static async createPhrase(payload) {
+    try {
+      const { data } = await api.post('/phrases', payload);
+      return data;
+    } catch (error) {
+      throw new Error('No se pudo crear la frase');
+    }
+  }
 }
 

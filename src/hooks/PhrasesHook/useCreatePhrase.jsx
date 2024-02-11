@@ -1,22 +1,22 @@
 import { useMutation, useQueryClient } from 'react-query';
 
-import { OptPolynomialsService } from '@/services/optionPolynomial.service';
+import { PhrasesService } from '@/services/phrases.service';
 import { toast } from 'sonner';
 
-const useCreateOption = () => {
+const useCreatePhrase = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(OptPolynomialsService.createOptPolynomial, {
+  return useMutation(PhrasesService.createPhrase, {
     onSuccess: () => {
-      toast.success('Opcion creada con éxito');
+      toast.success('Frase creada con éxito');
     },
     onError: error => {
       toast.error(error?.message || 'Ha ocurrido un error, intente nuevamente');
     },
     onSettled: () => {
-      queryClient.invalidateQueries('options');
+      queryClient.invalidateQueries('PhrasesByidPolinomial');
     },
   });
 };
 
-export default useCreateOption;
+export default useCreatePhrase;
