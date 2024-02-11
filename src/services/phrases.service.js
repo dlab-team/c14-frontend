@@ -43,7 +43,7 @@ export class PhrasesService {
       const { data, status } = await api.post(`/phrases/bygroup/social`, {
         ids: ids,
       });
-      if (status === 200) {       
+      if (status === 200) {      
         return data.phrases;
       }
     } catch (error) {
