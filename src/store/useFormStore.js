@@ -60,7 +60,8 @@ const useFormStore = create(
     },
     setOppositeSocialResult: oppositeSocialResult => {
       set(state => {
-        return { ...state, oppositeSocialResult };
+        return { ...state, 
+          oppositeSocialResult: oppositeSocialResult?.map(p => ({ ...p, value: 50 })) };
       });
     },
     updateOppositeSocialResult: (phraseId, newValue) => {

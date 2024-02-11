@@ -3,23 +3,42 @@ import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
 
 export const Perception = () => {
+  let quantityPerceptions = 0;
+  let totalPerceptions = 0;
+  let resultArray;
+
   const oppositePoliticalResult = useFormStore(s =>
     s.oppositePoliticalResult.map(e => ({
       ...e,
       investigation: Math.floor(Math.random() * 60) + 30,
     }))
   );
-  let quantityPerseptions = 0
-  let totalPerseptions = 0
-  for (const result of oppositePoliticalResult){
-    quantityPerseptions = quantityPerseptions+1
-    totalPerseptions = totalPerseptions+Math.abs(result.value-result.investigation)
+
+  const oppositeSocialResult = useFormStore.getState().oppositeSocialResult;
+  if (oppositeSocialResult && oppositeSocialResult.length > 0) {
+    resultArray = useFormStore(s =>
+      s.oppositeSocialResult.map(e => ({
+        ...e,
+        investigation: Math.floor(Math.random() * 60) + 30,
+      }))
+    );
+  } else {
+    resultArray = oppositePoliticalResult;
   }
-  const totalPerseptionGap = (totalPerseptions/quantityPerseptions).toFixed(2)
+
+  for (const result of resultArray) {
+    quantityPerceptions++;
+    totalPerceptions += Math.abs(result.value - result.investigation);
+  }
+
+  const totalPerceptionGap = (totalPerceptions / quantityPerceptions).toFixed(2);
+
   return (
     <div className="flex flex-col h-full lg:w-[70%] w-[90%] mx-auto my-10">
       <div className="flex flex-col items-center justify-center mt-10 mb-10 gap-4">
-        <p className="text-3xl font-bold text-amber-500">Mi brecha de percepción es: {totalPerseptionGap}%</p>
+        <p className="text-3xl font-bold text-amber-500">
+          Mi brecha de percepción es: {totalPerceptionGap}%
+        </p>
         <p className="text-center text-base text-black font-normal">
           ipsum dolor sit amet consectetur adipiscing elit etiam habitant, scelerisque maecenas nisl
           platea himenaeos neque volutpat bibendum eros, donec rutrum odio in pellentesque venenatis
@@ -54,10 +73,14 @@ export const Perception = () => {
       </div>
       <div className="flex items-center justify-end font-bold my-7">Brecha de percepción</div>
       <div className="flex flex-col scatter-chart mt-3">
-        {oppositePoliticalResult.map((item, index) => (
+        {resultArray.map((item, index) => (
           <div key={index} className="flex justify-around items-center h-[94px] gap-4">
-            <div className="sm:hidden flex justify-center items-center text-lg overflow-clip w-4 h-20">{index}</div>
-            <div className="hidden sm:block text-right text-xs overflow-clip w-32 h-20">{item.text}</div>
+            <div className="sm:hidden flex justify-center items-center text-lg overflow-clip w-4 h-20">
+              {index}
+            </div>
+            <div className="hidden sm:block text-right text-xs overflow-clip w-32 h-20">
+              {item.text}
+            </div>
             <div className="flex items-center relative w-[100%] h-[100%] border-t-[2px] border-b-[1px] border-solid border-slate-400">
               <div className="absolute h-[100%] left-[0] border-l-[1px] border-dotted border-slate-400 z-[200]"></div>
               <div className="absolute hidden md:block h-[100%] left-[5%] border-l-[1px] border-dotted border-slate-400 z-[200]"></div>
@@ -100,21 +123,23 @@ export const Perception = () => {
               )}
 
               <div
-                className={`absolute translate-x-[-50%] z-[500] w-[20px] h-[20px] rounded-[15px] border-[2px] border-gray-500 ${item.value > item.investigation ? 'bg-blue-500' : 'bg-red-500'
-                  }`}
+                className={`absolute translate-x-[-50%] z-[500] w-[20px] h-[20px] rounded-[15px] border-[2px] border-gray-500 ${
+                  item.value > item.investigation ? 'bg-blue-500' : 'bg-red-500'
+                }`}
                 style={{
                   left: `${item.value > item.investigation ? item.value : item.investigation}%`,
                 }}
               ></div>
               <div
-                className={`absolute translate-x-[-50%] z-[500] w-[20px] h-[20px] rounded-[15px] border-[2px] border-gray-500 ${item.value > item.investigation ? 'bg-red-500' : 'bg-blue-500'
-                  }`}
+                className={`absolute translate-x-[-50%] z-[500] w-[20px] h-[20px] rounded-[15px] border-[2px] border-gray-500 ${
+                  item.value > item.investigation ? 'bg-red-500' : 'bg-blue-500'
+                }`}
                 style={{
                   left: `${item.value > item.investigation ? item.investigation : item.value}%`,
                 }}
               ></div>
             </div>
-            <div className='w-[20px]'>{Math.abs(item.value-item.investigation)}%</div>
+            <div className="w-[20px]">{Math.abs(item.value - item.investigation)}%</div>
           </div>
         ))}
         <div className="flex justify-between mt-2 ml-[30px] md:ml-[34px] mr-8">
@@ -131,14 +156,12 @@ export const Perception = () => {
           <div className="text-sm">100</div>
         </div>
       </div>
-      <div className='sm:hidden flex flex-col mt-[50px]'>
-        {
-          oppositePoliticalResult.map((item, index) => (
-            <div className='my-[8px] font-semibold' key={index}>
-              <p>{`${index + 1}. ${item.text}`}</p>
-            </div>
-          ))
-        }
+      <div className="sm:hidden flex flex-col mt-[50px]">
+        {resultArray.map((item, index) => (
+          <div className="my-[8px] font-semibold" key={index}>
+            <p>{`${index + 1}. ${item.text}`}</p>
+          </div>
+        ))}
       </div>
       <div className="border-2 rounded-lg border-opacity-60 border-gray-400 w-[80%] mx-auto mt-[8vh]">
         <div className="w-[90%] mx-auto pt-10 pb-10 text-center">
