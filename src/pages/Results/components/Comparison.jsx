@@ -4,25 +4,25 @@ import useFormStore from '@/store/useFormStore';
 import './Comparison.css';
 
 function Comparison() {
-  const socialResult = useFormStore.getState().socialResult;
-  const politicalResult = useFormStore(s =>
-    s.politicalResult.map(e => ({
-      ...e,
-      percentage: Math.floor(e.survey_results[0].percentage * 100),
-    }))
-  );
-
+  const step = useFormStore.getState().currentSurveySection;
   let mappedResult;
-
-  if (socialResult && socialResult.length > 0) {
-    mappedResult = useFormStore(s =>
-      s.socialResult.map(e => ({
-        ...e,
-        percentage: Math.floor(e.survey_results[0].percentage * 100),
-      }))
-    );
-  } else {
-    mappedResult = politicalResult;
+  switch (step) {
+    case 3:
+      mappedResult = useFormStore(s =>
+        s.politicalResult.map(e => ({
+          ...e,
+          percentage: Math.floor(e.survey_results[0].percentage * 100),
+        }))
+      );
+      break;
+    case 7:
+      mappedResult = useFormStore(s =>
+        s.socialResult.map(e => ({
+          ...e,
+          percentage: Math.floor(e.survey_results[0].percentage * 100),
+        }))
+      );
+      break;
   }
 
   return (

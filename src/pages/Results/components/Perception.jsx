@@ -5,28 +5,29 @@ import useFormStore from '@/store/useFormStore';
 export const Perception = () => {
   let quantityPerceptions = 0;
   let totalPerceptions = 0;
-  let resultArray;
+  let resultOpposite;
 
-  const oppositePoliticalResult = useFormStore(s =>
-    s.oppositePoliticalResult.map(e => ({
-      ...e,
-      investigation: Math.floor(Math.random() * 60) + 30,
-    }))
-  );
-
-  const oppositeSocialResult = useFormStore.getState().oppositeSocialResult;
-  if (oppositeSocialResult && oppositeSocialResult.length > 0) {
-    resultArray = useFormStore(s =>
-      s.oppositeSocialResult.map(e => ({
-        ...e,
-        investigation: Math.floor(Math.random() * 60) + 30,
-      }))
-    );
-  } else {
-    resultArray = oppositePoliticalResult;
+  const step = useFormStore.getState().currentSurveySection;
+  switch (step) {
+    case 3:
+      resultOpposite = useFormStore(s =>
+        s.oppositePoliticalResult.map(e => ({
+          ...e,
+          investigation: Math.floor(Math.random() * 60) + 30,
+        }))
+      );
+      break;
+    case 7:
+      resultOpposite = useFormStore(s =>
+        s.oppositeSocialResult.map(e => ({
+          ...e,
+          investigation: Math.floor(Math.random() * 60) + 30,
+        }))
+      );
+      break;
   }
 
-  for (const result of resultArray) {
+  for (const result of resultOpposite) {
     quantityPerceptions++;
     totalPerceptions += Math.abs(result.value - result.investigation);
   }
@@ -73,7 +74,7 @@ export const Perception = () => {
       </div>
       <div className="flex items-center justify-end font-bold my-7">Brecha de percepción</div>
       <div className="flex flex-col scatter-chart mt-3">
-        {resultArray.map((item, index) => (
+        {resultOpposite.map((item, index) => (
           <div key={index} className="flex justify-around items-center h-[94px] gap-4">
             <div className="sm:hidden flex justify-center items-center text-lg overflow-clip w-4 h-20">
               {index}
@@ -157,7 +158,7 @@ export const Perception = () => {
         </div>
       </div>
       <div className="sm:hidden flex flex-col mt-[50px]">
-        {resultArray.map((item, index) => (
+        {resultOpposite.map((item, index) => (
           <div className="my-[8px] font-semibold" key={index}>
             <p>{`${index + 1}. ${item.text}`}</p>
           </div>
