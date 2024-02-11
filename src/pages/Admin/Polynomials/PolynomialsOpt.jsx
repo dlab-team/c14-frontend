@@ -82,7 +82,7 @@ const PolynomialsOpt = () => {
       />
       <div className="flex relative overflow-x-auto  p-3 my-8  max-w-4xl mx-auto xl:justify-end justify-center">
         <button
-          className="bg-black px-4 py-2 rounded-2xl text-white text-xl font-bold flex justify-center items-center gap-2"
+          className="bg-black px-4 py-2 rounded-2xl text-white text-xl font-bold flex justify-center items-center gap-2 transition-all hover:scale-105"
           onClick={() => togglePolynomialModal()}
         >
           Crear un Polinomio <CiCirclePlus />

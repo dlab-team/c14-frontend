@@ -1,4 +1,4 @@
-import { IoClose } from 'react-icons/io5';
+import { PiXBold } from 'react-icons/pi';
 import { Toaster } from 'sonner';
 import { createPolynomialSchema } from '@/schemas/createPolynomialSchema';
 import useEditPolynomial from '@/hooks/PolynomialsHook/useEditPolynomial';
@@ -44,7 +44,7 @@ const EditPolynomialModal = ({ isOpen, onClose, polynomialData }) => {
       <Toaster position="top-center" />
       {isOpen && (
         <div
-          className="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-50"
+          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
           onClick={onClose}
         />
       )}
@@ -56,44 +56,49 @@ const EditPolynomialModal = ({ isOpen, onClose, polynomialData }) => {
         } fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center`}
       >
         <div className="relative p-4 w-full max-w-md max-h-full">
-          <div className="relative bg-white rounded-lg shadow white border border-gray-200 ">
-            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900">Editar el Polinomio</h3>
-              <button onClick={onClose}>
-                <IoClose size={28} />
+          <div className="relative bg-white rounded-lg shadow white border border-gray-200 p-4">
+            <div className="flex items-center justify-between p-5 md:pb-1 rounded-t dark:border-gray-600">
+              <h3 className="flex items-center mt-2 text-xl font-semibold leading-6 text-gray-900 mr-8">
+                Editar el Polinomio
+              </h3>
+              <button
+                onClick={onClose}
+                className="absolute top-6 right-6  hover:text-zinc-100 hover:bg-slate-900 p-1 rounded-full"
+              >
+                <PiXBold />
               </button>
             </div>
-            <div className="p-4 md:p-5">
+            <div className="p-3 pt-0 md:p-5">
               <form className="space-y-4" onSubmit={onSubmit}>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
+                  <label className="block leading-6 text-gray-900 font-medium">Nombre</label>
                   <input
                     type="text"
                     name="name"
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                     {...register('name')}
                     defaultValue={polynomialData?.name || ''}
                   />
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">Pregunta</label>
+                  <label className="block leading-6 text-gray-900 font-medium">Pregunta</label>
                   <input
                     type="text"
                     name="question"
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                     {...register('question')}
                     defaultValue={polynomialData?.question || ''}
                   />
                   {errors.question && <div className="text-red-600">{errors.question.message}</div>}
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
+                  <label className="block leading-6 text-gray-900 font-medium">
                     Tipo Político/Social
                   </label>
                   <select
                     name="political"
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                     {...register('political')}
                     defaultValue={polynomialData?.political ? 'true' : 'false'}
                   >
@@ -128,7 +133,7 @@ const EditPolynomialModal = ({ isOpen, onClose, polynomialData }) => {
 
                 <button
                   type="submit"
-                  className="w-full text-white bg-black hover:bg-gray-600 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-black dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                  className="bg-slate-900 px-4 py-2 rounded-xl text-white text-xl font-bold flex justify-center items-center w-full transition-all hover:scale-105"
                 >
                   Editar
                 </button>

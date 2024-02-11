@@ -8,7 +8,7 @@ const OptionCard = ({ option, deleteOption }) => {
     >
       <p>{option.name}</p>
       <button
-        className="text-red-500 border border-red-600 rounded-full"
+        className="text-red-500 border border-red-600 rounded-full transition-all hover:scale-105"
         onClick={() => deleteOption(option.id)}
       >
         <TbLetterX size={18} />

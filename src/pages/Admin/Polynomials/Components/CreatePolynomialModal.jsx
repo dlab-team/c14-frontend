@@ -1,9 +1,9 @@
-import { IoClose } from 'react-icons/io5';
+import { PiXBold } from 'react-icons/pi';
 import { Toaster } from 'sonner';
 import { createPolynomialSchema } from '@/schemas/createPolynomialSchema';
 import useCreatePolynomial from '@/hooks/PolynomialsHook/useCreatePolynomial';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const CreatePolynomialModal = ({ isOpen, onClose }) => {
@@ -13,7 +13,7 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
     handleSubmit,
     register,
     reset,
-    setValue, 
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(createPolynomialSchema),
@@ -30,10 +30,10 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
     }
   });
 
-  const handlePoliticalChange = (e) => {
+  const handlePoliticalChange = e => {
     const value = e.target.value;
-    setIsPolitical(value === "true");
-    if (value === "true") {
+    setIsPolitical(value === 'true');
+    if (value === 'true') {
       setValue('political', value);
       setValue('active', 'true');
     } else {
@@ -46,7 +46,7 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
       <Toaster position="top-center" />
       {isOpen && (
         <div
-          className="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-50"
+          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
           onClick={onClose}
         />
       )}
@@ -58,41 +58,46 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
         } fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center`}
       >
         <div className="relative p-4 w-full max-w-md max-h-full">
-          <div className="relative bg-white rounded-lg shadow white border border-gray-200 ">
-            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900">Crear un nuevo Polinomio</h3>
-              <button onClick={onClose}>
-                <IoClose size={28} />
+          <div className="relative bg-white rounded-lg shadow white border border-gray-200 p-4">
+            <div className="flex items-center justify-between p-5 md:pb-1 rounded-t dark:border-gray-600">
+              <h3 className="flex items-center mt-2 text-xl font-semibold leading-6 text-gray-900 mr-8">
+                Crear un nuevo Polinomio
+              </h3>
+              <button
+                onClick={onClose}
+                className="absolute top-6 right-6  hover:text-zinc-100 hover:bg-slate-900 p-1 rounded-full"
+              >
+                <PiXBold />
               </button>
             </div>
             <div className="p-4 md:p-5">
               <form className="space-y-4" onSubmit={onSubmit}>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
+                  <label className="block leading-6 text-gray-900 font-medium mb-2">Nombre</label>
                   <input
                     type="text"
                     {...register('name')}
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                   />
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">Pregunta</label>
+                  <label className="block leading-6 text-gray-900 font-medium mb-2">Pregunta</label>
                   <input
                     type="text"
                     {...register('question')}
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                   />
                   {errors.question && <div className="text-red-600">{errors.question.message}</div>}
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
+                  <label className="block leading-6 text-gray-900 font-medium mb-2">
                     Tipo Político/Social
                   </label>
                   <select
                     defaultValue=""
                     {...register('political')}
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                     onChange={handlePoliticalChange}
                   >
                     <option value="" disabled hidden>
@@ -101,17 +106,17 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
                     <option value="true">Político</option>
                     <option value="false">Social</option>
                   </select>
-                  {errors.political && (
+                  {/* {errors.political && (
                     <div className="text-red-600">{errors.political.message}</div>
-                  )}
+                  )} */}
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">Estado</label>
+                  <label className="block leading-6 text-gray-900 font-medium mb-2">Estado</label>
                   <select
                     defaultValue=""
                     {...register('active')}
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
-                    disabled={isPolitical} 
+                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
+                    disabled={isPolitical}
                   >
                     <option value="" disabled hidden>
                       Selecciona una opción
@@ -119,11 +124,11 @@ const CreatePolynomialModal = ({ isOpen, onClose }) => {
                     <option value="true">Activo</option>
                     <option value="false">Inactivo</option>
                   </select>
-                  {errors.active && <div className="text-red-600">{errors.active.message}</div>}
+                  {/* {errors.active && <div className="text-red-600">{errors.active.message}</div>} */}
                 </div>
                 <button
                   type="submit"
-                  className="w-full text-white bg-black hover:bg-gray-600 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-black dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                  className="bg-slate-900 px-4 py-2 rounded-xl text-white text-xl font-bold flex justify-center items-center w-full transition-all hover:scale-105"
                 >
                   Crear un nuevo polinomio
                 </button>
