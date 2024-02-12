@@ -11,7 +11,7 @@ const SocialOppositeQuestions = ({ handleStep }) => {
   const updateOppositeSocialResult = useFormStore(state => state.updateOppositeSocialResult);
 
   useEffect(() => {
-    if (!oppositeSocialResult?.length) {
+    if (!oppositeSocialResult?.length && oppositeSocialPhrases?.length) {
       setOppositeSocialResult(oppositeSocialPhrases);
     }
   }, [oppositeSocialPhrases, oppositeSocialResult, setOppositeSocialResult]);
