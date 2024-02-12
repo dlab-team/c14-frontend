@@ -1,38 +1,30 @@
 import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
+import { useMemo } from 'react';
 
 export const Perception = () => {
-  let quantityPerceptions = 0;
-  let totalPerceptions = 0;
-  let resultOpposite;
-
   const step = useFormStore.getState().currentSurveySection;
-  switch (step) {
-    case 3:
-      resultOpposite = useFormStore(s =>
-        s.oppositePoliticalResult.map(e => ({
-          ...e,
-          investigation: Math.floor(Math.random() * 60) + 30,
-        }))
-      );
-      break;
-    case 7:
-      resultOpposite = useFormStore(s =>
-        s.oppositeSocialResult.map(e => ({
-          ...e,
-          investigation: Math.floor(Math.random() * 60) + 30,
-        }))
-      );
-      break;
-  }
+  const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
+  const oppositeSocialResult = useFormStore(s => s.oppositeSocialResult);
 
-  for (const result of resultOpposite) {
-    quantityPerceptions++;
-    totalPerceptions += Math.abs(result.value - result.investigation);
-  }
+  const resultOpposite = useMemo(() => {
+    let result = [];
+    if (step === 3) result = oppositePoliticalResult;
+    else if (step === 7) result = oppositeSocialResult;
+    return result.map(e => ({
+      ...e,
+      percentage: Math.floor(e.survey_results[0].percentage * 100),
+    }));
+  }, [step, oppositePoliticalResult, oppositeSocialResult]);
 
-  const totalPerceptionGap = (totalPerceptions / quantityPerceptions).toFixed(2);
+  const totalPerceptionGap = useMemo(() => {
+    const totalPerceptions = resultOpposite.reduce(
+      (acc, curr) => acc + Math.abs(curr.value - curr.percentage),
+      0
+    );
+    return (totalPerceptions / resultOpposite.length).toFixed(2);
+  }, [resultOpposite]);
 
   return (
     <div className="flex flex-col h-full lg:w-[70%] w-[90%] mx-auto my-10">
@@ -105,19 +97,19 @@ export const Perception = () => {
               <div className="absolute hidden md:block h-[100%] left-[95%] border-l-[1px] border-dotted border-slate-400 z-[200]"></div>
               <div className="absolute h-[100%] left-[100%] border-l-[1px] border-dotted border-slate-400 z-[200]"></div>
 
-              {item.value < item.investigation ? (
+              {item.value < item.percentage ? (
                 <div
                   className="absolute z-[300] h-[25px] bg-gray-300 rounded-[27px]"
                   style={{
                     left: `calc(${item.value}% - 12px)`,
-                    right: `calc((100% - ${item.investigation}%) - 12px)`,
+                    right: `calc((100% - ${item.percentage}%) - 12px)`,
                   }}
                 ></div>
               ) : (
                 <div
                   className="absolute z-[300] h-[25px] bg-gray-300 rounded-[27px]"
                   style={{
-                    left: `calc(${item.investigation}% - 12px)`,
+                    left: `calc(${item.percentage}% - 12px)`,
                     right: `calc((100% - ${item.value}%) - 12px)`,
                   }}
                 ></div>
@@ -125,22 +117,22 @@ export const Perception = () => {
 
               <div
                 className={`absolute translate-x-[-50%] z-[500] w-[20px] h-[20px] rounded-[15px] border-[2px] border-gray-500 ${
-                  item.value > item.investigation ? 'bg-blue-500' : 'bg-red-500'
+                  item.value > item.percentage ? 'bg-blue-500' : 'bg-red-500'
                 }`}
                 style={{
-                  left: `${item.value > item.investigation ? item.value : item.investigation}%`,
+                  left: `${item.value > item.percentage ? item.value : item.percentage}%`,
                 }}
               ></div>
               <div
                 className={`absolute translate-x-[-50%] z-[500] w-[20px] h-[20px] rounded-[15px] border-[2px] border-gray-500 ${
-                  item.value > item.investigation ? 'bg-red-500' : 'bg-blue-500'
+                  item.value > item.percentage ? 'bg-red-500' : 'bg-blue-500'
                 }`}
                 style={{
-                  left: `${item.value > item.investigation ? item.investigation : item.value}%`,
+                  left: `${item.value > item.percentage ? item.percentage : item.value}%`,
                 }}
               ></div>
             </div>
-            <div className="w-[20px]">{Math.abs(item.value - item.investigation)}%</div>
+            <div className="w-[20px]">{Math.abs(item.value - item.percentage)}%</div>
           </div>
         ))}
         <div className="flex justify-between mt-2 ml-[30px] md:ml-[34px] mr-8">
