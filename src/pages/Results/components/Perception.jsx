@@ -38,29 +38,29 @@ export const Perception = () => {
     <div className="flex flex-col h-full lg:w-[70%] w-[90%] mx-auto my-10">
       <div className="flex flex-col items-center justify-center mt-10 mb-10 gap-4">
         <p className="text-3xl font-bold text-amber-500">
-          Mi brecha de percepción es: {totalPerceptionGap}%
+          Mi polarización subjetiva es de: {totalPerceptionGap}%
         </p>
         <p className="text-center text-base text-black font-normal">
-          ipsum dolor sit amet consectetur adipiscing elit etiam habitant, scelerisque maecenas nisl
-          platea himenaeos neque volutpat bibendum eros, donec rutrum odio in pellentesque venenatis
-          condimentum ut. Suscipit himenaeos porta orci vitae viverra ipsum dolor sit amet
-          consectetur adipiscing elit etiam habita
+          ¿Qué quiere decir? Es la distancia entre lo que tú crees que piensan los demás y lo que
+          realmente ellos piensan. Mientras más bajo es el porcentaje, más cerca estás de conocer
+          cómo piensan los otros: estás más conectado con ellos.
         </p>
       </div>
       <div className="flex flex-wrap gap-5 md:justify-center">
         <div className="flex items-start gap-2">
           <div className="bg-blue-500 w-[25px] h-[25px] rounded-xl border-solid border-2 border-neutral-600"></div>
-          <p>Tu respuesta</p>
+          <p className="w-[121px]">Tu respuesta (cómo crees que piensan los [opuestos])</p>
         </div>
         <div className="flex items-start gap-2">
           <div className="bg-red-500 w-[25px] h-[25px] rounded-xl border-solid border-2 border-neutral-600"></div>
-          <p className="w-[121px]">
-            Lo que piensan las personas de <strong>derecha</strong>
-          </p>
+          <p className="w-[121px]">Lo que piensan las personas de [opuestos]</p>
         </div>
         <div className="flex items-start gap-2">
           <div className="bg-gray-300 w-[62px] h-[25px] rounded-xl "></div>
-          <p>Polarizaciones</p>
+          <p className="w-[121px]">
+            Polarización subjetiva (la distancia entre lo que tú crees que piensan los demás y lo
+            que realmente ellos piensan).
+          </p>
         </div>
         <div className="invisible md:visible flex items-start gap-2">
           <Tooltip
@@ -72,7 +72,7 @@ export const Perception = () => {
           </Tooltip>
         </div>
       </div>
-      <div className="flex items-center justify-end font-bold my-7">Brecha de percepción</div>
+      <div className="flex items-center justify-end font-bold my-7">Distancia</div>
       <div className="flex flex-col scatter-chart mt-3">
         {resultOpposite.map((item, index) => (
           <div key={index} className="flex justify-around items-center h-[94px] gap-4">
@@ -166,14 +166,16 @@ export const Perception = () => {
       </div>
       <div className="border-2 rounded-lg border-opacity-60 border-gray-400 w-[80%] mx-auto mt-[8vh]">
         <div className="w-[90%] mx-auto pt-10 pb-10 text-center">
-          lorem ipsum dolor sit amet, consectetur adipiscing elitlorem ipsum dolor sit amet,
-          consectetur adipiscing elitlorem ipsum dolor sit amet, consectetur adipiscing elitlorem
-          ipsum dolor sit amet, consectetur adipiscing elitlorem ipsum dolor sit amet, consectetur
-          adipiscing elitlorem ipsum dolor sit amet, consectetur adipiscing elitlorem ipsum dolor
-          sit amet, consectetur adipiscing elitlorem ipsum dolor sit amet, consectetur adipiscing
-          elitlorem ipsum dolor sit amet, consectetur adipiscing elitlorem ipsum dolor sit amet,
-          consectetur adipiscing elitlorem ipsum dolor sit amet, consectetur adipiscing elitlorem
-          ipsum dolor sit amet, consectetur adipiscing elit.
+          <p>
+            A veces, por diversas razones, atribuimos a los otros que piensan distinto, ideas que
+            con las que ellos no necesariamente están de acuerdo. Aplicar estereotipos en función de
+            la tendencia política de alguien puede poner freno a la escucha y el diálogo.
+          </p>
+          <p>
+            Este estudio y este test que estás haciendo es una oportunidad para que podamos mirarnos
+            los unos a los otros y sorprendernos.
+          </p>
+          <p>Esta es una invitación a escuchar, a olvidar las etiquetas, a dialogar.</p>
         </div>
       </div>
     </div>
