@@ -119,6 +119,15 @@ const useFormStore = create(
     nextStep: () => {
       set(state => ({ ...state, currentSurveySection: state.currentSurveySection + 1 }));
     },
+    prevStep: () => {
+      set(state => ({ ...state, currentSurveySection: state.currentSurveySection - 1 }));
+    }, 
+    clearOppositeSocialResult: () => {
+      set(state => ({ ...state, oppositeSocialResult: [] }));
+    },
+    clearOppositePoliticalResult: () => {
+      set(state => ({ ...state, oppositePoliticalResult: [] }));
+    },
     clearForm: () => {
       set(state => ({
         politicalCharacterization: null,

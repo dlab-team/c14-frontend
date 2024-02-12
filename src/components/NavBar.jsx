@@ -1,12 +1,51 @@
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa6';
+import useFormStore from '@/store/useFormStore';
+import { useEffect, useState } from 'react';
 
 const NavBar = () => {
+  const [show, setShow] = useState('invisible');
+  const prevStep = useFormStore(state => state.prevStep);
+  const clearOppositeSocialResult = useFormStore(state => state.clearOppositeSocialResult);
+  const clearOppositePoliticalResult = useFormStore(state => state.clearOppositePoliticalResult);
+
+  useEffect(() => {
+    //Una subscription para realizar alguna accion cuando el estado de currentSurveySection cambia en el store.
+    const unsub = useFormStore.subscribe(state => {
+      if (state.currentSurveySection === 2 || state.currentSurveySection === 6) {
+        setShow('visible');
+      } else {
+        setShow('invisible');
+      }
+    });
+
+    //Por si el usuario hace refresh de la pagina
+    const currentSection = useFormStore.getState().currentSurveySection;
+    if (currentSection === 2 || currentSection === 6) {
+      setShow('visible');
+    } else {
+      setShow('invisible');
+    }
+
+    return unsub;
+  }, []);
+
+  const handlePrevious = () => {
+    const step = useFormStore.getState().currentSurveySection;
+    if (step === 2) {
+      clearOppositePoliticalResult();
+    }
+    if (step === 6) {
+      clearOppositeSocialResult();
+    }
+    prevStep();
+  };
+
   return (
     <nav className="bg-white flex items-center justify-between h-[10vh] w-full px-16 border-b-2">
-      <Link to="/">
+      <button className={show} onClick={handlePrevious}>
         <FaArrowLeft size={30} />
-      </Link>
+      </button>
       <div className="flex items-center">
         <Link className="flex-shrink-0 mr-4">
           <img
