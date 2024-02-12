@@ -8,6 +8,7 @@ import Select from 'react-select';
 import { Toaster } from 'sonner';
 import useGetAllPoly from './../../../hooks/PolynomialsHook/useGetAllPoly';
 import useGetPhrasesByIdPolinomial from '@/hooks/PhrasesHook/useGetPhrasesByIdPolinomial';
+import { ExtremeButtonGroup } from './Components/ExtremeButtonGroup';
 
 const Phrases = () => {
   const [selectedOption, setSelectedOption] = useState({
@@ -78,29 +79,8 @@ const Phrases = () => {
             onChange={setSelectedOption}
             value={selectedOption}
           />
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center  rounded-2xl bg-gray-400">
-            <button
-              className={`px-4 py-2  rounded-l-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 ${
-                extremo === 'Extremo 1'
-                  ? 'bg-purple-700 text-md border border-black text-gray-400'
-                  : 'bg-purple-500 text-xl'
-              }`}
-              onClick={() => handleExtreme('Extremo 1')}
-            >
-              Extremo 1
-            </button>
 
-            <button
-              className={`px-4 py-2  rounded-r-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 ${
-                extremo === 'Extremo 2'
-                  ? 'bg-teal-700 text-md border border-black text-gray-400'
-                  : 'bg-teal-500 text-xl'
-              }`}
-              onClick={() => handleExtreme('Extremo 2')}
-            >
-              Extremo 2
-            </button>
-          </div>
+          <ExtremeButtonGroup currentExtreme={extremo} handleExtreme={handleExtreme} />
 
           <button
             className="bg-black px-4 py-2 md:my-10 my-3 rounded-2xl text-white text-xl font-bold flex justify-center items-center transition-all hover:scale-105"
