@@ -28,7 +28,7 @@ function Comparison() {
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
-        Yo en comparación con otros participantes
+        Yo en comparación con otros [mi extremo]
       </div>
       <div className="flex items-center justify-end font-bold">Mis respuestas</div>
       <div className="invisible lg:visible lg:flex items-center justify-begin lg:translate-x-[-5%] lg:translate-y-[15px] lg:pl-1 pl-10">
@@ -39,6 +39,9 @@ function Comparison() {
         >
           <PiInfoBold className="w-6 h-6" />
         </Tooltip>
+      </div>
+      <div className="flex items-center justify-center">
+        <h2 className="text-xl font-normal">Porcentaje de acuerdo</h2>
       </div>
       <div className="scatter-chart mt-10">
         {mappedResult.map((item, index) => (

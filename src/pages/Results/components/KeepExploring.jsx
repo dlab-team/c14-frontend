@@ -14,13 +14,12 @@ function KeepExploring() {
     setAcceptedTerms(false);
     navigate('/reconocimiento');
   };
-  const paragraphs = [
-    'Ahora te invitamos a lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia molestiae quas vel sint commodi repudiandae repudiandae',
-  ];
+  const paragraphs = ['¡Ahora te invitamos a seguir jugando!'];
+
   return (
     <div className="w-[90%] mx-auto my-6 lg:w-[50%] pb-10">
       <div className="relative flex flex-col bg-white">
-        <div className="mb-10 pr-4 text-center m-4 font-semibold">{paragraphs}</div>
+        <div className="text-2xl mb-10 pr-4 text-center m-4 font-semibold">{paragraphs}</div>
         <div className="shadow-2xl border-2 rounded-xl">
           <div className="bg-purple-500 p-4 text-white rounded-t-lg">
             <h2 className="text-xl font-bold mb-4 mt-4 text-center">
