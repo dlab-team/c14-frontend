@@ -14,6 +14,7 @@ const SocialStep = ({ handleStep }) => {
   const setSocialCharacterization = useFormStore(state => state.setSocialCharacterization);
 
   const { data: socialPolynomials } = useGetSocialsPolynomials();
+  console.log(socialPolynomials)
 
   const onSubmit = data => {
     setSocialCharacterization(data);
@@ -38,69 +39,16 @@ const SocialStep = ({ handleStep }) => {
         />
       </div>
       <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 z-10 flex flex-col w-11/12 text-white text-2xl font-roboto font-semibold pb-12 sm:w-3/4">
-        <SocialQuestions
-          pregunta="¿Con qué Género te identificas?"
-          opciones={socialPolynomials?.[0]?.polynomial_options}
+        {socialPolynomials?.map(p => {
+          return <SocialQuestions
+          key={p.id}
+          pregunta={p.question}
+          opciones={p.polynomial_options}
           control={control}
-          nombreDelControl="genero"
+          nombreDelControl={p.name}
         />
-
-        <SocialQuestions
-          pregunta="¿En qué Región resides?"
-          opciones={socialPolynomials?.[1]?.polynomial_options}
-          control={control}
-          nombreDelControl="region"
-          className="w-full"
-        />
-
-        <SocialQuestions
-          pregunta="¿En qué rango de ingresos te clasificas?"
-          opciones={socialPolynomials?.[2]?.polynomial_options}
-          control={control}
-          nombreDelControl="rangoIngresos"
-        />
-
-        <SocialQuestions
-          pregunta="¿Perteneces a un pueblo indígena?"
-          opciones={socialPolynomials?.[3]?.polynomial_options}
-          control={control}
-          nombreDelControl="publoIndigena"
-        />
-
-        <SocialQuestions
-          pregunta="¿Con qué credo te identificas?"
-          opciones={socialPolynomials?.[4]?.polynomial_options}
-          control={control}
-          nombreDelControl="credo"
-        />
-
-        <SocialQuestions
-          pregunta="¿Cual es tu estado actual?"
-          opciones={socialPolynomials?.[5]?.polynomial_options}
-          control={control}
-          nombreDelControl="nacionalidad"
-        />
-
-        <SocialQuestions
-          pregunta="¿En qué grupo laboral te clasificas?"
-          opciones={socialPolynomials?.[6]?.polynomial_options}
-          control={control}
-          nombreDelControl="grupoLaboral"
-        />
-
-        <SocialQuestions
-          pregunta="¿A que grupo etario perteneces?"
-          opciones={socialPolynomials?.[7]?.polynomial_options}
-          control={control}
-          nombreDelControl="grupoEtario"
-        />
-
-        <SocialQuestions
-          pregunta="¿Cual es tu orientación sexual?"
-          opciones={socialPolynomials?.[8]?.polynomial_options}
-          control={control}
-          nombreDelControl="orientacionSexual"
-        />
+        })}
+        
         <div className="col-span-2 flex justify-end">
           <div className="w-1/3 md:w-1/6 mr-1 mt-10">
             <Button title={'Continuar'} />
