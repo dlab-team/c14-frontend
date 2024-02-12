@@ -2,28 +2,22 @@ import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
 import './Comparison.css';
+import { useMemo } from 'react';
 
 function Comparison() {
   const step = useFormStore.getState().currentSurveySection;
-  let mappedResult;
-  switch (step) {
-    case 3:
-      mappedResult = useFormStore(s =>
-        s.politicalResult.map(e => ({
-          ...e,
-          percentage: Math.floor(e.survey_results[0].percentage * 100),
-        }))
-      );
-      break;
-    case 7:
-      mappedResult = useFormStore(s =>
-        s.socialResult.map(e => ({
-          ...e,
-          percentage: Math.floor(e.survey_results[0].percentage * 100),
-        }))
-      );
-      break;
-  }
+  const politicalResult = useFormStore(s => s.politicalResult);
+  const socialResult = useFormStore(s => s.socialResult);
+
+  const mappedResult = useMemo(() => {
+    let result = [];
+    if (step === 3) result = politicalResult;
+    else if (step === 7) result = socialResult;
+    return result.map(e => ({
+      ...e,
+      percentage: Math.floor(e.survey_results[0].percentage * 100),
+    }));
+  }, [step, politicalResult, socialResult]);
 
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
