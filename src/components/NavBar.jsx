@@ -10,6 +10,7 @@ const NavBar = () => {
   const clearOppositePoliticalResult = useFormStore(state => state.clearOppositePoliticalResult);
 
   useEffect(() => {
+    //Una subscription para realizar alguna accion cuando el estado de currentSurveySection cambia en el store.
     const unsub = useFormStore.subscribe(state => {
       if (state.currentSurveySection === 2 || state.currentSurveySection === 6) {
         setShow('visible');
@@ -17,6 +18,15 @@ const NavBar = () => {
         setShow('invisible');
       }
     });
+
+    //Por si el usuario hace refresh de la pagina
+    const currentSection = useFormStore.getState().currentSurveySection;
+    if (currentSection === 2 || currentSection === 6) {
+      setShow('visible');
+    } else {
+      setShow('invisible');
+    }
+
     return unsub;
   }, []);
 
