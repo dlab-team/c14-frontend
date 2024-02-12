@@ -31,7 +31,6 @@ export class PhrasesService {
     try {
       const { data } = await api.get(`/phrases/polynomial/${idPolinomial}`);
       return data;
-
     } catch (error) {
       throw new Error('Error al obtener informacion');
     }
@@ -67,10 +66,10 @@ export class PhrasesService {
 
   static async deletePhrase(id) {
     try {
-      const { data } = await api.delete(`/phrases/${id}`)
-      return data
+      const { data } = await api.delete(`/phrases/${id}`);
+      return data;
     } catch (error) {
-      throw new Error('No se pudo obtener la informacion')
+      throw new Error('No se pudo obtener la informacion');
     }
   }
 
@@ -82,5 +81,13 @@ export class PhrasesService {
       throw new Error('No se pudo crear la frase');
     }
   }
-}
 
+  static async updatePhrase(phraseId, payload) {
+    try {
+      const { data } = await api.put(`/phrases/${phraseId}`, payload);
+      return data;
+    } catch (error) {
+      throw new Error('No se pudo actualizar la frase');
+    }
+  }
+}

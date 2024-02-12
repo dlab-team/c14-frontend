@@ -1,5 +1,5 @@
 import { FaRegEye, FaRegEyeSlash, FaRegTrashCan } from 'react-icons/fa6';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { FiEdit3 } from 'react-icons/fi';
 import { MdPercent } from 'react-icons/md';
@@ -7,9 +7,11 @@ import { phrasesSchema } from '../../../../schemas/phrasesSchema';
 import useDeletePhrase from '@/hooks/PhrasesHook/useDeletePhrase';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import useEditPhrase from '@/hooks/PhrasesHook/useEditPhrase';
 
 const PhraseCard = ({ phrase, index }) => {
   const { mutate: deletePhrase } = useDeletePhrase();
+  const { mutate: updatePhrase } = useEditPhrase();
   const [showEdit, setShowEdit] = useState(true);
   const [activePhrase, setActivePhrase] = useState(true);
 
@@ -24,8 +26,11 @@ const PhraseCard = ({ phrase, index }) => {
   });
 
   const onSubmit = data => {
-    console.log(data.text);
-    console.log(data.survey_results);
+    updatePhrase({
+      ...phrase,
+      text: data.text,
+      survey_results: data.survey_results,
+    });
   };
 
   const deleteOnePhrase = async id => {
