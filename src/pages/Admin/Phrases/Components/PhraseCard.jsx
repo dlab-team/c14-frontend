@@ -6,23 +6,12 @@ import { MdPercent } from 'react-icons/md';
 import { phrasesSchema } from '../../../../schemas/phrasesSchema';
 import useDeletePhrase from '@/hooks/PhrasesHook/useDeletePhrase';
 import { useForm } from 'react-hook-form';
-import useGetOptions from '@/hooks/OptionsHook/useGetOptions';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const PhraseCard = ({ phrase, index }) => {
   const { mutate: deletePhrase } = useDeletePhrase();
-  const { data: options } = useGetOptions();
-
   const [showEdit, setShowEdit] = useState(true);
   const [activePhrase, setActivePhrase] = useState(true);
-  const [filteredOptions, setsfilteredOptions] = useState([]);
-
-  useEffect(() => {
-    if (options) {
-      const filteredOptions = options.filter(item => item.polynomialId === phrase.polynomialId);
-      setsfilteredOptions(filteredOptions);
-    }
-  }, [options, phrase.polynomialId]);
 
   const {
     register,
@@ -30,14 +19,13 @@ const PhraseCard = ({ phrase, index }) => {
     formState: { errors },
     setValue,
   } = useForm({
-    defaultValues: {
-      phrase: '',
-    },
+    defaultValues: phrase,
     resolver: yupResolver(phrasesSchema),
   });
 
   const onSubmit = data => {
-    console.log(phrase);
+    console.log(data.text);
+    console.log(data.survey_results);
   };
 
   const deleteOnePhrase = async id => {
@@ -107,39 +95,48 @@ const PhraseCard = ({ phrase, index }) => {
               type="phrase"
               placeholder={'Escriba su pregunta aquí...'}
               className="border rounded-lg border-slate-200 focus:outline-slate-500 h-12 px-8 w-full md:text-lg"
-              {...register('phrase')}
+              {...register('text')}
             />
             <span className="text-xs text-red-500">{errors?.phrase?.message}</span>
           </div>
 
-          <div className="flex flex-col mx-auto  flex-wrap max-w-xl text-xl mb-10 gap-8">
-            {filteredOptions.map(poliOpt => {
+          <div className="flex flex-col max-w-md mx-auto text-xl mb-8 gap-4">
+            {phrase.survey_results.map((result, index) => {
               return (
-                <div className="flex justify-between">
-                  <div className="rounded-lg border border-slate-200 w-1/2 p-2">{poliOpt.name}</div>
-                  <div className="flex items-stretch relative rounded-lg border border-slate-200 focus-within:outline-slate-500 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 max-h-11">
-                    <span className="absolute bottom-16 bg-white text-xs text-red-500">
-                      {errors?.porcentaje?.message}
-                    </span>
+                <div
+                  className="flex flex-col max-w-md"
+                  key={result.phraseId + result.polynomialOptionId}
+                >
+                  <div className="flex items-stretch justify-center rounded-lg border border-slate-200 focus-within:outline-slate-500 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 max-h-11">
+                    <div className="rounded-s-lg bg-neutral-300 grow py-2 pl-4">
+                      {result.polynomial_option.name}
+                    </div>
                     <input
                       type="number"
-                      min="0"
-                      max="100"
-                      {...register('porcentaje')}
+                      min={0}
+                      max={1}
+                      step={0.01}
+                      {...register(`survey_results.${index}.percentage`, {
+                        max: 1,
+                        min: 0,
+                      })}
                       placeholder="acuerdo"
-                      className="peer px-3 w-32 rounded-l-lg outline-none "
+                      className="peer px-3 w-32 rounded-l-lg outline-none text-center"
                     />
                     <div className="bg-[#34ABC9] text-white flex items-center rounded-r-lg px-3">
                       <MdPercent />
                     </div>
                   </div>
+                  <span className="col-span-2 text-center text-xs text-red-500">
+                    {errors?.porcentaje?.message}
+                  </span>
                 </div>
               );
             })}
           </div>
 
           {/* SAVE PHRASE BUTTON----------- */}
-          <button className="font-medium border rounded-lg border-black flex justify-center items-center gap-2 w-full text-lg md:h-12 transition-all hover:scale-105">
+          <button className="max-w-lg mx-auto font-medium border py-2 rounded-lg border-black flex justify-center items-center gap-2 w-full text-lg transition-all hover:scale-105">
             <span>Guardar Cambios</span>
           </button>
         </form>

@@ -2,8 +2,11 @@ import * as yup from 'yup';
 
 export const phrasesSchema = yup
   .object({
-    phrase: yup.string().required('Campo requerido'),
-    binomio: yup.string().required('Campo requerido'),
-    porcentaje: yup.string().required('Ingresa %'),
+    text: yup.string().required('Campo requerido'),
+    survey_results: yup.array().of(
+      yup.object({
+        percentage: yup.number().required('Ingresa %'),
+      })
+    ),
   })
   .required();
