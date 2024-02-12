@@ -20,7 +20,7 @@ const Wrapper = () => {
       navigate('/');
     }
     window.scrollTo(0, 0);
-  });
+  }, [acceptedTerms, navigate]);
 
   const handleStep = () => {
     nextStep();
