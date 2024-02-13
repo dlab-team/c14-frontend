@@ -1,12 +1,13 @@
 import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 export const Perception = () => {
   const step = useFormStore.getState().currentSurveySection;
   const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
   const oppositeSocialResult = useFormStore(s => s.oppositeSocialResult);
+  const setTotalPerceptionGap = useFormStore(s => s.setTotalPerceptionGap);
 
   const resultOpposite = useMemo(() => {
     let result = [];
@@ -25,6 +26,10 @@ export const Perception = () => {
     );
     return (totalPerceptions / resultOpposite.length).toFixed(2);
   }, [resultOpposite]);
+
+  useEffect(() => {
+    setTotalPerceptionGap(totalPerceptionGap);
+  }, [totalPerceptionGap, setTotalPerceptionGap]);
 
   return (
     <div className="flex flex-col h-full lg:w-[70%] w-[90%] mx-auto my-10">
