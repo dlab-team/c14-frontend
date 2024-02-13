@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import useGetMetrics from '@/hooks/useGetMetrics';
+import { DateTime } from 'luxon';
 
 const AdminResults = () => {
   const [visits, setVisits] = useState(0);
   const [finished, setFinished] = useState(0);
+  const [duration, setDuration] = useState(0);
   const metrics = useGetMetrics();
 
   useEffect(() => {
     if (metrics.data) {
+      const duration = DateTime.fromMillis(metrics.data.duration).toFormat('mm:ss');
+      setDuration(duration);
       setVisits(metrics.data.unfinished + metrics.data.finished);
       setFinished(metrics.data.finished);
     }
@@ -34,7 +38,7 @@ const AdminResults = () => {
         </div>
         <div className="flex-col justify-start items-center gap-1 inline-flex">
           <div className="text-purple-700 text-[40px] font-medium font-['Roboto'] leading-[43.60px]">
-            5:30
+            {duration}
           </div>
           <div className="w-[67px] text-center text-zinc-600 text-xs font-normal font-['Roboto'] leading-[13.08px]">
             Tiempo terminado
