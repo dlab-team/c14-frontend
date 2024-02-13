@@ -1,7 +1,8 @@
+import './Comparison.css';
+
 import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
-import './Comparison.css';
 import { useMemo } from 'react';
 
 function Comparison() {
@@ -22,7 +23,7 @@ function Comparison() {
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
-        Yo en comparación con otros [mi extremo]
+        Yo en comparación con otros
       </div>
       <div className="flex items-center justify-end font-bold">Mis respuestas</div>
       <div className="invisible lg:visible lg:flex items-center justify-begin lg:translate-x-[-5%] lg:translate-y-[15px] lg:pl-1 pl-10">
