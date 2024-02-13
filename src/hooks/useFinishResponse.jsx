@@ -3,7 +3,7 @@ import { ResponseService } from '@/services/response.service';
 import { toast } from 'sonner';
 import useFormStore from '@/store/useFormStore';
 
-const useFinishResponse = characterization => {
+const useFinishResponse = (characterization, isSocial) => {
   const responseId = useFormStore.getState().responseId;
   const polinomialOptionsId = Array.isArray(characterization)
     ? characterization
@@ -12,11 +12,11 @@ const useFinishResponse = characterization => {
   const payload = {
     id: responseId,
     polinomialOptionsId: polinomialOptionsId,
+    finishedSocialForm: isSocial,
   };
 
   return useMutation(() => ResponseService.finishResponse(payload), {
     onSuccess: () => {
-      console.log('success');
       toast.success('Encuesta finalizada con éxito');
     },
     onError: error => {
