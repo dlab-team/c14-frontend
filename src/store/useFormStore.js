@@ -14,6 +14,12 @@ const useFormStore = create(
     oppositePoliticalResult: [],
     oppositeSocialResult: [],
     socialCharacterization:[],
+    totalPerceptionGap: 0,
+    setTotalPerceptionGap: totalPerceptionGap => {
+      set(state => {
+        return { ...state, totalPerceptionGap };
+      });
+    },
     setResponseId: responseId => {
       set(state => {
         return { ...state, responseId };
@@ -138,6 +144,7 @@ const useFormStore = create(
         oppositePoliticalResult: [],
         oppositeSocialResult: [],
         responseId: null,
+        totalPerceptionGap: 0,
       }));
     },
   }),

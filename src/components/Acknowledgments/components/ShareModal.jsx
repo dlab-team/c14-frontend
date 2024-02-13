@@ -9,9 +9,12 @@ import {
 } from 'react-share';
 import { FaFacebook, FaInstagram, FaRegCopy } from 'react-icons/fa';
 import { Toaster, toast } from 'sonner';
+import useFormStore from '@/store/useFormStore';
 
 function ShareModal({ isOpen, onClose }) {
-  const url = 'https://i.gyazo.com/b26aa6430185fd38280e9840c338cf9a.png';
+  const totalPerceptionGap = useFormStore.getState().totalPerceptionGap;
+
+  const url = 'https://laboratoriocivico.vercel.app/';
   if (!isOpen) {
     return null;
   }
@@ -38,7 +41,7 @@ function ShareModal({ isOpen, onClose }) {
             </div>
             <div className="flex flex-row justify-between mb-8 mt-2 h-12">
               <div className="">
-                <FacebookShareButton url={url} hashtag="#3xi">
+                <FacebookShareButton url={url} hashtag={'#MiPolarización' + totalPerceptionGap}>
                   <FaFacebook className="w-10 h-10 mx-auto" />
                   <span className="font-semibold text-xs">Facebook</span>
                 </FacebookShareButton>
@@ -48,7 +51,10 @@ function ShareModal({ isOpen, onClose }) {
                 <span className="font-semibold text-xs">Instagram</span>
               </div>
               <div className="">
-                <WhatsappShareButton url={url} title="Laboratorio Cívico">
+                <WhatsappShareButton
+                  url={url}
+                  title={'Mi polarización subjetiva es de: ' + totalPerceptionGap + '%'}
+                >
                   <WhatsappIcon
                     className="w-10 h-10 mx-auto"
                     round={true}
@@ -60,7 +66,7 @@ function ShareModal({ isOpen, onClose }) {
               <div className="">
                 <TwitterShareButton
                   url={url}
-                  title="Laboratorio Cívico"
+                  title={'Mi polarización subjetiva es de: ' + totalPerceptionGap + '%'}
                   hashtags={['3xi', 'Criteria']}
                 >
                   <XIcon className="w-10 h-10 mx-auto" round={true} />
@@ -86,7 +92,7 @@ function ShareModal({ isOpen, onClose }) {
             <div className="border-collapse flex flex-row">
               <input
                 type="text"
-                placeholder={url}
+                placeholder="https://laboratoriocivico.vercel.app/"
                 className="text-slate-500 pl-2 bg-white rounded-l-lg border border-slate-300 w-full h-10 items-center text-sm overflow"
                 value={url}
               />
