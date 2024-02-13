@@ -1,14 +1,13 @@
 // layouts
 import { AdminLayout, AuthLayout, RootLayout } from '@/layouts';
+import { ForgotPassword, Login, RecoveryPassword } from '@/pages/Auth';
 import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 import Acknowledgments from '@/components/Acknowledgments/Acknowledgments';
 import Admin from '@/pages/Admin/Admin';
-import Analysis from '@/pages/Admin/Analysis';
 import Error404 from '@/pages/Error404/Error404';
 // pages
 import Home from '@/pages/Home';
-import { Login, ForgotPassword, RecoveryPassword } from '@/pages/Auth';
 import Opinion from '@/pages/Opinion';
 import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 import Phrases from '@/pages/Admin/Phrases/Phrases';
@@ -43,7 +42,6 @@ export const router = createBrowserRouter(
         <Route path="phrases" element={<Phrases />} />
         <Route path="users" element={<UserControl />} />
         <Route path="polynomials" element={<PolynomialsOpt />} />
-        <Route path="analysis" element={<Analysis />} />
         <Route path="profile" element={<Profile />} />
       </Route>
     </>
