@@ -12,28 +12,28 @@ import {
 import AdminModal from './AdminModal';
 import Button from '@/layouts/Button';
 import { NavLink } from 'react-router-dom';
-import { toast } from 'sonner';
+import { Toaster } from 'sonner';
 import useAuthStore from '@/store/useAuthStore';
 import useLogout from '@/hooks/useLogout';
 import { useState } from 'react';
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const { logout } = useLogout();
   const { user } = useAuthStore();
   const [logoutModal, setLogoutModal] = useState(false);
+  const { mutate: clearCooke } = useLogout();
 
   if (!user) {
     return <NavLink to="/auth/login" />;
   }
 
   const handleLogoutClick = async () => {
-    logout();
-    toast.success('Sesión cerrada exitosamente');
+    clearCooke();
   };
 
   return (
     <>
+      <Toaster position="top-center" />
       <div
         className={`h-full fixed xl:static w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-auto top-0 p-4 flex bg-white flex-col justify-between z-50 shadow-xl text-sm xl:col-span-2 text-gray-700 ${
           showMenu ? 'left-0' : '-left-full'
