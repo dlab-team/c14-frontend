@@ -1,7 +1,8 @@
+import { useEffect, useMemo } from 'react';
+
 import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
-import { useEffect, useMemo } from 'react';
 
 export const Perception = () => {
   const step = useFormStore.getState().currentSurveySection;
@@ -46,11 +47,11 @@ export const Perception = () => {
       <div className="flex flex-wrap gap-5 md:justify-center">
         <div className="flex items-start gap-2">
           <div className="bg-blue-500 w-[25px] h-[25px] rounded-xl border-solid border-2 border-neutral-600"></div>
-          <p className="w-[121px]">Tu respuesta (cómo crees que piensan los [opuestos])</p>
+          <p className="w-[121px]">Tu respuesta (cómo crees que piensan los grupos opuestos)</p>
         </div>
         <div className="flex items-start gap-2">
           <div className="bg-red-500 w-[25px] h-[25px] rounded-xl border-solid border-2 border-neutral-600"></div>
-          <p className="w-[121px]">Lo que piensan las personas de [opuestos]</p>
+          <p className="w-[121px]">Lo que piensan las personas de los grupos opuestos</p>
         </div>
         <div className="flex items-start gap-2">
           <div className="bg-gray-300 w-[62px] h-[25px] rounded-xl "></div>
