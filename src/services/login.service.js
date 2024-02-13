@@ -9,4 +9,14 @@ export class LoginService {
       throw new Error('Email o contraseña incorrectos.')
     }
   }
+
+  static async clearCookies() {
+    try {
+      const { data } = await api.post('/users/logout');
+      return data;
+
+    } catch (error) {
+      throw new Error('Sesion cerrada');
+    }
+  }
 }

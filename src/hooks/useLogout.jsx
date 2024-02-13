@@ -1,18 +1,23 @@
+import { LoginService } from '../services/login.service';
+import { toast } from 'sonner';
+import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
-import useAuthStore from '../store/useAuthStore';
 
-const useLogout = () => {
-  const { clearLocalStorage } = useAuthStore();
+const useLogin = () => {
   const navigate = useNavigate();
 
-  const logout = () => {
-    clearLocalStorage();
-    setTimeout(() => {
-      navigate('/');
-    }, 1500);
-  };
-
-  return { logout };
+  return useMutation(LoginService.clearCookies, {
+    onSuccess: () => {
+      toast.success('Sesión cerrada');
+      setTimeout(() => {
+        navigate('/');
+      }, 1800);
+    },
+    onError: () => {
+      toast.error('error');
+      console.log('error');
+    },
+  });
 };
 
-export default useLogout;
+export default useLogin;
