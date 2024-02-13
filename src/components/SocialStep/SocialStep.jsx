@@ -14,10 +14,10 @@ const SocialStep = ({ handleStep }) => {
   const setSocialCharacterization = useFormStore(state => state.setSocialCharacterization);
 
   const { data: socialPolynomials } = useGetSocialsPolynomials();
-  console.log(socialPolynomials)
 
   const onSubmit = data => {
-    setSocialCharacterization(data);
+    const socialCharacterizationIds = Object.values(data);
+    setSocialCharacterization(socialCharacterizationIds);
     handleStep();
   };
 
@@ -40,15 +40,17 @@ const SocialStep = ({ handleStep }) => {
       </div>
       <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 z-10 flex flex-col w-11/12 text-white text-2xl font-roboto font-semibold pb-12 sm:w-3/4">
         {socialPolynomials?.map(p => {
-          return <SocialQuestions
-          key={p.id}
-          pregunta={p.question}
-          opciones={p.polynomial_options}
-          control={control}
-          nombreDelControl={p.name}
-        />
+          return (
+            <SocialQuestions
+              key={p.id}
+              pregunta={p.question}
+              opciones={p.polynomial_options}
+              control={control}
+              nombreDelControl={p.name}
+            />
+          );
         })}
-        
+
         <div className="col-span-2 flex justify-end">
           <div className="w-1/3 md:w-1/6 mr-1 mt-10">
             <Button title={'Continuar'} />
