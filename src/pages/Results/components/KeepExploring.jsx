@@ -1,17 +1,22 @@
 import useFormStore from '@/store/useFormStore';
 import { useNavigate } from 'react-router-dom';
+import useFinishResponse from '@/hooks/useFinishResponse';
 
 function KeepExploring() {
   const navigate = useNavigate();
   const nextStep = useFormStore(state => state.nextStep);
   const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
+  const politicalCharacterization = useFormStore.getState().politicalCharacterization;
+  const { mutate: finishResponse } = useFinishResponse(politicalCharacterization, false);
 
   const onAccept = () => {
+    finishResponse();
     nextStep();
   };
 
   const onReject = () => {
     setAcceptedTerms(false);
+    finishResponse();
     navigate('/reconocimiento');
   };
   const paragraphs = ['¡Ahora te invitamos a seguir jugando!'];

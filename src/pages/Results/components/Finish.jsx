@@ -1,13 +1,16 @@
 import useFormStore from '@/store/useFormStore';
 import { useNavigate } from 'react-router-dom';
+import useFinishResponse from '@/hooks/useFinishResponse';
 
 function Finish() {
   const navigate = useNavigate();
-  const nextStep = useFormStore(state => state.nextStep);
   const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
+  const socialCharacterization = useFormStore.getState().socialCharacterization;
+  const { mutate: finishResponse } = useFinishResponse(socialCharacterization, true);
 
   const onReject = () => {
     setAcceptedTerms(false);
+    finishResponse();
     navigate('/reconocimiento');
   };
 

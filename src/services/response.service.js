@@ -14,4 +14,14 @@ static async createResponse(surveyResponses) {
     }
   }
 
+  static async finishResponse(payload) {
+    try {
+      const { data } = await api.put('/surveyresponse/', payload);
+      return data;
+    } catch (error) {
+      throw new Error('No se pudo finalizar la encuesta');
+    }
+  }
+
+
 }
