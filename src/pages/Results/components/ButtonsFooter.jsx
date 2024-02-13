@@ -11,10 +11,10 @@ export const ButtonsFooter = ({ title = '' }) => {
             </button>
             <div className='flex justify-center items-center gap-[16px]'>
                 <button className={`px-[10px] py-[10px] rounded-md border-solid border-[1px] ${hover} hover:invert`}>
-                    <a href="https://www.instagram.com/criteriachile/" target="_blank"><img src={instagramLogo}  /></a>
+                    <a href="https://www.instagram.com/3xi.cl/" target="_blank"><img src={instagramLogo}  /></a>
                 </button>
                 <button className={`px-[10px] py-[10px] rounded-md border-solid border-[1px] ${hover} hover:invert`}>
-                    <a href="https://www.facebook.com/criteriaresearch/" target="_blank"><img src={facebookLogo}  /></a>
+                    <a href="https://www.facebook.com/3xi.cl/" target="_blank"><img src={facebookLogo}  /></a>
                 </button>
             </div>
         </div>
