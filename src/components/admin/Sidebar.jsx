@@ -1,5 +1,4 @@
 import {
-  PiChartBar,
   PiClipboardText,
   PiHouse,
   PiListBold,
@@ -60,21 +59,6 @@ const Sidebar = () => {
                   <PiHouse className="text-xl" />
                 </div>
                 Inicio
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/analysis"
-                className={({ isActive }) =>
-                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
-                    isActive && 'bg-slate-900 text-white'
-                  }`
-                }
-              >
-                <div>
-                  <PiChartBar className="text-xl" />
-                </div>
-                Analisis
               </NavLink>
             </li>
             <li>
