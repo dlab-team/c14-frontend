@@ -14,8 +14,6 @@ const OppositeQuestions = ({ handleStep, oppositeResults, updateOppositeResult }
     }
   };
 
-  console.log(oppositeResults);
-
   return (
     <>
       <HeaderOpposite />
