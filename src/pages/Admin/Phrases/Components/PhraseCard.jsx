@@ -1,19 +1,17 @@
-import { FaRegEye, FaRegEyeSlash, FaRegTrashCan } from 'react-icons/fa6';
-import { useState } from 'react';
-
+import { FaRegTrashCan } from 'react-icons/fa6';
 import { FiEdit3 } from 'react-icons/fi';
 import { MdPercent } from 'react-icons/md';
 import { phrasesSchema } from '../../../../schemas/phrasesSchema';
 import useDeletePhrase from '@/hooks/PhrasesHook/useDeletePhrase';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import useEditPhrase from '@/hooks/PhrasesHook/useEditPhrase';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const PhraseCard = ({ phrase, index }) => {
   const { mutate: deletePhrase } = useDeletePhrase();
   const { mutate: updatePhrase } = useEditPhrase();
   const [showEdit, setShowEdit] = useState(true);
-  const [activePhrase, setActivePhrase] = useState(true);
 
   const {
     register,
@@ -63,16 +61,6 @@ const PhraseCard = ({ phrase, index }) => {
             onClick={() => deleteOnePhrase(phrase.id)}
           >
             <FaRegTrashCan size={28} color="Crimson" />
-          </button>
-          <button
-            onClick={() => setActivePhrase(!activePhrase)}
-            className="border hover:border-black border-white rounded-md transition-all hover:scale-105 mx-1"
-          >
-            {activePhrase ? (
-              <FaRegEye size={28} color="black" />
-            ) : (
-              <FaRegEyeSlash size={28} color="black" />
-            )}
           </button>
           <button
             onClick={() => {
