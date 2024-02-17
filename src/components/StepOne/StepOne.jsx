@@ -17,8 +17,12 @@ const StepOne = ({ handleStep }) => {
 
   const { data: politicalOptions } = useGetPoliticalOptions();
   const setPoliticalCharacterization = useFormStore(state => state.setPoliticalCharacterization);
+  const setPoliticalName = useFormStore(state => state.setPoliticalName);
+
   const onSubmit = data => {
-    setPoliticalCharacterization(data.politicalCharacterization);
+    const { id, name } = JSON.parse(data.politicalCharacterization);
+    setPoliticalCharacterization(id);
+    setPoliticalName(name);
     handleStep();
   };
 
@@ -53,7 +57,11 @@ const StepOne = ({ handleStep }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <>
-                      <input type="radio" {...field} value={option.id} />
+                      <input
+                        type="radio"
+                        {...field}
+                        value={JSON.stringify({ id: option.id, name: option.name })}
+                      />
                       {option.name}
                     </>
                   )}
