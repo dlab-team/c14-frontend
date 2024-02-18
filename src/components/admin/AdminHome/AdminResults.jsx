@@ -4,13 +4,21 @@ import { DateTime } from 'luxon';
 import ResultTrend from './components/ResultTrend';
 import useGetMetrics from '@/hooks/useGetMetrics';
 import useGetPoliticalPolynomial from '@/hooks/SurveyResponse/useGetPoliticalPolynomial';
+import useGetSocialsPolynomials from '@/hooks/useGetSocialsPolynomials';
 
 const AdminResults = () => {
+  const metrics = useGetMetrics();
+  const { data: politicalPolynomial } = useGetPoliticalPolynomial();
+  const { data: socialPolynomials } = useGetSocialsPolynomials();
   const [visits, setVisits] = useState(0);
   const [finished, setFinished] = useState(0);
   const [duration, setDuration] = useState(0);
-  const metrics = useGetMetrics();
-  const { data: politicalPolynomial } = useGetPoliticalPolynomial();
+
+  const [selectedId, setSelectedId] = useState('');
+
+  const handleSelectChange = event => {
+    setSelectedId(event.target.value);
+  };
 
   useEffect(() => {
     if (metrics.data) {
@@ -20,6 +28,12 @@ const AdminResults = () => {
       setFinished(metrics.data.finished);
     }
   }, [metrics]);
+
+  useEffect(() => {
+    if (socialPolynomials?.length > 0) {
+      setSelectedId(socialPolynomials[0].id);
+    }
+  }, [socialPolynomials]);
 
   return (
     <div>
@@ -61,65 +75,23 @@ const AdminResults = () => {
         <div className="self-stretch h-3.5 text-black text-sm font-medium font-['Roboto']">
           Tendencia Social
         </div>
-        <div className="h-[37px] px-5 bg-white rounded-lg border border-stone-300 justify-center items-center gap-4 inline-flex">
-          <select id="opcionTendenciaSocial" name="opcionTendenciaSocial">
-            <option value="encuestasRealizadas">Encuestas Realizadas</option>
+        <div className="px-2 bg-white rounded-lg border border-stone-300 justify-center items-center gap-4 inline-flex">
+          <select
+            id="opcionTendenciaSocial"
+            name="opcionTendenciaSocial"
+            placeholder="Selecciona una opción"
+            className="px-3 py-2"
+            value={selectedId}
+            onChange={handleSelectChange}
+          >
+            {socialPolynomials?.map(item => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
           </select>
         </div>
-        <div className="self-stretch h-[133px] flex-col justify-start items-center gap-6 flex">
-          <div className="w-[328px] justify-start items-start gap-6 inline-flex">
-            <div className="justify-start items-start gap-2 flex">
-              <div className="w-[13px] h-[13px] bg-lime-400 rounded-full"></div>
-              <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                Izquierda
-              </div>
-            </div>
-            <div className="justify-start items-start gap-[30px] flex">
-              <div className="justify-start items-start gap-2 flex">
-                <div className="w-[13px] h-[13px] bg-orange-400 rounded-full"></div>
-                <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                  Derecha
-                </div>
-              </div>
-              <div className="justify-start items-start gap-2 flex">
-                <div className="w-[13px] h-[13px] bg-red-500 rounded-full"></div>
-                <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                  Independiente
-                </div>
-              </div>
-            </div>
-            <div className="justify-start items-start gap-2 flex">
-              <div className="w-[13px] h-[13px] bg-purple-700 rounded-full"></div>
-              <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                Centro
-              </div>
-            </div>
-          </div>
-          <div className="self-stretch h-[65px] flex-col justify-center items-center gap-[9px] flex">
-            <div className="w-[329px] shadow justify-center items-center inline-flex relative">
-              <div className="w-[4%] h-[42px] bg-lime-400 rounded-tl-lg rounded-bl-lg relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  4
-                </div>
-              </div>
-              <div className="w-[10%] h-[42px] bg-orange-400 relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  10
-                </div>
-              </div>
-              <div className="w-[28%] h-[42px] bg-red-500 relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  28
-                </div>
-              </div>
-              <div className="w-[58%] h-[42px] bg-purple-700 rounded-tr-lg rounded-br-lg relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  58
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {selectedId && <ResultTrend polynomialId={selectedId} />}
       </div>
     </div>
   );
