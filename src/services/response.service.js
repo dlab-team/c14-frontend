@@ -1,13 +1,11 @@
 import api from './api.services';
 
 export class ResponseService {
-
   static async createResponse(surveyResponses) {
     try {
-
-      const { data, status } = await api.post('/surveyresponse/', surveyResponses)
+      const { data, status } = await api.post('/surveyresponse/', surveyResponses);
       if (status === 201) {
-        return data.id
+        return data.id;
       }
     } catch (error) {
       throw new Error('Error al obtener informacion');
@@ -23,7 +21,7 @@ export class ResponseService {
     }
   }
 
-  static async politicalTrendResults(polynomialId) {
+  static async trendResults(polynomialId) {
     try {
       const { data } = await api.get(`/surveyresponse/groupby/${polynomialId}`);
       return data;
@@ -31,5 +29,4 @@ export class ResponseService {
       throw new Error('No se pudo obtener la información');
     }
   }
-
 }

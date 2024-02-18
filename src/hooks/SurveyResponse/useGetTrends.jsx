@@ -2,10 +2,10 @@ import { ResponseService } from '@/services/response.service';
 import { toast } from 'sonner';
 import { useQuery } from 'react-query';
 
-const useGetPoliticalTrend = polynomialId => {
+export const useGetTrends = polynomialId => {
   const { data, isLoading, isError } = useQuery(
-    ['politicalTrend', polynomialId],
-    () => ResponseService.politicalTrendResults(polynomialId),
+    ['trends', polynomialId],
+    () => ResponseService.trendResults(polynomialId),
     {
       onError: error => {
         toast.error(error?.message || 'Error al obtener las tendencias');
@@ -15,5 +15,3 @@ const useGetPoliticalTrend = polynomialId => {
 
   return { data, isLoading, isError };
 };
-
-export default useGetPoliticalTrend;
