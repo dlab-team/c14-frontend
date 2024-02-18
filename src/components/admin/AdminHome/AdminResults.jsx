@@ -37,8 +37,8 @@ const AdminResults = () => {
   }, [socialPolynomials]);
 
   return (
-    <div>
-      <div className="relative w-[100%] h-[106px] px-[20%] mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%] sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 -mt-11 py-8 bg-white rounded-lg border border-stone-300 align-center items-center gap-8 inline-flex z-60">
+    <div className="flex flex-col gap-4 py-4">
+      <div className="relative w-full grid grid-cols-2 md:grid-cols-3 mx-auto sm:w-full md:w-[75%] py-6 bg-white rounded-lg border border-stone-300 align-center items-center gap-4 z-60">
         <div className="h-[69px] flex-col justify-start items-center gap-1 inline-flex">
           <div className="text-purple-700 text-[40px] font-medium font-['Roboto'] leading-[43.60px]">
             {visits}
@@ -47,7 +47,7 @@ const AdminResults = () => {
             Visitas
           </div>
         </div>
-        <div className="px-8 border-l-2 border-r-2 border-purple-700 flex-col justify-start items-center gap-1 inline-flex">
+        <div className="px-8 border-l-2 md:border-r-2 border-purple-700 flex-col justify-start items-center gap-1 inline-flex">
           <div className="text-purple-700 text-[40px] font-medium font-['Roboto'] leading-[43.60px]">
             {finished}
           </div>
@@ -55,7 +55,7 @@ const AdminResults = () => {
             Encuestas finalizadas
           </div>
         </div>
-        <div className="flex-col justify-start items-center gap-1 inline-flex">
+        <div className="col-span-2 md:col-span-1 flex-col justify-start items-center gap-1 inline-flex">
           <div className="text-purple-700 text-[40px] font-medium font-['Roboto'] leading-[43.60px]">
             {duration}
           </div>
@@ -65,14 +65,14 @@ const AdminResults = () => {
         </div>
       </div>
 
-      <div className="w-[100%] px-6 mt-2 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%]sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
+      <div className="w-[100%] px-6 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%] pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
         <div className="self-stretch h-3.5 text-black text-sm font-medium font-['Roboto']">
           Tendencia Política
         </div>
         {politicalPolynomial && <ResultTrend polynomialId={politicalPolynomial.id} />}
       </div>
 
-      <div className="w-[100%] px-6 mt-2 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%]sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
+      <div className="w-[100%] px-6 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%] pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
         <div className="self-stretch h-3.5 text-black text-sm font-medium font-['Roboto']">
           Tendencia Social
         </div>
