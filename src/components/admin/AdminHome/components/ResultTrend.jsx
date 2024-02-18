@@ -22,8 +22,8 @@ const ResultTrend = ({ polynomialId }) => {
   }
 
   return (
-    <div className="self-stretch h-[133px] flex-col justify-start items-center gap-6 flex">
-      <div className="w-[328px] justify-start items-start gap-6 inline-flex">
+    <div className="self-stretch flex-col justify-start items-center gap-6 flex">
+      <div className="flex flex-wrap justify-start items-start gap-y-4 gap-x-6 px-6">
         {data?.map((option, index) => (
           <div key={`option-${option.name}`} className="justify-start items-start gap-2 flex">
             <div
