@@ -25,7 +25,7 @@ export class ResponseService {
 
   static async politicalTrendResults(polynomialId) {
     try {
-      const { data } = await api.post(`/surveyresponse/groupby/${polynomialId}`);
+      const { data } = await api.get(`/surveyresponse/groupby/${polynomialId}`);
       return data;
     } catch (error) {
       throw new Error('No se pudo obtener la información');

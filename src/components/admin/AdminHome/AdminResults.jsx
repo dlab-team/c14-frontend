@@ -1,14 +1,37 @@
 import { useEffect, useState } from 'react';
-
 import { DateTime } from 'luxon';
 import Politicaltrend from './components/Politicaltrend';
+import Socialtrend from './components/Socialtrend';
 import useGetMetrics from '@/hooks/useGetMetrics';
+import useGetAllPoly from '@/hooks/PolynomialsHook/useGetAllPoly';
 
 const AdminResults = () => {
   const [visits, setVisits] = useState(0);
   const [finished, setFinished] = useState(0);
   const [duration, setDuration] = useState(0);
   const metrics = useGetMetrics();
+  const { data: polynomialsData } = useGetAllPoly();
+  const [selectedId, setSelectedId] = useState('');
+  const handleSelectChange = event => {
+    setSelectedId(event.target.value);
+  };
+
+  let namesAndIds = [];
+
+  if (polynomialsData) {
+    namesAndIds = polynomialsData
+      .filter(item => item.name !== 'Político')
+      .map(item => ({
+        id: item.id,
+        name: item.name,
+      }));
+  }
+
+  useEffect(() => {
+    if (namesAndIds.length > 0 && selectedId === '') {
+      setSelectedId(namesAndIds[0].id);
+    }
+  }, [namesAndIds]);
 
   useEffect(() => {
     if (metrics.data) {
@@ -90,64 +113,22 @@ const AdminResults = () => {
           Tendencia Social
         </div>
         <div className="h-[37px] px-5 bg-white rounded-lg border border-stone-300 justify-center items-center gap-4 inline-flex">
-          <select id="opcionTendenciaSocial" name="opcionTendenciaSocial">
-            <option value="encuestasRealizadas">Encuestas Realizadas</option>
+          <select
+            id="opcionTendenciaSocial"
+            name="opcionTendenciaSocial"
+            placeholder="Selecciona una opción"
+            value={selectedId}
+            onChange={handleSelectChange}
+          >
+            {namesAndIds &&
+              namesAndIds.map(item => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
           </select>
         </div>
-        <div className="self-stretch h-[133px] flex-col justify-start items-center gap-6 flex">
-          <div className="w-[328px] justify-start items-start gap-6 inline-flex">
-            <div className="justify-start items-start gap-2 flex">
-              <div className="w-[13px] h-[13px] bg-lime-400 rounded-full"></div>
-              <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                Izquierda
-              </div>
-            </div>
-            <div className="justify-start items-start gap-[30px] flex">
-              <div className="justify-start items-start gap-2 flex">
-                <div className="w-[13px] h-[13px] bg-orange-400 rounded-full"></div>
-                <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                  Derecha
-                </div>
-              </div>
-              <div className="justify-start items-start gap-2 flex">
-                <div className="w-[13px] h-[13px] bg-red-500 rounded-full"></div>
-                <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                  Independiente
-                </div>
-              </div>
-            </div>
-            <div className="justify-start items-start gap-2 flex">
-              <div className="w-[13px] h-[13px] bg-purple-700 rounded-full"></div>
-              <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                Centro
-              </div>
-            </div>
-          </div>
-          <div className="self-stretch h-[65px] flex-col justify-center items-center gap-[9px] flex">
-            <div className="w-[329px] shadow justify-center items-center inline-flex relative">
-              <div className="w-[4%] h-[42px] bg-lime-400 rounded-tl-lg rounded-bl-lg relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  4
-                </div>
-              </div>
-              <div className="w-[10%] h-[42px] bg-orange-400 relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  10
-                </div>
-              </div>
-              <div className="w-[28%] h-[42px] bg-red-500 relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  28
-                </div>
-              </div>
-              <div className="w-[58%] h-[42px] bg-purple-700 rounded-tr-lg rounded-br-lg relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  58
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Socialtrend polynomialId={selectedId} />
       </div>
     </div>
   );
