@@ -1,5 +1,5 @@
 import AdminHeader from '@/components/admin/AdminHeader';
-import AdminResults from '@/components/admin/AdminResults';
+import AdminResults from '@/components/admin/AdminHome/AdminResults';
 import useAuthStore from '@/store/useAuthStore';
 
 const Admin = () => {
@@ -13,7 +13,6 @@ const Admin = () => {
       />
       <AdminResults />
       <main className="p-8"></main>
-      
     </>
   );
 };

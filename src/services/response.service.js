@@ -2,11 +2,11 @@ import api from './api.services';
 
 export class ResponseService {
 
-static async createResponse(surveyResponses) {
+  static async createResponse(surveyResponses) {
     try {
-     
+
       const { data, status } = await api.post('/surveyresponse/', surveyResponses)
-      if (status === 201) {     
+      if (status === 201) {
         return data.id
       }
     } catch (error) {
@@ -23,5 +23,13 @@ static async createResponse(surveyResponses) {
     }
   }
 
+  static async politicalTrendResults(polynomialId) {
+    try {
+      const { data } = await api.post(`/surveyresponse/groupby/${polynomialId}`);
+      return data;
+    } catch (error) {
+      throw new Error('No se pudo obtener la información');
+    }
+  }
 
 }
