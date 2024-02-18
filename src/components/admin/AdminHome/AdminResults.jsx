@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import useGetMetrics from '@/hooks/useGetMetrics';
+import { useEffect, useState } from 'react';
+
 import { DateTime } from 'luxon';
+import Politicaltrend from './components/Politicaltrend';
+import useGetMetrics from '@/hooks/useGetMetrics';
 
 const AdminResults = () => {
   const [visits, setVisits] = useState(0);
@@ -65,12 +67,6 @@ const AdminResults = () => {
                   Derecha
                 </div>
               </div>
-              <div className="justify-start items-start gap-2 flex">
-                <div className="w-[13px] h-[13px] bg-red-500 rounded-full"></div>
-                <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                  Independiente
-                </div>
-              </div>
             </div>
             <div className="justify-start items-start gap-2 flex">
               <div className="w-[13px] h-[13px] bg-purple-700 rounded-full"></div>
@@ -78,31 +74,14 @@ const AdminResults = () => {
                 Centro
               </div>
             </div>
-          </div>
-          <div className="self-stretch h-[65px] flex-col justify-center items-center gap-[9px] flex">
-            <div className="w-[329px] shadow justify-center items-center inline-flex relative">
-              <div className="w-[4%] h-[42px] bg-lime-400 rounded-tl-lg rounded-bl-lg relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  4
-                </div>
-              </div>
-              <div className="w-[10%] h-[42px] bg-orange-400 relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  10
-                </div>
-              </div>
-              <div className="w-[28%] h-[42px] bg-red-500 relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  28
-                </div>
-              </div>
-              <div className="w-[58%] h-[42px] bg-purple-700 rounded-tr-lg rounded-br-lg relative">
-                <div className="absolute top-11 w-full text-center text-black text-xs font-normal font-['Roboto']">
-                  58
-                </div>
+            <div className="justify-start items-start gap-2 flex">
+              <div className="w-[13px] h-[13px] bg-red-500 rounded-full"></div>
+              <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
+                Independiente
               </div>
             </div>
           </div>
+          <Politicaltrend />
         </div>
       </div>
 
