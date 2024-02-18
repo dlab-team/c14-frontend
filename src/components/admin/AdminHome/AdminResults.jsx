@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-
+import Select from 'react-select';
 import { DateTime } from 'luxon';
+
 import ResultTrend from './components/ResultTrend';
 import useGetMetrics from '@/hooks/useGetMetrics';
 import useGetPoliticalPolynomial from '@/hooks/SurveyResponse/useGetPoliticalPolynomial';
@@ -16,8 +17,8 @@ const AdminResults = () => {
 
   const [selectedId, setSelectedId] = useState('');
 
-  const handleSelectChange = event => {
-    setSelectedId(event.target.value);
+  const handleSelectChange = polynomial => {
+    setSelectedId(polynomial.id);
   };
 
   useEffect(() => {
@@ -64,33 +65,27 @@ const AdminResults = () => {
         </div>
       </div>
 
-      <div className="w-[100%] h-[242px] px-[29px] mt-2 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%]sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
+      <div className="w-[100%] px-6 mt-2 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%]sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
         <div className="self-stretch h-3.5 text-black text-sm font-medium font-['Roboto']">
           Tendencia Política
         </div>
         {politicalPolynomial && <ResultTrend polynomialId={politicalPolynomial.id} />}
       </div>
 
-      <div className="w-[100%] h-[319px] px-[29px] mt-2 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%]sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
+      <div className="w-[100%] px-6 mt-2 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%]sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
         <div className="self-stretch h-3.5 text-black text-sm font-medium font-['Roboto']">
           Tendencia Social
         </div>
-        <div className="px-2 bg-white rounded-lg border border-stone-300 justify-center items-center gap-4 inline-flex">
-          <select
-            id="opcionTendenciaSocial"
-            name="opcionTendenciaSocial"
-            placeholder="Selecciona una opción"
-            className="px-3 py-2"
-            value={selectedId}
-            onChange={handleSelectChange}
-          >
-            {socialPolynomials?.map(item => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Select
+          id="opcionTendenciaSocial"
+          placeholder="Selecciona una opción"
+          className="w-64"
+          options={socialPolynomials}
+          getOptionLabel={p => p.name}
+          getOptionValue={p => p.id}
+          onChange={handleSelectChange}
+          isSearchable={false}
+        />
         {selectedId && <ResultTrend polynomialId={selectedId} />}
       </div>
     </div>
