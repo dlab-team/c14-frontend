@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import { DateTime } from 'luxon';
-import Politicaltrend from './components/Politicaltrend';
+import ResultTrend from './components/ResultTrend';
 import useGetMetrics from '@/hooks/useGetMetrics';
+import useGetPoliticalPolynomial from '@/hooks/SurveyResponse/useGetPoliticalPolynomial';
 
 const AdminResults = () => {
   const [visits, setVisits] = useState(0);
   const [finished, setFinished] = useState(0);
   const [duration, setDuration] = useState(0);
   const metrics = useGetMetrics();
+  const { data: politicalPolynomial } = useGetPoliticalPolynomial();
 
   useEffect(() => {
     if (metrics.data) {
@@ -52,37 +54,7 @@ const AdminResults = () => {
         <div className="self-stretch h-3.5 text-black text-sm font-medium font-['Roboto']">
           Tendencia Política
         </div>
-        <div className="self-stretch h-[133px] flex-col justify-start items-center gap-6 flex">
-          <div className="w-[328px] justify-start items-start gap-6 inline-flex">
-            <div className="justify-start items-start gap-2 flex">
-              <div className="w-[13px] h-[13px] bg-lime-400 rounded-full"></div>
-              <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                Izquierda
-              </div>
-            </div>
-            <div className="justify-start items-start gap-[30px] flex">
-              <div className="justify-start items-start gap-2 flex">
-                <div className="w-[13px] h-[13px] bg-orange-400 rounded-full"></div>
-                <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                  Derecha
-                </div>
-              </div>
-            </div>
-            <div className="justify-start items-start gap-2 flex">
-              <div className="w-[13px] h-[13px] bg-purple-700 rounded-full"></div>
-              <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                Centro
-              </div>
-            </div>
-            <div className="justify-start items-start gap-2 flex">
-              <div className="w-[13px] h-[13px] bg-red-500 rounded-full"></div>
-              <div className="text-center text-zinc-600 text-xs font-normal font-['Roboto']">
-                Independiente
-              </div>
-            </div>
-          </div>
-          <Politicaltrend />
-        </div>
+        {politicalPolynomial && <ResultTrend polynomialId={politicalPolynomial.id} />}
       </div>
 
       <div className="w-[100%] h-[319px] px-[29px] mt-2 mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%]sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 pt-6 pb-10 bg-white rounded-lg border border-stone-300 flex-col justify-center items-center gap-[42px] inline-flex">
