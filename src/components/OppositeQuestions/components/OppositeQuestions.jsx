@@ -23,9 +23,13 @@ const OppositeQuestions = ({ handleStep, oppositeResults, updateOppositeResult }
     }
   };
 
+  if (!oppositeResults[currentPhraseIndex]) {
+    return null;
+  }
+
   return (
     <>
-      <HeaderOpposite />
+      <HeaderOpposite phrase={oppositeResults[currentPhraseIndex]} />
       {oppositeResults?.length > 0 && (
         <CardOpposite
           phrase={oppositeResults[currentPhraseIndex]}
