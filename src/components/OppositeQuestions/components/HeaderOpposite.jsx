@@ -27,14 +27,11 @@ const HeaderOpposite = ({ phrase }) => {
     const options = data?.filter(
       opt => opt.polynomialId === phrase.polynomialId && opt.group === phrase.group
     );
-    const formattedOptions = options
-      ?.map(o => o.name)
-      .join(', ')
-      .toLowerCase();
+    const formattedMessage = (options?.map(o => o.name).join(', ') ?? '')
+      .toLowerCase()
+      .replace(/^\w/, c => c.toUpperCase());
 
-    return formattedOptions
-      ? formattedOptions.charAt(0).toUpperCase() + formattedOptions.slice(1)
-      : '';
+    return formattedMessage;
   }, [data, phrase]);
 
   return (
