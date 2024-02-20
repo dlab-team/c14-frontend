@@ -10,6 +10,7 @@ import {
 
 import AdminModal from './AdminModal';
 import Button from '@/layouts/Button';
+import { MdTextRotationNone } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import useAuthStore from '@/store/useAuthStore';
@@ -75,6 +76,21 @@ const Sidebar = () => {
                   <PiClipboardText className="text-xl" />
                 </div>
                 Frases y Respuestas
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/admin/polarizedPhrases"
+                className={({ isActive }) =>
+                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
+                    isActive && 'bg-slate-900 text-white'
+                  }`
+                }
+              >
+                <div>
+                  <MdTextRotationNone className="text-xl" />
+                </div>
+                Frases Politicas Polarizadas
               </NavLink>
             </li>
             <li>
