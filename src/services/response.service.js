@@ -1,13 +1,11 @@
 import api from './api.services';
 
 export class ResponseService {
-
-static async createResponse(surveyResponses) {
+  static async createResponse(surveyResponses) {
     try {
-     
-      const { data, status } = await api.post('/surveyresponse/', surveyResponses)
-      if (status === 201) {     
-        return data.id
+      const { data, status } = await api.post('/surveyresponse/', surveyResponses);
+      if (status === 201) {
+        return data.id;
       }
     } catch (error) {
       throw new Error('Error al obtener informacion');
@@ -23,5 +21,12 @@ static async createResponse(surveyResponses) {
     }
   }
 
-
+  static async trendResults(polynomialId) {
+    try {
+      const { data } = await api.get(`/surveyresponse/groupby/${polynomialId}`);
+      return data;
+    } catch (error) {
+      throw new Error('No se pudo obtener la información');
+    }
+  }
 }
