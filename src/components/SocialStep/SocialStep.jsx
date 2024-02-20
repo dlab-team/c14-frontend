@@ -1,5 +1,4 @@
-import './SocialStep.css';
-
+import { useState } from 'react';
 import Button from '../../layouts/Button';
 import PropTypes from 'prop-types';
 import SocialQuestions from './SocialQuestions';
@@ -12,13 +11,26 @@ import useGetSocialsPolynomials from '@/hooks/useGetSocialsPolynomials';
 const SocialStep = ({ handleStep }) => {
   const { control, handleSubmit } = useForm();
   const setSocialCharacterization = useFormStore(state => state.setSocialCharacterization);
-
+  const setSocialNames = useFormStore(state => state.setSocialNames);
   const { data: socialPolynomials } = useGetSocialsPolynomials();
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const onSubmit = data => {
-    const socialCharacterizationIds = Object.values(data);
-    setSocialCharacterization(socialCharacterizationIds);
+    const selectedOptionNames = Object.values(selectedOptions)
+      .map(option => option.name)
+      .join(', ')
+      .toLowerCase();
+    setSocialNames(selectedOptionNames);
+    const socialCharacterizationValues = Object.values(data);
+    setSocialCharacterization(socialCharacterizationValues);
     handleStep();
+  };
+
+  const handleOptionSelect = (questionId, option) => {
+    setSelectedOptions(prevSelectedOptions => ({
+      ...prevSelectedOptions,
+      [questionId]: option,
+    }));
   };
 
   return (
@@ -39,17 +51,16 @@ const SocialStep = ({ handleStep }) => {
         />
       </div>
       <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 z-10 flex flex-col w-11/12 text-white text-2xl font-roboto font-semibold pb-12 sm:w-3/4">
-        {socialPolynomials?.map(p => {
-          return (
-            <SocialQuestions
-              key={p.id}
-              pregunta={p.question}
-              opciones={p.polynomial_options}
-              control={control}
-              nombreDelControl={p.name}
-            />
-          );
-        })}
+        {socialPolynomials?.map(p => (
+          <SocialQuestions
+            key={p.id}
+            pregunta={p.question}
+            opciones={p.polynomial_options}
+            control={control}
+            nombreDelControl={p.name}
+            onOptionSelect={option => handleOptionSelect(p.id, option)}
+          />
+        ))}
 
         <div className="col-span-2 flex justify-end">
           <div className="w-1/3 md:w-1/6 mr-1 mt-10">

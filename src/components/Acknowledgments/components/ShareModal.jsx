@@ -94,7 +94,7 @@ function ShareModal({ isOpen, onClose }) {
                 type="text"
                 placeholder="https://laboratoriocivico.vercel.app/"
                 className="text-slate-500 pl-2 bg-white rounded-l-lg border border-slate-300 w-full h-10 items-center text-sm overflow"
-                value={url}
+                defaultValue={url}
               />
               <button
                 type="button"
