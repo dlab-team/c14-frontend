@@ -1,11 +1,14 @@
-import AdminHeader from '@/components/admin/AdminHeader';
 import { twMerge } from 'tailwind-merge';
+
+import AdminHeader from '@/components/admin/AdminHeader';
 import useGetAllPoliticalPhrases from '@/hooks/PhrasesHook/useGetAllPoliticalPhrases';
-import { useState } from 'react';
 
 const PolarizedPoliticalPhrases = () => {
-  const { data: phrases, isLoading, isError, refetch } = useGetAllPoliticalPhrases();
-  const [isPolarized, setIsPolarized] = useState(true);
+  const { data: phrases, isLoading, refetch } = useGetAllPoliticalPhrases();
+
+  const handleToggle = () => {
+    // TODO consumir endpoint para cambiar el estado de la frase
+  };
 
   return (
     <>
@@ -35,36 +38,39 @@ const PolarizedPoliticalPhrases = () => {
               <tr key={phrase.id}>
                 <th
                   scope="row"
-                  className="hidden sm:table-cell px-2 py-2 font-medium  whitespace-nowrap w-2 text-center"
+                  className="hidden sm:table-cell px-2 py-2 font-medium whitespace-nowrap w-2 text-center"
                 >
                   {index + 1}.-
                 </th>
                 <th
                   scope="row"
-                  className="flex px-2 py-2 font-medium whitespace-normal w-auto overflow-auto"
+                  className="px-2 py-2 font-medium whitespace-normal w-auto overflow-auto min-w-[10rem]"
                 >
                   {phrase.text}
                 </th>
-                <td className="hidden md:table-cell px-3 py-2 ms-2 font-medium whitespace-nowrap w-10">
+                <td className="px-3 py-2 ms-2 font-medium whitespace-nowrap w-10">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-center rounded-2xl">
                     <button
                       className={twMerge(
-                        'px-4 py-2 text-md rounded-l-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 bg-neutral-400 border',
-                        isPolarized === 'Polarizado' && 'bg-purple-500'
+                        'max-w-md text-md rounded-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 bg-neutral-400 border overflow-hidden'
                       )}
-                      // onClick={handleClick}
+                      onClick={() => handleToggle(phrase.id)}
                     >
-                      Polarizado
-                    </button>
-
-                    <button
-                      className={twMerge(
-                        'px-4 py-2 text-md rounded-r-2xl text-white font-bold flex justify-center items-center transition-all hover:scale-105 bg-neutral-400 border',
-                        isPolarized === 'No Polarizado' && 'bg-teal-500'
-                      )}
-                      // onClick={handleClick}
-                    >
-                      No Polarizado
+                      <span
+                        className={twMerge(
+                          'w-28 p-2 block md:hidden',
+                          phrase.neutral && 'bg-purple-500',
+                          !phrase.neutral && 'bg-teal-500'
+                        )}
+                      >
+                        {phrase.neutral ? 'Si' : 'No'}
+                      </span>
+                      <span className={twMerge('w-28 p-2 hidden md:block', !phrase.neutral && 'bg-teal-500')}>
+                        No Polarizado
+                      </span>
+                      <span className={twMerge('w-28 p-2 hidden md:block', phrase.neutral && 'bg-purple-500')}>
+                        Polarizado
+                      </span>
                     </button>
                   </div>
                 </td>

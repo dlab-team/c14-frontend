@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 const useGetAllPoliticalPhrases = () => {
   const { data, isLoading, isError, refetch } = useQuery(
-    'AllPhrases',
+    'political-phrases',
     PhrasesService.getAllPoliticalPhrases,
     {
       onError: error => {
