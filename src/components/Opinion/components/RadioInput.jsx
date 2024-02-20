@@ -16,13 +16,13 @@ const RadioInput = ({
   return (
     <Fragment>
       <div
-        className={`flex items-center px-5 text-white rounded-t-lg md:rounded-tr-none md:rounded-l-lg  ${bgColor} h-28 md:h-20 md:shadow-xl mt-8 md:mt-0`}
+        className={`flex items-center px-5 text-white rounded-t-lg md:rounded-tr-none md:rounded-l-lg  ${bgColor} mh-20 mb-3 md:shadow-xl mt-8 md:mt-0`}
       >
         <p>{sentence}</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 divide-x-2 divide-y-2 md:divide-y-0 border-2 md:mb-3 h-fit md:h-20 md:shadow-xl">
         <div className="flex justify-center items-center md:hidden h-14 bg-gray-100">
-          <span className="">Muy en desacuerdo</span>
+          <span className="text-center">Muy en desacuerdo</span>
         </div>
         <div className="grid place-content-center bg-gray-100">
           <input
