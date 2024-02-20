@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'sonner';
 import { PhrasesService } from '@/services/phrases.service';
 
-const useEditPhrase = () => {
+const usePutPhrasesPolarized = () => {
   const queryClient = useQueryClient();
 
   return useMutation(({ id }) => PhrasesService.putPhrasesPolarized(id), {
@@ -18,4 +18,4 @@ const useEditPhrase = () => {
   });
 };
 
-export default useEditPhrase;
+export default usePutPhrasesPolarized;
