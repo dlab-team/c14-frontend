@@ -141,7 +141,7 @@ export const Perception = () => {
             <div className="w-[20px]">{Math.abs(item.value - item.percentage)}%</div>
           </div>
         ))}
-        <div className="flex justify-between mt-2 ml-[30px] md:ml-[34px] mr-8">
+        <div className="flex justify-between mt-2 ml-[30px] sm:ml-[110px] md:ml-[125px] mr-8">
           <div className="text-sm">0</div>
           <div className="text-sm hidden sm:block">10</div>
           <div className="text-sm">20</div>
