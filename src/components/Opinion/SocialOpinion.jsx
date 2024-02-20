@@ -9,7 +9,6 @@ const SocialOpinion = ({ handleStep }) => {
   const setSocialResult = useFormStore(s => s.setSocialResult);
   const { data: socialPhrases, isLoading, isError } = useGetSocialPhrases(optionIds);
   const updateSocialResult = useFormStore(state => state.updateSocialResult);
-
   useEffect(() => {
     if (!socialResult?.length) {
       setSocialResult(socialPhrases);

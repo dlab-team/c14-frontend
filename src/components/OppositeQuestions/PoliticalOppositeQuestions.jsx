@@ -9,7 +9,7 @@ const PoliticalOppositeQuestions = ({ handleStep }) => {
   const setOppositePoliticalResult = useFormStore(s => s.setOppositePoliticalResult);
   const { data: oppositePoliticalPhrases } = useGetOppositePoliticalPhrases(optionId);
   const updateOppositePoliticalResult = useFormStore(state => state.updateOppositePoliticalResult);
-
+  console.log(oppositePoliticalResult)
   useEffect(() => {
     if (!oppositePoliticalResult?.length) {
       setOppositePoliticalResult(oppositePoliticalPhrases);
