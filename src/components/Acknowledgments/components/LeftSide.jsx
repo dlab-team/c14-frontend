@@ -1,5 +1,4 @@
 import { IoCheckmarkCircle } from 'react-icons/io5';
-import { IoShareSocialOutline } from 'react-icons/io5';
 import ShareModal from './ShareModal';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -18,10 +17,6 @@ const LeftSide = () => {
 
   const goBack = () => {
     navigate('/');
-  };
-
-  const downloadResults = () => {
-    alert('Descargando resultados');
   };
   return (
     <>
@@ -56,15 +51,9 @@ const LeftSide = () => {
               <button
                 type="button"
                 className="text-white bg-black rounded-lg border border-black w-full h-11 font-semibold text-lg"
-                onClick={downloadResults}
+                onClick={openModal}
               >
-                Descargar Resultados
-              </button>
-              <button type="button" onClick={openModal}>
-                <IoShareSocialOutline
-                  onClick={openModal}
-                  className="w-12 h-11 bg-black text-white rounded-lg p-1"
-                />
+                Compartir Resultados
               </button>
             </div>
             <div className="w-full flex justify-center">

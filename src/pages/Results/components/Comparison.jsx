@@ -1,5 +1,4 @@
 import './Comparison.css';
-
 import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
@@ -9,6 +8,10 @@ function Comparison() {
   const step = useFormStore.getState().currentSurveySection;
   const politicalResult = useFormStore(s => s.politicalResult);
   const socialResult = useFormStore(s => s.socialResult);
+  const politicalName = useFormStore.getState().politicalName;
+  const socialNames = useFormStore.getState().socialNames;
+
+  const name = step === 3 ? politicalName : socialNames;
 
   const mappedResult = useMemo(() => {
     let result = [];
@@ -23,7 +26,7 @@ function Comparison() {
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
-        Yo en comparación con otros
+        Yo en comparación con otros de: {name}
       </div>
       <div className="flex items-center justify-end font-bold">Mis respuestas</div>
       <div className="invisible lg:visible lg:flex items-center justify-begin lg:translate-x-[-5%] lg:translate-y-[15px] lg:pl-1 pl-10">
@@ -84,8 +87,10 @@ function Comparison() {
       </div>
       <div className="mt-11 lg:hidden">
         {mappedResult.map((item, index) => (
-          <div className="flex items-center justify-begin mt-2 w-[90%]" key={index}>
-            <div className="text-xs font-semibold">{index + 1 + '. ' + item.text}</div>
+          <div className="flex items-center mt-2 w-[90%]" key={index}>
+            <div className="font-semibold item-center justify-center">
+              {index + 1 + '. ' + item.text}
+            </div>
           </div>
         ))}
       </div>

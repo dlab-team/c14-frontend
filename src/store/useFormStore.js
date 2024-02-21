@@ -7,6 +7,8 @@ const useFormStore = create(
     responseId: null,
     acceptedTerms: null,
     politicalCharacterization: null,
+    politicalName: null,
+    socialNames: null,
     currentSurveySection: 0,
     howCompare: null,
     politicalResult: [],
@@ -15,6 +17,16 @@ const useFormStore = create(
     oppositeSocialResult: [],
     socialCharacterization:[],
     totalPerceptionGap: 0,
+    setPoliticalName : politicalName => {
+      set(state => {
+        return { ...state, politicalName };
+      });
+    },
+    setSocialNames: socialNames => {
+      set(state => {
+        return { ...state, socialNames };
+      });
+    },
     setTotalPerceptionGap: totalPerceptionGap => {
       set(state => {
         return { ...state, totalPerceptionGap };
@@ -145,6 +157,8 @@ const useFormStore = create(
         oppositeSocialResult: [],
         responseId: null,
         totalPerceptionGap: 0,
+        socialNames: [],
+        politicalName: null,
       }));
     },
   }),

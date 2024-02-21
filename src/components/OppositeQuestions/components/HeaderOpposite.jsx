@@ -27,10 +27,11 @@ const HeaderOpposite = ({ phrase }) => {
     const options = data?.filter(
       opt => opt.polynomialId === phrase.polynomialId && opt.group === phrase.group
     );
-    return options
-      ?.map(o => o.name)
-      .join(', ')
-      .toLowerCase();
+    const formattedMessage = (options?.map(o => o.name).join(', ') ?? '')
+      .toLowerCase()
+      .replace(/^\w/, c => c.toUpperCase());
+
+    return formattedMessage;
   }, [data, phrase]);
 
   return (
@@ -53,8 +54,8 @@ const HeaderOpposite = ({ phrase }) => {
           )}
         </div>
         <div>
-          Concretamente te pedimos que pienses y respondas qué % de personas de{' '}
-          <strong>{infoMessage}</strong> está de acuerdo con cada una de las siguientes frases.
+          Concretamente, te pedimos que pienses y respondas qué % de personas que dicen pertenecer a
+          la opción: <strong>{infoMessage}</strong>, está de acuerdo con la siguiente frase.
         </div>
       </div>
     </div>
