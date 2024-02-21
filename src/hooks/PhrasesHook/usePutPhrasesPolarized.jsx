@@ -13,7 +13,7 @@ const usePutPhrasesPolarized = () => {
       toast.error(error?.message || 'Ha ocurrido un error, intente nuevamente');
     },
     onSettled: () => {
-      queryClient.invalidateQueries('phrases');
+      queryClient.invalidateQueries('political-phrases');
     },
   });
 };
