@@ -98,7 +98,6 @@ const CreatePhraseModal = ({ isOpen, onClose }) => {
                       Selecciona un grupo
                     </option>
                     <option value="Extremo 1">Extremo 1</option>
-                    <option value={null}>Neutro</option>
                     <option value="Extremo 2">Extremo 2</option>
                   </select>
                   {errors.group && <div className="text-red-600">{errors.group.message}</div>}
