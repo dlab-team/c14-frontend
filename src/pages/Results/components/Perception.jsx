@@ -9,6 +9,8 @@ export const Perception = () => {
   const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
   const oppositeSocialResult = useFormStore(s => s.oppositeSocialResult);
   const setTotalPerceptionGap = useFormStore(s => s.setTotalPerceptionGap);
+  console.log(oppositePoliticalResult)
+  console.log(oppositeSocialResult)
 
   const resultOpposite = useMemo(() => {
     let result = [];
@@ -35,7 +37,7 @@ export const Perception = () => {
   return (
     <div className="flex flex-col h-full lg:w-[70%] w-[90%] mx-auto my-10">
       <div className="flex flex-col items-center justify-center mt-10 mb-10 gap-4">
-        <p className="text-3xl font-bold text-amber-500">
+        <p className="text-3xl font-bold text-amber-500 text-center">
           Mi polarización subjetiva es de: {totalPerceptionGap}%
         </p>
         <p className="text-center text-base text-black font-normal">
