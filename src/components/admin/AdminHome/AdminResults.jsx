@@ -15,10 +15,10 @@ const AdminResults = () => {
   const [finished, setFinished] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const [selectedId, setSelectedId] = useState('');
+  const [selectedPolynomial, setSelectedPolynomial] = useState('');
 
   const handleSelectChange = polynomial => {
-    setSelectedId(polynomial.id);
+    setSelectedPolynomial(polynomial);
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const AdminResults = () => {
 
   useEffect(() => {
     if (socialPolynomials?.length > 0) {
-      setSelectedId(socialPolynomials[0].id);
+      setSelectedPolynomial(socialPolynomials[0]);
     }
   }, [socialPolynomials]);
 
@@ -80,13 +80,14 @@ const AdminResults = () => {
           id="opcionTendenciaSocial"
           placeholder="Selecciona una opción"
           className="w-64"
+          value={selectedPolynomial}
           options={socialPolynomials}
           getOptionLabel={p => p.name}
           getOptionValue={p => p.id}
           onChange={handleSelectChange}
           isSearchable={false}
         />
-        {selectedId && <ResultTrend polynomialId={selectedId} />}
+        {selectedPolynomial && <ResultTrend polynomialId={selectedPolynomial.id} />}
       </div>
     </div>
   );
