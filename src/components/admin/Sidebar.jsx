@@ -38,8 +38,8 @@ const Sidebar = () => {
           showMenu ? 'left-0' : '-left-full'
         } transition-all overflow-y-auto`}
       >
-        <Toaster position="top-center" />
         <div>
+          <Toaster position="top-center" />
           <div className="flex flex-col items-center py-10">
             <NavLink to="/">
               <img src="/logo/logo-3xi-negro.png" alt="Logo 3xi" className="w-10" />
