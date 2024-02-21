@@ -99,4 +99,14 @@ export class PhrasesService {
       throw new Error('No se pudo actualizar la frase');
     }
   }
+
+  static async putPhrasesPolarized(phraseId) {
+    try {
+      const { data } = await api.put(`/phrases/neutral/political/${phraseId}`);
+      return data;
+    } catch (error) {
+      throw new Error('No se pudo actualizar la frase');
+    }
+  }
+
 }

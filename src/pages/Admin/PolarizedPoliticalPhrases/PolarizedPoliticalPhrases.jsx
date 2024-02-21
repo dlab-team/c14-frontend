@@ -1,13 +1,15 @@
 import { twMerge } from 'tailwind-merge';
-
 import AdminHeader from '@/components/admin/AdminHeader';
 import useGetAllPoliticalPhrases from '@/hooks/PhrasesHook/useGetAllPoliticalPhrases';
+import usePutPhrasesPolarized from '@/hooks/PhrasesHook/usePutPhrasesPolarized';
 
 const PolarizedPoliticalPhrases = () => {
   const { data: phrases, isLoading, refetch } = useGetAllPoliticalPhrases();
+  const { mutate: updatePolarized } = usePutPhrasesPolarized();
 
-  const handleToggle = () => {
-    // TODO consumir endpoint para cambiar el estado de la frase
+  const handleToggle = id => {
+    updatePolarized({ id });
+    refetch();
   };
 
   return (
@@ -28,7 +30,7 @@ const PolarizedPoliticalPhrases = () => {
               <th scope="col" className="px-6 py-3">
                 Frases
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-center">
                 Polarización
               </th>
             </tr>
@@ -65,10 +67,20 @@ const PolarizedPoliticalPhrases = () => {
                       >
                         {phrase.neutral ? 'Si' : 'No'}
                       </span>
-                      <span className={twMerge('w-28 p-2 hidden md:block', !phrase.neutral && 'bg-teal-500')}>
+                      <span
+                        className={twMerge(
+                          'w-28 p-2 hidden md:block',
+                          !phrase.neutral && 'bg-teal-500'
+                        )}
+                      >
                         No Polarizado
                       </span>
-                      <span className={twMerge('w-28 p-2 hidden md:block', phrase.neutral && 'bg-purple-500')}>
+                      <span
+                        className={twMerge(
+                          'w-28 p-2 hidden md:block',
+                          phrase.neutral && 'bg-purple-500'
+                        )}
+                      >
                         Polarizado
                       </span>
                     </button>
