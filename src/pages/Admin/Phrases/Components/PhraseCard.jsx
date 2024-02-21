@@ -79,7 +79,21 @@ const PhraseCard = ({ phrase, index }) => {
       </div>
       {/* FORM */}
       {!showEdit ? (
-        <div className="mt-4 max-w-xl">{phrase.text}</div>
+        <div className="mt-4 max-w-xl">
+          <p className="mb-2">{phrase.text}</p>
+          <footer className="flex flex-wrap gap-2 items-center">
+            {phrase.survey_results.map((result, index) => {
+              return (
+                <span
+                  className="text-neutral-600 bg-neutral-300 px-3 py-1 rounded-full"
+                  key={'chip' + result.phraseId + result.polynomialOptionId}
+                >
+                  {result.polynomial_option.name}: {result.percentage}
+                </span>
+              );
+            })}
+          </footer>
+        </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative my-10">
