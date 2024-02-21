@@ -21,19 +21,6 @@ const LeftSide = () => {
   return (
     <>
       <div className="flex-1 flex flex-col items-center justify-center lg:my-auto mt-10">
-        <div className="w-[320px] lg:w-[400px]">
-          <div className="text-2xl font-bold mb-5 text-center">
-            La importancia de las brechas de percepción
-          </div>
-          <div className="h-1 w-[320px] lg:w-[400px] bg-gradient-to-r from-red-500 via-purple-600 to-green-500 mb-4 rounded-sm"></div>
-          <div className="text-sm font-bold mb-8 text-justify">
-            Tiene como objetivo observar cómo evoluciona la distancia entre las opiniones de
-            personas identificadas con visiones políticas opuestas. La idea es realizar mediciones
-            periódicas pidiendo a los encuestados que manifiesten su acuerdo o desacuerdo con un
-            conjunto constante de frases y, de esta forma, realizar un monitorio a lo largo del
-            tiempo.
-          </div>
-        </div>
         <div className="border border-gray-300 shadow-xl shadow-gray-300 w-[320px] rounded-xl">
           <div className="flex flex-col justify-center items-center">
             <div className="flex items-center justify-center mb-4 mt-5">
