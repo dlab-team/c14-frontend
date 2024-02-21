@@ -36,22 +36,13 @@ const HeaderOpposite = ({ phrase }) => {
 
   return (
     <div
-      className="text-center mx-auto my-12 md:w-5/6 text-2xl bg-white z-50 sticky top-0"
+      className="text-center mx-auto my-12 md:w-5/6 text-2xl bg-white z-50 top-0"
       style={{ willChange: 'transform' }}
     >
       <div className="p-4">
-        <div
-          style={{
-            transform: `translateY(${scrollPosition * 0.5}px)`,
-            opacity: 1 - scrollPosition / 200,
-          }}
-        >
-          {isTextVisible && (
-            <>
+        <div>
               Ahora te invitamos al segundo desafío que consiste en participar en un juego social.
               Te vamos a pedir que te imagines lo que piensan grupos de personas distintas a ti.
-            </>
-          )}
         </div>
         <div>
           Concretamente, te pedimos que pienses y respondas qué % de personas que dicen pertenecer a
