@@ -7,11 +7,12 @@ import useEditPhrase from '@/hooks/PhrasesHook/useEditPhrase';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { twMerge } from 'tailwind-merge';
 
 const PhraseCard = ({ phrase, index }) => {
   const { mutate: deletePhrase } = useDeletePhrase();
   const { mutate: updatePhrase } = useEditPhrase();
-  const [showEdit, setShowEdit] = useState(true);
+  const [showEdit, setShowEdit] = useState(false);
 
   const {
     register,
@@ -29,6 +30,7 @@ const PhraseCard = ({ phrase, index }) => {
       text: data.text,
       survey_results: data.survey_results,
     });
+    setShowEdit(false);
   };
 
   const deleteOnePhrase = async id => {
@@ -54,29 +56,29 @@ const PhraseCard = ({ phrase, index }) => {
           )}
         </div>
 
-        <div className="flex gap-4 ">
-          {/* DELETE - ACTIVE - EDIT BUTTONS -------- */}
+        <div className="flex gap-3">
           <button
-            className="border hover:border-black border-white rounded-md transition-all hover:scale-105 mx-1"
+            className="p-1 border hover:border-neutral-400 border-white rounded-md transition-all hover:scale-105"
             onClick={() => deleteOnePhrase(phrase.id)}
           >
-            <FaRegTrashCan size={28} color="Crimson" />
+            <FaRegTrashCan size={26} color="Crimson" />
           </button>
           <button
             onClick={() => {
               setShowEdit(!showEdit);
               setValue('phrase', phrase.text);
             }}
-            className={`p-1 border hover:border-black border-white rounded-md transition-all hover:scale-105 mx-1${
-              showEdit ? '' : 'bg-white text-white rounded border border-black'
-            }`}
+            className={twMerge(
+              `p-1 border hover:border-neutral-400 border-white rounded-md transition-all hover:scale-105`,
+              showEdit && 'shadow border'
+            )}
           >
-            <FiEdit3 size={28} color="DarkCyan" />
+            <FiEdit3 size={26} color="DarkCyan" />
           </button>
         </div>
       </div>
       {/* FORM */}
-      {showEdit ? (
+      {!showEdit ? (
         <div className="mt-4 max-w-xl">{phrase.text}</div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>

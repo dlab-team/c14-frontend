@@ -14,7 +14,7 @@ const useDeletePhrase = () => {
       toast.error(error?.message || 'Ha ocurrido un error al eliminar, intente nuevamente');
     },
     onSettled: () => {
-      queryClient.invalidateQueries('PhrasesByidPolinomial');
+      queryClient.invalidateQueries('phrases');
     },
   });
 };

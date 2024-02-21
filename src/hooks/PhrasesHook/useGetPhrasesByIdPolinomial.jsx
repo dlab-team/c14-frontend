@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 const useGetPhrasesByIdPolinomial = idPolinomial => {
   const { data, isLoading, isError, refetch } = useQuery(
-    ['PhrasesByidPolinomial', idPolinomial],
+    ['phrases', 'polynomial', idPolinomial],
     () => PhrasesService.getPhrasesByIdPolinomial(idPolinomial),
     {
       onError: error => {
