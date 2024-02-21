@@ -4,11 +4,9 @@ import RightSide from './components/RightSide';
 
 const Acknowledgments = () => {
   return (
-    <div className="flex flex-col justify-center items-center mt-9">
-      <div className='md:mb-8'>
-        <Information />
-      </div>
-      <div className='lg:flex lg:gap-[200px]'>
+    <div className="flex flex-col justify-center items-center gap-10 px-8 mt-9">
+      <Information />
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-y-12 gap-x-32 mb-12">
         <LeftSide />
         <RightSide />
       </div>
