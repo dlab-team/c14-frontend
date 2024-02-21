@@ -47,11 +47,6 @@ const UserControl = () => {
     }
   };
 
-  const editUser = async () => {
-    alert('desea editar el usuario?');
-    refetch();
-  };
-
   const addUser = async () => {
     setShowModal(true);
     refetch();
