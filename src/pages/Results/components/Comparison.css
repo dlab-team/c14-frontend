@@ -68,10 +68,7 @@
   border: 2px solid black;
 }
 
-.scatter-chart .item.body .data .marker.green {
-  background-color: rgb(74, 189, 74);
-}
 
 .scatter-chart .item.body .data .marker.blue {
-  background-color: rgb(100, 150, 216);
+  background-color: rgb(234 88 12);
 }
