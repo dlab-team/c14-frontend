@@ -15,7 +15,6 @@ import PolarizedPoliticalPhrases from '@/pages/Admin/PolarizedPoliticalPhrases/P
 import PolynomialsOpt from '@/pages/Admin/Polynomials/PolynomialsOpt';
 // admin pages
 import Profile from '@/pages/Admin/Profile/Profile';
-import Results from '@/pages/Results/Results';
 import UserControl from '@/pages/Admin/UserControl';
 import Wrapper from '@/pages/Questionary/Wrapper';
 
@@ -27,7 +26,6 @@ export const router = createBrowserRouter(
         <Route path="cuestionario" element={<Wrapper />} />
         <Route path="opinion" element={<Opinion />} />
         <Route path="opposite" element={<OppositeQuestions />} />
-        <Route path="results" element={<Results />} />
         <Route path="reconocimiento" element={<Acknowledgments />} />
         <Route path="*" element={<Error404 />} />
       </Route>
