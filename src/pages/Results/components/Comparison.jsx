@@ -28,7 +28,6 @@ function Comparison() {
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
         Yo en comparación con otros de: {name}
       </div>
-      <div className="flex items-center justify-end font-bold">Mis respuestas</div>
       <div className="invisible lg:visible lg:flex items-center justify-begin lg:translate-x-[-5%] lg:translate-y-[15px] lg:pl-1 pl-10">
         <Tooltip
           message="<b>Enunciado</b><br><br>Frase contruida sobre la base de algunos de los temas por los cuales se producen debates políticos o culturales que sitúan a cada grupo en una posición"
@@ -38,9 +37,18 @@ function Comparison() {
           <PiInfoBold className="w-6 h-6" />
         </Tooltip>
       </div>
-      <div className="flex items-center justify-center">
-        <h2 className="text-xl font-normal">Porcentaje de acuerdo</h2>
+      <div className="flex flex-col items-center justify-center mx-auto ">
+        <div className="flex gap-2 mb-2">
+          <div className="bg-orange-600 w-[25px] h-[25px] rounded-xl border-solid border-2 border-neutral-600"></div>
+          <div>
+            <p className="">% de acuerdo dentro de tu misma caracterización</p>
+          </div>
+        </div>
+        <div>
+          <h2 className="text-xl font-normal mt-2 justify-start">Porcentaje de acuerdo</h2>
+        </div>
       </div>
+      <div className="flex flex-row justify-end font-bold mt-1 mr-2">Mis respuestas</div>
       <div className="scatter-chart mt-10">
         {mappedResult.map((item, index) => (
           <div className="item body" key={item.id}>
