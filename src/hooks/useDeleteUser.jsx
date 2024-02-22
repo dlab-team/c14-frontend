@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 const useDeleteUser = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(payload => AdministrationService.deleteUser(payload), {
+  return useMutation(id => AdministrationService.deleteUser(id), {
     onSuccess: () => {
       toast.success('Usuario eliminado con éxito');
     },
