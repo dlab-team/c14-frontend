@@ -75,12 +75,12 @@ const PolynomialsOpt = () => {
 
   return (
     <>
-      <Toaster position="top-center" />
       <AdminHeader
         title="Control de Polinomios"
         description="Aquí puedes crear, modificar y eliminar polinomios."
       />
       <div className="flex relative overflow-x-auto  p-3 my-8  max-w-4xl mx-auto xl:justify-end justify-center">
+        <Toaster position="top-center" />
         <button
           className="bg-black px-4 py-2 rounded-2xl text-white text-xl font-bold flex justify-center items-center gap-2 transition-all hover:scale-105"
           onClick={() => togglePolynomialModal()}

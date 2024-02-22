@@ -8,7 +8,7 @@ const useGetAllPoliticalPhrases = () => {
     PhrasesService.getAllPoliticalPhrases,
     {
       onError: error => {
-        toast.error(error?.message || 'Error al obtener las frases');
+        toast(error?.message || 'Error al obtener las frases');
       },
     }
   );

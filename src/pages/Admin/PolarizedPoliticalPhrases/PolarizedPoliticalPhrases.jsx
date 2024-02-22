@@ -1,15 +1,48 @@
-import { twMerge } from 'tailwind-merge';
+import { Toaster, toast } from 'sonner';
+import { useEffect, useState } from 'react';
+
 import AdminHeader from '@/components/admin/AdminHeader';
+import { twMerge } from 'tailwind-merge';
 import useGetAllPoliticalPhrases from '@/hooks/PhrasesHook/useGetAllPoliticalPhrases';
 import usePutPhrasesPolarized from '@/hooks/PhrasesHook/usePutPhrasesPolarized';
 
 const PolarizedPoliticalPhrases = () => {
-  const { data: phrases, isLoading, refetch } = useGetAllPoliticalPhrases();
+  const { data: phrases, refetch } = useGetAllPoliticalPhrases();
   const { mutate: updatePolarized } = usePutPhrasesPolarized();
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    if (!phrases) return;
+
+    const timeoutId = setTimeout(() => {
+      const checkAllNeutral = () => {
+        return phrases.every(phrase => phrase.neutral);
+      };
+
+      const checkNoneNeutral = () => {
+        return phrases.every(phrase => !phrase.neutral);
+      };
+
+      const allPhrasesNeutral = checkAllNeutral();
+      const nonePhraseNeutral = checkNoneNeutral();
+
+      if ((allPhrasesNeutral || nonePhraseNeutral) && !showMessage) {
+        toast.warning(
+          allPhrasesNeutral
+            ? 'Si todas las frases están como Polarizadas habrá partes del formularios vacías'
+            : 'Si todas las frases están como No Polarizadas habrá partes del formularios vacías'
+        );
+        setShowMessage(true);
+      }
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
+  }, [phrases, showMessage]);
 
   const handleToggle = id => {
     updatePolarized({ id });
     refetch();
+    setShowMessage(false);
   };
 
   return (
@@ -20,6 +53,7 @@ const PolarizedPoliticalPhrases = () => {
       />
 
       <div className="relative overflow-x-auto rounded-lg p-3 m-3 mt-10 bg-white border-2 w-5/6 mx-auto">
+        <Toaster richColors position="top-center" />
         <table className="table-auto w-full text-sm text-left text-gray-500">
           <caption className="p-5 text-lg font-semibold text-left rtl:text-righ dark:text-black">
             Frases

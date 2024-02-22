@@ -1,12 +1,11 @@
-import { CiCirclePlus, CiEdit } from 'react-icons/ci';
 import { Toaster, toast } from 'sonner';
 
 import AdminHeader from '@/components/admin/AdminHeader';
 import AdminModal from '@/components/admin/AdminModal';
 import { AdministrationService } from '@/services/administration.service';
 import Button from '@/layouts/Button';
+import { CiCirclePlus } from 'react-icons/ci';
 import { FaRegTrashCan } from 'react-icons/fa6';
-import { MdDeleteOutline } from 'react-icons/md';
 import { format } from 'date-fns';
 import useDeleteUser from '@/hooks/useDeleteUser';
 import { useForm } from 'react-hook-form';
@@ -62,7 +61,6 @@ const UserControl = () => {
 
   return (
     <>
-      <Toaster position="top-center" />
       <AdminHeader
         title="Control de Usuarios"
         description="Aquí puedes crear, modificar y eliminar cuentas de usuarios."
