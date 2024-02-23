@@ -64,7 +64,7 @@ const UserControl = () => {
         title="Control de Usuarios"
         description="Aquí puedes crear, modificar y eliminar cuentas de usuarios."
       />
-      <div className="relative overflow-x-auto rounded-lg p-3 m-3 bg-white border-2 w-5/6 mx-auto">
+      <div className="relative overflow-x-auto rounded-lg p-3 m-3 bg-white border-2 w-5/6 mx-auto shadow-xl">
         <table className="table-auto w-full text-sm text-left text-gray-500">
           <caption className="p-5 text-lg font-semibold text-left rtl:text-righ dark:text-black">
             SuperAdmin
@@ -124,7 +124,7 @@ const UserControl = () => {
           Agregar un nuevo usuario <CiCirclePlus />
         </button>
       </div>
-      <div className="relative overflow-x-auto rounded-lg p-3 m-3 bg-white border-2 w-5/6 mx-auto">
+      <div className="relative overflow-x-auto rounded-lg p-3 m-3 bg-white border-2 w-5/6 mx-auto shadow-xl">
         <table className="table-auto w-full text-sm text-left text-gray-500">
           <caption className="p-5 text-lg font-semibold text-left rtl:text-righ dark:text-black">
             Administradores
