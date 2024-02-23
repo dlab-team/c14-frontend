@@ -4,10 +4,12 @@ import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
 import { useState } from 'react';
 import DOMPurify from 'dompurify';
+import useCreateFeedback from '@/hooks/FeedbackHook/useCreateFeedback';
 
 function RatingModal({ isOpen, onClose }) {
   const [value, setValue] = useState(3);
   const [feedback, setFeedback] = useState(' ');
+  const { mutate: createFeedback } = useCreateFeedback();
 
   if (!isOpen) {
     return null;
@@ -22,7 +24,10 @@ function RatingModal({ isOpen, onClose }) {
       toast.error('Debes calificar la encuesta del 1 al 5');
     } else {
       const cleanFeedback = DOMPurify.sanitize(feedback);
-      toast.success(cleanFeedback);
+      createFeedback({
+        feedback: cleanFeedback || ' ',
+        rating: value,
+      });
     }
   };
 
@@ -50,7 +55,7 @@ function RatingModal({ isOpen, onClose }) {
                 }}
               />
             </div>
-            <h2 className="text-sm font-bold mb-1">Cuentanos tu experiencia:</h2>
+            <h2 className="text-sm font-bold mb-1">Cuentanos tu experiencia (Opcional):</h2>
             <TextField
               id="feedback"
               placeholder="Escribe aquí..."
