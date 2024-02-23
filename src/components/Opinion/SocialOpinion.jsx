@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useFormStore from '@/store/useFormStore';
 import useGetSocialPhrases from '@/hooks/PhrasesHook/useGetSocialPhrases';
 import Opinion from './components/Opinion';
+import Loader from '@/components/Loader/Loader';
 
 const SocialOpinion = ({ handleStep }) => {
   const optionIds = useFormStore(state => state.socialCharacterization);
@@ -15,9 +16,7 @@ const SocialOpinion = ({ handleStep }) => {
     }
   }, [socialPhrases, socialResult, setSocialResult]);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  if (isLoading) return <Loader />;
 
   if (isError) {
     return <p>Error</p>;
