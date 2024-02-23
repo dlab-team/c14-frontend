@@ -27,6 +27,13 @@ const RightSide = () => {
           <img src="/logo/logo-3xi-blanco.png" alt="Logo 3xi" className="h-[7.5rem]" />
         </div>
       </div>
+      <div className="bg-white flex items-center justify-center">
+        <img
+          src="logo/criteria/criteriaLogo.png"
+          alt="Logo criteria"
+          className="w-[280px] h-[70px]"
+        />
+      </div>
       <div className="mx-auto mt-5 w-[10rem] sm:w-[14rem]">
         <button
           type="button"

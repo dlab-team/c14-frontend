@@ -9,8 +9,6 @@ export const Perception = () => {
   const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
   const oppositeSocialResult = useFormStore(s => s.oppositeSocialResult);
   const setTotalPerceptionGap = useFormStore(s => s.setTotalPerceptionGap);
-  console.log(oppositePoliticalResult)
-  console.log(oppositeSocialResult)
 
   const resultOpposite = useMemo(() => {
     let result = [];
