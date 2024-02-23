@@ -7,12 +7,13 @@ import backgroundHeaderMobile from '../../assets/img/admin/backgroundHeaderMobil
 import { useForm } from 'react-hook-form';
 import useFormStore from '@/store/useFormStore';
 import useGetSocialsPolynomials from '@/hooks/useGetSocialsPolynomials';
+import Loader from '@/components/Loader/Loader';
 
 const SocialStep = ({ handleStep }) => {
   const { control, handleSubmit } = useForm();
   const setSocialCharacterization = useFormStore(state => state.setSocialCharacterization);
   const setSocialNames = useFormStore(state => state.setSocialNames);
-  const { data: socialPolynomials } = useGetSocialsPolynomials();
+  const { data: socialPolynomials, isLoading } = useGetSocialsPolynomials();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const onSubmit = data => {
@@ -32,6 +33,8 @@ const SocialStep = ({ handleStep }) => {
       [questionId]: option,
     }));
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">

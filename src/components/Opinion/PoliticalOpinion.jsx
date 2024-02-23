@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useFormStore from '@/store/useFormStore';
 import useGetPoliticalPhrases from '@/hooks/PhrasesHook/useGetPoliticalPhrases';
 import Opinion from './components/Opinion';
+import Loader from '@/components/Loader/Loader';
 
 const PoliticalOpinion = ({ handleStep }) => {
   const optionId = useFormStore(state => state.politicalCharacterization);
@@ -16,9 +17,7 @@ const PoliticalOpinion = ({ handleStep }) => {
     }
   }, [politicalPhrases, politicalResult, setPoliticalResult]);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  if (isLoading) return <Loader />;
 
   if (isError) {
     return <p>Error</p>;

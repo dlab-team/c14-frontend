@@ -24,7 +24,6 @@ const Wrapper = () => {
 
   const handleStep = () => {
     nextStep();
-    //console.log(useFormStore.getState().currentSurveySection);
   };
 
   const sections = {
@@ -36,9 +35,6 @@ const Wrapper = () => {
     5: <SocialOpinion handleStep={handleStep} />,
     6: <SocialOppositeQuestions handleStep={handleStep} />,
     7: <Results />,
-    // 4: <p>[Political] Opposite group perceptions results</p>,
-    // 5: <p>[Political] Next step invitation</p>,
-    // 9: <p>[End] Final Step</p>,
   };
   const CurrentStep = sections[currentSurveySection];
 

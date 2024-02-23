@@ -7,6 +7,7 @@ import Button from '../../layouts/Button';
 import './StepOne.css';
 import useFormStore from '@/store/useFormStore';
 import useGetPoliticalOptions from '@/hooks/OptionsHook/useGetPoliticalOptions';
+import Loader from '@/components/Loader/Loader';
 
 const StepOne = ({ handleStep }) => {
   const {
@@ -15,7 +16,7 @@ const StepOne = ({ handleStep }) => {
     formState: { errors },
   } = useForm();
 
-  const { data: politicalOptions } = useGetPoliticalOptions();
+  const { data: politicalOptions, isLoading } = useGetPoliticalOptions();
   const setPoliticalCharacterization = useFormStore(state => state.setPoliticalCharacterization);
 
   const onSubmit = data => {
@@ -25,6 +26,8 @@ const StepOne = ({ handleStep }) => {
     handleStep();
   };
   const setPoliticalName = useFormStore(state => state.setPoliticalName);
+
+  if (isLoading) return <Loader />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
