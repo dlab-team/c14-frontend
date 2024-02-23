@@ -7,6 +7,7 @@ import {
   PiUsersFour,
   PiXBold,
 } from 'react-icons/pi';
+import { VscFeedback } from 'react-icons/vsc';
 
 import AdminModal from './AdminModal';
 import Button from '@/layouts/Button';
@@ -106,6 +107,21 @@ const Sidebar = () => {
                   <PiListBullets className="text-xl" />
                 </div>
                 Control de Polinomios
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/admin/feedback"
+                className={({ isActive }) =>
+                  `flex items-center gap-4 py-3 px-4 rounded-lg hover:bg-slate-900 hover:text-white transition-colors ${
+                    isActive && 'bg-slate-900 text-white'
+                  }`
+                }
+              >
+                <div>
+                  <VscFeedback className="text-xl" />
+                </div>
+                Feedback recibido
               </NavLink>
             </li>
             <li>

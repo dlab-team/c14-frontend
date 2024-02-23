@@ -13,6 +13,7 @@ import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
 import Phrases from '@/pages/Admin/Phrases/Phrases';
 import PolarizedPoliticalPhrases from '@/pages/Admin/PolarizedPoliticalPhrases/PolarizedPoliticalPhrases';
 import PolynomialsOpt from '@/pages/Admin/Polynomials/PolynomialsOpt';
+import Feedback from '@/pages/Admin/Feedback/Feedback';
 // admin pages
 import Profile from '@/pages/Admin/Profile/Profile';
 import UserControl from '@/pages/Admin/UserControl';
@@ -44,6 +45,7 @@ export const router = createBrowserRouter(
         <Route path="polynomials" element={<PolynomialsOpt />} />
         <Route path="profile" element={<Profile />} />
         <Route path="polarizedPhrases" element={<PolarizedPoliticalPhrases />} />
+        <Route path="feedback" element={<Feedback />} />
       </Route>
     </>
   )
