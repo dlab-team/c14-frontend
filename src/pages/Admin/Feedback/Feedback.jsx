@@ -3,6 +3,7 @@ import AdminHeader from '@/components/admin/AdminHeader';
 import useGetAllFeedback from '@/hooks/FeedbackHook/useGetAllFeedback';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import useDeleteFeedback from '@/hooks/FeedbackHook/useDeleteFeedback';
+import Rating from '@mui/material/Rating';
 
 const Feedback = () => {
   const pageSize = 20;
@@ -73,7 +74,7 @@ const Feedback = () => {
               <th scope="col" className="px-6 py-3">
                 Feedback
               </th>
-              <th scope="col" className="px-6 py-3 text-center">
+              <th scope="col" className="pr-12 py-3 text-end ">
                 Rating
               </th>
               <th scope="col" className="px-6 py-3 text-center">
@@ -98,11 +99,11 @@ const Feedback = () => {
                 </th>
                 <th
                   scope="row"
-                  className="px-2 py-2 font-medium whitespace-normal w-auto overflow-auto min-w-[10rem] text-center"
+                  className="px-2 py-2 font-medium whitespace-normal w-auto overflow-auto min-w-[10rem] text-end"
                 >
-                  {feedbackItem.rating}
+                  <Rating defaultValue={feedbackItem.rating} readOnly />
                 </th>
-                <td className="px-3 py-2 ms-2 font-medium whitespace-nowrap w-10">
+                <td className="px-3 py-2 ms-2 font-medium whitespace-nowrap w-10 text-center">
                   <button
                     className="p-1 border hover:border-neutral-400 border-white rounded-md transition-all hover:scale-105"
                     onClick={() => deleteOneFeedback(feedbackItem.id)}
