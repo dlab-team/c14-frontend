@@ -1,9 +1,13 @@
 import { ButtonsFooter } from './ButtonsFooter';
 
-export const ResultsFooter = () => {
+export const ResultsFooter = ({ showImages }) => {
   return (
     <footer className="flex flex-col justify-center items-center w-full mt-16 gap-10">
-      <div className="flex flex-col justify-between items-center h-[172px] w-[330px]">
+      <div
+        className={`flex flex-col justify-between items-center h-[172px] w-[330px] ${
+          showImages ? '' : 'hidden'
+        }`}
+      >
         <img src="logo/logo-3xi-negro.png" alt="Logo 3xi" className="w-[76px] h-[66px]" />
         <img
           src="logo/criteria/criteriaLogo.png"

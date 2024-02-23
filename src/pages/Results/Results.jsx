@@ -1,13 +1,15 @@
 import AdminHeader from '@/components/admin/AdminHeader';
-import { ResultsFooter } from './components/ResultsFooter';
 import Comparison from './components/Comparison.jsx';
-import { Perception } from './components/Perception';
-import KeepExploring from './components/KeepExploring';
-import useFormStore from '@/store/useFormStore';
 import Finish from './components/Finish';
+import KeepExploring from './components/KeepExploring';
+import { Perception } from './components/Perception';
+import { ResultsFooter } from './components/ResultsFooter';
+import useFormStore from '@/store/useFormStore';
+import { useState } from 'react';
 
 const Results = () => {
   const step = useFormStore.getState().currentSurveySection;
+  const [showImages, setShowImages] = useState(true);
 
   return (
     <div>
@@ -20,7 +22,7 @@ const Results = () => {
       <Comparison />
       <Perception />
       {step === 3 ? <KeepExploring /> : <Finish />}
-      <ResultsFooter />
+      <ResultsFooter showImages={showImages} />
     </div>
   );
 };
