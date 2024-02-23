@@ -3,6 +3,7 @@ import { MdMarkEmailRead } from 'react-icons/md';
 import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
 import { useState } from 'react';
+import DOMPurify from 'dompurify';
 
 function RatingModal({ isOpen, onClose }) {
   const [value, setValue] = useState(3);
@@ -20,7 +21,8 @@ function RatingModal({ isOpen, onClose }) {
     if (!value) {
       toast.error('Debes calificar la encuesta del 1 al 5');
     } else {
-      toast.success('Gracias por calificar la encuesta');
+      const cleanFeedback = DOMPurify.sanitize(feedback);
+      toast.success(cleanFeedback);
     }
   };
 
