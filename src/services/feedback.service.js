@@ -2,7 +2,6 @@ import api from './api.services';
 
 export class FeedbackService {
     static async createFeedback(data) {
-        console.log(data)
         try {
             const { data: response, status } = await api.post('/feedback', data);
             if (status === 200) {
@@ -13,4 +12,14 @@ export class FeedbackService {
             throw new Error('Error al enviar la encuesta');
         }
     }
+
+    static async getAllFeedback() {
+        try {
+          const { data } = await api.get(`/feedback`);
+          return data;
+        } catch (error) {
+          throw new Error('No se pudo obtener la informacion');
+        }
+      }
+
 }
