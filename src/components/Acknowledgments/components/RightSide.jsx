@@ -1,17 +1,10 @@
-import { useState } from 'react';
-import RatingModal from './RatingModal';
 const RightSide = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openRating = () => setIsModalOpen(true);
-  const closeRating = () => setIsModalOpen(false);
-
   const RainbowGradient =
     'bg-gradient-to-r from-red-500 via-purple-600 via-blue-600 to-green-500 text-transparent bg-clip-text';
 
   return (
-    <div>
-      <div className="flex justify-center flex-col sm:flex-row gap-y-2 gap-x-5">
+    <div className="flex flex-col items-center justify-center">
+      <div className="flex justify-center flex-col sm:flex-row gap-y-2 gap-x-5 mb-4">
         <div className="text-3xl font-bold flex flex-col gap-2 justify-between items-end">
           <p>
             Inspirar<span className={RainbowGradient}>NOS</span>
@@ -34,16 +27,6 @@ const RightSide = () => {
           className="w-[280px] h-[70px]"
         />
       </div>
-      <div className="mx-auto mt-5 w-[10rem] sm:w-[14rem]">
-        <button
-          type="button"
-          className="text-white bg-black rounded-lg border border-black w-[10rem] sm:w-[14rem] h-13 sm:h-11 font-semibold text-lg"
-          onClick={openRating}
-        >
-          ¡Dejanos un comentario!
-        </button>
-      </div>
-      <RatingModal isOpen={isModalOpen} onClose={closeRating} />
     </div>
   );
 };
