@@ -35,15 +35,12 @@ const UserControl = () => {
     return format(new Date(createdAt), 'dd-MM-yyyy');
   };
 
-  const deleteUser = async (name, lastName, email) => {
+  const deleteUser = async (name, lastName, id) => {
     const status = window.confirm(
       `¿Estás seguro de eliminar el administrador "${name} ${lastName}"? Una vez eliminado, no se podrá recuperar`
     );
     if (status) {
-      const payload = {
-        email: email,
-      };
-      mutateDelete(payload);
+      mutateDelete(id);
     }
   };
 
@@ -174,7 +171,7 @@ const UserControl = () => {
                     <div className="flex flex-column gap-3">
                       <button
                         className="border hover:border-black border-white rounded-md transition-all hover:scale-105"
-                        onClick={() => deleteUser(user.firstName, user.lastName, user.email)}
+                        onClick={() => deleteUser(user.firstName, user.lastName, user.id)}
                       >
                         <FaRegTrashCan size={28} color="Crimson" />
                       </button>

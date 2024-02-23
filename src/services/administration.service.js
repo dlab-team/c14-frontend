@@ -23,10 +23,10 @@ export class AdministrationService {
     }
   }
 
-  static async deleteUser(payload) {
+  static async deleteUser(id) {
     try {
-      const { data, status } = await api.delete('/users/delete', {
-        data: payload
+      const { data, status } = await api.delete(`/users/${id}`, {
+        data:id
       })
       if (status === 200) {
         return data
