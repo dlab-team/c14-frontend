@@ -22,4 +22,13 @@ export class FeedbackService {
         }
       }
 
+      static async deleteFeedback(id) {
+        try {
+          const { data } = await api.delete(`/feedback/${id}`);
+          return data;
+        } catch (error) {
+          throw new Error('No se pudo obtener la informacion');
+        }
+      }
+
 }

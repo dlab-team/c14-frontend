@@ -1,16 +1,41 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import useGetAllFeedback from '@/hooks/FeedbackHook/useGetAllFeedback';
+import { FaRegTrashCan } from 'react-icons/fa6';
+import useDeleteFeedback from '@/hooks/FeedbackHook/useDeleteFeedback';
 
 const Feedback = () => {
   const pageSize = 20;
   const { data: feedback, isLoading, refetch } = useGetAllFeedback();
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedRating, setSelectedRating] = useState(null);
+
   const indexOfLastItem = currentPage * pageSize;
   const indexOfFirstItem = indexOfLastItem - pageSize;
-  const currentFeedback = feedback?.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(feedback?.length / pageSize);
+  let filteredFeedback = feedback;
+
+  if (selectedRating !== null) {
+    filteredFeedback = feedback?.filter(item => item.rating === selectedRating);
+  }
+
+  const currentFeedback = filteredFeedback?.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredFeedback?.length / pageSize);
+
   const paginate = pageNumber => setCurrentPage(pageNumber);
+  const { mutate: deleteFeedback } = useDeleteFeedback();
+
+  const deleteOneFeedback = async id => {
+    const status = window.confirm(`¿Estás seguro de eliminar el feedback?`);
+    if (status) {
+      deleteFeedback(id);
+      refetch();
+    }
+  };
+
+  const handleRatingChange = rating => {
+    setSelectedRating(rating);
+    setCurrentPage(1);
+  };
 
   return (
     <>
@@ -19,6 +44,28 @@ const Feedback = () => {
         description="Aquí podrás leer el feedback de los encuestados"
       />
       <div className="relative overflow-x-auto rounded-lg p-3 m-3 mt-10 bg-white border-2 w-5/6 mx-auto">
+        <div className="flex justify-center">
+          <div className="mt-4 mb-2 flex items-center">
+            <label htmlFor="ratingFilter" className="mr-2">
+              Filtrar por rating:
+            </label>
+            <select
+              id="ratingFilter"
+              value={selectedRating || ''}
+              onChange={e =>
+                handleRatingChange(e.target.value !== '' ? parseInt(e.target.value) : null)
+              }
+              className="border border-gray-300 rounded-md p-1"
+            >
+              <option value="">Todos</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
         <table className="table-auto w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-900 border-y-3 border-black">
             <tr>
@@ -28,6 +75,9 @@ const Feedback = () => {
               </th>
               <th scope="col" className="px-6 py-3 text-center">
                 Rating
+              </th>
+              <th scope="col" className="px-6 py-3 text-center">
+                Eliminar
               </th>
             </tr>
           </thead>
@@ -52,6 +102,14 @@ const Feedback = () => {
                 >
                   {feedbackItem.rating}
                 </th>
+                <td className="px-3 py-2 ms-2 font-medium whitespace-nowrap w-10">
+                  <button
+                    className="p-1 border hover:border-neutral-400 border-white rounded-md transition-all hover:scale-105"
+                    onClick={() => deleteOneFeedback(feedbackItem.id)}
+                  >
+                    <FaRegTrashCan size={26} color="Crimson" />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
