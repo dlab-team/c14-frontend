@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '@/schemas/loginSchema';
@@ -8,9 +9,11 @@ import { Toaster } from 'sonner';
 
 function LoginForm() {
   const title = 'Acceder';
+  const [rememberEmail, setRememberEmail] = useState(false);
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm({
@@ -19,10 +22,29 @@ function LoginForm() {
 
   const loginMutation = useLogin();
 
+  useEffect(() => {
+    if (!rememberEmail) {
+      setValue('email', '');
+    }
+  }, [rememberEmail, setValue]);
+
   const onSubmit = async data => {
+    if (rememberEmail) {
+      localStorage.setItem('rememberedEmail', data.email);
+    } else {
+      localStorage.removeItem('rememberedEmail');
+    }
     await loginMutation.mutateAsync(data);
     reset();
   };
+
+  useEffect(() => {
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    if (rememberedEmail) {
+      setValue('email', rememberedEmail);
+      setRememberEmail(true);
+    }
+  }, [setValue]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -55,7 +77,13 @@ function LoginForm() {
 
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center">
-            <input className="" type="checkbox" {...register('remember')} id="remember" />
+            <input
+              className=""
+              type="checkbox"
+              id="remember"
+              checked={rememberEmail}
+              onChange={() => setRememberEmail(!rememberEmail)}
+            />
             <label htmlFor="remember" className="text-slate-950 ml-1 font-medium text-xs">
               Recuérdame
             </label>
