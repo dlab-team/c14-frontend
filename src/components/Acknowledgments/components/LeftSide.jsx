@@ -1,14 +1,19 @@
 import { IoCheckmarkCircle } from 'react-icons/io5';
 import ShareModal from './ShareModal';
+import RatingModal from './RatingModal';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IoShareSocialOutline } from 'react-icons/io5';
 
 const LeftSide = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openShareModal = () => setIsShareModalOpen(true);
+  const closeShareModal = () => setIsShareModalOpen(false);
+  const openRatingModal = () => setIsRatingModalOpen(true);
+  const closeRatingModal = () => setIsRatingModalOpen(false);
 
   const goBack = () => {
     navigate('/');
@@ -24,14 +29,22 @@ const LeftSide = () => {
           <h2 className="text-slate-950 font-medium text-lg text-center">
             ¡Gracias por participar!
           </h2>
-          <footer className="flex flex-col gap-3 mt-5 w-full">
-            <button
-              type="button"
-              className="text-white bg-black rounded-lg border border-black w-full h-11 font-semibold text-lg"
-              onClick={openModal}
-            >
-              Compartir Resultados
-            </button>
+          <footer className="gap-3 mt-5 w-full">
+            <div className="flex flex-row gap-2 mb-2">
+              <button
+                type="button"
+                className="text-white bg-black rounded-lg border border-black w-full h-11 font-semibold text-lg"
+                onClick={openRatingModal}
+              >
+                Entregar Feedback
+              </button>
+              <button type="button" onClick={openShareModal}>
+                <IoShareSocialOutline
+                  onclick={openShareModal}
+                  className="w-12 h-11 bg-black text-white rounded-lg p-1"
+                />
+              </button>
+            </div>
             <button
               type="button"
               className="text-black bg-white rounded-lg border border-black w-full h-11 font-semibold items-center text-lg"
@@ -42,7 +55,8 @@ const LeftSide = () => {
           </footer>
         </div>
       </article>
-      <ShareModal isOpen={isModalOpen} onClose={closeModal} />
+      <RatingModal isOpen={isRatingModalOpen} onClose={closeRatingModal} />
+      <ShareModal isOpen={isShareModalOpen} onClose={closeShareModal} />
     </>
   );
 };
