@@ -29,4 +29,34 @@ export class ResponseService {
       throw new Error('No se pudo obtener la información');
     }
   }
+
+  static async groupedByYear() {
+    try {
+      const { data } = await api.get(`/surveyresponse/groupedbyyear`);
+      const formattedData = data.map(entry => ({
+        label: entry.label,
+        Visitas: parseInt(entry.Visitas),
+        Finalizadas: parseInt(entry.Finalizadas)
+      }));
+      return formattedData;
+    } catch (error) {
+      throw new Error('No se pudo obtener la información');
+    }
+  }
+
+  static async groupedForAYear(year) {
+    try {
+      const { data } = await api.get(`/surveyresponse/groupedbymonth/${year}`);
+      const formattedData = data.map(entry => ({
+        label: entry.label,
+        Visitas: parseInt(entry.Visitas),
+        Finalizadas: parseInt(entry.Finalizadas)
+      }));
+      return formattedData;
+    } catch (error) {
+      console.log(error)
+      throw new Error('No se pudo obtener la información');
+    }
+  }
+
 }

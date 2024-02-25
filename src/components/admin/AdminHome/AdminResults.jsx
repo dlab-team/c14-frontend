@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { DateTime } from 'luxon';
 
 import ResultTrend from './components/ResultTrend';
+import AdminChart from './components/AdminChart';
 import useGetMetrics from '@/hooks/useGetMetrics';
 import useGetPoliticalPolynomial from '@/hooks/SurveyResponse/useGetPoliticalPolynomial';
 import useGetSocialsPolynomials from '@/hooks/useGetSocialsPolynomials';
@@ -88,6 +89,10 @@ const AdminResults = () => {
           isSearchable={false}
         />
         {selectedPolynomial && <ResultTrend polynomialId={selectedPolynomial.id} />}
+      </div>
+
+      <div className="w-[100%]  mx-auto sm:w-full md:w-[75%] lg:w-[75%] xl:w-[75%] pt-6 pb-10 bg-white rounded-lg border border-stone-300 justify-center items-center inline-flex">
+        <AdminChart />
       </div>
     </div>
   );
