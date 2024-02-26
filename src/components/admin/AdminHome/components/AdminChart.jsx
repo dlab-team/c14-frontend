@@ -92,13 +92,22 @@ const AdminChart = () => {
           />
           <YAxis tickLine={false} dx={-10} allowDecimals={false} />
           <Tooltip />
+          <defs>
+            <linearGradient id="selectedVisitas" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="rgb(153, 209, 64)" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="rgb(153, 209, 64)" stopOpacity={0.3} />
+            </linearGradient>
+            <linearGradient id="selectedFinalizadas" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="rgb(211, 191, 93)" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="rgb(211, 191, 93)" stopOpacity={0.3} />
+            </linearGradient>
+          </defs>
           <Area
             type="monotone"
             dataKey="Visitas"
             stroke="rgb(153, 209, 64)"
             activeDot={{ stroke: 'black', strokeWidth: 2, r: 8 }}
             strokeWidth={4}
-            fillOpacity={1}
             fill="url(#selectedVisitas)"
             hide={selectHideDataset1}
           />
@@ -108,7 +117,6 @@ const AdminChart = () => {
             stroke="rgb(211, 191, 93)"
             activeDot={{ stroke: 'black', strokeWidth: 2, r: 8 }}
             strokeWidth={4}
-            fillOpacity={1}
             fill="url(#selectedFinalizadas)"
             hide={selectHideDataset2}
           />
