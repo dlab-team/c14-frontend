@@ -2,7 +2,7 @@ import { ButtonsFooter } from './ButtonsFooter';
 
 export const ResultsFooter = ({ showImages }) => {
   return (
-    <footer className="flex flex-col justify-center items-center w-full mt-16 gap-10">
+    <footer className="flex flex-col justify-center items-center w-full mt-16 gap-10 bottom-0">
       <div
         className={`flex flex-col justify-between items-center h-[172px] w-[330px] ${
           showImages ? '' : 'hidden'
