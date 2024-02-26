@@ -89,7 +89,7 @@ export default function UpdatePass() {
                 type="password"
                 className={`mt-2 mb-4 border ${
                   edit ? 'border-gray-300 bg-gray-200' : 'border-gray-500 bg-white'
-                } text-gray-900 text-sm rounded-lg block w-96 p-2.5 dark:border-gray-500 dark:placeholder-gray-400`}
+                } text-gray-900 text-sm rounded-lg block min-w-full p-2.5 dark:border-gray-500 dark:placeholder-gray-400`}
                 placeholder="Contraseña actual"
                 {...register('password')}
                 disabled={edit}
@@ -101,7 +101,7 @@ export default function UpdatePass() {
                 type="password"
                 className={`mt-2 mb-4 border ${
                   edit ? 'border-gray-300 bg-gray-200' : 'border-gray-500 bg-white'
-                } text-gray-900 text-sm rounded-lg block w-96 p-2.5 dark:border-gray-500 dark:placeholder-gray-400`}
+                } text-gray-900 text-sm rounded-lg block min-w-full p-2.5 dark:border-gray-500 dark:placeholder-gray-400`}
                 placeholder="Nueva contraseña"
                 {...register('newPassword')}
                 onChange={handlePassChange}
@@ -113,8 +113,8 @@ export default function UpdatePass() {
               <input
                 type="password"
                 className={`mt-2 mb-4 border ${
-                  edit ? 'border-gray-300 bg-gray-200 w-96' : 'border-gray-500 bg-white'
-                } text-gray-900 text-sm rounded-lg block w-96 px-3 py-2.5 dark:border-gray-500 dark:placeholder-gray-400`}
+                  edit ? 'border-gray-300 bg-gray-200' : 'border-gray-500 bg-white'
+                } text-gray-900 text-sm rounded-lg block min-w-full px-3 py-2.5 dark:border-gray-500 dark:placeholder-gray-400`}
                 placeholder="Confirmar nueva contraseña"
                 {...register('repeatPassword')}
                 onChange={handleRepeatPassChange}

@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import { CiCirclePlus } from 'react-icons/ci';
 import CreatePhraseModal from './Components/CreatePhraseModal';
+import { ExtremeButtonGroup } from './Components/ExtremeButtonGroup';
 import PhraseCard from './Components/PhraseCard';
 import Select from 'react-select';
 import { Toaster } from 'sonner';
 import useGetAllPoly from './../../../hooks/PolynomialsHook/useGetAllPoly';
 import useGetPhrasesByIdPolinomial from '@/hooks/PhrasesHook/useGetPhrasesByIdPolinomial';
-import { ExtremeButtonGroup } from './Components/ExtremeButtonGroup';
 
 const Phrases = () => {
   const [selectedOption, setSelectedOption] = useState({
@@ -72,7 +72,7 @@ const Phrases = () => {
         </p>
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <Select
-            className="md:w-52"
+            className="md:w-52 my-4"
             id="selectOption"
             placeholder="Selecciona"
             options={polynomials.map(poly => ({ value: poly.id, label: poly.name }))}
@@ -83,7 +83,7 @@ const Phrases = () => {
           <ExtremeButtonGroup currentExtreme={extremo} handleExtreme={handleExtreme} />
 
           <button
-            className="bg-black px-4 py-2 md:my-10 my-3 rounded-2xl text-white text-xl font-bold flex justify-center items-center transition-all hover:scale-105"
+            className="bg-black px-4 py-2 md:my-10 my-4 rounded-2xl text-white text-xl font-bold flex justify-center items-center transition-all hover:scale-105"
             onClick={() => toggleModal()}
           >
             Crear Frase <CiCirclePlus />
