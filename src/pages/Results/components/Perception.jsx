@@ -77,7 +77,7 @@ export const Perception = () => {
             <div className="sm:hidden flex justify-center items-center text-lg overflow-clip w-4 h-20">
               {index}
             </div>
-            <div className="hidden sm:block text-right text-xs overflow-clip w-32 h-20">
+            <div className="hidden sm:block text-right translate-x-[-10px] text-xs w-[220px] h-22">
               {item.text}
             </div>
             <div className="flex items-center relative w-[100%] h-[100%] border-t-[2px] border-b-[1px] border-solid border-slate-400">
@@ -141,7 +141,7 @@ export const Perception = () => {
             <div className="w-[20px]">{Math.abs(item.value - item.percentage)}%</div>
           </div>
         ))}
-        <div className="flex justify-between mt-2 ml-[30px] sm:ml-[110px] md:ml-[125px] mr-8">
+        <div className="flex justify-between mt-2 ml-[30px] sm:ml-[165px] md:ml-[180px] xl:ml-[195px] mr-8">
           <div className="text-sm">0</div>
           <div className="text-sm hidden sm:block">10</div>
           <div className="text-sm">20</div>
