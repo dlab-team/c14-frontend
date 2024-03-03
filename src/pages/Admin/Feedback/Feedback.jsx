@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import useGetAllFeedback from '@/hooks/FeedbackHook/useGetAllFeedback';
 import { FaRegTrashCan } from 'react-icons/fa6';
@@ -10,6 +10,15 @@ const Feedback = () => {
   const { data: feedback, isLoading, refetch } = useGetAllFeedback();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRating, setSelectedRating] = useState(null);
+  const [averageRating, setAverageRating] = useState(0);
+
+  useMemo(() => {
+    if (feedback) {
+      const totalRatings = feedback.reduce((acc, item) => acc + item.rating, 0);
+      const average = totalRatings / feedback.length;
+      setAverageRating(average);
+    }
+  }, [feedback]);
 
   const indexOfLastItem = currentPage * pageSize;
   const indexOfFirstItem = indexOfLastItem - pageSize;
@@ -46,25 +55,32 @@ const Feedback = () => {
       />
       <div className="relative overflow-x-auto rounded-lg p-3 m-3 mt-10 bg-white border-2 w-5/6 mx-auto">
         <div className="flex justify-center">
-          <div className="mt-4 mb-2 flex items-center">
-            <label htmlFor="ratingFilter" className="mr-2">
-              Filtrar por rating:
-            </label>
-            <select
-              id="ratingFilter"
-              value={selectedRating || ''}
-              onChange={e =>
-                handleRatingChange(e.target.value !== '' ? parseInt(e.target.value) : null)
-              }
-              className="border border-gray-300 rounded-md p-1"
-            >
-              <option value="">Todos</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
+          <div className="mt-4 mb-2 flex flex-col items-center sm:flex-row sm:items-center">
+            <div className="order-2 sm:order-1">
+              <label htmlFor="ratingFilter" className="mr-2">
+                Filtrar por rating:
+              </label>
+              <select
+                id="ratingFilter"
+                value={selectedRating || ''}
+                onChange={e =>
+                  handleRatingChange(e.target.value !== '' ? parseInt(e.target.value) : null)
+                }
+                className="border border-gray-300 rounded-md p-1"
+              >
+                <option value="">Todos</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div className="order-1 sm:order-2 mb-2 sm:mb-0">
+              <p className="ml-3">
+                - Rating promedio: <span className="font-bold">{averageRating.toFixed(2)}</span>
+              </p>
+            </div>
           </div>
         </div>
         <table className="table-auto w-full text-sm text-left text-gray-500">
@@ -74,7 +90,7 @@ const Feedback = () => {
               <th scope="col" className="px-6 py-3">
                 Feedback
               </th>
-              <th scope="col" className="pr-12 py-3 text-end ">
+              <th scope="col" className="pr-10 py-3 text-end ">
                 Rating
               </th>
               <th scope="col" className="px-6 py-3 text-center">
@@ -101,7 +117,7 @@ const Feedback = () => {
                   scope="row"
                   className="px-2 py-2 font-medium whitespace-normal w-auto overflow-auto min-w-[10rem] text-end"
                 >
-                  <Rating defaultValue={feedbackItem.rating} readOnly />
+                  <Rating defaultValue={feedbackItem.rating} readOnly size="small" />
                 </th>
                 <td className="px-3 py-2 ms-2 font-medium whitespace-nowrap w-10 text-center">
                   <button
