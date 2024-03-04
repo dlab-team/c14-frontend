@@ -10,14 +10,13 @@ const Feedback = () => {
   const { data: feedback, isLoading, refetch } = useGetAllFeedback();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRating, setSelectedRating] = useState(null);
-  const [averageRating, setAverageRating] = useState(0);
 
-  useMemo(() => {
+  const averageRating = useMemo(() => {
     if (feedback) {
       const totalRatings = feedback.reduce((acc, item) => acc + item.rating, 0);
-      const average = totalRatings / feedback.length;
-      setAverageRating(average);
+      return totalRatings / feedback.length;
     }
+    return 0;
   }, [feedback]);
 
   const indexOfLastItem = currentPage * pageSize;
