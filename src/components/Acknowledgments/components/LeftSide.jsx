@@ -40,7 +40,7 @@ const LeftSide = () => {
               </button>
               <button type="button" onClick={openShareModal}>
                 <IoShareSocialOutline
-                  onclick={openShareModal}
+                  onClick={openShareModal}
                   className="w-12 h-11 bg-black text-white rounded-lg p-1"
                 />
               </button>
