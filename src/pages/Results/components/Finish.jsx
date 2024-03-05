@@ -6,7 +6,14 @@ function Finish() {
   const navigate = useNavigate();
   const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
   const socialCharacterization = useFormStore.getState().socialCharacterization;
-  const { mutate: finishResponse } = useFinishResponse(socialCharacterization, true);
+  const socialResult = useFormStore.getState().socialResult;
+  const oppositeSocialResult = useFormStore.getState().oppositeSocialResult;
+  const { mutate: finishResponse } = useFinishResponse(
+    socialCharacterization,
+    true,
+    socialResult,
+    oppositeSocialResult
+  );
 
   const onReject = () => {
     setAcceptedTerms(false);

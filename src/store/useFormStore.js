@@ -12,7 +12,7 @@ const useFormStore = create(
     currentSurveySection: 0,
     howCompare: null,
     politicalResult: [],
-    socialResults: [],
+    socialResult: [],
     oppositePoliticalResult: [],
     oppositeSocialResult: [],
     socialCharacterization:[],

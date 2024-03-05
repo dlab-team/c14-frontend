@@ -7,7 +7,14 @@ function KeepExploring() {
   const nextStep = useFormStore(state => state.nextStep);
   const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
   const politicalCharacterization = useFormStore.getState().politicalCharacterization;
-  const { mutate: finishResponse } = useFinishResponse(politicalCharacterization, false);
+  const politicalResult = useFormStore.getState().politicalResult;
+  const oppositePoliticalResult = useFormStore.getState().oppositePoliticalResult;
+  const { mutate: finishResponse } = useFinishResponse(
+    politicalCharacterization,
+    false,
+    politicalResult,
+    oppositePoliticalResult
+  );
 
   const onAccept = () => {
     finishResponse();
