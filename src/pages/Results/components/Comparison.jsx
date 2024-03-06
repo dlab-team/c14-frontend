@@ -2,7 +2,16 @@ import './Comparison.css';
 import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+
+//Nuevo
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
+
+//
 
 function Comparison() {
   const step = useFormStore.getState().currentSurveySection;
@@ -10,7 +19,46 @@ function Comparison() {
   const socialResult = useFormStore(s => s.socialResult);
   const politicalName = useFormStore.getState().politicalName;
   const socialNames = useFormStore.getState().socialNames;
+  //Nuevo
+  const [value, setValue] = useState(0);
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  function CustomTabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  CustomTabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+  //
   const name = step === 3 ? politicalName : socialNames;
 
   const mappedResult = useMemo(() => {
@@ -22,6 +70,86 @@ function Comparison() {
       percentage: Math.floor(e.survey_results[0].percentage * 100),
     }));
   }, [step, politicalResult, socialResult]);
+
+  //Nuevo
+  const groupedResults = useMemo(() => {
+    const groups = {};
+    mappedResult.forEach(item => {
+      const groupName = item.name;
+      if (!groups[groupName]) {
+        groups[groupName] = [];
+      }
+      groups[groupName].push(item);
+    });
+    return groups;
+  }, [mappedResult]);
+
+  console.log(groupedResults);
+
+  const renderTabs = () => {
+    return Object.keys(groupedResults).map((groupName, index) => {
+      let groupIndex = 0; // Initialize group index for each group
+      return (
+        <CustomTabPanel key={index} value={value} index={index}>
+          <div className="scatter-chart mt-10">
+            <div className="flex flex-row justify-end font-bold mt-1 mb-10 mr-2">
+              Mis respuestas
+            </div>
+            {groupedResults[groupName].map((item, groupItemIndex) => {
+              groupIndex++; // Increment group index for each item
+              return (
+                <div className="item body" key={item.id}>
+                  <div className="legend mr-3 text-xs bottom-4 ml-[-50px]">
+                    <label
+                      className="text-xs mb-4 hidden lg:block"
+                      htmlFor={`phrase-${groupIndex}`}
+                    >
+                      {item.text}
+                    </label>
+                    <label className="block lg:hidden pt-2" htmlFor={`phrase-${groupIndex}`}>
+                      {groupIndex}
+                    </label>
+                  </div>
+                  <div className="data">
+                    <div className="percentage zero"></div>
+                    <div className="percentage twenty-five"></div>
+                    <div className="percentage fifty"></div>
+                    <div className="percentage seventy-five"></div>
+                    <div className="percentage one-hundred"></div>
+                    <div
+                      className={`marker dot blue`}
+                      style={{ left: `${item.percentage}%` }}
+                    ></div>
+                  </div>
+                  <div className="response ml-3 font-bold w-40 text-center translate-y-[-10px] text-sm">
+                    {item.value}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex items-center mt-10 justify-between w-[75%] mx-auto translate-x-[-16%] xl:w-[82%] xl:mx-auto xl:pl-9 xl:translate-x-0 lg:mx-auto lg:w-[78%] lg:pr-3 lg:translate-x-0 md:mx-auto md:w-[77%] md:pr-4 md:translate-x-0 sm:mx-auto sm:w-[81%] sm:pr-10 sm:translate-x-0">
+            <div className="text-sm">0%</div>
+            <div className="text-sm">25%</div>
+            <div className="text-sm">50%</div>
+            <div className="text-sm">75%</div>
+            <div className="text-sm">100%</div>
+          </div>
+          <div className="mt-11 lg:hidden">
+            {groupedResults[groupName].map((item, groupItemIndex) => (
+              <div className="flex items-center mt-2 justify-between" key={groupItemIndex}>
+                <div className="font-semibold item-center justify-center text-sm">
+                  {groupItemIndex + 1 + '. ' + item.text}
+                </div>
+              </div>
+            ))}
+          </div>
+        </CustomTabPanel>
+      );
+    });
+  };
+
+  //
 
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
@@ -48,34 +176,22 @@ function Comparison() {
           <h2 className="text-xl font-normal mt-2 justify-start">Porcentaje de acuerdo</h2>
         </div>
       </div>
-      <div className="flex flex-row justify-end font-bold mt-1 mr-2">Mis respuestas</div>
-      <div className="scatter-chart mt-10">
-        {mappedResult.map((item, index) => (
-          <div className="item body" key={item.id}>
-            <div className="legend mr-3 text-xs bottom-4 ml-[-50px]">
-              <label className="text-xs mb-4 hidden lg:block" htmlFor={`phrase-${index}`}>
-                {item.text}
-              </label>
-
-              <label className="block lg:hidden pt-2" htmlFor={`phrase-${index}`}>
-                {index + 1}
-              </label>
-            </div>
-            <div className="data">
-              <div className="percentage zero"></div>
-              <div className="percentage twenty-five"></div>
-              <div className="percentage fifty"></div>
-              <div className="percentage seventy-five"></div>
-              <div className="percentage one-hundred"></div>
-              <div className={`marker dot blue`} style={{ left: `${item.percentage}%` }}></div>
-            </div>
-            <div className="response ml-3 font-bold w-40 text-center translate-y-[-10px] text-sm">
-              {item.value}
-            </div>
-          </div>
-        ))}
-      </div>
-
+      <Box sx={{ width: '100%' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="wrapped label tabs example"
+            variant="scrollable"
+            scrollButtons="auto"
+          >
+            {Object.keys(groupedResults).map((groupName, index) => (
+              <Tab key={index} label={groupName} {...a11yProps(index)} style={{ width: '20px' }} />
+            ))}
+          </Tabs>
+        </Box>
+        {renderTabs()}
+      </Box>
       <div className="invisible lg:visible lg:flex items-center justify-end pr-10">
         <Tooltip
           message="Eje que indica el <b>porcentaje de acuerdo</b>"
@@ -84,35 +200,6 @@ function Comparison() {
         >
           <PiInfoBold className="w-6 h-6" />
         </Tooltip>
-      </div>
-
-      <div className="flex items-center mt-10 justify-between w-[75%] mx-auto translate-x-[-16%] xl:w-[82%] xl:mx-auto xl:pl-9 xl:translate-x-0 lg:mx-auto lg:w-[78%] lg:pr-3 lg:translate-x-0 md:mx-auto md:w-[77%] md:pr-4 md:translate-x-0 sm:mx-auto sm:w-[81%] sm:pr-10 sm:translate-x-0">
-        <div className="text-sm">0%</div>
-        <div className="text-sm">25%</div>
-        <div className="text-sm">50%</div>
-        <div className="text-sm">75%</div>
-        <div className="text-sm">100%</div>
-      </div>
-      <div className="mt-11 lg:hidden">
-        {mappedResult.map((item, index) => (
-          <div className="flex items-center mt-2 w-[90%]" key={index}>
-            <div className="font-semibold item-center justify-center">
-              {index + 1 + '. ' + item.text}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="border-2 rounded-lg border-opacity-60 border-gray-400 w-[80%] mx-auto mt-[15vh]">
-        <div className="w-[90%] mx-auto pt-10 pb-10 text-center">
-          lorem ipsum dolor sit amet, consectetur adipiscing elitlorem ipsum dolor sit amet,
-          consectetur adipiscing elitlorem ipsum dolor sit amet, consectetur adipiscing elitlorem
-          ipsum dolor sit amet, consectetur adipiscing elitlorem ipsum dolor sit amet, consectetur
-          adipiscing elitlorem ipsum dolor sit amet, consectetur adipiscing elitlorem ipsum dolor
-          sit amet, consectetur adipiscing elitlorem ipsum dolor sit amet, consectetur adipiscing
-          elitlorem ipsum dolor sit amet, consectetur adipiscing elitlorem ipsum dolor sit amet,
-          consectetur adipiscing elitlorem ipsum dolor sit amet, consectetur adipiscing elitlorem
-          ipsum dolor sit amet, consectetur adipiscing elit.
-        </div>
       </div>
     </div>
   );
