@@ -4,14 +4,11 @@ import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
 import { useMemo, useState } from 'react';
 
-//Nuevo
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-
-//
 
 function Comparison() {
   const step = useFormStore.getState().currentSurveySection;
@@ -19,7 +16,6 @@ function Comparison() {
   const socialResult = useFormStore(s => s.socialResult);
   const politicalName = useFormStore.getState().politicalName;
   const socialNames = useFormStore.getState().socialNames;
-  //Nuevo
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -58,7 +54,7 @@ function Comparison() {
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
-  //
+
   const name = step === 3 ? politicalName : socialNames;
 
   const mappedResult = useMemo(() => {
@@ -71,7 +67,6 @@ function Comparison() {
     }));
   }, [step, politicalResult, socialResult]);
 
-  //Nuevo
   const groupedResults = useMemo(() => {
     const groups = {};
     mappedResult.forEach(item => {
@@ -84,19 +79,26 @@ function Comparison() {
     return groups;
   }, [mappedResult]);
 
-  console.log(groupedResults);
-
   const renderTabs = () => {
     return Object.keys(groupedResults).map((groupName, index) => {
-      let groupIndex = 0; // Initialize group index for each group
+      let groupIndex = 0;
       return (
         <CustomTabPanel key={index} value={value} index={index}>
+          <div className="text-center">
+            <h2 className="text-md font-normal mt-2 lg:text-xl">Porcentaje de acuerdo</h2>
+          </div>
+          <div className="invisible lg:visible lg:flex items-center justify-begin lg:translate-x-[-5%] lg:translate-y-[15px] lg:pl-1 pl-10">
+            <Tooltip
+              message="<b>Enunciado</b><br><br>Frase contruida sobre la base de algunos de los temas por los cuales se producen debates políticos o culturales que sitúan a cada grupo en una posición"
+              bgColor="bg-teal-600"
+              width="w-[200px]"
+            >
+              <PiInfoBold className="w-6 h-6" />
+            </Tooltip>
+          </div>
           <div className="scatter-chart mt-10">
-            <div className="flex flex-row justify-end font-bold mt-1 mb-10 mr-2">
-              Mis respuestas
-            </div>
             {groupedResults[groupName].map((item, groupItemIndex) => {
-              groupIndex++; // Increment group index for each item
+              groupIndex++;
               return (
                 <div className="item body" key={item.id}>
                   <div className="legend mr-3 text-xs bottom-4 ml-[-50px]">
@@ -156,15 +158,6 @@ function Comparison() {
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
         Yo en comparación con otros de: {name}
       </div>
-      <div className="invisible lg:visible lg:flex items-center justify-begin lg:translate-x-[-5%] lg:translate-y-[15px] lg:pl-1 pl-10">
-        <Tooltip
-          message="<b>Enunciado</b><br><br>Frase contruida sobre la base de algunos de los temas por los cuales se producen debates políticos o culturales que sitúan a cada grupo en una posición"
-          bgColor="bg-teal-600"
-          width="w-[200px]"
-        >
-          <PiInfoBold className="w-6 h-6" />
-        </Tooltip>
-      </div>
       <div className="flex flex-col items-center justify-center mx-auto ">
         <div className="flex gap-2 mb-2">
           <div className="bg-orange-600 w-[25px] h-[25px] rounded-xl border-solid border-2 border-neutral-600"></div>
@@ -172,26 +165,42 @@ function Comparison() {
             <p className="">% de acuerdo dentro de tu misma caracterización</p>
           </div>
         </div>
-        <div>
-          <h2 className="text-xl font-normal mt-2 justify-start">Porcentaje de acuerdo</h2>
-        </div>
       </div>
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <div className="flex flex-row justify-end font-bold mt-1 mb-5 mr-10">Mis respuestas</div>
+      <div className="items-center justify-center w-[100%] mx-auto">
+        <Box
+          sx={{
+            borderBottom: 1,
+            borderColor: 'divider',
+            width: '80%',
+            ml: 'auto',
+            mr: 'auto',
+            mt: '20px',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="wrapped label tabs example"
+            textColor="inherit"
+            indicatorColor="secondary"
             variant="scrollable"
-            scrollButtons="auto"
+            allowScrollButtonsMobile
           >
             {Object.keys(groupedResults).map((groupName, index) => (
-              <Tab key={index} label={groupName} {...a11yProps(index)} style={{ width: '20px' }} />
+              <Tab
+                key={index}
+                label={groupName}
+                {...a11yProps(index)}
+                sx={{ textTransform: 'none', fontWeight: 'bold', fontSize: '13px' }}
+              />
             ))}
           </Tabs>
         </Box>
         {renderTabs()}
-      </Box>
+      </div>
       <div className="invisible lg:visible lg:flex items-center justify-end pr-10">
         <Tooltip
           message="Eje que indica el <b>porcentaje de acuerdo</b>"
