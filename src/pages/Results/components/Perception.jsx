@@ -10,15 +10,10 @@ import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 
 export const Perception = () => {
-
   const step = useFormStore.getState().currentSurveySection;
   const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
   const oppositeSocialResult = useFormStore(s => s.oppositeSocialResult);
   const setTotalPerceptionGap = useFormStore(s => s.setTotalPerceptionGap);
-  const politicalName = useFormStore.getState().politicalName;
-  const socialNames = useFormStore.getState().socialNames;
-
-  const name = step === 3 ? politicalName : socialNames;
 
   const resultOpposite = useMemo(() => {
     let result = [];
@@ -203,8 +198,9 @@ export const Perception = () => {
           Mi polarización subjetiva es de: {totalPerceptionGap}%
         </p>
         <p className="text-center text-xl text-black font-normal">
-        ¿Qué quiere decir? Es la distancia entre lo que tú crees que piensan las personas de: {name} y lo que realmente ellas piensan. 
-        Mientras más bajo es el porcentaje, más cerca estás de conocer cómo piensan los otros: estás más conectado con ellos.
+          ¿Qué quiere decir? Es la distancia entre lo que tú crees que piensan los demás y lo que
+          realmente ellos piensan. Mientras más bajo es el porcentaje, más cerca estás de conocer
+          cómo piensan los otros: estás más conectado con ellos.
         </p>
       </div>
       <div className="flex flex-wrap gap-5 md:justify-center">
