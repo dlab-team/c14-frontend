@@ -12,7 +12,7 @@ const Results = () => {
   const [showImages, setShowImages] = useState(true);
 
   return (
-    <div>
+    <div className="w-full">
       <AdminHeader
         title="¡Conoce los resultados de tu test!"
         fromColor="from-yellow-600"
