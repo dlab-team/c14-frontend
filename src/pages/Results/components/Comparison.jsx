@@ -83,10 +83,7 @@ function Comparison() {
     return Object.keys(groupedResults).map((groupName, index) => {
       let groupIndex = 0;
       return (
-        <CustomTabPanel key={index} value={value} index={index}>
-          <div className="text-center">
-            <h2 className="text-md font-normal mt-2 lg:text-xl">Porcentaje de acuerdo</h2>
-          </div>
+        <CustomTabPanel key={index} value={value} index={index}>          
           <div className="invisible lg:visible lg:flex items-center justify-begin lg:translate-x-[-5%] lg:translate-y-[15px] lg:pl-1 pl-10">
             <Tooltip
               message="<b>Enunciado</b><br><br>Frase contruida sobre la base de algunos de los temas por los cuales se producen debates políticos o culturales que sitúan a cada grupo en una posición"
@@ -162,7 +159,7 @@ function Comparison() {
         <div className="flex gap-2 mb-2">
           <div className="bg-orange-600 w-[25px] h-[25px] rounded-xl border-solid border-2 border-neutral-600"></div>
           <div>
-            <p className="">% de acuerdo dentro de tu misma caracterización</p>
+            <p className="">% de acuerdo de personas de: {name}</p>
           </div>
         </div>
       </div>

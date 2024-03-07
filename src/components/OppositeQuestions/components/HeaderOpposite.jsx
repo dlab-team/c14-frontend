@@ -36,17 +36,17 @@ const HeaderOpposite = ({ phrase }) => {
 
   return (
     <div
-      className="text-center mx-auto my-12 md:w-5/6 text-2xl bg-white z-50 top-0"
+      className="text-center mx-auto my-4 md:w-5/6 text-2xl bg-white z-50 top-0"
       style={{ willChange: 'transform' }}
     >
-      <div className="p-4">
-        <div>
-              Ahora te invitamos al segundo desafío que consiste en participar en un juego social.
-              Te vamos a pedir que te imagines lo que piensan grupos de personas distintas a ti.
+      <div className="p-4 ">
+        <h2 className="text-3xl font-bold mt-6 text-center">Ahora te invitamos al segundo desafío: participar en un juego social</h2>
+        <div className="p-4 ">      
+        Te vamos a pedir que te imagines <b>lo que piensan grupos de personas distintas a ti.</b>
         </div>
-        <div>
-          Concretamente, te pedimos que pienses y respondas qué % de personas que dicen pertenecer a
-          la opción: <strong>{infoMessage}</strong>, está de acuerdo con la siguiente frase.
+        <div className="p-4 ">Concretamente, te pedimos que pienses y respondas:</div>
+        <div><strong>¿Qué % de personas que dicen pertenecer a la opción: {infoMessage}, está de acuerdo con la siguiente frase?</strong><br />
+          Mueve el círculo negro del centro para aumentar o disminuir el %.
         </div>
       </div>
     </div>

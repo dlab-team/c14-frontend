@@ -8,7 +8,7 @@ const CardOpposite = ({ phrase, updateOppositeResult }) => {
 
   return (
     <div
-      className="rounded-md border border-slate-200 shadow-xl max-w-2xl mx-auto my-10 py-5 px-8"
+      className="rounded-md border border-slate-200 shadow-xl max-w-2xl mx-auto my-4 py-5 px-8"
       style={{ width: '100%' }}
     >
       <p className="text-xl mb-16">{phrase.text}</p>

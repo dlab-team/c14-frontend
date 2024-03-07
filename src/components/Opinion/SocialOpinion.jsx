@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useFormStore from '@/store/useFormStore';
 import useGetSocialPhrases from '@/hooks/PhrasesHook/useGetSocialPhrases';
-import Opinion from './components/Opinion';
+import OpinionSocial from './components/OpinionSocial';
 import Loader from '@/components/Loader/Loader';
 
 const SocialOpinion = ({ handleStep }) => {
@@ -24,7 +24,7 @@ const SocialOpinion = ({ handleStep }) => {
   }
 
   return (
-    <Opinion
+    <OpinionSocial
       handleStep={handleStep}
       opinionResult={socialResult}
       updateOpinionResult={updateSocialResult}
