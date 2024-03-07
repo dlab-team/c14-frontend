@@ -197,7 +197,7 @@ export const Perception = () => {
         <p className="text-3xl font-bold text-amber-500 text-center">
           Mi polarización subjetiva es de: {totalPerceptionGap}%
         </p>
-        <p className="text-center text-base text-black font-normal">
+        <p className="text-center text-xl text-black font-normal">
           ¿Qué quiere decir? Es la distancia entre lo que tú crees que piensan los demás y lo que
           realmente ellos piensan. Mientras más bajo es el porcentaje, más cerca estás de conocer
           cómo piensan los otros: estás más conectado con ellos.

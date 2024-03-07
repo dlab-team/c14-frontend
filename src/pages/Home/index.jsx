@@ -78,14 +78,9 @@ export default function Home() {
           <h1 className="text-4xl lg:text-5xl font-bold text-center mx-4">
             Test de polarizaciones
           </h1>
-          <h2 className="text-2xl text-center mx-4"> Descúbrete y despolarízate!</h2>
+          <h2 className="text-2xl text-center mx-4"> ¡Descúbrete y despolarízate!</h2>
           <p className="xl:text-xl text-center px-10 sm:px-28 lg:px-0 py-10 text-slate-600 w-[90%]">
-            Esta encuesta es muy especial porque te vamos a desafiar. A continuación, te
-            presentaremos una serie de frases que quizás no representen exactamente tu pensamiento e
-            incluso te pueden parecer un poco exageradas. Y lo que te pedimos es que hagas el
-            esfuerzo por responder igualmente. Sintetizar temas sociales en frases es complejo y
-            siempre se generan problemas, pero es la única manera que tenemos de medir opiniones en
-            una encuesta.
+          Te invitamos a responder esta encuesta con total sinceridad y a descubrir cuál es tu grado de polarización.
           </p>
           <div className="lg:hidden flex flex-col items-center mx-6"></div>
           <div className="lg:w-96">
