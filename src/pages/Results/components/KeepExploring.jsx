@@ -1,7 +1,6 @@
 import useFormStore from '@/store/useFormStore';
 import { useNavigate } from 'react-router-dom';
 import useFinishResponse from '@/hooks/useFinishResponse';
-import { useEffect } from 'react';
 
 function KeepExploring() {
   const navigate = useNavigate();
