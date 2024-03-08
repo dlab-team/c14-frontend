@@ -1,6 +1,7 @@
 import useFormStore from '@/store/useFormStore';
 import { useNavigate } from 'react-router-dom';
 import useFinishResponse from '@/hooks/useFinishResponse';
+import { useEffect } from 'react';
 
 function KeepExploring() {
   const navigate = useNavigate();
@@ -9,11 +10,15 @@ function KeepExploring() {
   const politicalCharacterization = useFormStore.getState().politicalCharacterization;
   const politicalResult = useFormStore.getState().politicalResult;
   const oppositePoliticalResult = useFormStore.getState().oppositePoliticalResult;
+  const avg = useFormStore(state => state.totalPerceptionGap);
+
   const { mutate: finishResponse } = useFinishResponse(
     politicalCharacterization,
     false,
     politicalResult,
-    oppositePoliticalResult
+    oppositePoliticalResult,
+    avg,
+    null
   );
 
   const onAccept = () => {
