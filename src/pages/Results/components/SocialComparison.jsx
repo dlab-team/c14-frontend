@@ -1,8 +1,8 @@
+import { useMemo, useState, useEffect } from 'react';
 import './Comparison.css';
 import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
 import useFormStore from '@/store/useFormStore';
-import { useMemo, useState } from 'react';
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -12,7 +12,7 @@ import { ScatterChart } from './ScatterChart';
 
 export const SocialComparison = () => {
   const socialResult = useFormStore(s => s.socialResult);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -44,10 +44,14 @@ export const SocialComparison = () => {
     return groups;
   }, [mappedResult]);
 
+  useEffect(() => {
+    if (Object.keys(groupedResults).length > 0) setValue(Object.keys(groupedResults)[0]);
+  }, [groupedResults]);
+
   const renderTabs = () => {
     return Object.keys(groupedResults).map((groupName, index) => {
       return (
-        <CustomTabPanel key={index} value={value} index={index}>
+        <CustomTabPanel key={index} value={value} index={groupName}>
           <div className="text-center">
             <h2 className="text-md font-normal mt-2 lg:text-xl">Porcentaje de acuerdo</h2>
           </div>
@@ -69,7 +73,7 @@ export const SocialComparison = () => {
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
-        Yo en comparación con otros de: ???
+        Yo en comparación con otros de: {groupedResults[value]?.[0].options}
       </div>
       <div className="flex flex-col items-center justify-center mx-auto ">
         <div className="flex gap-2 mb-2">
@@ -106,6 +110,7 @@ export const SocialComparison = () => {
               <Tab
                 key={index}
                 label={groupName}
+                value={groupName}
                 {...a11yProps(index)}
                 sx={{ textTransform: 'none', fontWeight: 'bold', fontSize: '13px' }}
               />
