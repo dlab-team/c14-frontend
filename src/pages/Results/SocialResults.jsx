@@ -16,7 +16,7 @@ const Results = () => {
       <SocialComparison />
       <SocialPerception />
 
-      <div className="max-w-4xl border-2 rounded-lg border-opacity-60 border-gray-400 w-[80%] mx-auto mt-[8vh]">
+      <div className="max-w-4xl mb-8 border-2 rounded-lg border-opacity-60 border-gray-400 w-[80%] mx-auto mt-[8vh]">
         <div className="w-[90%] mx-auto pt-10 pb-10 text-center">
           <p>
             A veces, por diversas razones, atribuimos a los otros que piensan distinto, ideas que
