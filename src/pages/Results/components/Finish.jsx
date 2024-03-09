@@ -8,11 +8,14 @@ function Finish() {
   const socialCharacterization = useFormStore.getState().socialCharacterization;
   const socialResult = useFormStore.getState().socialResult;
   const oppositeSocialResult = useFormStore.getState().oppositeSocialResult;
+  const avg = useFormStore(state => state.totalPerceptionGap);
   const { mutate: finishResponse } = useFinishResponse(
     socialCharacterization,
     true,
     socialResult,
-    oppositeSocialResult
+    oppositeSocialResult,
+    null,
+    avg
   );
 
   const onReject = () => {

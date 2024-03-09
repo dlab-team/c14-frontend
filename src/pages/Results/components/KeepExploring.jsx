@@ -9,11 +9,15 @@ function KeepExploring() {
   const politicalCharacterization = useFormStore.getState().politicalCharacterization;
   const politicalResult = useFormStore.getState().politicalResult;
   const oppositePoliticalResult = useFormStore.getState().oppositePoliticalResult;
+  const avg = useFormStore(state => state.totalPerceptionGap);
+
   const { mutate: finishResponse } = useFinishResponse(
     politicalCharacterization,
     false,
     politicalResult,
-    oppositePoliticalResult
+    oppositePoliticalResult,
+    avg,
+    null
   );
 
   const onAccept = () => {

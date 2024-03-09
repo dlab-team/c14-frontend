@@ -3,7 +3,14 @@ import { ResponseService } from '@/services/response.service';
 import { toast } from 'sonner';
 import useFormStore from '@/store/useFormStore';
 
-const useFinishResponse = (characterization, isSocial, opinion, subjetive) => {
+const useFinishResponse = (
+  characterization,
+  isSocial,
+  opinion,
+  subjetive,
+  politicalAvg,
+  socialAvg
+) => {
   const responseId = useFormStore.getState().responseId;
 
   const modifiedOpinion = opinion.map(item => ({
@@ -31,6 +38,10 @@ const useFinishResponse = (characterization, isSocial, opinion, subjetive) => {
     responseOpinion: modifiedOpinion,
     responseSubjetive: modifiedSubjetive,
   };
+
+  politicalAvg !== null
+    ? (payload.character.politicalAvg = parseFloat(politicalAvg))
+    : (payload.character.socialAvg = parseFloat(socialAvg));
 
   return useMutation(() => ResponseService.finishResponse(payload), {
     onSuccess: () => {
