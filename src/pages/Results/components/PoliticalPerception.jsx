@@ -265,21 +265,6 @@ export const Perception = () => {
         </Box>
         {renderTabs()}
       </div>
-
-      <div className="border-2 rounded-lg border-opacity-60 border-gray-400 w-[80%] mx-auto mt-[8vh]">
-        <div className="w-[90%] mx-auto pt-10 pb-10 text-center">
-          <p>
-            A veces, por diversas razones, atribuimos a los otros que piensan distinto, ideas que
-            con las que ellos no necesariamente están de acuerdo. Aplicar estereotipos en función de
-            la tendencia política de alguien puede poner freno a la escucha y el diálogo.
-          </p>
-          <p>
-            Este estudio y este test que estás haciendo es una oportunidad para que podamos mirarnos
-            los unos a los otros y sorprendernos.
-          </p>
-          <p>Esta es una invitación a escuchar, a olvidar las etiquetas, a dialogar.</p>
-        </div>
-      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import useFormStore from '@/store/useFormStore';
 import StepOne from '@/components/StepOne/StepOne';
 import SocialStep from '@/components/SocialStep/SocialStep';
-import Results from '../Results/Results';
+import { PoliticalResults, SocialResults } from '../Results';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PoliticalOpinion from '@/components/Opinion/PoliticalOpinion';
@@ -30,11 +30,11 @@ const Wrapper = () => {
     0: <StepOne handleStep={handleStep} />,
     1: <PoliticalOpinion handleStep={handleStep} />,
     2: <PoliticalOppositeQuestions handleStep={handleStep} />,
-    3: <Results />,
+    3: <PoliticalResults />,
     4: <SocialStep handleStep={handleStep} />,
     5: <SocialOpinion handleStep={handleStep} />,
     6: <SocialOppositeQuestions handleStep={handleStep} />,
-    7: <Results />,
+    7: <SocialResults />,
   };
   const CurrentStep = sections[currentSurveySection];
 
