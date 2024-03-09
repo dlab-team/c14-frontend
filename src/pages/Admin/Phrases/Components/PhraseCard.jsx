@@ -45,15 +45,14 @@ const PhraseCard = ({ phrase, index }) => {
       <div className="flex justify-between items-center text-2xl">
         <div className="flex flex-wrap">
           <p className="font-semibold me-2">Frase N°{index + 1}</p>
-          {phrase.group === 'Extremo 1' ? (
-            <span className="text-xs text-[#7e22ce] font-medium bg-[#FBD7FF] py-2 px-3 rounded-full">
-              Extremo 1
-            </span>
-          ) : (
-            <span className="text-xs text-[#006666] font-medium bg-[#CFF5FF] py-2 px-3 rounded-full">
-              Extremo 2
-            </span>
-          )}
+          <span
+            className={twMerge(
+              'text-xs text-[#7e22ce] font-medium bg-[#FBD7FF] py-2 px-3 rounded-full',
+              phrase.group === 'Extremo 2' && 'text-[#006666] bg-[#CFF5FF]'
+            )}
+          >
+            {phrase.options ?? phrase.group}
+          </span>
         </div>
 
         <div className="flex gap-3">
