@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import './Comparison.css';
 import { PiInfoBold } from 'react-icons/pi';
 import { Tooltip } from '@/components/Tooltip';
@@ -36,17 +36,23 @@ export const SocialComparison = () => {
   const groupedResults = useMemo(() => {
     const groups = {};
     mappedResult.forEach(item => {
-      const groupName = item.polynomial?.name;
+      const groupName = item.polynomialId;
       if (!groups[groupName]) {
-        groups[groupName] = [];
+        groups[groupName] = {
+          id: item.polynomialId,
+          name: item.polynomial?.name,
+          characterization: socialCharacterization.find(p => p.polynomialId === item.polynomialId)
+            .name,
+          phrases: [],
+        };
       }
-      groups[groupName].push(item);
+      groups[groupName].phrases.push(item);
     });
-    return groups;
-  }, [mappedResult]);
+    return Object.values(groups);
+  }, [mappedResult, socialCharacterization]);
 
   const renderTabs = () => {
-    return mappedResult?.map((p, index) => {
+    return groupedResults?.map((group, index) => {
       return (
         <CustomTabPanel key={index} value={value} index={index}>
           <div className="text-center">
@@ -61,7 +67,7 @@ export const SocialComparison = () => {
               <PiInfoBold className="w-6 h-6" />
             </Tooltip>
           </div>
-          <ScatterChart results={groupedResults[p.polynomial?.name]} />
+          <ScatterChart results={groupedResults[index].phrases} />
         </CustomTabPanel>
       );
     });
@@ -70,7 +76,7 @@ export const SocialComparison = () => {
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
-        Yo en comparación con otros de: {socialCharacterization[value]?.name}
+        Yo en comparación con otros de: {groupedResults[value]?.characterization}
       </div>
       <div className="flex flex-col items-center justify-center mx-auto ">
         <div className="flex gap-2 mb-2">
@@ -103,10 +109,11 @@ export const SocialComparison = () => {
             variant="scrollable"
             allowScrollButtonsMobile
           >
-            {Object.keys(groupedResults).map((groupName, index) => (
+            {groupedResults?.map((group, index) => (
               <Tab
                 key={index}
-                label={groupName}
+                label={group.name}
+                index={group.id}
                 {...a11yProps(index)}
                 sx={{ textTransform: 'none', fontWeight: 'bold', fontSize: '13px' }}
               />
