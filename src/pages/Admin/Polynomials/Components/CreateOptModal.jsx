@@ -12,6 +12,7 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
   const defaultValuesForCreateOption = {
     name: '',
     group: '',
+    description: '',
   };
 
   const {
@@ -101,6 +102,15 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
                     <option value="Extremo 2">Extremo 2</option>
                   </select>
                   {errors.group && <div className="text-red-600">{errors.group.message}</div>}
+                </div>
+                <div>
+                  <label className="block leading-6 text-gray-900 font-medium">Descripción</label>
+                  <input
+                    type="phrase"
+                    placeholder={'Escriba una descripción aquí...'}
+                    className="border rounded-lg border-slate-200 focus:outline-slate-500 h-12 px-8 w-full md:text-lg"
+                    {...register('description')}
+                  />
                 </div>
                 <button
                   type="submit"
