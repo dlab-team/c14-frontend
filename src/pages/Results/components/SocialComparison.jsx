@@ -12,7 +12,8 @@ import { ScatterChart } from './ScatterChart';
 
 export const SocialComparison = () => {
   const socialResult = useFormStore(s => s.socialResult);
-  const [value, setValue] = useState();
+  const socialCharacterization = useFormStore(state => state.socialCharacterization);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -35,7 +36,7 @@ export const SocialComparison = () => {
   const groupedResults = useMemo(() => {
     const groups = {};
     mappedResult.forEach(item => {
-      const groupName = item.name;
+      const groupName = item.polynomial?.name;
       if (!groups[groupName]) {
         groups[groupName] = [];
       }
@@ -44,14 +45,10 @@ export const SocialComparison = () => {
     return groups;
   }, [mappedResult]);
 
-  useEffect(() => {
-    if (Object.keys(groupedResults).length > 0) setValue(Object.keys(groupedResults)[0]);
-  }, [groupedResults]);
-
   const renderTabs = () => {
-    return Object.keys(groupedResults).map((groupName, index) => {
+    return mappedResult?.map((p, index) => {
       return (
-        <CustomTabPanel key={index} value={value} index={groupName}>
+        <CustomTabPanel key={index} value={value} index={index}>
           <div className="text-center">
             <h2 className="text-md font-normal mt-2 lg:text-xl">Porcentaje de acuerdo</h2>
           </div>
@@ -64,7 +61,7 @@ export const SocialComparison = () => {
               <PiInfoBold className="w-6 h-6" />
             </Tooltip>
           </div>
-          <ScatterChart results={groupedResults[groupName]} />
+          <ScatterChart results={groupedResults[p.polynomial?.name]} />
         </CustomTabPanel>
       );
     });
@@ -73,7 +70,7 @@ export const SocialComparison = () => {
   return (
     <div className="items-center justify-center h-full lg:w-[70%] w-[90%] mx-auto">
       <div className="flex items-center justify-center text-3xl font-bold text-purple-800 mt-10 mb-10">
-        Yo en comparación con otros de: {groupedResults[value]?.[0].options}
+        Yo en comparación con otros de: {socialCharacterization[value]?.name}
       </div>
       <div className="flex flex-col items-center justify-center mx-auto ">
         <div className="flex gap-2 mb-2">
@@ -110,7 +107,6 @@ export const SocialComparison = () => {
               <Tab
                 key={index}
                 label={groupName}
-                value={groupName}
                 {...a11yProps(index)}
                 sx={{ textTransform: 'none', fontWeight: 'bold', fontSize: '13px' }}
               />
