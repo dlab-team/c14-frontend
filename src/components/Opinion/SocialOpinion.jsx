@@ -5,17 +5,17 @@ import Opinion from './components/Opinion';
 import Loader from '@/components/Loader/Loader';
 
 const SocialOpinion = ({ handleStep }) => {
-  const optionIds = useFormStore(state => state.socialCharacterization);
+  const optionIds = useFormStore(state => state.socialCharacterization?.map(p => p.id));
   const socialResult = useFormStore(s => s.socialResult);
   const setSocialResult = useFormStore(s => s.setSocialResult);
-  const { data: socialPhrases, isLoading, isError } = useGetSocialPhrases(optionIds);
+  const { data, isLoading, isError } = useGetSocialPhrases(optionIds);
   const updateSocialResult = useFormStore(state => state.updateSocialResult);
 
   useEffect(() => {
     if (!socialResult?.length) {
-      setSocialResult(socialPhrases);
+      setSocialResult(data);
     }
-  }, [socialPhrases, socialResult, setSocialResult]);
+  }, [data, socialResult, setSocialResult]);
 
   if (isLoading) return <Loader />;
 

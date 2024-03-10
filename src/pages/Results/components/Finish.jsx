@@ -5,7 +5,7 @@ import useFinishResponse from '@/hooks/useFinishResponse';
 function Finish() {
   const navigate = useNavigate();
   const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
-  const socialCharacterization = useFormStore.getState().socialCharacterization;
+  const socialCharacterization = useFormStore.getState().socialCharacterization?.map(p => p.id);
   const socialResult = useFormStore.getState().socialResult;
   const oppositeSocialResult = useFormStore.getState().oppositeSocialResult;
   const avg = useFormStore(state => state.totalPerceptionGap);

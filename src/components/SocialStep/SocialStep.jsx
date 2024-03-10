@@ -16,14 +16,13 @@ const SocialStep = ({ handleStep }) => {
   const { data: socialPolynomials, isLoading } = useGetSocialsPolynomials();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const onSubmit = data => {
+  const onSubmit = () => {
     const selectedOptionNames = Object.values(selectedOptions)
       .map(option => option.name)
       .join(', ')
       .toLowerCase();
     setSocialNames(selectedOptionNames);
-    const socialCharacterizationValues = Object.values(data);
-    setSocialCharacterization(socialCharacterizationValues);
+    setSocialCharacterization(Object.values(selectedOptions));
     handleStep();
   };
 
@@ -54,13 +53,13 @@ const SocialStep = ({ handleStep }) => {
         />
       </div>
       <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 z-10 flex flex-col w-11/12 text-white text-2xl font-roboto font-semibold pb-12 sm:w-3/4">
-        {socialPolynomials?.map(p => (
+        {socialPolynomials?.map((p, index) => (
           <SocialQuestions
             key={p.id}
-            pregunta={p.question}
-            opciones={p.polynomial_options}
+            index={index}
+            question={p.question}
+            options={p.polynomial_options}
             control={control}
-            nombreDelControl={p.name}
             onOptionSelect={option => handleOptionSelect(p.id, option)}
           />
         ))}

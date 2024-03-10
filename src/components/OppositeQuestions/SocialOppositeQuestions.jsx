@@ -5,7 +5,7 @@ import OppositeQuestions from './components/OppositeQuestions';
 import Loader from '@/components/Loader/Loader';
 
 const SocialOppositeQuestions = ({ handleStep }) => {
-  const optionIds = useFormStore(state => state.socialCharacterization);
+  const optionIds = useFormStore(state => state.socialCharacterization?.map(p => p.id));
   const oppositeSocialResult = useFormStore(s => s.oppositeSocialResult);
   const setOppositeSocialResult = useFormStore(s => s.setOppositeSocialResult);
   const { data: oppositeSocialPhrases, isLoading } = useGetOppositeSocialPhrases(optionIds);
