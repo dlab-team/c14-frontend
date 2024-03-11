@@ -107,12 +107,24 @@ const PolynomialsOpt = () => {
                 <div className="flex flex-col items-center mt-5">
                   <OptButton toggleOptionModal={toggleOptionModal} />
                   <div className="flex flex-wrap gap-2">
-                    {options &&
-                      options
-                        .filter(opt => opt.polynomialId === poly.id)
-                        .map(opt => (
-                          <OptionCard key={opt.id} option={opt} deleteOption={deleteOption} />
-                        ))}
+                    <table className="w-full border-collapse border border-gray-300 table-auto">
+                      <thead>
+                        <tr>
+                          <th className="border border-gray-300 px-4 py-2">Nombre</th>
+                          <th className="border border-gray-300 px-4 py-2">Extremo</th>
+                          <th className="border border-gray-300 px-4 py-2">Descripción</th>
+                          <th className="border border-gray-300 px-4 py-2">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {options &&
+                          options
+                            .filter(opt => opt.polynomialId === poly.id)
+                            .map(opt => (
+                              <OptionCard key={opt.id} option={opt} deleteOption={deleteOption} />
+                            ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </PolynomialCard>
@@ -138,12 +150,24 @@ const PolynomialsOpt = () => {
                 <div className="flex flex-col items-center mt-5">
                   <OptButton toggleOptionModal={toggleOptionModal} />
                   <div className="flex flex-wrap gap-2">
-                    {options &&
-                      options
-                        .filter(opt => opt.polynomialId === poly.id)
-                        .map(opt => (
-                          <OptionCard key={opt.id} option={opt} deleteOption={deleteOption} />
-                        ))}
+                    <table className="w-full border-collapse border border-gray-300">
+                      <thead>
+                        <tr>
+                          <th className="border border-gray-300 px-4 py-2">Nombre</th>
+                          <th className="border border-gray-300 px-4 py-2">Extremo</th>
+                          <th className="border border-gray-300 px-4 py-2">Descripción</th>
+                          <th className="border border-gray-300 px-4 py-2">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {options &&
+                          options
+                            .filter(opt => opt.polynomialId === poly.id)
+                            .map(opt => (
+                              <OptionCard key={opt.id} option={opt} deleteOption={deleteOption} />
+                            ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </PolynomialCard>
