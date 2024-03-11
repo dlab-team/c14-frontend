@@ -12,18 +12,14 @@ import CustomTabPanel from './CustomTabPanel';
 export const Perception = () => {
   const step = useFormStore.getState().currentSurveySection;
   const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
-  const oppositeSocialResult = useFormStore(s => s.oppositeSocialResult);
   const setTotalPerceptionGap = useFormStore(s => s.setTotalPerceptionGap);
 
   const resultOpposite = useMemo(() => {
-    let result = [];
-    if (step === 3) result = oppositePoliticalResult;
-    else if (step === 7) result = oppositeSocialResult;
-    return result.map(e => ({
+    return oppositePoliticalResult.map(e => ({
       ...e,
       percentage: Math.floor(e.survey_results[0].percentage * 100),
     }));
-  }, [step, oppositePoliticalResult, oppositeSocialResult]);
+  }, [step, oppositePoliticalResult]);
 
   const totalPerceptionGap = useMemo(() => {
     const totalPerceptions = resultOpposite.reduce(
