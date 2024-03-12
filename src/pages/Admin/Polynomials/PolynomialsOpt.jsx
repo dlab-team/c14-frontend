@@ -2,6 +2,7 @@ import AdminHeader from '@/components/admin/AdminHeader';
 import { CiCirclePlus } from 'react-icons/ci';
 import CreateOptionModal from './Components/CreateOptModal';
 import CreatePolynomialModal from './Components/CreatePolynomialModal';
+import EditOptModal from './Components/EditOptModal';
 import EditPolynomialModal from './Components/EditPolynomialModal';
 import OptButton from './Components/OptButton';
 import OptionCard from './Components/OptionsCard';
@@ -20,10 +21,11 @@ const PolynomialsOpt = () => {
   const { mutate: deleteOpt } = useDeleteOption();
   const [isCreatingOpt, setIsCreatingOpt] = useState(false);
   const [selectedPolynomial, setSelectedPolynomial] = useState(null);
+  const [selectedOpt, setSelectedOpt] = useState(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isCreatingPoly, setIsCreatingPoly] = useState(false);
   const [isEditingPoly, setIsEditingPoly] = useState(false);
-
+  const [isEditingOpt, setIsEditingOpt] = useState(false);
   const [polynomialsState, setPolynomialsState] = useState({});
 
   const DetailsOpt = polynomial => {
@@ -49,6 +51,14 @@ const PolynomialsOpt = () => {
   const toggleEditPolynomialModal = polynomial => {
     setSelectedPolynomial(polynomial);
     setIsEditingPoly(!isEditingPoly);
+  };
+
+  const toggleEditOptModal = optId => {
+    const selectedOption = options.find(opt => opt.id === optId);
+    if (selectedOption) {
+      setSelectedOpt(selectedOption);
+    }
+    setIsEditingOpt(!isEditingOpt);
   };
 
   const deleteOption = async id => {
@@ -107,12 +117,29 @@ const PolynomialsOpt = () => {
                 <div className="flex flex-col items-center mt-5">
                   <OptButton toggleOptionModal={toggleOptionModal} />
                   <div className="flex flex-wrap gap-2">
-                    {options &&
-                      options
-                        .filter(opt => opt.polynomialId === poly.id)
-                        .map(opt => (
-                          <OptionCard key={opt.id} option={opt} deleteOption={deleteOption} />
-                        ))}
+                    <table className="w-full border-collapse border border-gray-300 table-auto">
+                      <thead>
+                        <tr>
+                          <th className="border border-gray-300 px-2 py-2">Nombre</th>
+                          <th className="border border-gray-300 px-2 py-2">Extremo</th>
+                          <th className="border border-gray-300 px-2 py-2">Descripción</th>
+                          <th className="border border-gray-300 px-2 py-2">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {options &&
+                          options
+                            .filter(opt => opt.polynomialId === poly.id)
+                            .map(opt => (
+                              <OptionCard
+                                key={opt.id}
+                                option={opt}
+                                deleteOption={deleteOption}
+                                editOption={toggleEditOptModal}
+                              />
+                            ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </PolynomialCard>
@@ -138,12 +165,29 @@ const PolynomialsOpt = () => {
                 <div className="flex flex-col items-center mt-5">
                   <OptButton toggleOptionModal={toggleOptionModal} />
                   <div className="flex flex-wrap gap-2">
-                    {options &&
-                      options
-                        .filter(opt => opt.polynomialId === poly.id)
-                        .map(opt => (
-                          <OptionCard key={opt.id} option={opt} deleteOption={deleteOption} />
-                        ))}
+                    <table className="w-full border-collapse border border-gray-300">
+                      <thead>
+                        <tr>
+                          <th className="border border-gray-300 px-2 py-2">Nombre</th>
+                          <th className="border border-gray-300 px-2 py-2">Extremo</th>
+                          <th className="border border-gray-300 px-2 py-2">Descripción</th>
+                          <th className="border border-gray-300 px-2 py-2">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {options &&
+                          options
+                            .filter(opt => opt.polynomialId === poly.id)
+                            .map(opt => (
+                              <OptionCard
+                                key={opt.id}
+                                option={opt}
+                                deleteOption={deleteOption}
+                                editOption={toggleEditOptModal}
+                              />
+                            ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </PolynomialCard>
@@ -170,6 +214,10 @@ const PolynomialsOpt = () => {
           onClose={toggleEditPolynomialModal}
           polynomialData={selectedPolynomial}
         />
+      )}
+
+      {isEditingOpt && selectedOpt && (
+        <EditOptModal isOpen={isEditingOpt} onClose={toggleEditOptModal} optData={selectedOpt} />
       )}
     </>
   );

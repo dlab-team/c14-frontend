@@ -1,19 +1,32 @@
-import { TbLetterX } from 'react-icons/tb';
+import { FaRegTrashCan } from 'react-icons/fa6';
+import { FiEdit3 } from 'react-icons/fi';
+import { useMemo } from 'react';
 
-const OptionCard = ({ option, deleteOption }) => {
+const OptionCard = ({ option, deleteOption, editOption }) => {
+  const group = useMemo(() => {
+    return !option.group ? 'Neutro' : option.group;
+  }, [option.group]);
+
   return (
-    <div
-      key={option.id}
-      className="border rounded-xl border-gray-300 flex max-w-sm items-center gap-2 px-2.5 py-1"
-    >
-      <p>{option.name}</p>
-      <button
-        className="text-red-500 border border-red-600 rounded-full transition-all hover:scale-105"
-        onClick={() => deleteOption(option.id)}
-      >
-        <TbLetterX size={18} />
-      </button>
-    </div>
+    <tr className="hover:bg-sky-100">
+      <td className="border border-gray-300 px-2 py-2 text-center text-sm">{option.name}</td>
+      <td className="border border-gray-300 px-2 text-sm text-center">{group}</td>
+      <td className="border border-gray-300 px-3 py-2 text-sm">{option.description}</td>
+      <td className="border border-gray-300 text-center">
+        <button
+          className="transition-all hover:scale-105 mr-2"
+          onClick={() => deleteOption(option.id)}
+        >
+          <FaRegTrashCan size={18} color="Crimson" />
+        </button>
+        <button
+          className="transition-all hover:scale-105 ml-2"
+          onClick={() => editOption(option.id)}
+        >
+          <FiEdit3 size={18} color="DarkCyan" />
+        </button>
+      </td>
+    </tr>
   );
 };
 

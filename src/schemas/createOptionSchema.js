@@ -6,5 +6,8 @@ export const createOptionSchema = yup
     group: yup
       .string()
       .required("Debes ingresar un grupo"),
+    description: yup.string().required("Debes ingresar una descripción"),
+    color: yup.string().required("ingresa un color"),
+
   })
   .required();
