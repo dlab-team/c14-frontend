@@ -10,16 +10,28 @@ import { ScatterPerceptionChart } from './ScatterPerceptionChart';
 import CustomTabPanel from './CustomTabPanel';
 
 export const Perception = () => {
-  const step = useFormStore.getState().currentSurveySection;
   const oppositePoliticalResult = useFormStore(s => s.oppositePoliticalResult);
   const setTotalPerceptionGap = useFormStore(s => s.setTotalPerceptionGap);
+  const clearOppositePoliticalResult = useFormStore(state => state.clearOppositePoliticalResult);
+  const setOppositePoliticalResult = useFormStore(s => s.setOppositePoliticalResult);
 
   const resultOpposite = useMemo(() => {
     return oppositePoliticalResult.map(e => ({
       ...e,
       percentage: Math.floor(e.survey_results[0].percentage * 100),
+      perception: Math.abs(e.value - Math.floor(e.survey_results[0].percentage * 100)),
     }));
-  }, [step, oppositePoliticalResult]);
+  }, [oppositePoliticalResult]);
+
+  useEffect(() => {
+    if (
+      resultOpposite &&
+      JSON.stringify(resultOpposite) !== JSON.stringify(oppositePoliticalResult)
+    ) {
+      clearOppositePoliticalResult();
+      setOppositePoliticalResult(resultOpposite);
+    }
+  }, [resultOpposite, oppositePoliticalResult]);
 
   const totalPerceptionGap = useMemo(() => {
     const totalPerceptions = resultOpposite.reduce(
