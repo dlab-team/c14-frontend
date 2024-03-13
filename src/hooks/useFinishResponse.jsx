@@ -23,6 +23,7 @@ const useFinishResponse = (
     surveyResponseId: responseId,
     value: item.value,
     phraseId: item.id,
+    perception: item.perception,
   }));
 
   const polinomialOptionsId = Array.isArray(characterization)
