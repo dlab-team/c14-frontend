@@ -14,14 +14,22 @@ const EditOptModal = ({ isOpen, onClose, optData }) => {
     register,
     reset,
     formState: { errors },
+    watch,
   } = useForm({
-    defaultValues: optData || {},
+    defaultValues: {
+      name: optData?.name || '',
+      group: optData?.group || 'Neutro',
+      description: optData?.description || '',
+      color: optData?.color || '',
+    },
     resolver: yupResolver(createOptionSchema),
   });
 
+  console.log(watch('group'));
+
   useEffect(() => {
     if (isOpen && optData) {
-      reset(optData);
+      reset({ ...optData, group: optData?.group || 'Neutro' });
     }
   }, [isOpen, reset, optData]);
 
@@ -75,9 +83,8 @@ const EditOptModal = ({ isOpen, onClose, optData }) => {
                   <input
                     type="text"
                     name="name"
-                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
+                    className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                     {...register('name')}
-                    defaultValue={optData?.name || ''}
                   />
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
                 </div>
@@ -85,9 +92,8 @@ const EditOptModal = ({ isOpen, onClose, optData }) => {
                   <label className="block mb-2 text-sm font-medium text-gray-900">Extremo</label>
                   <select
                     name="group"
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="ring-1 ring-gray-300 text-gray-900 text-sm rounded-md block w-full p-2.5 bg-white dark:placeholder-gray-400"
                     {...register('group')}
-                    defaultValue={optData?.group || ''}
                   >
                     <option value="" disabled hidden>
                       Selecciona un grupo
@@ -103,9 +109,8 @@ const EditOptModal = ({ isOpen, onClose, optData }) => {
                   <input
                     type="text"
                     name="description"
-                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
+                    className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                     {...register('description')}
-                    defaultValue={optData?.description || ''}
                   />
                   {errors.description && (
                     <div className="text-red-600">{errors.description.message}</div>
@@ -115,9 +120,8 @@ const EditOptModal = ({ isOpen, onClose, optData }) => {
                   <label className="block mb-2 text-sm font-medium text-gray-900">Color</label>
                   <select
                     name="color"
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="ring-1 ring-gray-300 text-gray-900 text-sm rounded-md block w-full p-2.5 bg-white dark:placeholder-gray-400"
                     {...register('color')}
-                    defaultValue={optData?.color || ''}
                   >
                     <option value="" disabled hidden>
                       Selecciona un grupo

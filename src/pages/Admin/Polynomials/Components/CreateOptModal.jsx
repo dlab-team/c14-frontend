@@ -81,7 +81,7 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
                     type="text"
                     name="name"
                     defaultValue=""
-                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6 mt-2"
+                    className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6 mt-2"
                     {...register('name')}
                   />
                   {errors.name && <div className="text-red-600">{errors.name.message}</div>}
@@ -91,7 +91,7 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
                   <select
                     name="option"
                     defaultValue=""
-                    className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6 mt-2"
+                    className="ring-1 ring-gray-300 text-gray-900 text-sm rounded-md block w-full p-2.5 bg-white dark:placeholder-gray-400"
                     {...register('group')}
                   >
                     <option value="" disabled hidden>
@@ -106,9 +106,9 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
                 <div>
                   <label className="block leading-6 text-gray-900 font-medium">Descripción</label>
                   <input
-                    type="phrase"
+                    type="text"
                     placeholder={'Escriba una descripción aquí...'}
-                    className="border rounded-lg border-slate-200 focus:outline-slate-500 h-12 px-8 w-full md:text-lg"
+                    className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset text-sm leading-6"
                     {...register('description')}
                   />
                 </div>
@@ -116,7 +116,7 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
                   <label className="block mb-2 text-sm font-medium text-gray-900">Color</label>
                   <select
                     name="color"
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 bg-white dark:border-gray-500 dark:placeholder-gray-400"
+                    className="ring-1 ring-gray-300 text-gray-900 text-sm rounded-md block w-full p-2.5 bg-white dark:placeholder-gray-400"
                     {...register('color')}
                   >
                     <option value="" disabled hidden>
