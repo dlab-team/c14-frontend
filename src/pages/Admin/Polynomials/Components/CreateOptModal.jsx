@@ -5,6 +5,8 @@ import useCreateOption from '@/hooks/OptionsHook/useCreateOption';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Tooltip } from '@/components/Tooltip';
+import { PiInfoBold } from 'react-icons/pi';
 
 const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
   const { mutate: createOpt } = useCreateOption();
@@ -103,8 +105,17 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
                   </select>
                   {errors.group && <div className="text-red-600">{errors.group.message}</div>}
                 </div>
-                <div>
-                  <label className="block leading-6 text-gray-900 font-medium">Descripción</label>
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-2 mb-2">
+                    <label className=" text-gray-900 font-medium">Descripción</label>
+                    <Tooltip
+                      message="<b>Descripción</b><br><br>Es lo que se mostrará en el encabezado de <b>frases opuestas</b>"
+                      bgColor="bg-teal-600"
+                      width="w-[200px]"
+                    >
+                      <PiInfoBold className="w-6 h-6" />
+                    </Tooltip>
+                  </div>
                   <input
                     type="text"
                     placeholder={'Escriba una descripción aquí...'}
@@ -114,18 +125,11 @@ const CreateOptionModal = ({ isOpen, onClose, selectedPolynomial }) => {
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900">Color</label>
-                  <select
-                    name="color"
-                    className="ring-1 ring-gray-300 text-gray-900 text-sm rounded-md block w-full p-2.5 bg-white dark:placeholder-gray-400"
+                  <input
+                    type="color"
+                    className="p-1 h-12 w-20 block bg-white border border-gray-200 cursor-pointer rounded-lg"
                     {...register('color')}
-                  >
-                    <option value="" disabled hidden>
-                      Selecciona un grupo
-                    </option>
-                    <option value="red">Rojo</option>
-                    <option value="green">Verde</option>
-                    <option value="yellow">Amarillo</option>
-                  </select>
+                  />
                   {errors.color && <div className="text-red-600">{errors.color.message}</div>}
                 </div>
                 <button
