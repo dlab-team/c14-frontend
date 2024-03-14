@@ -10,7 +10,15 @@ const OptionCard = ({ option, deleteOption, editOption }) => {
   return (
     <tr className="hover:bg-sky-100">
       <td className="border border-gray-300 px-2 py-2 text-center text-sm">{option.name}</td>
-      <td className="border border-gray-300 px-2 text-sm text-center">{group}</td>
+      <td className="border border-gray-300 px-2 text-sm text-center hidden sm:table-cell">
+        {group}
+      </td>
+      <td className="border border-gray-300 px-2 text-sm text-center hidden md:table-cell">
+        <span
+          className="inline-block h-5 w-5 rounded-full"
+          style={{ backgroundColor: option.color }}
+        ></span>
+      </td>
       <td className="border border-gray-300 px-3 py-2 text-sm">{option.description}</td>
       <td className="border border-gray-300 text-center">
         <button

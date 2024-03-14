@@ -121,7 +121,12 @@ const PolynomialsOpt = () => {
                       <thead>
                         <tr>
                           <th className="border border-gray-300 px-2 py-2">Nombre</th>
-                          <th className="border border-gray-300 px-2 py-2">Extremo</th>
+                          <th className="border border-gray-300 px-2 py-2 hidden sm:table-cell">
+                            Extremo
+                          </th>
+                          <th className="border border-gray-300 px-2 py-2 hidden md:table-cell">
+                            Color
+                          </th>
                           <th className="border border-gray-300 px-2 py-2">Descripción</th>
                           <th className="border border-gray-300 px-2 py-2">Acciones</th>
                         </tr>
@@ -169,7 +174,12 @@ const PolynomialsOpt = () => {
                       <thead>
                         <tr>
                           <th className="border border-gray-300 px-2 py-2">Nombre</th>
-                          <th className="border border-gray-300 px-2 py-2">Extremo</th>
+                          <th className="border border-gray-300 px-2 py-2 hidden sm:table-cell">
+                            Extremo
+                          </th>
+                          <th className="border border-gray-300 px-2 py-2 hidden md:table-cell">
+                            Color
+                          </th>
                           <th className="border border-gray-300 px-2 py-2">Descripción</th>
                           <th className="border border-gray-300 px-2 py-2">Acciones</th>
                         </tr>
