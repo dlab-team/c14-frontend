@@ -13,7 +13,6 @@ export default function Home() {
   const setAcceptedTerms = useFormStore(state => state.setAcceptedTerms);
   const { mutate: createResponse } = useCreateResponse();
   const [ip, setIp] = useState();
-  const [isIpLoaded, setIsIpLoaded] = useState(false);
 
   useEffect(() => {
     const getIp = async () => {
@@ -21,7 +20,6 @@ export default function Home() {
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.json();
         setIp(data);
-        setIsIpLoaded(true);
       } catch (error) {
         console.error('Error fetching IP:', error);
       }
@@ -33,11 +31,15 @@ export default function Home() {
     if (isChecked) {
       clearForm();
       setAcceptedTerms(true);
+      const os = osName ? osName : 'Desconocido';
+      const country = ip ? ip.country_name : 'Desconocido';
+      const region = ip ? ip.region : 'Desconocido';
+      const city = ip ? ip.city : 'Desconocido';
       createResponse({
-        os: osName,
-        country: ip.country_name,
-        region: ip.region,
-        city: ip.city,
+        os: os,
+        country: country,
+        region: region,
+        city: city,
         finishedSocialForm: false,
         duration: 0,
       });
@@ -80,7 +82,8 @@ export default function Home() {
           </h1>
           <h2 className="text-2xl text-center mx-4"> ¡Descúbrete y despolarízate!</h2>
           <p className="xl:text-xl text-center px-10 sm:px-28 lg:px-0 py-10 text-slate-600 w-[90%]">
-          Te invitamos a responder esta encuesta con total sinceridad y a descubrir cuál es tu grado de polarización.
+            Te invitamos a responder esta encuesta con total sinceridad y a descubrir cuál es tu
+            grado de polarización.
           </p>
           <div className="lg:hidden flex flex-col items-center mx-6"></div>
           <div className="lg:w-96">
@@ -97,7 +100,7 @@ export default function Home() {
               </span>
             </p>
             <div className="lg:pb-0 pb-10">
-              <Button title={'¡Quiero participar! '} onClick={handleClick} disabled={!isIpLoaded} />
+              <Button title={'¡Quiero participar! '} onClick={handleClick} />
             </div>
           </div>
         </div>
