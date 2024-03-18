@@ -3,21 +3,20 @@ import { AdminLayout, AuthLayout, RootLayout } from '@/layouts';
 import { ForgotPassword, Login, RecoveryPassword } from '@/pages/Auth';
 import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-import Acknowledgments from '@/components/Acknowledgments/Acknowledgments';
-import Admin from '@/pages/Admin/Admin';
-import Error404 from '@/pages/Error404/Error404';
 // pages
 import Home from '@/pages/Home';
-import Opinion from '@/pages/Opinion';
-import OppositeQuestions from '@/pages/OppositeQuestions/OppositeQuestions';
-import Phrases from '@/pages/Admin/Phrases/Phrases';
-import PolarizedPoliticalPhrases from '@/pages/Admin/PolarizedPoliticalPhrases/PolarizedPoliticalPhrases';
-import PolynomialsOpt from '@/pages/Admin/Polynomials/PolynomialsOpt';
 import Feedback from '@/pages/Admin/Feedback/Feedback';
+import Acknowledgments from '@/components/Acknowledgments/Acknowledgments';
+import Error404 from '@/pages/Error404/Error404';
+
 // admin pages
 import Profile from '@/pages/Admin/Profile/Profile';
 import UserControl from '@/pages/Admin/UserControl';
 import Wrapper from '@/pages/Questionary/Wrapper';
+import Phrases from '@/pages/Admin/Phrases/Phrases';
+import PolarizedPoliticalPhrases from '@/pages/Admin/PolarizedPoliticalPhrases/PolarizedPoliticalPhrases';
+import PolynomialsOpt from '@/pages/Admin/Polynomials/PolynomialsOpt';
+import Admin from '@/pages/Admin/Admin';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,8 +24,6 @@ export const router = createBrowserRouter(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path="cuestionario" element={<Wrapper />} />
-        <Route path="opinion" element={<Opinion />} />
-        <Route path="opposite" element={<OppositeQuestions />} />
         <Route path="reconocimiento" element={<Acknowledgments />} />
         <Route path="*" element={<Error404 />} />
       </Route>
