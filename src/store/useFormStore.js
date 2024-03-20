@@ -10,7 +10,6 @@ const useFormStore = create(
       politicalName: null,
       socialNames: null,
       currentSurveySection: 0,
-      howCompare: null,
       politicalResult: [],
       socialResult: [],
       oppositePoliticalResult: [],
@@ -50,11 +49,6 @@ const useFormStore = create(
       setAcceptedTerms: acceptedTerms => {
         set(state => {
           return { ...state, acceptedTerms };
-        });
-      },
-      setHowCompare: howCompare => {
-        set(state => {
-          return { ...state, howCompare };
         });
       },
       setOppositePoliticalResult: oppositePoliticalResult => {

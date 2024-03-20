@@ -3,8 +3,6 @@ import { toast } from 'sonner';
 import { useMutation } from 'react-query';
 
 const useUpdatePassword = () => {
-  /*  const queryClient = useQueryClient(); */
-
   return useMutation(payload => AdministrationService.updatePassword(payload), {
     onSuccess: () => {
       toast.success('Contraseña actualizada con éxito');
@@ -12,9 +10,6 @@ const useUpdatePassword = () => {
     onError: error => {
       toast.error(error?.message || 'Ha ocurrido un error, intente nuevamente');
     },
-    /* onSettled: () => {
-      queryClient.invalidateQueries('polynomials');
-    }, */
   });
 };
 
